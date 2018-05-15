@@ -1,0 +1,76 @@
+plugin.tx_cartproducts {
+    view {
+        templateRootPaths.0 = {$plugin.tx_cartproducts.view.templateRootPath}
+        partialRootPaths.0 = {$plugin.tx_cartproducts.view.partialRootPath}
+        layoutRootPaths.0 = {$plugin.tx_cartproducts.view.layoutRootPath}
+    }
+
+    persistence {
+        storagePid = {$plugin.tx_cartproducts.persistence.storagePid}
+        recursive = {$plugin.tx_cartproducts.persistence.recursive}
+
+        classes {
+            Extcode\CartProducts\Domain\Model\Category {
+                mapping {
+                    tableName = sys_category
+                }
+            }
+        }
+    }
+
+    mvc {
+        callDefaultActionIfActionCantBeResolved = 1
+    }
+    features {
+        skipDefaultArguments = 1
+    }
+
+    settings {
+        format.currency < plugin.tx_cart.settings.format.currency
+        addToCartByAjax = {$plugin.tx_cartproducts.ajaxCartProductsTypeNum}
+
+        showAction {
+            media {
+                image {
+                    size {
+                        small.maxWidth = 100
+                        small.maxHeight =
+                        medium.maxWidth = 300
+                        medium.maxHeight =
+                        large.maxWidth = 600
+                        large.maxHeight =
+                    }
+                }
+            }
+        }
+        teaserAction < .showAction
+        listAction < .showAction
+
+        addToCartByAjax = {$plugin.tx_cart.settings.addToCartByAjax}
+    }
+}
+
+lib.cartProduct = COA
+lib.cartProduct.showForm = USER
+lib.cartProduct.showForm {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    vendorName = Extcode
+    extensionName = CartProducts
+    pluginName = ProductPartial
+
+    controller = Product
+    action = showForm
+
+    settings =< plugin.tx_cartproducts.settings
+    persistence =< plugin.tx_cartproducts.persistence
+    view =< plugin.tx_cartproducts.view
+    update =< plugin.tx_cartproducts.update
+}
+
+lib.renderContent = RECORDS
+lib.renderContent {
+    source.current = 1
+    tables = tt_content
+    dontCheckPid = 1
+    conf.tt_content =< tt_content
+}

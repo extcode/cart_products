@@ -1,0 +1,76 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <cartproducts:canonicalTag product="{product}" />
+
+    <cartproducts:format.nothing>
+        <cartproducts:titleTag>
+            <f:format.htmlentitiesDecode>{product.title}</f:format.htmlentitiesDecode>
+        </cartproducts:titleTag>
+    </cartproducts:format.nothing>
+
+    <h1>{product.title}</h1>
+
+    <f:if condition="{product.images}">
+        <f:image src="{product.firstImage.originalResource.originalFile.uid}"
+                 title="{product.firstImage.originalResource.title}"
+                 alt="{product.firstImage.originalResource.title}"
+                 width="{settings.showAction.media.image.size.medium.maxWidth}"
+                 height="{settings.showAction.media.image.size.medium.maxHeight}" />
+
+        <f:if condition="{product.images -> f:count()} > 1">
+            <f:for each="{product.images}" as="image">
+                <f:image src="{image.originalResource.originalFile.uid}"
+                         title="{image.originalResource.title}"
+                         alt="{image.originalResource.title}"
+                         width="{settings.showAction.media.image.size.small.maxWidth}"
+                         height="{settings.showAction.media.image.size.small.maxHeight}"  />
+            </f:for>
+        </f:if>
+    </f:if>
+
+    <div>
+        <f:format.raw>
+            {product.teaser -> f:format.html()}
+        </f:format.raw>
+    </div>
+    <f:if condition="{product.tags}">
+        <div>
+            <f:for each="{product.tags}" as="tag">
+                <span>{tag.title}</span>
+            </f:for>
+        </div>
+    </f:if>
+    <div>
+        <f:format.raw>
+            {product.description -> f:format.html()}
+        </f:format.raw>
+    </div>
+
+    <f:if condition="{product.productContent}">
+        <f:for each="{product.productContent}" as="content" iteration="iterator">
+            <div id="content-{iterator.cycle}" class="content-element">
+                <f:cObject typoscriptObjectPath="lib.renderContent" data="{content.uid}" />
+            </div>
+        </f:for>
+    </f:if>
+
+    <f:cObject typoscriptObjectPath="lib.cartProduct.showForm" />
+
+    <f:if condition="{product.relatedProducts}">
+        <ul>
+        <f:for each="{product.relatedProducts}" as="relatedProduct">
+            <li>
+                <f:render partial="Product/RelatedProduct" arguments="{product: relatedProduct}"/>
+            </li>
+        </f:for>
+        </ul>
+    </f:if>
+
+    <f:link.external class="btn btn-default" uri="javascript:history.back();">{f:translate(key: 'tx_cartproducts.history_back')}</f:link.external>
+</f:section>
+</html>

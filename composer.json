@@ -1,0 +1,63 @@
+{
+    "name": "extcode/cart-products",
+    "type": "typo3-cms-extension",
+    "description": "Shopping Cart(s) for TYPO3 - Products",
+    "homepage": "https://cart.extco.de",
+    "license": [
+        "GPL-2.0-or-later"
+    ],
+    "keywords": [
+        "TYPO3 CMS",
+        "Shopping Cart",
+        "cart",
+        "products"
+    ],
+    "authors": [
+        {
+            "name": "Daniel Lorenz",
+            "email": "ext.cart@extco.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/extcode/cart_products/issues"
+    },
+    "require": {
+        "php": ">=7.0.0",
+        "typo3/cms-core": "^8.7",
+        "extcode/cart": "dev-5.x.alpha1"
+    },
+    "require-dev": {
+        "nimut/testing-framework": "^2.0 || ^3.0",
+        "friendsofphp/php-cs-fixer": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Extcode\\CartProducts\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Extcode\\CartProducts\\Tests\\": "Tests"
+        }
+    },
+    "replace": {
+        "cart_products": "self.version"
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "mkdir -p .Build/Web/typo3conf/ext/",
+            "[ -L .Build/Web/typo3conf/ext/cart_products ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/cart_products"
+        ]
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/Web"
+        }
+    }
+}

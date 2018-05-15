@@ -1,0 +1,13 @@
+mod.wizards.newContentElement.wizardItems.plugins {
+	elements {
+		products {
+			iconIdentifier = ext-cartproducts-wizard-icon
+			title = LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.title
+			description = LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.description
+			tt_content_defValues {
+				CType = list
+				list_type = cartproducts_products
+			}
+		}
+	}
+}

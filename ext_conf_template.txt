@@ -1,0 +1,5 @@
+###########################
+# Records
+###########################
+# cat=records/enable/100; type=options[LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:extmng.categoryRestriction.none=none,LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:extmng.categoryRestriction.pages_tsconfig=page_tsconfig,LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:extmng.categoryRestriction.current_pid=current_pid,LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:extmng.categoryRestriction.siteroot=siteroot]; label=LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:extmng.categoryRestriction
+categoryRestriction =

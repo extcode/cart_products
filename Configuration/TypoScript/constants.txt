@@ -1,0 +1,12 @@
+plugin.tx_cartproducts {
+    view {
+        templateRootPath = EXT:cart_products/Resources/Private/Templates/
+        partialRootPath = EXT:cart_products/Resources/Private/Partials/
+        layoutRootPath = EXT:cart_products/Resources/Private/Layouts/
+    }
+
+    persistence {
+        storagePid =
+        recursive =
+    }
+}

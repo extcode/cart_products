@@ -1,0 +1,65 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:cart="http://typo3.org/ns/Extcode/Cart/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+
+    <f:flashMessages/>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-2">
+                    &nbsp;
+                </th>
+                <th class="col-md-6">
+                    <f:translate key="tx_cartproducts_domain_model_product_product.title"/>
+                </th>
+                <th class="col-md-4">
+                    <f:translate key="tx_cartproducts_domain_model_product_product.price"/>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{products}" as="product">
+                <f:if condition="{product.category.cartProductShowPid}">
+                    <f:then>
+                        <cart:variable.set name="showPageUid" value="{product.category.cartProductShowPid}"/>
+                    </f:then>
+                    <f:else>
+                        <cart:variable.set name="showPageUid" value="{settings.showPageUids}"/>
+                    </f:else>
+                </f:if>
+                <tr>
+                    <td>
+                        <f:if condition="{product.images}">
+                            <f:link.action pageUid="{cart:variable.get(name: 'showPageUid')}"
+                                       action="show"
+                                       arguments="{product : product}">
+                                <f:image src="{product.firstImage.originalResource.originalFile.uid}"
+                                         title="{product.firstImage.originalResource.title}"
+                                         alt="{product.firstImage.originalResource.title}"
+                                         width="{settings.listAction.media.image.size.small.maxWidth}"
+                                         height="{settings.listAction.media.image.size.small.maxHeight}" />
+                            </f:link.action>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:link.action pageUid="{cart:variable.get(name: 'showPageUid')}"
+                                       action="show"
+                                       arguments="{product: product}">
+                            {product.title}
+                        </f:link.action>
+                    </td>
+                    <td>
+                        <f:render partial="Product/Price" arguments="{product: product, settings: settings, currencyTranslationData:currencyTranslationData}"></f:render>
+                    </td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+
+</f:section>
+</html>
