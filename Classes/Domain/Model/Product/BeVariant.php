@@ -16,28 +16,28 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Product
      *
-     * @var Product\Product
+     * @var \Extcode\CartProducts\Domain\Model\Product\Product
      */
     protected $product = null;
 
     /**
      * Variant Attribute 1
      *
-     * @var Product\BeVariantAttributeOption
+     * @var \Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption
      */
     protected $beVariantAttributeOption1 = null;
 
     /**
      * Variant Attribute 2
      *
-     * @var Product\BeVariantAttributeOption
+     * @var \Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption
      */
     protected $beVariantAttributeOption2 = null;
 
     /**
      * Variant Attribute 3
      *
-     * @var Product\BeVariantAttributeOption
+     * @var \Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption
      */
     protected $beVariantAttributeOption3 = null;
 
@@ -51,7 +51,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Product Special Price
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Product\SpecialPrice>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\SpecialPrice>
      * @cascade remove
      */
     protected $specialPrices = null;

@@ -8,7 +8,6 @@ namespace Extcode\CartProducts\Utility;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
@@ -20,18 +19,6 @@ class ProductUtility
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
      */
     protected $objectManager;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
-    */
-    protected $configurationManager;
-
-    /**
-     * Plugin Settings
-     *
-     * @var array
-     */
-    protected $pluginSettings;
 
     /**
      * Tax Classes
@@ -46,14 +33,6 @@ class ProductUtility
     public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
-    }
-
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
-    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
-    {
-        $this->configurationManager = $configurationManager;
     }
 
     /**
@@ -83,24 +62,28 @@ class ProductUtility
     /**
      * Get Cart/Product From Request
      *
-     * @param array $pluginSettings TypoScript Plugin Settings
      * @param Request $request Request
      * @param \Extcode\Cart\Domain\Model\Cart\TaxClass[] $taxClasses Tax Class Array
      *
      * @return \Extcode\Cart\Domain\Model\Cart\Product
      */
-    public function getProductFromRequest(array $pluginSettings, Request $request, array $taxClasses)
+    public function getProductFromRequest(Request $request, array $taxClasses)
     {
-        if (!$this->pluginSettings) {
-            $this->pluginSettings = $pluginSettings;
-        }
         if (!$this->taxClasses) {
             $this->taxClasses = $taxClasses;
         }
 
-        $cartProductValues = $this->retrieveCartProductValuesFromRequest($pluginSettings, $request);
+        $cartProductValues = $this->retrieveCartProductValuesFromRequest($request);
 
         return $this->createCartProduct($cartProductValues);
+    }
+
+    /**
+     * @param array $taxClasses
+     */
+    public function setTaxClasses(array $taxClasses)
+    {
+        $this->taxClasses = $taxClasses;
     }
 
     /**
@@ -112,11 +95,6 @@ class ProductUtility
      */
     protected function createCartProduct(array $cartProductValues)
     {
-        $cartProductsFrameworkConfig = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
-            'CartProducts'
-        );
-
         $cartProduct = null;
 
         $productId = intval($cartProductValues['productId']);
@@ -157,9 +135,9 @@ class ProductUtility
             }
 
             $cartProduct = new \Extcode\Cart\Domain\Model\Cart\Product(
-                $cartProductsFrameworkConfig['productStorage']['class'],
+                'CartProducts',
                 $cartProductValues['productId'],
-                $cartProductsFrameworkConfig['productStorage']['id'],
+                1,
                 null,
                 $productProduct->getSku(),
                 $productProduct->getTitle(),
@@ -209,34 +187,36 @@ class ProductUtility
 
             $newVariantArr = [];
 
-            foreach ($cartProductValues['beVariants'] as $variantsKey => $variantsValue) {
-                if ($variantsKey == 1) {
-                    $newVariant = $this->createCartBackendVariant(
-                        $cartProduct,
-                        null,
-                        $cartProductValues,
-                        $variantsValue
-                    );
+            if ($cartProductValues['beVariants']) {
+                foreach ($cartProductValues['beVariants'] as $variantsKey => $variantsValue) {
+                    if ($variantsKey == 1) {
+                        $newVariant = $this->createCartBackendVariant(
+                            $cartProduct,
+                            null,
+                            $cartProductValues,
+                            $variantsValue
+                        );
 
-                    if ($newVariant) {
-                        $newVariantArr[$variantsKey] = $newVariant;
-                        $cartProduct->addBeVariant($newVariant);
+                        if ($newVariant) {
+                            $newVariantArr[$variantsKey] = $newVariant;
+                            $cartProduct->addBeVariant($newVariant);
+                        } else {
+                            break;
+                        }
                     } else {
-                        break;
-                    }
-                } else {
-                    $newVariant = $this->createCartBackendVariant(
-                        null,
-                        $newVariantArr[$variantsKey - 1],
-                        $cartProductValues,
-                        $variantsValue
-                    );
+                        $newVariant = $this->createCartBackendVariant(
+                            null,
+                            $newVariantArr[$variantsKey - 1],
+                            $cartProductValues,
+                            $variantsValue
+                        );
 
-                    if ($newVariant) {
-                        $newVariantArr[$variantsKey] = $newVariant;
-                        $newVariantArr[$variantsKey - 1]->addBeVariant($newVariant);
-                    } else {
-                        break;
+                        if ($newVariant) {
+                            $newVariantArr[$variantsKey] = $newVariant;
+                            $newVariantArr[$variantsKey - 1]->addBeVariant($newVariant);
+                        } else {
+                            break;
+                        }
                     }
                 }
             }
@@ -354,17 +334,12 @@ class ProductUtility
     }
 
     /**
-     * @param array $pluginSettings
      * @param Request $request Request
      *
      * @return array
      */
-    public function retrieveCartProductValuesFromRequest(array $pluginSettings, Request $request)
+    public function retrieveCartProductValuesFromRequest(Request $request)
     {
-        if (!$this->pluginSettings) {
-            $this->pluginSettings = $pluginSettings;
-        }
-
         $cartProductValues = [];
 
         if ($request->hasArgument('product')) {
@@ -395,7 +370,6 @@ class ProductUtility
         }
 
         $data = [
-            'pluginSettings' => $pluginSettings,
             'request' => $request,
             'cartProductValues' => $cartProductValues,
         ];

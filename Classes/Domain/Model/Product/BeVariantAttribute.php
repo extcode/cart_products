@@ -15,7 +15,7 @@ class BeVariantAttribute extends Product\AbstractProduct
     /**
      * BeVariantAttributeOptions
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Product\BeVariantAttributeOption>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption>
      */
     protected $beVariantAttributeOptions = null;
 
@@ -60,7 +60,7 @@ class BeVariantAttribute extends Product\AbstractProduct
     /**
      * Returns BeVariantAttributeOptions
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Product\BeVariantAttributeOption>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption>
      */
     public function getBeVariantAttributeOptions()
     {
