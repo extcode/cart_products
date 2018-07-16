@@ -801,18 +801,6 @@
                 <source>Quantity Discount</source>
                 <target>Mengenrabatt</target>
             </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.tax_class_id">
-                <target>Steuerklasse</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.tax_class_id.1">
-                <target>normal</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.tax_class_id.2">
-                <target>reduziert</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.tax_class_id.3">
-                <target>frei</target>
-            </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_product_product.price_measure">
                 <target>Messwert</target>
             </trans-unit>

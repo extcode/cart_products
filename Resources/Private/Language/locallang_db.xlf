@@ -547,18 +547,6 @@
             <trans-unit id="tx_cartproducts_domain_model_product_product.is_net_price">
                 <source>Is Net Price</source>
             </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.tax_class_id">
-                <source>Tax Class</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.tax_class_id.1">
-                <source>normal</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.tax_class_id.2">
-                <source>reduced</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.tax_class_id.3">
-                <source>free</source>
-            </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_product_product.attributes">
                 <source>Additional Attributes</source>
             </trans-unit>

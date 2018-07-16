@@ -428,14 +428,14 @@ return [
 
         'tax_class_id' => [
             'exclude' => 1,
-            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.tax_class_id',
+            'label' => $_LLL . ':tx_cart.tax_class_id',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.tax_class_id.1', 1],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.tax_class_id.2', 2],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.tax_class_id.3', 3],
+                    [$_LLL . ':tx_cart.tax_class_id.1', 1],
+                    [$_LLL . ':tx_cart.tax_class_id.2', 2],
+                    [$_LLL . ':tx_cart.tax_class_id.3', 3],
                 ],
                 'size' => 1,
                 'minitems' => 1,
