@@ -31,14 +31,24 @@ class BestSpecialPricePercentageDiscountViewHelper extends \TYPO3\CMS\Fluid\Core
      */
     protected $escapeOutput = false;
 
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+
+        $this->registerArgument(
+            'product',
+            '\Extcode\Cart\Domain\Model\Cart\Product',
+            'product',
+            true
+        );
+    }
+
     /**
-     * @param \Extcode\CartProducts\Domain\Model\Product\Product $product
-     *
      * @return float
      */
-    public function render(
-        \Extcode\CartProducts\Domain\Model\Product\Product $product
-    ) {
+    public function render()
+    {
+        $product = $this->arguments['product'];
         return $product->getBestSpecialPricePercentageDiscount($this->getFrontendUserGroupIds());
     }
 

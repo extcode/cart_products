@@ -28,13 +28,20 @@ class CanonicalTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTa
      */
     protected $tagName = 'link';
 
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+
+        $this->registerArgument('product', '\Extcode\CartProducts\Domain\Model\Product\Product', 'product', false, 0);
+    }
+
     /**
      * Override the canonical tag
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\Product $product
      */
-    public function render(\Extcode\CartProducts\Domain\Model\Product\Product $product)
+    public function render()
     {
+        $product = $this->arguments['product'];
+
         /* get topic category */
         $category = $product->getCategory();
 

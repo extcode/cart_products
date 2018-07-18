@@ -298,6 +298,8 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     protected function addCacheTags($products)
     {
+        $cacheTags = [];
+
         foreach ($products as $product) {
             // cache tag for each product record
             $cacheTags[] = 'tx_cartproducts_product_' . $product->getUid();

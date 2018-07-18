@@ -1,34 +1,16 @@
-[compatVersion = 7.6]
-    module.tx_cartproducts {
-        view {
-            templateRootPaths {
-                0 = EXT:cart_products/Resources/Private/Backend/V7/Templates/
-            }
-            partialRootPaths {
-                0 = EXT:cart_products/Resources/Private/Backend/V7/Partials/
-            }
-            layoutRootPaths {
-                0 = EXT:cart_products/Resources/Private/Backend/V7/Layouts/
-            }
+module.tx_cartproducts {
+    view {
+        templateRootPaths {
+            0 = EXT:cart_products/Resources/Private/Backend/V8/Templates/
+        }
+        partialRootPaths {
+            0 = EXT:cart_products/Resources/Private/Backend/V8/Partials/
+        }
+        layoutRootPaths {
+            0 = EXT:cart_products/Resources/Private/Backend/V8/Layouts/
         }
     }
-[global]
-
-[compatVersion = 8.7]
-    module.tx_cartproducts {
-        view {
-            templateRootPaths {
-                0 = EXT:cart_products/Resources/Private/Backend/V8/Templates/
-            }
-            partialRootPaths {
-                0 = EXT:cart_products/Resources/Private/Backend/V8/Partials/
-            }
-            layoutRootPaths {
-                0 = EXT:cart_products/Resources/Private/Backend/V8/Layouts/
-            }
-        }
-    }
-[global]
+}
 
 module.tx_cartproducts {
     persistence {

@@ -172,7 +172,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->view->assign('searchArguments', $this->searchArguments);
         $this->view->assign('products', $products);
 
-        $this->view->assign('returnUrl', rawurlencode(BackendUtility::getModuleUrl('Cart_CartProducts')));
+        $this->view->assign('returnUrl', rawurlencode(BackendUtility::getModuleUrl('Cart_CartProductsProducts')));
     }
 
     /**
