@@ -47,6 +47,12 @@
         "vendor-dir": ".Build/vendor",
         "bin-dir": ".Build/bin"
     },
+    "scripts": {
+        "post-autoload-dump": [
+            "mkdir -p .Build/Web/typo3conf/ext/",
+            "[ -L .Build/Web/typo3conf/ext/cart_products ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/cart_products"
+        ]
+    },
     "extra": {
         "typo3/cms": {
             "extension-key": "cart_products",

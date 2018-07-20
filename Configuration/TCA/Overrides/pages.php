@@ -2,7 +2,7 @@
 defined('TYPO3_MODE') or die();
 
 call_user_func(function () {
-    $_LLL = 'LLL:' . 'EXT:cart_products/Resources/Private/Language/locallang_db.xlf:';
+    $_LLL = 'LLL:' . 'EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
     $GLOBALS['TCA']['pages']['columns']['doktype']['config']['items'][] = [
         $_LLL . 'pages.doktype.182',

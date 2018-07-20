@@ -118,9 +118,9 @@
 				<target>Teaserprodukt auswählen</target>
 			</trans-unit>
 
-			<trans-unit id="pages.doktype.185">
-				<source>CartProducts: Product</source>
-				<target>CartProducts: Produkt</target>
+			<trans-unit id="pages.doktype.182">
+				<source>Cart: Products</source>
+				<target>Cart: Produkte</target>
 			</trans-unit>
 
 		</body>

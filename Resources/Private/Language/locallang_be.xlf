@@ -96,8 +96,8 @@
 				<source>Choose teaser product</source>
 			</trans-unit>
 
-			<trans-unit id="pages.doktype.185">
-				<source>CartProducts: Product</source>
+			<trans-unit id="pages.doktype.182">
+				<source>Cart: Products</source>
 			</trans-unit>
 
 		</body>
