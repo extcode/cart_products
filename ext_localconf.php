@@ -9,11 +9,9 @@ defined('TYPO3_MODE') or die();
     'Products',
     [
         'Product' => 'show, list, teaser, showForm',
-        'Cart' => 'add',
     ],
     [
         'Product' => 'showForm',
-        'Cart' => 'add',
     ]
 );
 
