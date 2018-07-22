@@ -31,6 +31,19 @@
                         </TCEforms>
                     </switchableControllerActions>
 
+                    <!-- Template Layout -->
+                    <settings.templateLayout>
+                        <TCEforms>
+                            <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list;Product->add</displayCond>
+                            <config>
+                                <type>select</type>
+                                <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
+                                <renderType>selectSingle</renderType>
+                            </config>
+                        </TCEforms>
+                    </settings.templateLayout>
+
                     <!-- order -->
                     <settings.orderBy>
                         <TCEforms>

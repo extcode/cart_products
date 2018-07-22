@@ -28,6 +28,16 @@
 				<source>CartProducts: Products</source>
 			</trans-unit>
 
+			<trans-unit id="flexforms_template.templateLayout">
+				<source>Template Layout</source>
+			</trans-unit>
+			<trans-unit id="flexforms_template.templateLayout.table">
+				<source>Table</source>
+			</trans-unit>
+			<trans-unit id="flexforms_template.templateLayout.grid">
+				<source>Grid</source>
+			</trans-unit>
+
 			<trans-unit id="tx_cartproducts.module.main">
 				<source>Shopping Cart</source>
 			</trans-unit>
