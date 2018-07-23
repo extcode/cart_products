@@ -1,5 +1,5 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:cart="http://typo3.org/ns/Extcode/Cart/ViewHelpers"
+      xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <table class="table table-striped table-hover">
@@ -18,34 +18,22 @@
     </thead>
     <tbody>
     <f:for each="{products}" as="product">
-        <f:if condition="{product.category.cartProductShowPid}">
-            <f:then>
-                <cart:variable.set name="showPageUid" value="{product.category.cartProductShowPid}"/>
-            </f:then>
-            <f:else>
-                <cart:variable.set name="showPageUid" value="{settings.showPageUids}"/>
-            </f:else>
-        </f:if>
         <tr>
             <td>
                 <f:if condition="{product.images}">
-                    <f:link.action pageUid="{cart:variable.get(name: 'showPageUid')}"
-                                   action="show"
-                                   arguments="{product : product}">
+                    <cartproducts:link.product product="{product}" settings="{settings}">
                         <f:image src="{product.firstImage.originalResource.originalFile.uid}"
                                  title="{product.firstImage.originalResource.title}"
                                  alt="{product.firstImage.originalResource.title}"
                                  width="{settings.listAction.media.image.size.small.maxWidth}"
                                  height="{settings.listAction.media.image.size.small.maxHeight}" />
-                    </f:link.action>
+                    </cartproducts:link.product>
                 </f:if>
             </td>
             <td>
-                <f:link.action pageUid="{cart:variable.get(name: 'showPageUid')}"
-                               action="show"
-                               arguments="{product: product}">
+                <cartproducts:link.product product="{product}" settings="{settings}">
                     {product.title}
-                </f:link.action>
+                </cartproducts:link.product>
             </td>
             <td>
                 <f:render partial="Product/Price" arguments="{product: product, settings: settings, currencyTranslationData:currencyTranslationData}"></f:render>

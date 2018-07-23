@@ -1,33 +1,21 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:cartevents="http://typo3.org/ns/Extcode/CartEvents/ViewHelpers"
+      xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <f:section name="GridItem">
     <div class="col-md-4">
-        <f:if condition="{product.category.cartProductShowPid}">
-            <f:then>
-                <cart:variable.set name="showPageUid" value="{product.category.cartProductShowPid}"/>
-            </f:then>
-            <f:else>
-                <cart:variable.set name="showPageUid" value="{settings.showPageUids}"/>
-            </f:else>
-        </f:if>
         <f:if condition="{product.images}">
-            <f:link.action pageUid="{cart:variable.get(name: 'showPageUid')}"
-                           action="show"
-                           arguments="{product : product}">
+            <cartproducts:link.product product="{product}" settings="{settings}">
                 <f:image src="{product.firstImage.originalResource.originalFile.uid}"
                          title="{product.firstImage.originalResource.title}"
                          alt="{product.firstImage.originalResource.title}"
                          width="{settings.listAction.media.image.size.small.maxWidth}"
                          height="{settings.listAction.media.image.size.small.maxHeight}" />
-            </f:link.action>
+            </cartproducts:link.product>
         </f:if>
-        <f:link.action pageUid="{cart:variable.get(name: 'showPageUid')}"
-                       action="show"
-                       arguments="{product: product}">
+        <cartproducts:link.product product="{product}" settings="{settings}">
             {product.title}
-        </f:link.action>
+        </cartproducts:link.product>
         <f:render partial="Product/Price" arguments="{product: product, settings: settings, currencyTranslationData:currencyTranslationData}"></f:render>
     </div>
 </f:section>
