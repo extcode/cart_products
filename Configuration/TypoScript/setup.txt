@@ -27,7 +27,8 @@ plugin.tx_cartproducts {
 
     settings {
         format.currency < plugin.tx_cart.settings.format.currency
-        addToCartByAjax = {$plugin.tx_cartproducts.ajaxCartProductsTypeNum}
+
+        addToCartByAjax = {$plugin.tx_cart.settings.addToCartByAjax}
 
         showAction {
             media {
@@ -45,8 +46,6 @@ plugin.tx_cartproducts {
         }
         teaserAction < .showAction
         listAction < .showAction
-
-        addToCartByAjax = {$plugin.tx_cart.settings.addToCartByAjax}
     }
 }
 

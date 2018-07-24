@@ -2,11 +2,6 @@
       data-namespace-typo3-fluid="true">
 
 <div class="product">
-    <f:if condition="{settings.templateLayout} == 'table'">
-        <f:render partial="Product/ListTable" arguments="{_all}" />
-    </f:if>
-    <f:if condition="{settings.templateLayout} == 'grid'">
-        <f:render partial="Product/ListGrid" arguments="{_all}" />
-    </f:if>
+    <f:render partial="Product/List{f:format.case(value: settings.templateLayout, mode: 'capital')}" arguments="{_all}" />
 </div>
 </html>
