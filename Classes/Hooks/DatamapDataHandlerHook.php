@@ -77,7 +77,7 @@ class DatamapDataHandlerHook
 
     protected function isAllowedTargetPage($listType, $doktype)
     {
-        if (substr($listType, 0, 11) != 'cartproducts_') {
+        if (empty($listType) || substr($listType, 0, 11) != 'cartproducts_') {
             return true;
         }
         if (($doktype == 183) && ($listType == 'cartproducts_singleproduct')) {
