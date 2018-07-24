@@ -17,7 +17,8 @@ $_LLL = 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf';
  */
 $pluginNames = [
     'Products',
-    'ProductPartial'
+    'SingleProduct',
+    'ProductPartial',
 ];
 
 foreach ($pluginNames as $pluginName) {
@@ -28,7 +29,12 @@ foreach ($pluginNames as $pluginName) {
         $pluginName,
         $_LLL . ':tx_cartproducts.plugin.' . $pluginNameSC . '.title'
     );
-    $TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'select_key';
+
+    if ($pluginName == 'SingleProduct') {
+        $TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'select_key, pages, recursive';
+    } else {
+        $TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'select_key';
+    }
 
     $flexFormPath = 'EXT:' . $_EXTKEY . '/Configuration/FlexForms/' . $pluginName . 'Plugin.xml';
     if (file_exists(\TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($flexFormPath))) {

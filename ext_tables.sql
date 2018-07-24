@@ -360,6 +360,13 @@ CREATE TABLE tx_cartproducts_domain_model_product_tag_mm (
 );
 
 #
+# Table structure for table 'pages'
+#
+CREATE TABLE pages (
+    cart_products_product int(11) unsigned DEFAULT '0',
+);
+
+#
 # Extend table structure of table 'sys_category'
 #
 CREATE TABLE sys_category (

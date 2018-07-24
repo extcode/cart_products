@@ -17,6 +17,17 @@ defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'Extcode.' . $_EXTKEY,
+    'SingleProduct',
+    [
+        'Product' => 'show, showForm',
+    ],
+    [
+        'Product' => 'showForm',
+    ]
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Extcode.' . $_EXTKEY,
     'ProductPartial',
     [
         'Product' => 'showForm',
@@ -74,6 +85,11 @@ if (TYPO3_MODE === 'FE') {
 
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['registerIndexerConfiguration'][] = 'EXT:cart_products/Classes/Hooks/KeSearchIndexer.php:Extcode\CartProducts\Hooks\KeSearchIndexer';
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['customIndexer'][] = 'EXT:cart_products/Classes/Hooks/KeSearchIndexer.php:Extcode\CartProducts\Hooks\KeSearchIndexer';
+
+// processDatamapClass Hook
+
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['cartproducts_allowed'] =
+    \Extcode\CartProducts\Hooks\DatamapDataHandlerHook::class;
 
 // clearCachePostProc Hook
 

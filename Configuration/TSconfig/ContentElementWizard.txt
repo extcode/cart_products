@@ -1,3 +1,11 @@
+[page|doktype = 183]
+TCEFORM.tt_content.list_type {
+  removeItems = cartproducts_products
+}
+[else]
+TCEFORM.tt_content.list_type {
+  removeItems = cartproducts_singleproduct
+}
 mod.wizards.newContentElement.wizardItems.plugins {
 	elements {
 		products {
@@ -11,3 +19,4 @@ mod.wizards.newContentElement.wizardItems.plugins {
 		}
 	}
 }
+[global]

@@ -106,8 +106,15 @@
 				<source>Choose teaser product</source>
 			</trans-unit>
 
+			<trans-unit id="tx_cartproducts.plugin.single_product.title">
+				<source>CartProducts: Single Produkt</source>
+			</trans-unit>
+
 			<trans-unit id="pages.doktype.182">
 				<source>Cart: Products</source>
+			</trans-unit>
+			<trans-unit id="pages.doktype.183">
+				<source>Cart: Product</source>
 			</trans-unit>
 
 		</body>

@@ -194,7 +194,10 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function showAction(\Extcode\CartProducts\Domain\Model\Product\Product $product = null)
     {
-        if (empty($product)) {
+        if (!$product) {
+            $product = $this->getProduct();
+        }
+        if (!$product) {
             $this->forward('list');
         }
 
@@ -214,35 +217,10 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function showFormAction(\Extcode\CartProducts\Domain\Model\Product\Product $product = null)
     {
-        if (!$product && $this->request->getPluginName()=='ProductPartial') {
-            $requestBuilder =$this->objectManager->get(
-                \TYPO3\CMS\Extbase\Mvc\Web\RequestBuilder::class
-            );
-            $configurationManager = $this->objectManager->get(
-                \TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class
-            );
-            $configurationManager->setConfiguration([
-                'vendorName' => 'Extcode',
-                'extensionName' => 'CartProducts',
-                'pluginName' => 'Products',
-            ]);
-            $requestBuilder->injectConfigurationManager($configurationManager);
-
-            /**
-             * @var \TYPO3\CMS\Extbase\Mvc\Web\Request $cartProductRequest
-             */
-            $cartProductRequest = $requestBuilder->build();
-
-            if ($cartProductRequest->hasArgument('product')) {
-                $productUid = $cartProductRequest->getArgument('product');
-            }
-
-            $productRepository = $this->objectManager->get(
-                \Extcode\CartProducts\Domain\Repository\Product\ProductRepository::class
-            );
-
-            $product =  $productRepository->findByUid($productUid);
+        if (!$product) {
+            $product = $this->getProduct();
         }
+
         $this->view->assign('product', $product);
         $this->view->assign('cartSettings', $this->cartSettings);
 
@@ -271,6 +249,52 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $contentId = $this->contentObj->data['uid'];
 
         $this->view->assign('contentId', $contentId);
+    }
+
+    /**
+     * @return \Extcode\CartProducts\Domain\Model\Product\Product
+     */
+    protected function getProduct()
+    {
+        $productUid = 0;
+
+        if ((int)$GLOBALS['TSFE']->page['doktype'] == 183) {
+            $productUid = (int)$GLOBALS['TSFE']->page['cart_products_product'];
+        } else {
+            if ($this->request->getPluginName()=='ProductPartial') {
+                $requestBuilder =$this->objectManager->get(
+                    \TYPO3\CMS\Extbase\Mvc\Web\RequestBuilder::class
+                );
+                $configurationManager = $this->objectManager->get(
+                    \TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class
+                );
+                $configurationManager->setConfiguration([
+                    'vendorName' => 'Extcode',
+                    'extensionName' => 'CartProducts',
+                    'pluginName' => 'Products',
+                ]);
+                $requestBuilder->injectConfigurationManager($configurationManager);
+
+                /**
+                 * @var \TYPO3\CMS\Extbase\Mvc\Web\Request $cartProductRequest
+                 */
+                $cartProductRequest = $requestBuilder->build();
+
+                if ($cartProductRequest->hasArgument('product')) {
+                    $productUid = $cartProductRequest->getArgument('product');
+                }
+            }
+        }
+
+        if ($productUid > 0) {
+            $productRepository = $this->objectManager->get(
+                \Extcode\CartProducts\Domain\Repository\Product\ProductRepository::class
+            );
+
+            $product =  $productRepository->findByUid($productUid);
+        }
+
+        return $product;
     }
 
     /**

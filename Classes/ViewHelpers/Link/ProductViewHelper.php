@@ -2,6 +2,9 @@
 
 namespace Extcode\CartProducts\ViewHelpers\Link;
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class ProductViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelper
 {
     public function initializeArguments()
@@ -53,16 +56,22 @@ class ProductViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelp
     ) {
         $product = $this->arguments['product'];
 
-        if ($product->getCategory() && $product->getCategory()->getCartProductShowPid()) {
-            $pageUid = $product->getCategory()->getCartProductShowPid();
-        } elseif ($this->arguments['settings']['showPageUids']) {
-            $pageUid = $this->arguments['settings']['showPageUids'];
-        }
+        $page = $this->getProductPage($product);
 
-        $action = 'show';
-        $arguments = [
-            'product' => $product
-        ];
+        if ($page) {
+            $pageUid = $page['uid'];
+        } else {
+            if ($product->getCategory() && $product->getCategory()->getCartProductShowPid()) {
+                $pageUid = $product->getCategory()->getCartProductShowPid();
+            } elseif ($this->arguments['settings']['showPageUids']) {
+                $pageUid = $this->arguments['settings']['showPageUids'];
+            }
+
+            $action = 'show';
+            $arguments = [
+                'product' => $product
+            ];
+        }
 
         return parent::render(
             $action,
@@ -83,5 +92,23 @@ class ProductViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelp
             $argumentsToBeExcludedFromQueryString,
             $addQueryStringMethod
         );
+    }
+
+    /**
+     * @param \Extcode\CartProducts\Domain\Model\Product\Product $product
+     * @return array|bool
+     */
+    protected function getProductPage(\Extcode\CartProducts\Domain\Model\Product\Product $product)
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
+        return $queryBuilder->select('*')
+            ->from('pages')
+            ->where(
+                $queryBuilder->expr()->eq('cart_products_product', $product->getUid())
+            )
+            ->orderBy('sorting')
+            ->setMaxResults(1)
+            ->execute()
+            ->fetch();
     }
 }

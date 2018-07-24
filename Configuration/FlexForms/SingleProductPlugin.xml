@@ -1,0 +1,27 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Optionen</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+
+                    <!-- Template Layout -->
+                    <settings.templateLayout>
+                        <TCEforms>
+                            <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout</label>
+                            <config>
+                                <type>select</type>
+                                <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
+                                <renderType>selectSingle</renderType>
+                            </config>
+                        </TCEforms>
+                    </settings.templateLayout>
+
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>
