@@ -137,8 +137,6 @@ class ProductUtility
             $cartProduct = new \Extcode\Cart\Domain\Model\Cart\Product(
                 'CartProducts',
                 $cartProductValues['productId'],
-                1,
-                null,
                 $productProduct->getSku(),
                 $productProduct->getTitle(),
                 $productProduct->getPrice(),
