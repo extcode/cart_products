@@ -7,18 +7,18 @@ call_user_func(function () {
     $GLOBALS['TCA']['pages']['columns']['doktype']['config']['items'][] = [
         $_LLL . ':pages.doktype.182',
         182,
-        'icon-apps-pagetree-cartproducts-page'
+        'apps-pagetree-page-cartproducts-products'
     ];
 
-    $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes'][182] = 'icon-apps-pagetree-cartproducts-page';
+    $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes'][182] = 'apps-pagetree-page-cartproducts-products';
 
     $GLOBALS['TCA']['pages']['columns']['doktype']['config']['items'][] = [
         $_LLL . ':pages.doktype.183',
         183,
-        'icon-apps-pagetree-cartproducts-page'
+        'apps-pagetree-page-cartproducts-products'
     ];
 
-    $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes'][183] = 'icon-apps-pagetree-cartproducts-page';
+    $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes'][183] = 'apps-pagetree-page-cartproducts-products';
 
     $newPagesColumns = [
         'cart_products_product' => [

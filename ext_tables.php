@@ -86,18 +86,7 @@ $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
     \TYPO3\CMS\Core\Imaging\IconRegistry::class
 );
 
-$iconRegistry->registerIcon(
-    'tcarecords-pages-contains-cartproducts',
-    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-    ['source' => $iconPath . 'pages_products_icon.svg']
-);
-$TCA['pages']['ctrl']['typeicon_classes']['contains-cartproducts'] = 'tcarecords-pages-contains-cartproducts';
-
-$TCA['pages']['columns']['module']['config']['items'][] = [
-    'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:tcarecords-pages-contains.cart_products',
-    'cartproducts',
-    $iconPath . 'pages_products_icon.svg'
-];
+$TCA['pages']['ctrl']['typeicon_classes']['contains-cartproducts'] = 'apps-pagetree-folder-cartproducts-products';
 
 $tables = [
     'product_product',
