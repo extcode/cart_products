@@ -1,37 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
-<style type="text/css">
-	.st0{display:none;fill:#FFC857;}
-	.st1{display:none;fill:#E8A33D;}
-	.st2{fill:#AAAAAA;}
-	.st3{opacity:0.43;enable-background:new    ;}
-	.st4{display:none;}
-	.st5{display:inline;fill:#3A7CAE;}
-	.st6{display:inline;opacity:0.2;enable-background:new    ;}
-	.st7{fill:#FFFFFF;}
-	.st8{fill:#3A7CAE;}
-</style>
-<path class="st0" d="M16,4v10H0V2h7l1.3,2H16z"/>
-<path class="st1" d="M16,5H8.3L7,7H0V4h16V5z"/>
-<path class="st2" d="M16,4v10H0V2h7l1.3,2H16z"/>
-<path class="st3" d="M16,5H8.3L7,7H0V4h16V5z"/>
-<g class="st4">
-	<path class="st5" d="M5,5h11v11H5V5z"/>
-	<path class="st6" d="M15,6v9H6V6H15 M16,5H5v11h11V5z"/>
-	<path class="st7" d="M12,14H7l1.3-2l1.3-2l1.3,2L12,14z"/>
-	<path class="st7" d="M14,14H9l1.3-1.5l1.3-1.5l1.3,1.5L14,14z"/>
-	<circle class="st7" cx="13" cy="9" r="1"/>
+<path fill="#AAAAAA" d="M16,4v10H0V2h7l1.3,2H16z"/>
+<path opacity="0.43" d="M16,5H8.3L7,7H0V4h16V5z"/>
+<g display="none">
+	<path fill="#3A7CAE" d="M5,5h11v11H5V5z"/>
+	<path opacity="0.2" d="M15,6v9H6V6H15 M16,5H5v11h11V5z"/>
+	<path fill="#FFFFFF" d="M12,14H7l1.3-2l1.3-2l1.3,2L12,14z"/>
+	<path fill="#FFFFFF" d="M14,14H9l1.3-1.5l1.3-1.5l1.3,1.5L14,14z"/>
+	<circle fill="#FFFFFF" cx="13" cy="9" r="1"/>
 </g>
 <g transform="matrix(1.4274084,0,0,1.4274084,1.7618725,2.4599728)">
-	<polyline class="st7" points="2.3,3.3 6,1.4 10,3.3 6.1,5.4 	"/>
-	<polygon class="st7" points="5.9,9.5 6.1,5.4 2.3,3.3 2.3,8.4 	"/>
-	<polygon class="st7" points="5.9,9.5 6.1,5.4 10,3.3 10,8.2 	"/>
+	<polyline fill="#FFFFFF" points="2.3,3.3 6,1.4 10,3.3 6.1,5.4"/>
+	<polygon fill="#FFFFFF" points="5.9,9.5 6.1,5.4 2.3,3.3 2.3,8.4"/>
+	<polygon fill="#FFFFFF" points="5.9,9.5 6.1,5.4 10,3.3 10,8.2"/>
 </g>
 <g transform="matrix(1.4274084,0,0,1.4274084,1.7618725,2.4599728)">
-	<polyline class="st8" points="2.9,3.6 6.1,2.1 9.4,3.6 6.1,5.4 	"/>
-	<polygon class="st8" points="6,9.2 6,5.8 2.9,4.2 2.9,7.9 	"/>
-	<polygon class="st8" points="6.3,9.2 6.3,5.8 9.4,4.2 9.4,7.9 	"/>
+	<polyline fill="#3A7CAE" points="2.9,3.6 6.1,2.1 9.4,3.6 6.1,5.4"/>
+	<polygon fill="#3A7CAE" points="6,9.2 6,5.8 2.9,4.2 2.9,7.9"/>
+	<polygon fill="#3A7CAE" points="6.3,9.2 6.3,5.8 9.4,4.2 9.4,7.9"/>
 </g>
 </svg>
