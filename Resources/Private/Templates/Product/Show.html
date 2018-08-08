@@ -1,4 +1,5 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:cart="http://typo3.org/ns/Extcode/Cart/ViewHelpers"
       xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
@@ -7,11 +8,11 @@
 <f:section name="main">
     <cartproducts:canonicalTag product="{product}" />
 
-    <cartproducts:format.nothing>
-        <cartproducts:titleTag>
+    <cart:format.nothing>
+        <cart:titleTag>
             <f:format.htmlentitiesDecode>{product.title}</f:format.htmlentitiesDecode>
-        </cartproducts:titleTag>
-    </cartproducts:format.nothing>
+        </cart:titleTag>
+    </cart:format.nothing>
 
     <h1>{product.title}</h1>
 

@@ -27,7 +27,7 @@ test:cgl:
   image: composer:1.6
   stage: cgl
   before_script:
-  - composer require typo3/cms-core --no-update
+  - composer require typo3/cms-core ^8.7 --no-update
   - composer install
   script:
   - .Build/bin/php-cs-fixer fix --config=Build/.php_cs -v --dry-run --using-cache=no --path-mode=intersection ./
