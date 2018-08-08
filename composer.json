@@ -23,11 +23,12 @@
         "issues": "https://github.com/extcode/cart_products/issues"
     },
     "require": {
-        "typo3/cms-core": "^8.7 || ^9.3",
-        "extcode/cart": "dev-5.x.alpha"
+        "php": ">=7.2.0 <7.3",
+        "typo3/cms-core": "^9.3",
+        "extcode/cart": "dev-6.x.alpha"
     },
     "require-dev": {
-        "nimut/testing-framework": "^2.0 || ^3.0 || ^4.0",
+        "nimut/testing-framework": "^4.0",
         "friendsofphp/php-cs-fixer": "^2.0"
     },
     "autoload": {
