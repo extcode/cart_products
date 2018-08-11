@@ -3,10 +3,9 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-Benutzer Handbuch
-=================
+Editor Manual
+=============
 
 .. toctree::
-      :maxdepth: 5
-      :titlesonly:
-
+   :maxdepth: 5
+   :titlesonly:

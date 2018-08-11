@@ -5,8 +5,8 @@
 
 .. _misc:
 
-Sonstiges
----------
+Miscellaneous
+=============
 
 .. toctree::
    :maxdepth: 5
