@@ -20,4 +20,4 @@ Support
 -------
 If you need further support, please contact me.
 
-**This support is not always free!**
+**Be aware that this support might not be free!**

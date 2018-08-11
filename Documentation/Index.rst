@@ -1,12 +1,17 @@
+.. ==================================================
+.. FOR YOUR INFORMATION
+.. --------------------------------------------------
+.. -*- coding: utf-8 -*- with BOM.
+
 .. include:: Includes.txt
 
 .. _start:
 
 ===========================
-EXT: Cart
+EXT: Contacts
 ===========================
 
-.. image:: Images/cart_logo.png
+.. image:: Images/cart_products_logo.png
    :height: 200
    :width: 200
 
@@ -23,15 +28,14 @@ EXT: Cart
       en
 
    :Description:
-      CartProducts is an extension providing a product storage (database) for the TYPO3 shopping extension Cart.
+      Cart is a small but powerful extension which "solely" adds a shopping cart to your TYPO3 installation.
+      The extension allows you to create coupons, products with or without variants, special prices.
+      CartProducts provides an own data storage for simple and configurable products. Products can be offered via a list and detail view and can be purchased via cart function of the Cart extension.
 
-      :Keywords:
-      cart, prodcts, shop, shopping, e-commerce, ecommerce, checkout, payment
+   :Keywords:
+      cart, products, configurable products, shopping
 
-   :Copyright:
-      2018
-
-   :Author:
+   :Autor:
       Daniel Lorenz
 
    :E-Mail:
@@ -41,20 +45,20 @@ EXT: Cart
       This document is published under the Open Publication License
       available from http://www.opencontent.org/openpub/
 
-   :Rendered:
-      |today|
+    :Rendered:
+        |today|
 
-   The content of this document is related to TYPO3,
-   a GNU/GPL CMS/Framework available from `www.typo3.org <https://typo3.org/>`__.
+    The content of this document is related to TYPO3,
+    a GNU/GPL CMS/Framework available from `www.typo3.org <https://typo3.org/>`__.
 
-   **Table of Contents**
+    **Table of Contents**
 
 .. toctree::
-   :maxdepth: 5
-   :titlesonly:
+    :maxdepth: 5
+    :titlesonly:
 
-   Introduction/Index
-   EditorManual/Index
-   DeveloperManual/Index
-   AdministratorManual/Index
-   Misc/Index
+    Introduction/Index
+    EditorManual/Index
+    DeveloperManual/Index
+    AdministratorManual/Index
+    Misc/Index
