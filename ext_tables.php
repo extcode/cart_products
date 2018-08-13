@@ -87,20 +87,3 @@ $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
 );
 
 $TCA['pages']['ctrl']['typeicon_classes']['contains-cartproducts'] = 'apps-pagetree-folder-cartproducts-products';
-
-$tables = [
-    'product_product',
-    'product_specialprice',
-    'product_taxclass',
-    'product_fevariant',
-    'product_bevariant',
-    'product_bevariantattribute',
-    'product_bevariantattributeoption',
-];
-
-foreach ($tables as $table) {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
-        'tx_cartproducts_domain_model_' . $table,
-        'EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_csh_tx_cart_domain_model_' . $table . '.xlf'
-    );
-}
