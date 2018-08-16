@@ -2,8 +2,8 @@
 
 defined('TYPO3_MODE') or die();
 
-// Extension manager configuration
-$configuration = \Extcode\CartProducts\Utility\EmConfiguration::getSettings();
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 $_LLL = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf';
 
@@ -33,7 +33,7 @@ $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['category']['con
 );
 
 // category restriction based on settings in extension manager
-$categoryRestrictionSetting = $configuration->getCategoryRestriction();
+$categoryRestrictionSetting = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('cart_products', 'categoryRestriction');
 
 if ($categoryRestrictionSetting) {
     $categoryRestriction = '';

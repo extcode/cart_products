@@ -51,8 +51,8 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Product Special Price
      *
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\SpecialPrice>
-     * @cascade remove
      */
     protected $specialPrices = null;
 

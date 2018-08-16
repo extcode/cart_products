@@ -70,8 +70,8 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
     /**
      * Product Content
      *
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\TtContent>
-     * @lazy
      */
     protected $productContent;
 
@@ -106,16 +106,16 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
     /**
      * Product Special Price
      *
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\SpecialPrice>
-     * @cascade remove
      */
     protected $specialPrices;
 
     /**
      * Product Quantity Discount
      *
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\QuantityDiscount>
-     * @cascade remove
      */
     protected $quantityDiscounts;
 
@@ -192,32 +192,32 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
     /**
      * variants
      *
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\BeVariant>
-     * @cascade remove
      */
     protected $beVariants = null;
 
     /**
      * Frontend Variants
      *
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\FeVariant>
-     * @cascade remove
      */
     protected $feVariants = null;
 
     /**
      * Related Products
      *
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product>
-     * @lazy
      */
     protected $relatedProducts = null;
 
     /**
      * Related Products (from)
      *
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product>
-     * @lazy
      */
     protected $relatedProductsFrom;
 

@@ -14,7 +14,7 @@ abstract class AbstractProduct extends \TYPO3\CMS\Extbase\DomainObject\AbstractE
      * SKU
      *
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate NotEmpty
      */
     protected $sku = '';
 
@@ -22,7 +22,7 @@ abstract class AbstractProduct extends \TYPO3\CMS\Extbase\DomainObject\AbstractE
      * Title
      *
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate NotEmpty
      */
     protected $title = '';
 
