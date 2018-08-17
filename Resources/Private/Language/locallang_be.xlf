@@ -25,7 +25,7 @@
 			</trans-unit>
 
 			<trans-unit id="tcarecords-pages-contains.cart_products">
-				<source>CartProducts: Products</source>
+				<source>Cart: Products</source>
 			</trans-unit>
 
 			<trans-unit id="flexforms_template.templateLayout">
