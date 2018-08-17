@@ -14,7 +14,7 @@ class QuantityDiscount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Price
      *
      * @var float
-     * @TYPO3\CMS\Extbase\Annotation\Validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $price = 0.0;
 
@@ -22,7 +22,7 @@ class QuantityDiscount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Quantity (lower bound)
      *
      * @var int
-     * @TYPO3\CMS\Extbase\Annotation\Validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $quantity = 0;
 
