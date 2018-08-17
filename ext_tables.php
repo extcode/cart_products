@@ -87,3 +87,9 @@ $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
 );
 
 $TCA['pages']['ctrl']['typeicon_classes']['contains-cartproducts'] = 'apps-pagetree-folder-cartproducts-products';
+
+$TCA['pages']['columns']['module']['config']['items'][] = [
+    'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:tcarecords-pages-contains.cart_products',
+    'cartproducts',
+    'apps-pagetree-folder-cartproducts-products',
+];
