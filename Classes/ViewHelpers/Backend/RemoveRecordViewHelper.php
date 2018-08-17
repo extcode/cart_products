@@ -37,7 +37,7 @@ class RemoveRecordViewHelper extends AbstractViewHelper
     }
 
     /**
-     * Render link with sprite icon to remove user
+     * Render link with sprite icon to remove product
      *
      * @param array $arguments
      * @param \Closure $renderChildrenClosure

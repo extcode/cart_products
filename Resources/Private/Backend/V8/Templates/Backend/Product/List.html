@@ -2,6 +2,7 @@
       xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
       xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
       xmlns:cart="http://typo3.org/ns/Extcode/Cart/ViewHelpers"
+      xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <f:layout name="Default"/>
@@ -68,6 +69,7 @@
                                 <core:icon identifier="actions-view" />
                             </a>
                             <a class="btn btn-default" href="{be:uri.editRecord(table: 'tx_cartproducts_domain_model_product_product', uid: product.uid)}"><core:icon identifier="actions-open" /></a>
+                            {cartproducts:backend.removeRecord(product: product)}
                         </div>
                     </td>
                 </tr>
