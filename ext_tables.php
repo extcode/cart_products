@@ -77,6 +77,7 @@ if (TYPO3_MODE === 'BE') {
             'access' => 'user, group',
             'icon' => $iconPath . 'module_products.svg',
             'labels' => $_LLL . ':tx_cartproducts.module.products',
+            'navigationComponentId' => 'TYPO3/CMS/Backend/PageTree/PageTreeElement',
         ]
     );
 }
