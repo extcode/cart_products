@@ -180,7 +180,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\Product $product
      *
-     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation $product
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("product")
      */
     public function showAction(\Extcode\CartProducts\Domain\Model\Product\Product $product = null)
     {
