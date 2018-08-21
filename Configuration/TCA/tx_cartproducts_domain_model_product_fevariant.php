@@ -2,7 +2,7 @@
 
 defined('TYPO3_MODE') or die();
 
-$_LLL_general = 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf';
+$_LLL_general = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf';
 $_LLL = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf';
 
 return [
