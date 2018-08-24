@@ -104,7 +104,10 @@ class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
     {
         $options = [];
 
-        $currencyViewHelper = $this->objectManager->get(
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Extbase\Object\ObjectManager::class
+        );
+        $currencyViewHelper = $objectManager->get(
             \Extcode\Cart\ViewHelpers\Format\CurrencyViewHelper::class
         );
         $currencyViewHelper->initialize();
