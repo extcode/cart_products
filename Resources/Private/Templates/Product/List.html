@@ -1,7 +1,9 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<div class="product">
-    <f:render partial="Product/List{f:format.case(value: settings.templateLayout, mode: 'capital')}" arguments="{_all}" />
-</div>
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <f:render partial="Product/List/{f:format.case(value: settings.templateLayout, mode: 'capital')}" arguments="{_all}" />
+</f:section>
 </html>

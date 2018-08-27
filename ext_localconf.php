@@ -2,6 +2,8 @@
 
 defined('TYPO3_MODE') or die();
 
+$_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf';
+
 // configure plugins
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -9,6 +11,17 @@ defined('TYPO3_MODE') or die();
     'Products',
     [
         'Product' => 'show, list, teaser, showForm',
+    ],
+    [
+        'Product' => 'showForm',
+    ]
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Extcode.' . $_EXTKEY,
+    'TeaserProducts',
+    [
+        'Product' => 'teaser, showForm',
     ],
     [
         'Product' => 'showForm',
@@ -114,5 +127,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['cartproducts'][]
     = 'Extcode\\CartProducts\\ViewHelpers';
 
 // register listTemplateLayouts
-$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts'][] = ['LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout.table', 'table'];
-$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts'][] = ['LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout.grid', 'grid'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts']['products'][] = [$_LLL_be . ':flexforms_template.templateLayout.products.table', 'table'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts']['products'][] = [$_LLL_be . ':flexforms_template.templateLayout.products.grid', 'grid'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts']['teaser_products'][] = [$_LLL_be . ':flexforms_template.templateLayout.products.table', 'table'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts']['teaser_products'][] = [$_LLL_be . ':flexforms_template.templateLayout.products.grid', 'grid'];
