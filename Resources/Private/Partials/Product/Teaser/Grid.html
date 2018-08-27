@@ -1,0 +1,49 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:section name="GridItem">
+    <div class="col-md-4">
+        <f:if condition="{product.images}">
+            <cartproducts:link.product pluginName="Products" product="{product}"settings="{settings}">
+                <f:image src="{product.firstImage.originalResource.originalFile.uid}"
+                         title="{product.firstImage.originalResource.title}"
+                         alt="{product.firstImage.originalResource.title}"
+                         width="{settings.listAction.media.image.size.small.maxWidth}"
+                         height="{settings.listAction.media.image.size.small.maxHeight}" />
+            </cartproducts:link.product>
+        </f:if>
+        <cartproducts:link.product pluginName="Products" product="{product}"settings="{settings}">
+            {product.title}
+        </cartproducts:link.product>
+        <f:render partial="Product/Price" arguments="{product: product, settings: settings, currencyTranslationData:currencyTranslationData}"></f:render>
+    </div>
+</f:section>
+
+<f:for each="{products}" as="product" iteration="iterator">
+    <f:if condition="{iterator.isFirst}">
+        <div class="row">
+    </f:if>
+
+    <f:if condition="{iterator.cycle} % 3">
+        <f:then>
+            <f:render section="GridItem" arguments="{_all}"/>
+        </f:then>
+
+        <f:else>
+            <f:render section="GridItem" arguments="{_all}"/>
+
+            <f:if condition="{iterator.isLast}">
+                <f:then></f:then>
+                <f:else>
+                    </div><div class="row">
+                </f:else>
+            </f:if>
+        </f:else>
+    </f:if>
+
+    <f:if condition="{iterator.isLast}">
+        </div>
+    </f:if>
+</f:for>
+</html>

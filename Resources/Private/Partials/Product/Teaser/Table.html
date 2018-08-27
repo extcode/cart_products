@@ -1,0 +1,45 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th class="col-md-2">
+            &nbsp;
+        </th>
+        <th class="col-md-6">
+            <f:translate key="tx_cartproducts_domain_model_product_product.title"/>
+        </th>
+        <th class="col-md-4">
+            <f:translate key="tx_cartproducts_domain_model_product_product.price"/>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <f:for each="{products}" as="product">
+        <tr>
+            <td>
+                <f:if condition="{product.images}">
+                    <cartproducts:link.product pluginName="Products" product="{product}"settings="{settings}">
+                        <f:image src="{product.firstImage.originalResource.originalFile.uid}"
+                                 title="{product.firstImage.originalResource.title}"
+                                 alt="{product.firstImage.originalResource.title}"
+                                 width="{settings.listAction.media.image.size.small.maxWidth}"
+                                 height="{settings.listAction.media.image.size.small.maxHeight}" />
+                    </cartproducts:link.product>
+                </f:if>
+            </td>
+            <td>
+                <cartproducts:link.product pluginName="Products" product="{product}"settings="{settings}">
+                    {product.title}
+                </cartproducts:link.product>
+            </td>
+            <td>
+                <f:render partial="Product/Price" arguments="{product: product, settings: settings, currencyTranslationData:currencyTranslationData}"></f:render>
+            </td>
+        </tr>
+    </f:for>
+    </tbody>
+</table>
+</html>
