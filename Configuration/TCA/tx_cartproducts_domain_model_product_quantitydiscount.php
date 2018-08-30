@@ -82,6 +82,7 @@ return [
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_quantitydiscount.frontend_user_group',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'readOnly' => 0,
                 'foreign_table' => 'fe_groups',
                 'size' => 1,
