@@ -49,10 +49,10 @@
 			</trans-unit>
 
 			<trans-unit id="tx_cartproducts.plugin.products.title">
-				<source>CartProducts: Products</source>
+				<source>Cart: Products</source>
 			</trans-unit>
 			<trans-unit id="tx_cartproducts.plugin.products.description">
-				<source>List and show products</source>
+				<source>list and show products</source>
 			</trans-unit>
 			<trans-unit id="tx_cartproducts.plugin.products.action.switch">
 				<source>Display Type</source>
@@ -107,11 +107,14 @@
 			</trans-unit>
 
 			<trans-unit id="tx_cartproducts.plugin.teaser_products.title">
-				<source>CartProducts: Products (Teaser)</source>
+				<source>Cart: selected Products</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.teaser_products.description">
+				<source>list or tease selected products</source>
 			</trans-unit>
 
 			<trans-unit id="tx_cartproducts.plugin.single_product.title">
-				<source>CartProducts: Single Product</source>
+				<source>Cart: Single Product</source>
 			</trans-unit>
 
 			<trans-unit id="pages.doktype.182">

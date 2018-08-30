@@ -336,13 +336,13 @@
             </trans-unit>
 
             <trans-unit id="tx_cartproducts_domain_model_category.cart_product_image">
-                <source>CartProducts: Product Category Image</source>
+                <source>Cart: Product Category Image</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_category.cart_product_list_pid">
-                <source>CartProducts: Page where Products of this category are listed.</source>
+                <source>Cart: Page where Products of this category are listed.</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_category.cart_product_show_pid">
-                <source>CartProducts: Page where Products of this category are shown.</source>
+                <source>Cart: Page where Products of this category are shown.</source>
             </trans-unit>
 
         </body>
