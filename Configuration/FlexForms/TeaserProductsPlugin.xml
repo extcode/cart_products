@@ -13,7 +13,8 @@
                             <config>
                                 <type>select</type>
                                 <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
-                                <itemsProcFuncConf>TeaserProducts</itemsProcFuncConf>
+                                <extKey>cart_products</extKey>
+                                <pluginName>TeaserProducts</pluginName>
                                 <renderType>selectSingle</renderType>
                             </config>
                         </TCEforms>

@@ -34,7 +34,8 @@
                             <config>
                                 <type>select</type>
                                 <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
-                                <itemsProcFuncConf>Products</itemsProcFuncConf>
+                                <extKey>cart_products</extKey>
+                                <pluginName>Products</pluginName>
                                 <renderType>selectSingle</renderType>
                             </config>
                         </TCEforms>
