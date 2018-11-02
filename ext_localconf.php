@@ -87,13 +87,6 @@ if (TYPO3_MODE === 'FE') {
         \Extcode\CartProducts\Hooks\CartProductHook::class;
 }
 
-// realurl Hook
-
-if (TYPO3_MODE === 'FE') {
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['ConfigurationReader_postProc'][1499067085] =
-        'EXT:cart_products/Classes/Hooks/RealUrlHook.php:Extcode\CartProducts\Hooks\RealUrlHook->postProcessConfiguration';
-}
-
 // ke_search Hook
 
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['registerIndexerConfiguration'][] = 'EXT:cart_products/Classes/Hooks/KeSearchIndexer.php:Extcode\CartProducts\Hooks\KeSearchIndexer';
