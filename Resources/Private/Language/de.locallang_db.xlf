@@ -133,6 +133,10 @@
             <trans-unit id="tx_cartproducts_domain_model_product_product.title">
                 <target>Titel</target>
             </trans-unit>
+            <trans-unit id="tx_cartproducts_domain_model_product_product.path_segment">
+                <source>URL segment</source>
+                <target>URL Segment</target>
+            </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_product_product.teaser">
                 <target>Teaser</target>
             </trans-unit>
