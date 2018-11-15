@@ -12,6 +12,8 @@ CREATE TABLE tx_cartproducts_domain_model_product_product (
     teaser text NOT NULL,
     description text NOT NULL,
 
+    path_segment varchar(2048),
+
     min_number_in_order int(11) unsigned DEFAULT '0' NOT NULL,
     max_number_in_order int(11) unsigned DEFAULT '0' NOT NULL,
 

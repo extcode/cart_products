@@ -45,6 +45,7 @@ return [
             'showitem' => '
                 sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource,
                 product_type, sku, title,
+                path_segment,
                 --div--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.div.descriptions,
                     teaser;;;richtext:rte_transform[mode=ts_links], description;;;richtext:rte_transform[mode=ts_links],
                     product_content,
@@ -221,6 +222,21 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'required,trim'
+            ],
+        ],
+
+        'path_segment' => [
+            'exclude' => true,
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.path_segment',
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => ['title'],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => '',
             ],
         ],
 
