@@ -77,7 +77,7 @@ if (TYPO3_MODE === 'BE') {
 // TSconfig
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-    <INCLUDE_TYPOSCRIPT: source="FILE:EXT:cart_products/Configuration/TSconfig/ContentElementWizard.typoscript">
+    <INCLUDE_TYPOSCRIPT: source="FILE:EXT:cart_products/Configuration/TSconfig/ContentElementWizard.tsconfig">
 ');
 
 // Cart Hooks
