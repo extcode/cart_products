@@ -2,13 +2,13 @@
 
 defined('TYPO3_MODE') or die();
 
-$_LLL = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf';
+$_LLL_db = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf:';
 
 $newSysCategoryColumns = [
     'images' => [
         'exclude' => 1,
         'l10n_mode' => 'mergeIfNotBlank',
-        'label' => $_LLL . ':tx_cartproducts_domain_model_category.image',
+        'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.image',
         'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
             'images',
             [
@@ -31,7 +31,7 @@ $newSysCategoryColumns = [
     'cart_product_list_pid' => [
         'exclude' => 1,
         'l10n_mode' => 'mergeIfNotBlank',
-        'label' => $_LLL . ':tx_cartproducts_domain_model_category.cart_product_list_pid',
+        'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.cart_product_list_pid',
         'config' => [
             'type' => 'group',
             'internal_type' => 'db',
@@ -54,7 +54,7 @@ $newSysCategoryColumns = [
     'cart_product_show_pid' => [
         'exclude' => 1,
         'l10n_mode' => 'mergeIfNotBlank',
-        'label' => $_LLL . ':tx_cartproducts_domain_model_category.cart_product_show_pid',
+        'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.cart_product_show_pid',
         'config' => [
             'type' => 'group',
             'internal_type' => 'db',

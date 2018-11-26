@@ -5,14 +5,14 @@ defined('TYPO3_MODE') or die();
 // Extension manager configuration
 $configuration = \Extcode\CartProducts\Utility\EmConfiguration::getSettings();
 
-$_LLL = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf';
+$_LLL_db = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf:';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
     'cart_products',
     'tx_cartproducts_domain_model_product_product',
     'category',
     [
-        'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.category',
+        'label' => $_LLL_db . 'tx_cartproducts_domain_model_product_product.category',
         'fieldConfiguration' => [
             'minitems' => 0,
             'maxitems' => 1,
@@ -28,7 +28,7 @@ $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['category']['con
     'tx_cartproducts_domain_model_product_product',
     'categories',
     [
-        'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.categories'
+        'label' => $_LLL_db . 'tx_cartproducts_domain_model_product_product.categories'
     ]
 );
 
