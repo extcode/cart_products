@@ -2,54 +2,8 @@
 
 defined('TYPO3_MODE') or die();
 
-$iconPath = 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/';
-
-$_LLL = 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf';
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-    $_EXTKEY,
-    'Configuration/TypoScript',
-    'Shopping Cart - Cart Products'
-);
-
-/**
- * Register Frontend Plugins
- */
-$pluginNames = [
-    'Products' => [
-        'subtypes_excludelist' => 'select_key'
-    ],
-    'TeaserProducts' => [
-        'subtypes_excludelist' => 'select_key, pages, recursive'
-    ],
-    'SingleProduct' => [
-        'subtypes_excludelist' => 'select_key, pages, recursive'
-    ],
-    'ProductPartial' => [
-        'subtypes_excludelist' => 'select_key, recursive'
-    ],
-];
-
-foreach ($pluginNames as $pluginName => $pluginConf) {
-    $pluginSignature = strtolower(str_replace('_', '', $_EXTKEY)) . '_' . strtolower($pluginName);
-    $pluginNameSC = strtolower(preg_replace('/[A-Z]/', '_$0', lcfirst($pluginName)));
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        'Extcode.' . $_EXTKEY,
-        $pluginName,
-        $_LLL . ':tx_cartproducts.plugin.' . $pluginNameSC . '.title'
-    );
-
-    $TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = $pluginConf['subtypes_excludelist'];
-
-    $flexFormPath = 'EXT:' . $_EXTKEY . '/Configuration/FlexForms/' . $pluginName . 'Plugin.xml';
-    if (file_exists(\TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($flexFormPath))) {
-        $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-            $pluginSignature,
-            'FILE:' . $flexFormPath
-        );
-    }
-}
+$iconPath = 'EXT:cart_products/Resources/Public/Icons/';
+$_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
 /**
  * Register Backend Modules
@@ -70,7 +24,7 @@ if (TYPO3_MODE === 'BE') {
     }
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-        'Extcode.' . $_EXTKEY,
+        'Extcode.cart_products',
         'Cart',
         'Products',
         '',
@@ -81,20 +35,8 @@ if (TYPO3_MODE === 'BE') {
         [
             'access' => 'user, group',
             'icon' => $iconPath . 'module_products.svg',
-            'labels' => $_LLL . ':tx_cartproducts.module.products',
+            'labels' => $_LLL_be . 'tx_cartproducts.module.products',
             'navigationComponentId' => 'TYPO3/CMS/Backend/PageTree/PageTreeElement',
         ]
     );
 }
-
-$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-    \TYPO3\CMS\Core\Imaging\IconRegistry::class
-);
-
-$TCA['pages']['ctrl']['typeicon_classes']['contains-cartproducts'] = 'apps-pagetree-folder-cartproducts-products';
-
-$TCA['pages']['columns']['module']['config']['items'][] = [
-    'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:tcarecords-pages-contains.cart_products',
-    'cartproducts',
-    'apps-pagetree-folder-cartproducts-products',
-];

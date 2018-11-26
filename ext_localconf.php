@@ -2,12 +2,12 @@
 
 defined('TYPO3_MODE') or die();
 
-$_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf';
+$_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
 // configure plugins
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Extcode.' . $_EXTKEY,
+    'Extcode.cart_products',
     'Products',
     [
         'Product' => 'show, list, teaser, showForm',
@@ -18,7 +18,7 @@ $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf';
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Extcode.' . $_EXTKEY,
+    'Extcode.cart_products',
     'TeaserProducts',
     [
         'Product' => 'teaser, showForm',
@@ -29,7 +29,7 @@ $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf';
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Extcode.' . $_EXTKEY,
+    'Extcode.cart_products',
     'SingleProduct',
     [
         'Product' => 'show, showForm',
@@ -40,7 +40,7 @@ $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf';
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Extcode.' . $_EXTKEY,
+    'Extcode.cart_products',
     'ProductPartial',
     [
         'Product' => 'showForm',
@@ -124,7 +124,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cartProducts
     \Extcode\CartProducts\Updates\SlugUpdater::class;
 
 // register listTemplateLayouts
-$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts']['products'][] = [$_LLL_be . ':flexforms_template.templateLayout.products.table', 'table'];
-$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts']['products'][] = [$_LLL_be . ':flexforms_template.templateLayout.products.grid', 'grid'];
-$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts']['teaser_products'][] = [$_LLL_be . ':flexforms_template.templateLayout.products.table', 'table'];
-$GLOBALS['TYPO3_CONF_VARS']['EXT'][$_EXTKEY]['templateLayouts']['teaser_products'][] = [$_LLL_be . ':flexforms_template.templateLayout.products.grid', 'grid'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['products'][] = [$_LLL_be . 'flexforms_template.templateLayout.products.table', 'table'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['products'][] = [$_LLL_be . 'flexforms_template.templateLayout.products.grid', 'grid'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['teaser_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.products.table', 'table'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['teaser_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.products.grid', 'grid'];
