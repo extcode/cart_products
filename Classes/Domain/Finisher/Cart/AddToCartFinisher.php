@@ -1,8 +1,19 @@
 <?php
 
-namespace Extcode\CartProducts\Hooks;
+namespace Extcode\CartProducts\Domain\Finisher\Cart;
 
+use Extcode\Cart\Domain\Finisher\Cart\AddToCartFinisherInterface;
+use Extcode\Cart\Domain\Model\Cart\Cart;
+use Extcode\Cart\Domain\Model\Cart\Product;
+use Extcode\Cart\Domain\Model\Dto\AvailabilityResponse;
+use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
+use Extcode\CartProducts\Utility\ProductUtility;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Web\Request;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This file is part of the "cart_products" Extension for TYPO3 CMS.
@@ -10,45 +21,46 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
-class CartProductHook implements \Extcode\Cart\Hooks\CartProductHookInterface
+class AddToCartFinisher implements AddToCartFinisherInterface
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     * @var ObjectManager
      */
     protected $objectManager;
 
     /**
      * Product Repository
      *
-     * @var \Extcode\CartProducts\Domain\Repository\Product\ProductRepository
+     * @var ProductRepository
      */
     protected $productRepository;
 
     /**
-     * @param \TYPO3\CMS\Extbase\Mvc\Web\Request $request
-     * @param \Extcode\Cart\Domain\Model\Cart\Product $cartProduct
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
+     * @param Request $request
+     * @param Product $cartProduct
+     * @param Cart $cart
      * @param string $mode
      *
-     * @return \Extcode\Cart\Domain\Model\Dto\AvailabilityResponse
+     * @return AvailabilityResponse
      */
     public function checkAvailability(
-        \TYPO3\CMS\Extbase\Mvc\Web\Request $request,
-        \Extcode\Cart\Domain\Model\Cart\Product $cartProduct,
-        \Extcode\Cart\Domain\Model\Cart\Cart $cart,
+        Request $request,
+        Product $cartProduct,
+        Cart $cart,
         string $mode = 'update'
-    ) : \Extcode\Cart\Domain\Model\Dto\AvailabilityResponse {
-        $this->objectManager = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+    ) : AvailabilityResponse {
+        $this->objectManager = new ObjectManager();
 
+        /** @var AvailabilityResponse $availabilityResponse */
         $availabilityResponse = GeneralUtility::makeInstance(
-            \Extcode\Cart\Domain\Model\Dto\AvailabilityResponse::class
+            AvailabilityResponse::class
         );
 
         if ($cartProduct->getProductType() != 'CartProducts') {
             return $availabilityResponse;
         }
         $this->productRepository = $this->objectManager->get(
-            \Extcode\CartProducts\Domain\Repository\Product\ProductRepository::class
+            ProductRepository::class
         );
 
         $querySettings = $this->productRepository->createQuery()->getQuerySettings();
@@ -77,20 +89,20 @@ class CartProductHook implements \Extcode\Cart\Hooks\CartProductHookInterface
         if (!$product->isHandleStockInVariants()) {
             $quantity = (int)$quantities;
 
-            if (($mode == 'add') && $cart->getProduct($cartProduct->getId())) {
+            if (($mode === 'add') && $cart->getProduct($cartProduct->getId())) {
                 $quantity += $cart->getProduct($cartProduct->getId())->getQuantity();
             }
 
             if ($quantity > $product->getStock()) {
                 $availabilityResponse->setAvailable(false);
-                $flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                    \TYPO3\CMS\Core\Messaging\FlashMessage::class,
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                $flashMessage = GeneralUtility::makeInstance(
+                    FlashMessage::class,
+                    LocalizationUtility::translate(
                         'tx_cart.error.stock_handling.update',
                         'cart'
                     ),
                     '',
-                    \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                    AbstractMessage::ERROR
                 );
 
                 $availabilityResponse->addMessage($flashMessage);
@@ -100,21 +112,21 @@ class CartProductHook implements \Extcode\Cart\Hooks\CartProductHookInterface
         } else {
             foreach ($product->getBeVariants() as $beVariant) {
                 $quantity = (int)$quantities[$beVariant->getUid()];
-                if (($mode == 'add') && $cart->getProduct($cartProduct->getId())) {
+                if (($mode === 'add') && $cart->getProduct($cartProduct->getId())) {
                     if ($cart->getProduct($cartProduct->getId())->getBeVariant($beVariant->getUid())) {
                         $quantity += (int)$cart->getProduct($cartProduct->getId())->getBeVariant($beVariant->getUid())->getQuantity();
                     }
                 }
                 if ($quantity > $beVariant->getStock()) {
                     $availabilityResponse->setAvailable(false);
-                    $flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                        \TYPO3\CMS\Core\Messaging\FlashMessage::class,
-                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    $flashMessage = GeneralUtility::makeInstance(
+                        FlashMessage::class,
+                        LocalizationUtility::translate(
                             'tx_cart.error.stock_handling.update',
                             'cart'
                         ),
                         '',
-                        \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                        AbstractMessage::ERROR
                     );
 
                     $availabilityResponse->addMessage($flashMessage);
@@ -126,14 +138,14 @@ class CartProductHook implements \Extcode\Cart\Hooks\CartProductHookInterface
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Mvc\Web\Request $request
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
+     * @param Request $request
+     * @param Cart $cart
      *
      * @return array
      */
     public function getProductFromRequest(
-        \TYPO3\CMS\Extbase\Mvc\Web\Request $request,
-        \Extcode\Cart\Domain\Model\Cart\Cart $cart
+        Request $request,
+        Cart $cart
     ) {
         $requestArguments = $request->getArguments();
         $taxClasses = $cart->getTaxClasses();
@@ -144,10 +156,10 @@ class CartProductHook implements \Extcode\Cart\Hooks\CartProductHookInterface
             return [$errors, []];
         }
 
-        $this->objectManager = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+        $this->objectManager = new ObjectManager();
 
         $productUtility = $this->objectManager->get(
-            \Extcode\CartProducts\Utility\ProductUtility::class
+            ProductUtility::class
         );
         $productUtility->setTaxClasses($taxClasses);
 
@@ -165,21 +177,21 @@ class CartProductHook implements \Extcode\Cart\Hooks\CartProductHookInterface
     {
         if (!(int)$requestArguments['product']) {
             return [
-                'messageBody' => \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                'messageBody' => LocalizationUtility::translate(
                     'tx_cart.error.parameter.no_product',
                     'cart_products'
                 ),
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                AbstractMessage::ERROR
             ];
         }
 
         if ((int)$requestArguments['quantity'] < 0) {
             return [
-                'messageBody' => \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                'messageBody' => LocalizationUtility::translate(
                     'tx_cart.error.invalid_quantity',
                     'cart_products'
                 ),
-                'severity' => \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                'severity' => AbstractMessage::WARNING
             ];
         }
     }
