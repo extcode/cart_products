@@ -1,5 +1,10 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<f:link.action action="show" arguments="{product : product}">{product.title}</f:link.action>
+<div>
+    <cartproducts:link.product pluginName="Products" product="{product}" settings="{settings}">
+        {product.title}
+    </cartproducts:link.product>
+</div>
 </html>
