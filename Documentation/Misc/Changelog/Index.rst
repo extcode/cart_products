@@ -9,3 +9,5 @@ ChangeLog
 .. toctree::
    :maxdepth: 5
    :titlesonly:
+
+   1.0.0

@@ -19,9 +19,6 @@ Installation from TYPO3 Extension Repository (TER)
 
 Download and install the extension with the extension manager module.
 
-.. IMPORTANT::
-   Until version 1.0.0 the extension will not be available on the TYPO3 Extension Repository (TER).
-
 Latest version from git
 -----------------------
 You can get the latest version from git by using the git command:
@@ -29,8 +26,6 @@ You can get the latest version from git by using the git command:
 .. code-block:: bash
 
    git clone git@github.com:extcode/cart_products.git
-
-|
 
 Preparation: Include static TypoScript
 --------------------------------------
