@@ -44,13 +44,13 @@ EXT: Cart Products
       This document is published under the Open Publication License
       available from http://www.opencontent.org/openpub/
 
-    :Rendered:
-        |today|
+   :Rendered:
+       |today|
 
-    The content of this document is related to TYPO3,
-    a GNU/GPL CMS/Framework available from `www.typo3.org <https://typo3.org/>`__.
+   The content of this document is related to TYPO3,
+   a GNU/GPL CMS/Framework available from `www.typo3.org <https://typo3.org/>`_.
 
-    **Table of Contents**
+   **Table of Contents**
 
 .. toctree::
     :maxdepth: 5
