@@ -25,7 +25,7 @@
     "require": {
         "php": ">=7.0.0 <7.3",
         "typo3/cms-core": "^8.7",
-        "extcode/cart": "dev-5.x.alpha"
+        "extcode/cart": "^5.0"
     },
     "require-dev": {
         "nimut/testing-framework": "^2.0 || ^3.0 || ^4.0",
