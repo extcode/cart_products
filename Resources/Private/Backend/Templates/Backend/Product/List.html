@@ -1,6 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
       xmlns:cart="http://typo3.org/ns/Extcode/Cart/ViewHelpers"
+      xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <f:layout name="Default"/>
@@ -66,8 +67,8 @@
                                title="{f:translate(key: 'tx_cartproducts.controller.product.action.show')}">
                                 <core:icon identifier="actions-view" />
                             </a>
-                            <a class="btn btn-default" href="{cart:backend.editRecord(parameters: 'edit[tx_cartproducts_domain_model_product_product][{product.uid}]=edit&returnUrl={returnUrl}')}"><core:icon identifier="actions-open" /></a>
-                            {cart:backend.removeRecord(product: product)}
+                            <a class="btn btn-default" href="{cartproducts:backend.editRecord(parameters: 'edit[tx_cartproducts_domain_model_product_product][{product.uid}]=edit&returnUrl={returnUrl}')}"><core:icon identifier="actions-open" /></a>
+                            {cartproducts:backend.removeRecord(product: product)}
                         </div>
                     </td>
                 </tr>
