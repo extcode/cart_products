@@ -37,7 +37,7 @@ class BestSpecialPricePercentageDiscountViewHelper extends \TYPO3\CMS\Fluid\Core
 
         $this->registerArgument(
             'product',
-            '\Extcode\Cart\Domain\Model\Cart\Product',
+            '\Extcode\CartProducts\Domain\Model\Product\Product',
             'product',
             true
         );
