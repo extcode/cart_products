@@ -958,7 +958,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\Product $relatedProduct
      */
-    public function addRelatedProduct(\Extcode\CartProducts\Domain\Model\Product\Product $relatedProduct)
+    public function addRelatedProduct(self $relatedProduct)
     {
         $this->relatedProducts->attach($relatedProduct);
     }
@@ -968,7 +968,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\Product $relatedProductToRemove
      */
-    public function removeRelatedProduct(\Extcode\CartProducts\Domain\Model\Product\Product $relatedProductToRemove)
+    public function removeRelatedProduct(self $relatedProductToRemove)
     {
         $this->relatedProducts->detach($relatedProductToRemove);
     }
@@ -998,7 +998,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\Product $relatedProductFrom
      */
-    public function addRelatedProductFrom(\Extcode\CartProducts\Domain\Model\Product\Product $relatedProductFrom)
+    public function addRelatedProductFrom(self $relatedProductFrom)
     {
         $this->relatedProductsFrom->attach($relatedProductFrom);
     }
@@ -1008,7 +1008,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\Product $relatedProductFromToRemove
      */
-    public function removeRelatedProductFrom(\Extcode\CartProducts\Domain\Model\Product\Product $relatedProductFromToRemove)
+    public function removeRelatedProductFrom(self $relatedProductFromToRemove)
     {
         $this->relatedProductsFrom->detach($relatedProductFromToRemove);
     }

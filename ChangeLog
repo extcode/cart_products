@@ -1,5 +1,11 @@
-0.1.0
-    2018-05-15
+2.0.1
+    2019-01-16
     Daniel Lorenz <https://github.com/extcode>
 
-    * Initial commit
+    * BUGFIX #31: unit tests fails on self_accessor
+
+2.0.0
+    2018-11-30
+    Daniel Lorenz <https://github.com/extcode>
+
+    * Initial release
