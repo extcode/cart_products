@@ -57,41 +57,21 @@ class ProductViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelp
         $product = $this->arguments['product'];
 
         $page = $this->getProductPage($product);
-
         if ($page) {
-            $pageUid = $page['uid'];
+            $this->arguments['pageUid'] = $page['uid'];
         } else {
             if ($product->getCategory() && $product->getCategory()->getCartProductShowPid()) {
-                $pageUid = $product->getCategory()->getCartProductShowPid();
+                $this->arguments['pageUid'] = $product->getCategory()->getCartProductShowPid();
             } elseif ($this->arguments['settings']['showPageUids']) {
-                $pageUid = $this->arguments['settings']['showPageUids'];
+                $this->arguments['pageUid'] = $this->arguments['settings']['showPageUids'];
             }
 
-            $action = 'show';
-            $arguments = [
+            $this->arguments['action'] = 'show';
+            $this->arguments['arguments'] = [
                 'product' => $product
             ];
         }
-
-        return parent::render(
-            $action,
-            $arguments,
-            $controller,
-            $extensionName,
-            $pluginName,
-            $pageUid,
-            $pageType,
-            $noCache,
-            $noCacheHash,
-            $section,
-            $format,
-            $linkAccessRestrictedPages,
-            $additionalParams,
-            $absolute,
-            $addQueryString,
-            $argumentsToBeExcludedFromQueryString,
-            $addQueryStringMethod
-        );
+        return parent::render();
     }
 
     /**
