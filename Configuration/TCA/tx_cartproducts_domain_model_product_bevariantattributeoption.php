@@ -57,6 +57,8 @@ return [
                     [$_LLL_general . ':LGL.allLanguages', -1],
                     [$_LLL_general . ':LGL.default_value', 0]
                 ],
+                'eval' => 'int',
+                'default' => 0,
             ],
         ],
         'l10n_parent' => [
