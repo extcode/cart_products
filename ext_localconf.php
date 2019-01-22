@@ -87,6 +87,13 @@ if (TYPO3_MODE === 'FE') {
         \Extcode\CartProducts\Domain\Finisher\Cart\AddToCartFinisher::class;
 }
 
+// ke_search Hook - register indexer for products
+
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['registerIndexerConfiguration'][] =
+    \Extcode\CartProducts\Hooks\KeSearchIndexer::class;
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['customIndexer'][] =
+    \Extcode\CartProducts\Hooks\KeSearchIndexer::class;
+
 // processDatamapClass Hook
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['cartproducts_allowed'] =

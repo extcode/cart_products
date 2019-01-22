@@ -8,6 +8,7 @@ namespace Extcode\CartProducts\Hooks;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class KeSearchIndexer
@@ -23,7 +24,7 @@ class KeSearchIndexer
         $newArray = [
             'Cart Product Indexer',
             'cartproductindexer',
-            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('cart') . 'ext_icon.gif'
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cart_products') . 'Resources/Public/Icons/Extension.svg'
         ];
         $params['items'][] = $newArray;
     }
@@ -37,7 +38,7 @@ class KeSearchIndexer
      */
     public function customIndexer(&$indexerConfig, &$indexerObject)
     {
-        if ($indexerConfig['type'] == 'cartproductindexer') {
+        if ($indexerConfig['type'] === 'cartproductindexer') {
             return $this->cartProductIndexer($indexerConfig, $indexerObject);
         }
 
@@ -57,6 +58,7 @@ class KeSearchIndexer
         $productIndexerName = 'Product Indexer "' . $indexerConfig['title'] . '"';
 
         $indexPids = $this->getPidList($indexerConfig);
+
         if ($indexPids === '') {
             $productIndexerMessage = 'ERROR: No Storage Pids configured!';
         } else {
@@ -72,7 +74,7 @@ class KeSearchIndexer
                     $description = strip_tags($product['description']);
 
                     $fullContent = $sku . "\n" . $title . "\n" . $teaser . "\n" . $description;
-                    $params = '&tx_cartproducts_product[product]=' . $product['uid'];
+                    $params = '&tx_cartproducts_products[product]=' . $product['uid'];
                     $tags = '#product#';
                     $additionalFields = [
                         'sortdate' => $product['crdate'],
@@ -80,9 +82,10 @@ class KeSearchIndexer
                         'orig_pid' => $product['pid'],
                     ];
 
-                    $targetPid = $indexerConfig['targetpid'];
-                    if (intval($product['cart_product_show_pid'])) {
-                        $targetPid = intval($product['cart_product_show_pid']);
+                    $targetPid = $this->getTargetPidFormCategory($product['category']);
+
+                    if ($targetPid == 0) {
+                        $targetPid = $indexerConfig['targetpid'];
                     }
 
                     $indexerObject->storeInIndex(
@@ -167,14 +170,51 @@ class KeSearchIndexer
      */
     protected function getProductsToIndex($indexPids)
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            'TYPO3\CMS\Extbase\Object\ObjectManager'
-        );
-        $productRepository = $objectManager->get(
-            \Extcode\CartProducts\Domain\Repository\Product\ProductRepository::class
-        );
-        $products = $productRepository->findAllForIndexer($indexPids);
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_cartproducts_domain_model_product_product');
+
+        $queryBuilder
+            ->select('*')
+            ->from('tx_cartproducts_domain_model_product_product')
+            ->where(
+                $queryBuilder->expr()->in('tx_cartproducts_domain_model_product_product.pid', $indexPids)
+            );
+
+        $products = $queryBuilder->execute()->fetchAll();
 
         return $products;
+    }
+
+    /**
+     *
+     */
+    protected function getTargetPidFormCategory($categoryUid)
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('sys_category');
+
+        $constraints = [
+            $queryBuilder->expr()->eq('sys_category_mm.tablenames', $queryBuilder->createNamedParameter('tx_cartproducts_domain_model_product_product', \PDO::PARAM_STR)),
+            $queryBuilder->expr()->eq('sys_category_mm.fieldname', $queryBuilder->createNamedParameter('category', \PDO::PARAM_STR)),
+            $queryBuilder->expr()->eq('sys_category_mm.uid_foreign', $queryBuilder->createNamedParameter($categoryUid, \PDO::PARAM_INT)),
+        ];
+
+        $queryBuilder
+            ->select('sys_category.cart_product_show_pid')
+            ->from('sys_category')
+            ->leftJoin(
+                'sys_category',
+                'sys_category_record_mm',
+                'sys_category_mm',
+                $queryBuilder->expr()->eq(
+                    'sys_category_mm.uid_local',
+                    $queryBuilder->quoteIdentifier('sys_category.uid')
+                )
+            )
+            ->where(...$constraints);
+
+        $sys_category = $queryBuilder->execute()->fetch();
+
+        return $sys_category['cart_product_show_pid'];
     }
 }
