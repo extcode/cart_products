@@ -37,7 +37,7 @@ class BestSpecialPriceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
 
         $this->registerArgument(
             'product',
-            '\Extcode\Cart\Domain\Model\Cart\Product',
+            \Extcode\CartProducts\Domain\Model\Product\Product::class,
             'product',
             true
         );
@@ -60,7 +60,9 @@ class BestSpecialPriceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
     protected function getFrontendUserGroupIds()
     {
         if (!$this->objectManager) {
-            $this->objectManager = GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+            $this->objectManager = GeneralUtility::makeInstance(
+                \TYPO3\CMS\Extbase\Object\ObjectManager::class
+            );
         }
         $feGroupIds = [];
         $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];

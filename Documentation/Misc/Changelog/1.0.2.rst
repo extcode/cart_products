@@ -9,4 +9,5 @@
 All Changes
 -----------
 
+    2019-01-22 [BUGFIX] Fix class names in ViewHelper (by oliverbeck and extcode)
     2019-01-22 [BUGFIX] Use correct namespace for backend-viewhelper (by nebrot)
