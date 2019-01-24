@@ -3,11 +3,10 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-1.0.2 - 22.01.2019
+1.0.3 - 24.01.2019
 ==================
 
 All Changes
 -----------
 
-   - 2019-01-22 [BUGFIX] Fix class names in ViewHelper (by oliverbeck and extcode)
-   - 2019-01-22 [BUGFIX] Use correct namespace for backend-viewhelper (by nebrot)
+   - 2019-01-24 [BUGFIX] Add translation for frontend variants (by extcode)
