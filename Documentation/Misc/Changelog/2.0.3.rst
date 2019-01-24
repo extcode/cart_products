@@ -3,15 +3,10 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-ChangeLog
-=========
+2.0.3 - 24.01.2019
+==================
 
-.. toctree::
-   :maxdepth: 5
-   :titlesonly:
+All Changes
+-----------
 
-   2.0.3
-   2.0.2
-   2.0.1
-   2.0.0
-   1.0.0
+   - 2019-01-24 [BUGFIX] Add translation for frontend variants (by extcode)
