@@ -14,8 +14,7 @@ return [
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
 
-        'versioningWS' => 2,
-        'versioning_followPages' => true,
+        'versioningWS' => true,
 
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -34,7 +33,7 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, sku, title, description;;;richtext:rte_transform[mode=ts_links], be_variant_attribute_options'
+            'showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sku, title, description, be_variant_attribute_options'
         ],
     ],
     'palettes' => [
@@ -96,12 +95,11 @@ return [
         ],
         'starttime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => $_LLL_general . ':LGL.starttime',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 13,
-                'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
@@ -112,12 +110,11 @@ return [
         ],
         'endtime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => $_LLL_general . ':LGL.endtime',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 13,
-                'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
@@ -152,11 +149,8 @@ return [
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_bevariantattribute.description',
             'config' => [
                 'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim'
+                'enableRichtext' => true,
             ],
-            'defaultExtras' => 'richtext[]'
         ],
 
         'be_variant_attribute_options' => [

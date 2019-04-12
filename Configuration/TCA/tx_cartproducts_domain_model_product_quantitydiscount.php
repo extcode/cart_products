@@ -16,8 +16,7 @@ return [
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
 
-        'versioningWS' => 2,
-        'versioning_followPages' => true,
+        'versioningWS' => true,
 
         'hideTable' => true,
         'delete' => 'deleted',
@@ -32,7 +31,7 @@ return [
         'showRecordFieldList' => 'hidden, frontend_user_group, quantity, price',
     ],
     'types' => [
-        '1' => ['showitem' => 'hidden;;1, frontend_user_group, quantity, price'],
+        '1' => ['showitem' => 'hidden, frontend_user_group, quantity, price'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
