@@ -7,7 +7,6 @@ $_LLL_db = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf:';
 $newSysCategoryColumns = [
     'images' => [
         'exclude' => 1,
-        'l10n_mode' => 'mergeIfNotBlank',
         'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.image',
         'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
             'images',
@@ -30,7 +29,6 @@ $newSysCategoryColumns = [
     ],
     'cart_product_list_pid' => [
         'exclude' => 1,
-        'l10n_mode' => 'mergeIfNotBlank',
         'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.cart_product_list_pid',
         'config' => [
             'type' => 'group',
@@ -39,21 +37,16 @@ $newSysCategoryColumns = [
             'size' => 1,
             'maxitems' => 1,
             'minitems' => 0,
-            'show_thumbs' => 1,
             'default' => 0,
-            'wizards' => [
-                'suggest' => [
-                    'type' => 'suggest',
-                    'default' => [
-                        'searchWholePhrase' => true
-                    ]
+            'suggestOptions' => [
+                'default' => [
+                    'searchWholePhrase' => true,
                 ],
             ],
         ]
     ],
     'cart_product_show_pid' => [
         'exclude' => 1,
-        'l10n_mode' => 'mergeIfNotBlank',
         'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.cart_product_show_pid',
         'config' => [
             'type' => 'group',
@@ -62,14 +55,10 @@ $newSysCategoryColumns = [
             'size' => 1,
             'maxitems' => 1,
             'minitems' => 0,
-            'show_thumbs' => 1,
             'default' => 0,
-            'wizards' => [
-                'suggest' => [
-                    'type' => 'suggest',
-                    'default' => [
-                        'searchWholePhrase' => true
-                    ]
+            'suggestOptions' => [
+                'default' => [
+                    'searchWholePhrase' => true,
                 ],
             ],
         ]
