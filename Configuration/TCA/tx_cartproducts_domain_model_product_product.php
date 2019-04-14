@@ -232,6 +232,9 @@ return [
                 'size' => 50,
                 'generatorOptions' => [
                     'fields' => ['title'],
+                    'replacements' => [
+                        '/' => '',
+                    ],
                 ],
                 'fallbackCharacter' => '-',
                 'eval' => 'uniqueInSite',
