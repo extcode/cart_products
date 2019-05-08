@@ -47,6 +47,7 @@
                             <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.teaser.select.product</label>
                             <config>
                                 <type>select</type>
+                                <enableMultiSelectFilterTextfield>1</enableMultiSelectFilterTextfield>
                                 <foreign_table>tx_cartproducts_domain_model_product_product</foreign_table>
                                 <size>3</size>
                                 <minitems>1</minitems>
