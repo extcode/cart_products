@@ -179,6 +179,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         $this->view->assign('searchArguments', $this->searchArguments);
         $this->view->assign('products', $products);
+        $this->view->assign('cartSettings', $this->cartSettings);
 
         $this->assignCurrencyTranslationData();
 
