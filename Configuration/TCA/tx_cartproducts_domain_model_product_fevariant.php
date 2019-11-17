@@ -44,19 +44,21 @@ return [
         '1' => ['showitem' => ''],
     ],
     'columns' => [
+
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.language',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
+                'special' => 'languages',
                 'items' => [
-                    [$_LLL_general . ':LGL.allLanguages', -1],
-                    [$_LLL_general . ':LGL.default_value', 0]
+                    [
+                        $_LLL_general . ':LGL.allLanguages',
+                        -1,
+                        'flags-multiple'
+                    ],
                 ],
-                'eval' => 'int',
                 'default' => 0,
             ],
         ],
