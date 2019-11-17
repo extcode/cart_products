@@ -23,7 +23,7 @@
         "issues": "https://github.com/extcode/cart_products/issues"
     },
     "require": {
-        "php": ">=7.0.0 <7.3",
+        "php": ">=7.0.0 <7.4",
         "typo3/cms-core": "^8.7",
         "extcode/cart": "^5.0"
     },

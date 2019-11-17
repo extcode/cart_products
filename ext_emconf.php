@@ -1,6 +1,6 @@
 <?php
 
-$EM_CONF[$_EXTKEY] = [
+$EM_CONF['cart_products'] = [
     'title' => 'Cart - Products',
     'description' => 'Shopping Cart(s) for TYPO3 - Products',
     'category' => 'plugin',
