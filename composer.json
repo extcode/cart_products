@@ -43,7 +43,7 @@
         }
     },
     "replace": {
-        "cart_products": "self.version"
+        "extcode/cart_products": "self.version"
     },
     "config": {
         "vendor-dir": ".Build/vendor",
