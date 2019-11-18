@@ -20,6 +20,7 @@ before_script:
 stages:
   - lint
   - test
+  - documentation
   - analysis
 
 lint:cgl:
@@ -109,7 +110,6 @@ lint:php73:
     expire_in: 1 day
     when: always
 
-# Build in PHP 7.0 and TYPO3 8.7
 test:php70:typo3_8:
   <<: *test_php
   variables:
@@ -117,7 +117,6 @@ test:php70:typo3_8:
     TYPO3_VERSION: ^8.7
     COVERAGE: 0
 
-# Build in PHP 7.1 and TYPO3 8.7
 test:php71:typo3_8:
   <<: *test_php
   variables:
@@ -125,7 +124,6 @@ test:php71:typo3_8:
     TYPO3_VERSION: ^8.7
     COVERAGE: 0
 
-# Build in PHP 7.2 and TYPO3 8.7
 test:php72:typo3_8:
   <<: *test_php
   variables:
@@ -133,13 +131,29 @@ test:php72:typo3_8:
     TYPO3_VERSION: ^8.7
     COVERAGE: 0
 
-# Build in PHP 7.2 and TYPO3 8.7
 test:php73:typo3_8:
   <<: *test_php
   variables:
     DOCKER_TAG: 7.3-alpine
     TYPO3_VERSION: ^8.7
     COVERAGE: 1
+
+documentation:
+  stage: documentation
+  image:
+    name: t3docs/render-documentation:v2.4.0
+    entrypoint: [""]
+  before_script:
+    - cp -a ${CI_PROJECT_DIR}/. /PROJECT
+    - mkdir -p ${CI_PROJECT_DIR}/Documentation-GENERATED-temp
+  script:
+    - cd /ALL/venv
+    - /ALL/Menu/mainmenu.sh makehtml-no-cache -c resultdir ${CI_PROJECT_DIR}/Documentation-GENERATED-temp
+  artifacts:
+    paths:
+      - ${CI_PROJECT_DIR}/Documentation-GENERATED-temp/Result/project/0.0.0
+    expire_in: 1 day
+    when: always
 
 sonarqube:
   stage: analysis
