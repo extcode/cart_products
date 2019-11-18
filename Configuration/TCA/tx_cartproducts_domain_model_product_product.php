@@ -201,6 +201,7 @@ return [
                 'maxitems' => 1,
             ],
             'onChange' => 'reload',
+            'l10n_mode' => 'exclude',
         ],
 
         'sku' => [
