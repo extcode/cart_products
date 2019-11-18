@@ -1,8 +1,3 @@
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
 .. include:: Includes.txt
 
 .. _start:
@@ -53,11 +48,9 @@ EXT: Cart Products
    **Table of Contents**
 
 .. toctree::
-    :maxdepth: 5
-    :titlesonly:
+   :maxdepth: 5
+   :titlesonly:
 
-    Introduction/Index
-    EditorManual/Index
-    DeveloperManual/Index
-    AdministratorManual/Index
-    Misc/Index
+   Introduction/Index
+   AdministratorManual/Index
+   Changelog/Index
