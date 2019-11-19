@@ -774,6 +774,8 @@ return [
                 'type' => 'check',
             ],
             'onChange' => 'reload',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
         ],
         'handle_stock_in_variants' => [
             'exclude' => 1,
@@ -788,6 +790,8 @@ return [
                 'type' => 'check',
             ],
             'onChange' => 'reload',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
         ],
         'stock' => [
             'exclude' => 1,
@@ -803,7 +807,9 @@ return [
                 'size' => 30,
                 'eval' => 'int',
                 'default' => 0,
-            ]
+            ],
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
         ],
 
         'tags' => [
