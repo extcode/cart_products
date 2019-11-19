@@ -311,7 +311,9 @@ return [
                 'size' => 30,
                 'eval' => 'required,int',
                 'default' => 0,
-            ]
+            ],
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
         ],
 
         'product' => [
