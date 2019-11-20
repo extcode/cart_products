@@ -7,8 +7,9 @@ If there is a feature that has not yet been implemented in Cart or Cart Products
 
 There is also the possibility to support the further development independently of new functions.
 
-*  `paypal.me <https://paypal.me/extcart>`_
-*  `patreon.com <https://patreon.com/ext_cart>`_
+*  Ask for an invoice.
+*  `GitHub Sponsors <https://github.com/sponsors/extcode>`_
+*  `PayPal.Me <https://paypal.me/extcart>`_
 
 Sponsors
 --------
