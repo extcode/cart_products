@@ -1,8 +1,8 @@
-[page|doktype = 183]
+[page["doktype"] == 183]
 TCEFORM.tt_content.list_type {
     removeItems = cartproducts_products
 }
-[else]
+[ELSE]
 TCEFORM.tt_content.list_type {
     removeItems = cartproducts_singleproduct
 }
@@ -30,4 +30,4 @@ mod.wizards.newContentElement.wizardItems.plugins {
         }
     }
 }
-[global]
+[END]
