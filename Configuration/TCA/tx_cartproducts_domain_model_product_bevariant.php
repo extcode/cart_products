@@ -167,6 +167,8 @@ return [
                     ' ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
                 'minitems' => 0,
                 'maxitems' => 1,
+                'eval' => 'int',
+                'default' => 0,
             ],
         ],
 
@@ -186,6 +188,8 @@ return [
                     ' ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
                 'minitems' => 0,
                 'maxitems' => 1,
+                'eval' => 'int',
+                'default' => 0,
             ],
         ],
 
@@ -205,6 +209,8 @@ return [
                     ' ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
                 'minitems' => 0,
                 'maxitems' => 1,
+                'eval' => 'int',
+                'default' => 0,
             ],
         ],
 
