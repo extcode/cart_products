@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-02-03T16:30:00Z" product-name="cart">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z" product-name="cart_products">
         <header/>
         <body>
+
             <trans-unit id="tx_cartproducts.error.stock_handling.add">
                 <source>Desired number of this item not available.</source>
                 <target>Gewünschte Anzahl dieses Artikels nicht verfügbar.</target>
@@ -47,40 +48,8 @@
             </trans-unit>
 
             <trans-unit id="tx_cartproducts.add_product">
-                <source>add to cart</source>
+                <source>Add to cart</source>
                 <target>in den Warenkorb</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.remove_product">
-                <source>remove</source>
-                <target>entfernen</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.clear_cart">
-                <source>clear cart</source>
-                <target>Warenkorb löschen</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.submit_order">
-                <source>submit order</source>
-                <target>Kostenpflichtig bestellen</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.update_cart">
-                <source>update cart</source>
-                <target>Warenkorb aktualisieren</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.update_status">
-                <source>update status</source>
-                <target>Status aktualisieren</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.add_coupon">
-                <source>add coupon</source>
-                <target>Gutscheincode absenden</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.remove_coupon">
-                <source>remove</source>
-                <target>entfernen</target>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.same_address">
-                <source>Send it to the same address.</source>
-                <target>An die gleiche Adresse versenden.</target>
             </trans-unit>
             <trans-unit id="tx_cartproducts.variants-select.choose">
                 <source>Please choose ...</source>
@@ -106,7 +75,13 @@
             </trans-unit>
 
             <trans-unit id="tx_cartproducts.module.action.filter">
+                <source>Filter List</source>
                 <target>Filter Liste</target>
+            </trans-unit>
+
+            <trans-unit id="tx_cartproducts.plugin.form.submit">
+                <source>Add to cart</source>
+                <target>in den Warenkorb</target>
             </trans-unit>
 
             <trans-unit id="tx_cartproducts_domain_model_product_product">
