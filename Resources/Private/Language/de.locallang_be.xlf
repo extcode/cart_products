@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-04-20T22:10:00Z" product-name="cart_products">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z" product-name="cart_products">
         <header/>
         <body>
+
             <trans-unit id="extmng.categoryRestriction" xml:space="preserve">
                 <source>
                     Category restriction: Restrict the available categories in product records.
@@ -49,7 +50,13 @@
                 <target>Produkte</target>
             </trans-unit>
             <trans-unit id="tx_cartproducts.module.products.action.delete_record.title">
-                <source>Produkt löschen (!)</source>
+                <source>Delete product (!)</source>
+                <target>Produkt löschen (!)</target>
+            </trans-unit>
+
+            <trans-unit id="pages.singleview_cart_products_product">
+                <source>Product of this Page</source>
+                <target>Produkt dieser Seite</target>
             </trans-unit>
 
             <trans-unit id="tx_cartproducts.plugin.products.title">
