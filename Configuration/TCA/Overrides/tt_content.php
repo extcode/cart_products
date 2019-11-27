@@ -15,9 +15,6 @@ call_user_func(function () {
         'SingleProduct' => [
             'subtypes_excludelist' => 'select_key, pages, recursive'
         ],
-        'ProductPartial' => [
-            'subtypes_excludelist' => 'select_key, recursive'
-        ],
     ];
 
     foreach ($pluginNames as $pluginName => $pluginConf) {
