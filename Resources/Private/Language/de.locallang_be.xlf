@@ -83,7 +83,7 @@
                 <source>Teaser View</source>
                 <target>Teaseransicht</target>
             </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.select.single_pid">
+            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.select.show_pid">
                 <source>Product Detail Page</source>
                 <target>Produktdetailseite</target>
             </trans-unit>

@@ -71,7 +71,7 @@
             <trans-unit id="tx_cartproducts.plugin.products.action.product.teaser">
                 <source>Teaser View</source>
             </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.select.single_pid">
+            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.select.show_pid">
                 <source>Product Detail Page</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderBy">
