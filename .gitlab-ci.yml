@@ -72,6 +72,12 @@ lint:php73:
   script:
     - find . -name \*.php -exec php -l "{}" \;
 
+lint:php74:
+  stage: lint
+  image: php:7.4-alpine
+  script:
+    - find . -name \*.php -exec php -l "{}" \;
+
 .test: &test_php
   stage: test
   services:
@@ -135,7 +141,14 @@ test:php73:typo3_8:
   <<: *test_php
   variables:
     DOCKER_TAG: 7.3-alpine
-    TYPO3_VERSION: ^8.7
+    TYPO3_VERSION: ^8.5
+    COVERAGE: 0
+
+test:php74:typo3_8:
+  <<: *test_php
+  variables:
+    DOCKER_TAG: 7.4-alpine
+    TYPO3_VERSION: ^8.5
     COVERAGE: 1
 
 documentation:
