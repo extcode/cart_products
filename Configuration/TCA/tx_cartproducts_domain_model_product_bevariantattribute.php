@@ -159,7 +159,6 @@ return [
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_bevariantattribute.be_variant_attribute_options',
             'config' => [
                 'type' => 'inline',
-                'readOnly' => 1,
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattributeoption',
                 'foreign_field' => 'be_variant_attribute',
                 'foreign_table_where' => ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.pid=###CURRENT_PID### ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
