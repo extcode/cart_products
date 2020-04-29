@@ -21,15 +21,15 @@
             <cartproducts:form.variantSelect id="be-variants-select" class="form-control" name="tx_cart_cart[beVariants][1]" product="{product}" blank="{f:translate(key: 'tx_cartproducts.variants-select.choose')}"/>
         </f:if>
         <f:if condition="{product.feVariants}">
-            <f:for each="{product.feVariants}" as="feVariant">
+            <f:for each="{product.feVariants}" as="feVariant" iteration="feVariantIterator">
                 <f:if condition="{feVariant.isRequired}">
                     <f:then>
-                        <label class="required">{feVariant.title} <em>*</em></label>
-                        <input type="text" name="tx_cart_cart[feVariants][{feVariant.sku}]" required="true">
+                        <label for="product-fevariant-{feVariantIterator.index}" class="required">{feVariant.title} <em>*</em></label>
+                        <input id="product-fevariant-{feVariantIterator.index}" type="text" name="tx_cart_cart[feVariants][{feVariant.sku}]" required="true">
                     </f:then>
                     <f:else>
-                        <label class="required">{feVariant.title}</label>
-                        <input type="text" name="tx_cart_cart[feVariants][{feVariant.sku}]">
+                        <label for="product-fevariant-{feVariantIterator.index}">{feVariant.title}</label>
+                        <input id="product-fevariant-{feVariantIterator.index}" type="text" name="tx_cart_cart[feVariants][{feVariant.sku}]">
                     </f:else>
                 </f:if>
             </f:for>
