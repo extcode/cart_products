@@ -73,6 +73,7 @@ return [
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattributeoption',
                 'foreign_table_where' => 'AND tx_cartproducts_domain_model_product_bevariantattributeoption.pid=###CURRENT_PID### AND tx_cartproducts_domain_model_product_bevariantattributeoption.sys_language_uid IN (-1,0)',
+                'default' => 0,
             ],
         ],
         'l10n_diffsource' => [
