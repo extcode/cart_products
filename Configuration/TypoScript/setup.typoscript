@@ -60,6 +60,9 @@ lib.cartProduct.showForm {
     controller = Product
     action = showForm
 
+    product = TEXT
+    product.value.dataWrap = {field: productUid}
+
     settings =< plugin.tx_cartproducts.settings
     persistence =< plugin.tx_cartproducts.persistence
     view =< plugin.tx_cartproducts.view

@@ -8,6 +8,10 @@ namespace Extcode\CartProducts\Controller;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Mvc\Web\RequestBuilder;
+
 class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
@@ -92,7 +96,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     protected function initializeAction()
     {
         $this->cartSettings = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            ConfigurationManager::CONFIGURATION_TYPE_SETTINGS,
             'Cart'
         );
 
@@ -264,27 +268,41 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         if ((int)$GLOBALS['TSFE']->page['doktype'] == 183) {
             $productUid = (int)$GLOBALS['TSFE']->page['cart_products_product'];
         } else {
-            if ($this->request->getPluginName()=='ProductPartial') {
-                $requestBuilder =$this->objectManager->get(
-                    \TYPO3\CMS\Extbase\Mvc\Web\RequestBuilder::class
-                );
-                $configurationManager = $this->objectManager->get(
-                    \TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class
-                );
-                $configurationManager->setConfiguration([
-                    'vendorName' => 'Extcode',
-                    'extensionName' => 'CartProducts',
-                    'pluginName' => 'Products',
-                ]);
-                $requestBuilder->injectConfigurationManager($configurationManager);
+            if ($this->request->getPluginName() === 'ProductPartial') {
+                if ($productUid === 0) {
+                    $configurationManager = $this->objectManager->get(
+                        ConfigurationManager::class
+                    );
+                    $configuration = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK);
 
-                /**
-                 * @var \TYPO3\CMS\Extbase\Mvc\Web\Request $cartProductRequest
-                 */
-                $cartProductRequest = $requestBuilder->build();
+                    $typoscriptService = $this->objectManager->get(
+                        TypoScriptService::class
+                    );
+                    $configuration = $typoscriptService->convertPlainArrayToTypoScriptArray($configuration);
+                    $productUid = (int)$configurationManager->getContentObject()->cObjGetSingle($configuration['product'], $configuration['product.']);
+                }
+                if ($productUid === 0) {
+                    $requestBuilder = $this->objectManager->get(
+                        RequestBuilder::class
+                    );
+                    $configurationManager = $this->objectManager->get(
+                        ConfigurationManager::class
+                    );
+                    $configurationManager->setConfiguration([
+                        'vendorName' => 'Extcode',
+                        'extensionName' => 'CartProducts',
+                        'pluginName' => 'Products',
+                    ]);
+                    $requestBuilder->injectConfigurationManager($configurationManager);
 
-                if ($cartProductRequest->hasArgument('product')) {
-                    $productUid = $cartProductRequest->getArgument('product');
+                    /**
+                     * @var \TYPO3\CMS\Extbase\Mvc\Web\Request $cartProductRequest
+                     */
+                    $cartProductRequest = $requestBuilder->build();
+
+                    if ($cartProductRequest->hasArgument('product')) {
+                        $productUid = (int)$cartProductRequest->getArgument('product');
+                    }
                 }
             }
         }

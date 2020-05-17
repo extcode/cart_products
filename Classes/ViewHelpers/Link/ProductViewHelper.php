@@ -61,8 +61,10 @@ class ProductViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelp
             $this->arguments['pageUid'] = $page['uid'];
         } else {
             if ($product->getCategory() && $product->getCategory()->getCartProductShowPid()) {
+                $this->arguments['pluginName'] = 'SingleProduct';
                 $this->arguments['pageUid'] = $product->getCategory()->getCartProductShowPid();
             } elseif ($this->arguments['settings']['showPageUids']) {
+                $this->arguments['pluginName'] = 'SingleProduct';
                 $this->arguments['pageUid'] = $this->arguments['settings']['showPageUids'];
             }
 
