@@ -24,12 +24,12 @@
             <f:for each="{product.feVariants}" as="feVariant">
                 <f:if condition="{feVariant.isRequired}">
                     <f:then>
-                        <label class="required">{feVariant.title} <em>*</em></label>
-                        <input type="text" name="tx_cart_cart[feVariants][{feVariant.sku}]" required="true">
+                        <label for="product-fevariant-{feVariant.uid}" class="required">{feVariant.title} <em>*</em></label>
+                        <input id="product-fevariant-{feVariant.uid}" type="text" name="tx_cart_cart[feVariants][{feVariant.sku}]" required="true">
                     </f:then>
                     <f:else>
-                        <label class="required">{feVariant.title}</label>
-                        <input type="text" name="tx_cart_cart[feVariants][{feVariant.sku}]">
+                        <label for="product-fevariant-{feVariant.uid}">{feVariant.title}</label>
+                        <input id="product-fevariant-{feVariant.uid}" type="text" name="tx_cart_cart[feVariants][{feVariant.sku}]">
                     </f:else>
                 </f:if>
             </f:for>
