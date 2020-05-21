@@ -25,13 +25,13 @@
     "require": {
         "php": "^7.2 <7.5",
         "ext-pdo": "*",
-        "typo3/cms-core": "^9.5",
-        "typo3/cms-extbase": "^9.5",
-        "typo3/cms-fluid": "^9.5",
-        "extcode/cart": "^6.0"
+        "typo3/cms-core": "^10.4",
+        "typo3/cms-extbase": "^10.4",
+        "typo3/cms-fluid": "^10.4",
+        "extcode/cart": "^7.0"
     },
     "require-dev": {
-        "nimut/testing-framework": "^4.0",
+        "nimut/testing-framework": "^6.0",
         "friendsofphp/php-cs-fixer": "^2.0",
         "helmich/typo3-typoscript-lint": "^1.4"
     },
