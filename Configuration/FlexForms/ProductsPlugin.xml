@@ -13,6 +13,7 @@
                             <onChange>reload</onChange>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items>
                                     <numIndex index="0">
                                         <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list_and_show</numIndex>
@@ -47,6 +48,7 @@
                             <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items>
                                     <numIndex index="0" type="array">
                                         <numIndex index="0"></numIndex>
@@ -79,6 +81,7 @@
                             <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items>
                                     <numIndex index="0" type="array">
                                         <numIndex index="0"></numIndex>
