@@ -15,13 +15,14 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * BestSpecialPrice ViewHelper
  *
  * @author Daniel Lorenz <ext.cart@extco.de>
  */
-class BestSpecialPriceDiscountViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class BestSpecialPriceDiscountViewHelper extends AbstractViewHelper
 {
 
     /**
