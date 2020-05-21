@@ -22,7 +22,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
  *
  * @author Daniel Lorenz <ext.cart@extco.de>
  */
-class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper implements CompilableInterface
+class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper /**implements CompilableInterface**/
 {
     /**
      * Object Manager
