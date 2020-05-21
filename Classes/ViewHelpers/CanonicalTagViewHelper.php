@@ -15,13 +15,14 @@ namespace Extcode\CartProducts\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * adds the canonical tag to header data
  *
  * @author Daniel Lorenz <ext.cart@extco.de>
  */
-class CanonicalTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
+class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
 {
     /**
      * @var string
