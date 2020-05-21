@@ -14,8 +14,8 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Facets\CompilableInterface;
 
 /**
  * If SpecialPrice Available ViewHelper
