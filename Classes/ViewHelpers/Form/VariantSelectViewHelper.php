@@ -15,12 +15,14 @@ namespace Extcode\CartProducts\ViewHelpers\Form;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /**
  * VariantSelect ViewHelper
  *
  * @author Daniel Lorenz <ext.cart@extco.de>
  */
-class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class VariantSelectViewHelper extends AbstractViewHelper
 {
     /**
      * Output is escaped already. We must not escape children, to avoid double encoding.
