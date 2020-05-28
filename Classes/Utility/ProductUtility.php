@@ -164,7 +164,9 @@ class ProductUtility
                 $cartProduct->setIsVirtualProduct(true);
             }
 
-            $cartProduct->setAdditionalArray($cartProductValues['additional']);
+            if (is_array($cartProductValues['additional'])) {
+                $cartProduct->setAdditionalArray($cartProductValues['additional']);
+            }
 
             $data = [
                 'cartProductValues' => $cartProductValues,
