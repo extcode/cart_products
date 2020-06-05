@@ -140,7 +140,7 @@
                 <source>Cart: selected Products</source>
                 <target>Cart: ausgewählte Produkte</target>
             </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.description">
+            <trans-unit id="tx_cartproducts.plugin.teaser_products.description">
                 <source>list or tease selected products</source>
                 <target>Listen- oder Teaseransicht für ausgewählte Produkte</target>
             </trans-unit>
