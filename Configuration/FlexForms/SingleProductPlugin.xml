@@ -14,10 +14,10 @@
                             <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
                                 <extKey>cart_products</extKey>
                                 <pluginName>SingleProduct</pluginName>
-                                <renderType>selectSingle</renderType>
                             </config>
                         </TCEforms>
                     </settings.templateLayout>

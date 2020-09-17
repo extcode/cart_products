@@ -12,10 +12,10 @@
                             <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
                                 <extKey>cart_products</extKey>
                                 <pluginName>TeaserProducts</pluginName>
-                                <renderType>selectSingle</renderType>
                             </config>
                         </TCEforms>
                     </settings.templateLayout>
@@ -47,6 +47,7 @@
                             <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.teaser.select.product</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <enableMultiSelectFilterTextfield>1</enableMultiSelectFilterTextfield>
                                 <foreign_table>tx_cartproducts_domain_model_product_product</foreign_table>
                                 <size>3</size>
