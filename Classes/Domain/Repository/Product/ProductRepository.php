@@ -115,8 +115,9 @@ class ProductRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $orderedProducts = [];
 
         // Create an associative array
+        /** @var \Extcode\CartProducts\Domain\Model\Product\Product $object */
         foreach ($products as $object) {
-            $indexedProducts[$object->getUid()] = $object;
+            $indexedProducts[$object->getUidForOrdering()] = $object;
         }
         // add to ordered array in right order
         foreach ($uids as $uid) {
