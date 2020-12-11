@@ -2,29 +2,22 @@
 
 namespace Extcode\CartProducts\ViewHelpers\Form;
 
-/**
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+/*
+ * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
 
-/**
- * VariantSelect ViewHelper
- *
- * @author Daniel Lorenz <ext.cart@extco.de>
- */
-class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+use Extcode\Cart\ViewHelpers\Format\CurrencyViewHelper;
+use Extcode\CartProducts\Domain\Model\Product\BeVariant;
+use Extcode\CartProducts\Domain\Model\Product\Product;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+
+class VariantSelectViewHelper extends AbstractViewHelper
 {
     /**
-     * Output is escaped already. We must not escape children, to avoid double encoding.
-     *
      * @var bool
      */
     protected $escapeOutput = false;
@@ -32,7 +25,7 @@ class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
     /**
      * @var \Extcode\CartProducts\Domain\Model\Product\Product
      */
-    protected $product = null;
+    protected $product;
 
     /**
      * Initialize arguments.
@@ -45,7 +38,7 @@ class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
 
         $this->registerArgument(
             'product',
-            \Extcode\CartProducts\Domain\Model\Product\Product::class,
+            Product::class,
             'product for select options',
             true
         );
@@ -113,22 +106,19 @@ class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
     /**
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         $options = [];
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            \TYPO3\CMS\Extbase\Object\ObjectManager::class
-        );
-        $currencyViewHelper = $objectManager->get(
-            \Extcode\Cart\ViewHelpers\Format\CurrencyViewHelper::class
+        $currencyViewHelper = GeneralUtility::makeInstance(
+            CurrencyViewHelper::class
         );
         $currencyViewHelper->initialize();
         $currencyViewHelper->setRenderingContext($this->renderingContext);
 
         foreach ($this->product->getBeVariants() as $beVariant) {
             /**
-             * @var \Extcode\CartProducts\Domain\Model\Product\BeVariant $beVariant
+             * @var BeVariant $beVariant
              */
             $currencyViewHelper->setRenderChildrenClosure(
                 function () use ($beVariant) {
@@ -167,7 +157,7 @@ class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
             }
 
             $data .= 'data-regular-price="' . $regularPrice . '"';
-            if ($regularPrice != $specialPrice) {
+            if ($regularPrice !== $specialPrice) {
                 $data .= ' data-special-price="' . $specialPrice . '"';
                 $data .= ' data-special-price-percentage-discount="' . $specialPricePercentageDiscount . '"';
             }
@@ -184,13 +174,12 @@ class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
     }
 
     /**
-     * @param \Extcode\CartProducts\Domain\Model\Product\BeVariant $beVariant
+     * @param BeVariant $beVariant
      *
      * @return string
      */
-    protected function getOptionLabel(
-        \Extcode\CartProducts\Domain\Model\Product\BeVariant $beVariant
-    ) {
+    protected function getOptionLabel(BeVariant $beVariant): string
+    {
         $optionLabelArray = [];
 
         if ($this->product->getBeVariantAttribute1()) {
@@ -202,8 +191,7 @@ class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
         if ($this->product->getBeVariantAttribute3()) {
             $optionLabelArray[] = $beVariant->getBeVariantAttributeOption3()->getTitle();
         }
-        $optionLabel = implode(' - ', $optionLabelArray);
 
-        return $optionLabel;
+        return implode(' - ', $optionLabelArray);
     }
 }

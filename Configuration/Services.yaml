@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Extcode\CartProducts\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Widgets/*'
+
+  Extcode\CartProducts\Domain\Finisher\Cart\AddToCartFinisher:
+    public: true
+
+  Extcode\CartProducts\Updates\SlugUpdater:
+    public: true

@@ -2,6 +2,13 @@
 declare(strict_types=1);
 namespace Extcode\CartProducts\Hooks;
 
+/*
+ * This file is part of the package extcode/cart-products.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -77,13 +84,13 @@ class DatamapDataHandlerHook
 
     protected function isAllowedTargetPage($listType, $doktype)
     {
-        if (empty($listType) || substr($listType, 0, 11) != 'cartproducts_') {
+        if (empty($listType) || substr($listType, 0, 11) !== 'cartproducts_') {
             return true;
         }
-        if (($doktype == 183) && ($listType == 'cartproducts_singleproduct')) {
+        if (($doktype === 183) && ($listType === 'cartproducts_singleproduct')) {
             return true;
         }
-        if (($doktype != 183) && ($listType == 'cartproducts_products' || $listType == 'cartproducts_slots')) {
+        if (($doktype !== 183) && ($listType === 'cartproducts_products' || $listType === 'cartproducts_slots')) {
             return true;
         }
 

@@ -2,12 +2,13 @@
 
 namespace Extcode\CartProducts\Domain\Repository\Product;
 
-/**
- * This file is part of the "cart_products" Extension for TYPO3 CMS.
+/*
+ * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
@@ -90,7 +91,7 @@ class ProductRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 list($orderField, $ascDesc) =
                     \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $orderItem, true);
                 if ($ascDesc) {
-                    $orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?
+                    $orderings[$orderField] = ((strtolower($ascDesc) === 'desc') ?
                         \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
                         \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
                 } else {

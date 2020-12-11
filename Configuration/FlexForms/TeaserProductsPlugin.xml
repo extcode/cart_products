@@ -52,6 +52,7 @@
                                 <size>3</size>
                                 <minitems>1</minitems>
                                 <maxitems>99</maxitems>
+                                <renderType>selectSingle</renderType>
                             </config>
                         </TCEforms>
                     </settings.productUids>

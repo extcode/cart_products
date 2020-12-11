@@ -1,25 +1,25 @@
 <?php
 
-namespace Extcode\CartProducts\Tests\Domain\Model\Product;
+namespace Extcode\CartProducts\Tests\Unit\Domain\Model\Product;
 
 use Extcode\CartProducts\Domain\Model\Product\QuantityDiscount;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class QuantityDiscountTest extends UnitTestCase
 {
     /**
-     * Product Quantity Discount
-     *
      * @var QuantityDiscount
      */
-    protected $fixture = null;
+    protected $quantityDiscount;
 
-    /**
-     * Set Up
-     */
-    public function setUp()
+    public function setUp(): void
     {
-        $this->fixture = new QuantityDiscount();
+        $this->quantityDiscount = new QuantityDiscount();
+    }
+
+    public function tearDown(): void
+    {
+        unset($this->quantityDiscount);
     }
 
     /**
@@ -29,7 +29,7 @@ class QuantityDiscountTest extends UnitTestCase
     {
         $this->assertSame(
             0.0,
-            $this->fixture->getPrice()
+            $this->quantityDiscount->getPrice()
         );
     }
 
@@ -40,11 +40,11 @@ class QuantityDiscountTest extends UnitTestCase
     {
         $price = 1.00;
 
-        $this->fixture->setPrice($price);
+        $this->quantityDiscount->setPrice($price);
 
         $this->assertSame(
             $price,
-            $this->fixture->getPrice()
+            $this->quantityDiscount->getPrice()
         );
     }
 
@@ -55,7 +55,7 @@ class QuantityDiscountTest extends UnitTestCase
     {
         $this->assertSame(
             0,
-            $this->fixture->getQuantity()
+            $this->quantityDiscount->getQuantity()
         );
     }
 
@@ -66,11 +66,11 @@ class QuantityDiscountTest extends UnitTestCase
     {
         $quantity = 10;
 
-        $this->fixture->setQuantity($quantity);
+        $this->quantityDiscount->setQuantity($quantity);
 
         $this->assertSame(
             $quantity,
-            $this->fixture->getQuantity()
+            $this->quantityDiscount->getQuantity()
         );
     }
 }

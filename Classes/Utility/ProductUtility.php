@@ -2,38 +2,24 @@
 
 namespace Extcode\CartProducts\Utility;
 
-/**
- * This file is part of the "cart_products" Extension for TYPO3 CMS.
+/*
+ * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Request;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 class ProductUtility
 {
-    /**
-     * Object Manager
-     *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     */
-    protected $objectManager;
-
     /**
      * Tax Classes
      *
      * @var array
      */
     protected $taxClasses;
-
-    /**
-     * @param ObjectManagerInterface $objectManager
-     */
-    public function injectObjectManager(ObjectManagerInterface $objectManager)
-    {
-        $this->objectManager = $objectManager;
-    }
 
     /**
      * Get Frontend User Group
@@ -45,7 +31,7 @@ class ProductUtility
         $feGroupIds = [];
         $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
         if ($feUserId) {
-            $frontendUserRepository = $this->objectManager->get(
+            $frontendUserRepository = GeneralUtility::makeInstance(
                 \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository::class
             );
             $feUser = $frontendUserRepository->findByUid($feUserId);
@@ -99,7 +85,7 @@ class ProductUtility
 
         $productId = intval($cartProductValues['productId']);
 
-        $productRepository = $this->objectManager->get(
+        $productRepository = GeneralUtility::makeInstance(
             \Extcode\CartProducts\Domain\Repository\Product\ProductRepository::class
         );
 
@@ -128,7 +114,7 @@ class ProductUtility
 
             $newFeVariant = null;
             if ($cartProductValues['feVariants']) {
-                $newFeVariant = $this->objectManager->get(
+                $newFeVariant = GeneralUtility::makeInstance(
                     \Extcode\Cart\Domain\Model\Cart\FeVariant::class,
                     $cartProductValues['feVariants']
                 );
@@ -160,7 +146,7 @@ class ProductUtility
             $cartProduct->setServiceAttribute2($productProduct->getServiceAttribute2());
             $cartProduct->setServiceAttribute3($productProduct->getServiceAttribute3());
 
-            if ($productProduct->getProductType() == 'virtual' || $productProduct->getProductType() == 'downloadable') {
+            if ($productProduct->getProductType() === 'virtual' || $productProduct->getProductType() === 'downloadable') {
                 $cartProduct->setIsVirtualProduct(true);
             }
 
@@ -174,7 +160,7 @@ class ProductUtility
                 'cartProduct' => $cartProduct,
             ];
 
-            $signalSlotDispatcher = $this->objectManager->get(
+            $signalSlotDispatcher = GeneralUtility::makeInstance(
                 \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
             );
             $slotReturn = $signalSlotDispatcher->dispatch(
@@ -189,7 +175,7 @@ class ProductUtility
 
             if ($cartProductValues['beVariants']) {
                 foreach ($cartProductValues['beVariants'] as $variantsKey => $variantsValue) {
-                    if ($variantsKey == 1) {
+                    if ($variantsKey === 1) {
                         $newVariant = $this->createCartBackendVariant(
                             $cartProduct,
                             null,
@@ -249,7 +235,7 @@ class ProductUtility
             // creating a new Variant and using Price and Taxclass form CartProduct
 
             // get further data of variant
-            $variantRepository = $this->objectManager->get(
+            $variantRepository = GeneralUtility::makeInstance(
                 \Extcode\CartProducts\Domain\Repository\Product\BeVariantRepository::class
             );
             /** @var \Extcode\CartProducts\Domain\Model\Product\BeVariant $productBackendVariant */
@@ -260,7 +246,7 @@ class ProductUtility
 
                 $bestSpecialPrice = $productBackendVariant->getBestSpecialPrice($frontendUserGroupIds);
 
-                $cartBackendVariant = $this->objectManager->get(
+                $cartBackendVariant = GeneralUtility::makeInstance(
                     \Extcode\Cart\Domain\Model\Cart\BeVariant::class,
                     $variantId,
                     $product,
@@ -284,7 +270,7 @@ class ProductUtility
                     'cartBackendVariant' => $cartBackendVariant,
                 ];
 
-                $signalSlotDispatcher = $this->objectManager->get(
+                $signalSlotDispatcher = GeneralUtility::makeInstance(
                     \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
                 );
                 $slotReturn = $signalSlotDispatcher->dispatch(
@@ -318,7 +304,7 @@ class ProductUtility
             'errors' => $errors,
         ];
 
-        $signalSlotDispatcher = $this->objectManager->get(
+        $signalSlotDispatcher = GeneralUtility::makeInstance(
             \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
         );
         $slotReturn = $signalSlotDispatcher->dispatch(
@@ -374,7 +360,7 @@ class ProductUtility
             'cartProductValues' => $cartProductValues,
         ];
 
-        $signalSlotDispatcher = $this->objectManager->get(
+        $signalSlotDispatcher = GeneralUtility::makeInstance(
             \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
         );
 

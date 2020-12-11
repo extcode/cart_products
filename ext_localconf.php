@@ -7,46 +7,46 @@ $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 // configure plugins
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Extcode.cart_products',
+    'cart_products',
     'Products',
     [
-        'Product' => 'show, list, teaser, showForm',
+        \Extcode\CartProducts\Controller\ProductController::class => 'show, list, teaser, showForm',
     ],
     [
-        'Product' => 'showForm',
+        \Extcode\CartProducts\Controller\ProductController::class => 'showForm',
     ]
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Extcode.cart_products',
+    'cart_products',
     'TeaserProducts',
     [
-        'Product' => 'teaser, showForm',
+        \Extcode\CartProducts\Controller\ProductController::class => 'teaser, showForm',
     ],
     [
-        'Product' => 'showForm',
+        \Extcode\CartProducts\Controller\ProductController::class => 'showForm',
     ]
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Extcode.cart_products',
+    'cart_products',
     'SingleProduct',
     [
-        'Product' => 'show, showForm',
+        \Extcode\CartProducts\Controller\ProductController::class => 'show, showForm',
     ],
     [
-        'Product' => 'showForm',
+        \Extcode\CartProducts\Controller\ProductController::class => 'showForm',
     ]
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Extcode.cart_products',
+    'cart_products',
     'ProductPartial',
     [
-        'Product' => 'showForm',
+        \Extcode\CartProducts\Controller\ProductController::class => 'showForm',
     ],
     [
-        'Product' => 'showForm',
+        \Extcode\CartProducts\Controller\ProductController::class => 'showForm',
     ]
 );
 

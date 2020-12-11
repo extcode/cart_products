@@ -1,22 +1,25 @@
 <?php
 
-namespace Extcode\CartProducts\Tests\Domain\Model\Product;
+namespace Extcode\CartProducts\Tests\Unit\Domain\Model\Product;
 
 use Extcode\CartProducts\Domain\Model\Product\FeVariant;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class FeVariantTest extends UnitTestCase
 {
     /**
-     * Product Frontend Variant
-     *
      * @var FeVariant
      */
-    protected $feVariant = null;
+    protected $feVariant;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->feVariant = new FeVariant;
+    }
+
+    public function tearDown(): void
+    {
+        unset($this->feVariant);
     }
 
     /**

@@ -2,6 +2,13 @@
 declare(strict_types=1);
 namespace Extcode\CartProducts\Updates;
 
+/*
+ * This file is part of the package extcode/cart-products.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 use Symfony\Component\Console\Output\OutputInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;

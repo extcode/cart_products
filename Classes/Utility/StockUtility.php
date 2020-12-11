@@ -2,15 +2,17 @@
 declare(strict_types=1);
 namespace Extcode\CartProducts\Utility;
 
+/*
+ * This file is part of the package extcode/cart-products.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Stock Utility
- *
- * @author Daniel Lorenz <ext.cart@extco.de>
- */
 class StockUtility
 {
     /**
@@ -23,24 +25,16 @@ class StockUtility
      */
     public function __construct()
     {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            \TYPO3\CMS\Extbase\Object\ObjectManager::class
-        );
-
-        $this->logManager = $this->objectManager->get(
-            \TYPO3\CMS\Core\Log\LogManager::class
-        );
-
-        $this->persistenceManager = $this->objectManager->get(
+        $this->persistenceManager = GeneralUtility::makeInstance(
             \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
         );
 
-        $this->configurationManager = $this->objectManager->get(
+        $this->configurationManager = GeneralUtility::makeInstance(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class
         );
 
         $this->config = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+            \TYPO3\CMS\Extbase\Configuration\ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK,
             'CartProducts'
         );
     }

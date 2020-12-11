@@ -1,9 +1,9 @@
 <?php
 
-namespace Extcode\CartProducts\Tests\Domain\Model;
+namespace Extcode\CartProducts\Tests\Unit\Domain\Model;
 
 use Extcode\CartProducts\Domain\Model\Category;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class CategoryTest extends UnitTestCase
 {
@@ -13,12 +13,12 @@ class CategoryTest extends UnitTestCase
      */
     protected $category = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->category = new Category();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->category);
     }

@@ -1,25 +1,25 @@
 <?php
 
-namespace Extcode\CartProducts\Tests\Domain\Model\Product;
+namespace Extcode\CartProducts\Tests\Unit\Domain\Model\Product;
 
 use Extcode\CartProducts\Domain\Model\Product\SpecialPrice;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SpecialPriceTest extends UnitTestCase
 {
     /**
-     * Product Special Price
-     *
      * @var SpecialPrice
      */
-    protected $fixture = null;
+    protected $specialPrice;
 
-    /**
-     * Set Up
-     */
-    public function setUp()
+    public function setUp(): void
     {
-        $this->fixture = new SpecialPrice();
+        $this->specialPrice = new SpecialPrice();
+    }
+
+    public function tearDown(): void
+    {
+        unset($this->specialPrice);
     }
 
     /**
@@ -29,7 +29,7 @@ class SpecialPriceTest extends UnitTestCase
     {
         $this->assertSame(
             '',
-            $this->fixture->getTitle()
+            $this->specialPrice->getTitle()
         );
     }
 
@@ -40,11 +40,11 @@ class SpecialPriceTest extends UnitTestCase
     {
         $title = 'Special Price Title';
 
-        $this->fixture->setTitle($title);
+        $this->specialPrice->setTitle($title);
 
         $this->assertSame(
             $title,
-            $this->fixture->getTitle()
+            $this->specialPrice->getTitle()
         );
     }
 
@@ -55,7 +55,7 @@ class SpecialPriceTest extends UnitTestCase
     {
         $this->assertSame(
             0.0,
-            $this->fixture->getPrice()
+            $this->specialPrice->getPrice()
         );
     }
 
@@ -66,11 +66,11 @@ class SpecialPriceTest extends UnitTestCase
     {
         $price = 1.00;
 
-        $this->fixture->setPrice($price);
+        $this->specialPrice->setPrice($price);
 
         $this->assertSame(
             $price,
-            $this->fixture->getPrice()
+            $this->specialPrice->getPrice()
         );
     }
 }

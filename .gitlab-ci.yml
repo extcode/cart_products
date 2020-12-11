@@ -90,13 +90,13 @@ lint:php74:
   script:
     - >
       if [[ "$COVERAGE" == "0" ]]; then
-        .Build/bin/phpunit -c Build/UnitTests.xml Tests/Unit
+        .Build/bin/phpunit -c Build/UnitTests.xml
       fi
     - >
       if [[ "$COVERAGE" == "1" ]]; then
-        .Build/bin/phpunit --coverage-clover=phpunit.coverage.xml --log-junit=phpunit.report.xml -c Build/UnitTests.xml Tests/Unit
+        .Build/bin/phpunit --coverage-clover=phpunit.coverage.xml --log-junit=phpunit.report.xml -c Build/UnitTests.xml
       fi
-#    - find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit --colors  -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml {}'
+#    - typo3DatabaseDriver=pdo_sqlite .Build/bin/phpunit -c Build/FunctionalTests.xml
   artifacts:
     paths:
       - phpunit.coverage.xml
@@ -104,25 +104,25 @@ lint:php74:
     expire_in: 1 day
     when: always
 
-test:php72:typo3_9:
+test:php72:typo3_10:
   <<: *test_php
   variables:
     DOCKER_TAG: 7.2-alpine
-    TYPO3_VERSION: ^9.5
+    TYPO3_VERSION: ^10.4
     COVERAGE: 0
 
-test:php73:typo3_9:
+test:php73:typo3_10:
   <<: *test_php
   variables:
     DOCKER_TAG: 7.3-alpine
-    TYPO3_VERSION: ^9.5
+    TYPO3_VERSION: ^10.4
     COVERAGE: 0
 
-test:php74:typo3_9:
+test:php74:typo3_10:
   <<: *test_php
   variables:
     DOCKER_TAG: 7.4-alpine
-    TYPO3_VERSION: ^9.5
+    TYPO3_VERSION: ^10.4
     COVERAGE: 1
 
 documentation:
@@ -154,7 +154,7 @@ sonarqube:
     SONAR_SOURCES: "./Classes"
     SONAR_GITLAB_PROJECT_ID: "$CI_PROJECT_ID"
   script:
-    - echo "sonar.projectKey=cart_products-2.x" > sonar-project.properties
+    - echo "sonar.projectKey=cart_products-3.x" > sonar-project.properties
     - gitlab-sonar-scanner -Dsonar.php.coverage.reportPath=phpunit.coverage.xml -Dsonar.php.tests.reportPath=phpunit.report.xml
   allow_failure: true
 
@@ -170,5 +170,5 @@ sonarqube-reports:
     SONAR_SOURCES: "./Classes"
     SONAR_TESTS: "./Tests"
   script:
-    - echo "sonar.projectKey=cart_products-2.x" > sonar-project.properties
+    - echo "sonar.projectKey=cart_products-3.x" > sonar-project.properties
     - gitlab-sonar-scanner -Dsonar.php.coverage.reportPath=phpunit.coverage.xml -Dsonar.php.tests.reportPath=phpunit.report.xml

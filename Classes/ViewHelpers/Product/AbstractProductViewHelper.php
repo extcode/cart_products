@@ -12,9 +12,9 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
-class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
+abstract class AbstractProductViewHelper extends AbstractViewHelper
 {
     /**
      * @var bool
@@ -28,21 +28,9 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
         $this->registerArgument(
             'product',
             Product::class,
-            'product for select options',
+            'product',
             true
         );
-    }
-
-    /**
-     * @param array|NULL $arguments
-     * @return bool
-     * @api
-     */
-    protected static function evaluateCondition($arguments = null)
-    {
-        $product = $arguments['product'];
-        $bestSpecialPrice = $product->getBestSpecialPrice(self::getFrontendUserGroupIds());
-        return $bestSpecialPrice < $product->getMinPrice();
     }
 
     /**
@@ -50,7 +38,7 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
      *
      * @return array
      */
-    protected static function getFrontendUserGroupIds(): array
+    protected function getFrontendUserGroupIds()
     {
         $feGroupIds = [];
         $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];

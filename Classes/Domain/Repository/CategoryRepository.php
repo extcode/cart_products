@@ -2,12 +2,13 @@
 
 namespace Extcode\CartProducts\Domain\Repository;
 
-/**
- * This file is part of the "cart_products" Extension for TYPO3 CMS.
+/*
+ * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
 {
 
@@ -42,7 +43,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
                 'parent' =>
                     ($localCategory->getParent() ? $localCategory->getParent()->getUid() : null),
                 'subcategories' => null,
-                'isSelected' => ($selectedCategory == $localCategory ? true : false)
+                'isSelected' => ($selectedCategory === $localCategory)
             ];
             $categories[] = $newCategory;
         }
@@ -60,7 +61,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
         $categories = [];
         $localCategories = $this->findAllAsArray();
         foreach ($localCategories as $category) {
-            if (($parentCategory && $category['uid'] == $parentCategory->getUid())
+            if (($parentCategory && $category['uid'] === $parentCategory->getUid())
                 || !$parentCategory
             ) {
                 $this->getSubcategoriesIds(
@@ -87,7 +88,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
     ) {
         $subcategoriesArray[] = $parentCategory['uid'];
         foreach ($categoriesArray as $category) {
-            if ($category['parent'] == $parentCategory['uid']) {
+            if ($category['parent'] === $parentCategory['uid']) {
                 $this->getSubcategoriesIds(
                     $categoriesArray,
                     $category,
@@ -108,7 +109,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
     {
         $categories = null;
         foreach ($categoriesArray as $category) {
-            if ($category['parent'] == $parentCategory['uid']) {
+            if ($category['parent'] === $parentCategory['uid']) {
                 $newCategory = $category;
                 $newCategory['subcategories'] =
                     $this->buildSubcategories($categoriesArray, $category);

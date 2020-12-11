@@ -1,19 +1,14 @@
 <?php
 
-namespace Extcode\CartProducts\Tests\Domain\Repository\Product;
+namespace Extcode\CartProducts\Tests\Functional\Domain\Repository\Product;
 
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class ProductRepositoryTest extends FunctionalTestCase
 {
-    /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     */
-    protected $objectManager;
-
     /**
      * @var ProductRepository
      */
@@ -27,14 +22,11 @@ class ProductRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/cart_products',
     ];
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
-        $this->objectManager = GeneralUtility::makeInstance(
-            \TYPO3\CMS\Extbase\Object\ObjectManager::class
-        );
-        $this->productRepository = $this->objectManager->get(ProductRepository::class);
+        $this->productRepository = GeneralUtility::makeInstance(ProductRepository::class);
 
         $fixturePath = ORIGINAL_ROOT . 'typo3conf/ext/cart_products/Tests/Functional/Fixtures/';
         $this->importDataSet($fixturePath . 'pages.xml');
@@ -48,7 +40,7 @@ class ProductRepositoryTest extends FunctionalTestCase
     {
         $_GET['id'] = 110;
 
-        $productDemand = $this->objectManager->get(ProductDemand::class);
+        $productDemand = GeneralUtility::makeInstance(ProductDemand::class);
         $productDemand->setSku('first');
 
         $products = $this->productRepository->findDemanded($productDemand);
@@ -66,7 +58,7 @@ class ProductRepositoryTest extends FunctionalTestCase
     {
         $_GET['id'] = 110;
 
-        $productDemand = $this->objectManager->get(ProductDemand::class);
+        $productDemand = GeneralUtility::makeInstance(ProductDemand::class);
         $productDemand->setTitle('First');
 
         $products = $this->productRepository->findDemanded($productDemand);

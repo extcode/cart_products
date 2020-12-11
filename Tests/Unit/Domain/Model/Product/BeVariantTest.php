@@ -1,28 +1,28 @@
 <?php
 
-namespace Extcode\CartProducts\Tests\Domain\Model\Product;
+namespace Extcode\CartProducts\Tests\Unit\Domain\Model\Product;
 
 use Extcode\CartProducts\Domain\Model\Product\BeVariant;
 use Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Model\Product\SpecialPrice;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class BeVariantTest extends UnitTestCase
 {
     /**
-     * Product Backend Variant
-     *
      * @var BeVariant
      */
-    protected $beVariant = null;
+    protected $beVariant;
 
-    /**
-     *
-     */
-    public function setUp()
+    public function setUp(): void
     {
         $this->beVariant = new BeVariant();
+    }
+
+    public function tearDown(): void
+    {
+        unset($this->beVariant);
     }
 
     /**

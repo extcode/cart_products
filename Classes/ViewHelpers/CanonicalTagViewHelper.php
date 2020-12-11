@@ -2,26 +2,19 @@
 
 namespace Extcode\CartProducts\ViewHelpers;
 
-/**
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+/*
+ * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * adds the canonical tag to header data
- *
- * @author Daniel Lorenz <ext.cart@extco.de>
- */
-class CanonicalTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
+use Extcode\CartProducts\Domain\Model\Product\Product;
+use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+
+class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
 {
     /**
      * @var string
@@ -32,7 +25,13 @@ class CanonicalTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTa
     {
         parent::initializeArguments();
 
-        $this->registerArgument('product', '\Extcode\CartProducts\Domain\Model\Product\Product', 'product', false, 0);
+        $this->registerArgument(
+            'product',
+            Product::class,
+            'product',
+            false,
+            0
+        );
     }
 
     /**
@@ -83,9 +82,9 @@ class CanonicalTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTa
     {
         if ('FE' === TYPO3_MODE && is_callable([$this->getTypoScriptFrontendController(), 'getPageRenderer'])) {
             return $this->getTypoScriptFrontendController()->getPageRenderer();
-        } else {
-            return GeneralUtility::makeInstance('TYPO3\CMS\Core\Page\PageRenderer');
         }
+
+        return GeneralUtility::makeInstance(PageRenderer::class);
     }
 
     /**

@@ -23,6 +23,7 @@
                                         <numIndex index="1">Product->show</numIndex>
                                     </numIndex>
                                 </items>
+                                <renderType>selectSingle</renderType>
                             </config>
                         </TCEforms>
                     </switchableControllerActions>
@@ -69,6 +70,7 @@
                                         <numIndex index="1">title</numIndex>
                                     </numIndex>
                                 </items>
+                                <renderType>selectSingle</renderType>
                             </config>
                         </TCEforms>
                     </settings.orderBy>
@@ -93,6 +95,7 @@
                                         <numIndex index="1">desc</numIndex>
                                     </numIndex>
                                 </items>
+                                <renderType>selectSingle</renderType>
                             </config>
                         </TCEforms>
                     </settings.orderDirection>
@@ -131,7 +134,7 @@
                                 <foreign_table_where>AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC
                                 </foreign_table_where>
                                 <maxitems>99</maxitems>
-                                <renderMode>tree</renderMode>
+                                <renderType>selectTree</renderType>
                                 <size>10</size>
                                 <treeConfig>
                                     <appearance>

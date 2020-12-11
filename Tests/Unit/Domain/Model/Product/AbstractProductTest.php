@@ -1,18 +1,18 @@
 <?php
 
-namespace Extcode\CartProducts\Tests\Domain\Model\Product;
+namespace Extcode\CartProducts\Tests\Unit\Domain\Model\Product;
 
 use Extcode\CartProducts\Domain\Model\Product\AbstractProduct;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class AbstractProductTest extends UnitTestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    protected $product = null;
+    protected $product;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->product = $this->getMockForAbstractClass(
             AbstractProduct::class

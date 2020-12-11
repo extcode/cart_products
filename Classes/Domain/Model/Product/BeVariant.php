@@ -2,12 +2,13 @@
 
 namespace Extcode\CartProducts\Domain\Model\Product;
 
-/**
- * This file is part of the "cart_products" Extension for TYPO3 CMS.
+/*
+ * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
 use Extcode\CartProducts\Domain\Model\Product;
 
 class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
@@ -371,7 +372,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         if ($this->getSpecialPrices()) {
             foreach ($this->getSpecialPrices() as $specialPrice) {
-                if ($bestSpecialPrice == null) {
+                if ($bestSpecialPrice === null) {
                     if (!$specialPrice->getFrontendUserGroup() ||
                         in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
                     ) {
@@ -454,7 +455,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getBestSpecialPricePercentageDiscount($frontendUserGroupIds = [])
     {
-        if ($this->getPriceCalculated() != 0) {
+        if ($this->getPriceCalculated() !== 0) {
             $bestSpecialPricePercentageDiscount = (($this->getBestSpecialPriceDiscount($frontendUserGroupIds)) / $this->getPriceCalculated()) * 100;
         }
 

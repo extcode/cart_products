@@ -2,13 +2,15 @@
 
 namespace Extcode\CartProducts\Controller;
 
-/**
- * This file is part of the "cart_products" Extension for TYPO3 CMS.
+/*
+ * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Web\RequestBuilder;
 
@@ -122,7 +124,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     protected function createDemandObjectFromSettings($settings)
     {
         /** @var \Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand $demand */
-        $demand = $this->objectManager->get(
+        $demand = GeneralUtility::makeInstance(
             \Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand::class
         );
 
@@ -265,27 +267,27 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     {
         $productUid = 0;
 
-        if ((int)$GLOBALS['TSFE']->page['doktype'] == 183) {
+        if ((int)$GLOBALS['TSFE']->page['doktype'] === 183) {
             $productUid = (int)$GLOBALS['TSFE']->page['cart_products_product'];
         } else {
             if ($this->request->getPluginName() === 'ProductPartial') {
                 if ($productUid === 0) {
-                    $configurationManager = $this->objectManager->get(
+                    $configurationManager = GeneralUtility::makeInstance(
                         ConfigurationManager::class
                     );
                     $configuration = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK);
 
-                    $typoscriptService = $this->objectManager->get(
+                    $typoscriptService = GeneralUtility::makeInstance(
                         TypoScriptService::class
                     );
                     $configuration = $typoscriptService->convertPlainArrayToTypoScriptArray($configuration);
                     $productUid = (int)$configurationManager->getContentObject()->cObjGetSingle($configuration['product'], $configuration['product.']);
                 }
                 if ($productUid === 0) {
-                    $requestBuilder = $this->objectManager->get(
+                    $requestBuilder = GeneralUtility::makeInstance(
                         RequestBuilder::class
                     );
-                    $configurationManager = $this->objectManager->get(
+                    $configurationManager = GeneralUtility::makeInstance(
                         ConfigurationManager::class
                     );
                     $configurationManager->setConfiguration([
@@ -308,7 +310,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         }
 
         if ($productUid > 0) {
-            $productRepository = $this->objectManager->get(
+            $productRepository = GeneralUtility::makeInstance(
                 \Extcode\CartProducts\Domain\Repository\Product\ProductRepository::class
             );
 

@@ -2,12 +2,13 @@
 
 namespace Extcode\CartProducts\Hooks;
 
-/**
- * This file is part of the "cart_products" Extension for TYPO3 CMS.
+/*
+ * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -84,7 +85,7 @@ class KeSearchIndexer
 
                     $targetPid = $this->getTargetPidFormCategory($product['category']);
 
-                    if ($targetPid == 0) {
+                    if ($targetPid === 0) {
                         $targetPid = $indexerConfig['targetpid'];
                     }
 

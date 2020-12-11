@@ -35,8 +35,9 @@ and database!** If possible test the update in a test copy of your TYPO3 instanc
 
 | Cart Products | TYPO3      | PHP       | Support/Development                                                                      |
 | ------------- | ---------- | ----------|------------------------------------------------------------------------------------------|
+| 3.x.x         | 10.4       | 7.2 - 7.4 | Features, Bugfixes, Security Updates                                                     |
 | 2.x.x         | 9.5        | 7.2 - 7.4 | Features, Bugfixes, Security Updates                                                     |
-| 1.x.x         | 8.7        | 7.0 - 7.4 | Features, Bugfixes, Security Updates                                                     |
+| 1.x.x         | 8.7        | 7.0 - 7.4 | Bugfixes, Security Updates                                                     |
 
 ### 3.2. Changelog
 

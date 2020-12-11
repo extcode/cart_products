@@ -2,6 +2,13 @@
 
 namespace Extcode\CartProducts\Domain\Finisher\Cart;
 
+/*
+ * This file is part of the package extcode/cart-products.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 use Extcode\Cart\Domain\Finisher\Cart\AddToCartFinisherInterface;
 use Extcode\Cart\Domain\Model\Cart\Cart;
 use Extcode\Cart\Domain\Model\Cart\Product;
@@ -11,23 +18,11 @@ use Extcode\CartProducts\Utility\ProductUtility;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Web\Request;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-/**
- * This file is part of the "cart_products" Extension for TYPO3 CMS.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- */
 class AddToCartFinisher implements AddToCartFinisherInterface
 {
-    /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
-
     /**
      * Product Repository
      *
@@ -49,17 +44,15 @@ class AddToCartFinisher implements AddToCartFinisherInterface
         Cart $cart,
         string $mode = 'update'
     ) : AvailabilityResponse {
-        $this->objectManager = new ObjectManager();
-
         /** @var AvailabilityResponse $availabilityResponse */
         $availabilityResponse = GeneralUtility::makeInstance(
             AvailabilityResponse::class
         );
 
-        if ($cartProduct->getProductType() != 'CartProducts') {
+        if ($cartProduct->getProductType() !== 'CartProducts') {
             return $availabilityResponse;
         }
-        $this->productRepository = $this->objectManager->get(
+        $this->productRepository = GeneralUtility::makeInstance(
             ProductRepository::class
         );
 
@@ -143,10 +136,8 @@ class AddToCartFinisher implements AddToCartFinisherInterface
      *
      * @return array
      */
-    public function getProductFromRequest(
-        Request $request,
-        Cart $cart
-    ) {
+    public function getProductFromRequest(Request $request, Cart $cart): array
+    {
         $requestArguments = $request->getArguments();
         $taxClasses = $cart->getTaxClasses();
 
@@ -156,9 +147,7 @@ class AddToCartFinisher implements AddToCartFinisherInterface
             return [$errors, []];
         }
 
-        $this->objectManager = new ObjectManager();
-
-        $productUtility = $this->objectManager->get(
+        $productUtility = GeneralUtility::makeInstance(
             ProductUtility::class
         );
         $productUtility->setTaxClasses($taxClasses);

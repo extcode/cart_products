@@ -2,12 +2,13 @@
 
 namespace Extcode\CartProducts\Domain\Model\Product;
 
-/**
- * This file is part of the "cart_products" Extension for TYPO3 CMS.
+/*
+ * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
 class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
 {
 
@@ -415,7 +416,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      */
     public function setMaxNumberInOrder($maxNumberInOrder)
     {
-        if ($maxNumberInOrder < 0 || (($maxNumberInOrder != 0) && ($maxNumberInOrder < $this->minNumberInOrder))) {
+        if ($maxNumberInOrder < 0 || (($maxNumberInOrder !== 0) && ($maxNumberInOrder < $this->minNumberInOrder))) {
             throw new \InvalidArgumentException;
         }
 
