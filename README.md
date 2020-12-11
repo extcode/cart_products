@@ -1,6 +1,6 @@
 # Cart Products
 
-[![Build Status](https://travis-ci.org/extcode/cart_products.svg?branch=master)](https://travis-ci.org/extcode/cart_products)
+[![Build Status](https://travis-ci.org/extcode/cart_products.svg?branch=2.x)](https://travis-ci.org/extcode/cart_products)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/39ffda87c75d419ea82d1d8d132a3cf5)](https://www.codacy.com/manual/extcode/cart_products?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=extcode/cart_products&amp;utm_campaign=Badge_Grade)
 
 Cart is a small but powerful extension which "solely" adds a shopping cart to your TYPO3 installation.
@@ -35,8 +35,9 @@ and database!** If possible test the update in a test copy of your TYPO3 instanc
 
 | Cart Products | TYPO3      | PHP       | Support/Development                                                                      |
 | ------------- | ---------- | ----------|------------------------------------------------------------------------------------------|
+| 3.x.x         | 10.4       | 7.2 - 7.4 | Features, Bugfixes, Security Updates                                                     |
 | 2.x.x         | 9.5        | 7.2 - 7.4 | Features, Bugfixes, Security Updates                                                     |
-| 1.x.x         | 8.7        | 7.0 - 7.4 | Features, Bugfixes, Security Updates                                                     |
+| 1.x.x         | 8.7        | 7.0 - 7.4 | Bugfixes, Security Updates                                                     |
 
 ### 3.2. Changelog
 
