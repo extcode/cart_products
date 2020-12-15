@@ -709,10 +709,10 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
         $factor = 1.0;
 
         foreach ($this->measureUnits as $measureUnit) {
-            if ($measureUnit[$this->priceMeasureUnit]) {
+            if (array_key_exists($this->priceMeasureUnit, $measureUnit)) {
                 $factor = $factor / ($this->priceMeasure / $measureUnit[$this->priceMeasureUnit]);
             }
-            if ($measureUnit[$this->basePriceMeasureUnit]) {
+            if (array_key_exists($this->basePriceMeasureUnit, $measureUnit)) {
                 $factor = $factor * (1.0 / $measureUnit[$this->basePriceMeasureUnit]);
             }
         }

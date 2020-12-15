@@ -95,10 +95,9 @@ class ProductTest extends UnitTestCase
     {
         $this->product->setTeaser('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'teaser',
-            $this->product
+            $this->product->getTeaser()
         );
     }
 
@@ -115,10 +114,10 @@ class ProductTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function setNegativeMinNumberThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $minNumber = -10;
 
         $this->product->setMinNumberInOrder($minNumber);
@@ -126,10 +125,10 @@ class ProductTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function setMinNumberGreaterThanMaxNumberThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $minNumber = 10;
 
         $this->product->setMinNumberInOrder($minNumber);
@@ -164,10 +163,10 @@ class ProductTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function setNegativeMaxNumberThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $maxNumber = -10;
 
         $this->product->setMaxNumberInOrder($maxNumber);
@@ -190,10 +189,10 @@ class ProductTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function setMaxNumberLesserThanMinNumberThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $minNumber = 10;
         $maxNumber = 1;
 

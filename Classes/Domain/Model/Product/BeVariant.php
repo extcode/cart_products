@@ -251,7 +251,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
                 $calc_price = 0;
         }
 
-        if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount']) {
+        if (isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'] as $funcRef) {
                 if ($funcRef) {
                     $params = [

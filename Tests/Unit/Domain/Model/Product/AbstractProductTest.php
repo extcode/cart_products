@@ -37,10 +37,9 @@ class AbstractProductTest extends UnitTestCase
     {
         $this->product->setSku('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'sku',
-            $this->product
+            $this->product->getSku()
         );
     }
 
@@ -62,10 +61,9 @@ class AbstractProductTest extends UnitTestCase
     {
         $this->product->setTitle('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'title',
-            $this->product
+            $this->product->getTitle()
         );
     }
 
@@ -87,10 +85,9 @@ class AbstractProductTest extends UnitTestCase
     {
         $this->product->setDescription('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'description',
-            $this->product
+            $this->product->getDescription()
         );
     }
 }
