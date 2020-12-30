@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace Extcode\CartProducts\Utility;
+namespace Extcode\CartProducts\EventListener\ProcessOrderCreate;
 
 /*
  * This file is part of the package extcode/cart-products.
@@ -9,40 +9,16 @@ namespace Extcode\CartProducts\Utility;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Domain\Model\Cart\Cart;
-use TYPO3\CMS\Core\Cache\CacheManager;
+use Extcode\Cart\Domain\Model\Cart\Product as CartProduct;
+use Extcode\Cart\Event\ProcessOrderCreateEvent;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class StockUtility
+class HandleStock
 {
-    /**
-     * @var array
-     */
-    protected $config = [];
-
-    /**
-     * MailHandler constructor
-     */
-    public function __construct()
+    public function __invoke(ProcessOrderCreateEvent $event): void
     {
-        $this->persistenceManager = GeneralUtility::makeInstance(
-            \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
-        );
-
-        $this->configurationManager = GeneralUtility::makeInstance(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class
-        );
-
-        $this->config = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK,
-            'CartProducts'
-        );
-    }
-
-    public function handleStock(Cart $cart)
-    {
-        $cartProducts = $cart->getProducts();
+        $cartProducts = $event->getCart()->getProducts();
 
         foreach ($cartProducts as $cartProduct) {
             if ($cartProduct->getProductType() === 'CartProducts') {
@@ -64,29 +40,12 @@ class StockUtility
                     } else {
                         $this->handleStockInProduct($cartProduct);
                     }
-
-                    $this->flushCache($product['uid']);
                 }
             }
         }
     }
 
-    /**
-     * @param int $productId
-     */
-    protected function flushCache(int $productId)
-    {
-        $cacheTag = 'tx_cartproducts_product_' . $productId;
-
-        $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
-
-        $cacheManager->flushCachesInGroupByTag('pages', $cacheTag);
-    }
-
-    /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Product $cartProduct
-     */
-    protected function handleStockInProduct(\Extcode\Cart\Domain\Model\Cart\Product $cartProduct): void
+    protected function handleStockInProduct(CartProduct $cartProduct): void
     {
         $productConnection = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_cartproducts_domain_model_product_product');
@@ -112,10 +71,7 @@ class StockUtility
             ->execute();
     }
 
-    /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Product $cartProduct
-     */
-    protected function handleStockInBeVariant(\Extcode\Cart\Domain\Model\Cart\Product $cartProduct): void
+    protected function handleStockInBeVariant(CartProduct $cartProduct): void
     {
         $beVariantConnection = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_cartproducts_domain_model_product_bevariant');

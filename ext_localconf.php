@@ -82,11 +82,6 @@ if (TYPO3_MODE === 'BE') {
 
 // Cart Hooks
 
-if (TYPO3_MODE === 'FE') {
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['CartProducts']['Cart']['AddToCartFinisher'] =
-        \Extcode\CartProducts\Domain\Finisher\Cart\AddToCartFinisher::class;
-}
-
 // ke_search Hook - register indexer for products
 
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['registerIndexerConfiguration'][] =
@@ -103,19 +98,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['cartproducts_clearcache'] =
     \Extcode\CartProducts\Hooks\DataHandler::class . '->clearCachePostProc';
-
-// Signal Slots
-
-$dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-    \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
-);
-
-$dispatcher->connect(
-    \Extcode\Cart\Utility\StockUtility::class,
-    'handleStock',
-    \Extcode\CartProducts\Utility\StockUtility::class,
-    'handleStock'
-);
 
 // register "cartproducts:" namespace
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['cartproducts'][]

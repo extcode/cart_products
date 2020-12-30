@@ -6,18 +6,34 @@ services:
 
   Extcode\CartProducts\:
     resource: '../Classes/*'
-    exclude: '../Classes/Widgets/*'
 
-  Extcode\CartProducts\Domain\Finisher\Order\StockFinisher:
+  Extcode\CartProducts\EventListener\ProcessOrderCreate\HandleStock:
     tags:
       - name: event.listener
-        identifier: 'cart-products-stock-finisher'
+        identifier: 'cart-products--process-order-create--handle-stock'
         event: Extcode\Cart\Event\ProcessOrderCreateEvent
-        after: 'cart-order-finisher'
-        before: 'cart-email-finisher'
+        after: 'cart--process-order-create--order'
+        before: 'cart--process-order-create--email'
 
-  Extcode\CartProducts\Domain\Finisher\Cart\AddToCartFinisher:
-    public: true
+  Extcode\CartProducts\EventListener\ProcessOrderCreate\FlushCache:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--process-order-create--flush-cache'
+        event: Extcode\Cart\Event\ProcessOrderCreateEvent
+        after: 'cart-products--process-order-create--handle-stock'
+        before: 'cart--process-order-create--email'
+
+  Extcode\CartProducts\EventListener\RetrieveProductsFromRequest:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--retrieve-products-from-request'
+        event: Extcode\Cart\Event\RetrieveProductsFromRequestEvent
+
+  Extcode\CartProducts\EventListener\CheckProductAvailability:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--check-product-availability'
+        event: Extcode\Cart\Event\CheckProductAvailabilityEvent
 
   Extcode\CartProducts\Updates\SlugUpdater:
     public: true
