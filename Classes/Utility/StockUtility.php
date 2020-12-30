@@ -9,6 +9,7 @@ namespace Extcode\CartProducts\Utility;
  * LICENSE file that was distributed with this source code.
  */
 
+use Extcode\Cart\Domain\Model\Cart\Cart;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,31 +40,33 @@ class StockUtility
         );
     }
 
-    public function handleStock($params)
+    public function handleStock(Cart $cart)
     {
-        $cartProduct = $params['cartProduct'];
+        $cartProducts = $cart->getProducts();
 
-        if ($cartProduct->getProductType() === 'CartProducts') {
-            $productConnection = GeneralUtility::makeInstance(ConnectionPool::class)
-                ->getConnectionForTable('tx_cartproducts_domain_model_product_product');
-            $productQueryBuilder = $productConnection->createQueryBuilder();
+        foreach ($cartProducts as $cartProduct) {
+            if ($cartProduct->getProductType() === 'CartProducts') {
+                $productConnection = GeneralUtility::makeInstance(ConnectionPool::class)
+                    ->getConnectionForTable('tx_cartproducts_domain_model_product_product');
+                $productQueryBuilder = $productConnection->createQueryBuilder();
 
-            $product = $productQueryBuilder
-                ->select('uid', 'handle_stock', 'handle_stock_in_variants')
-                ->from('tx_cartproducts_domain_model_product_product')
-                ->where(
-                    $productQueryBuilder->expr()->eq('uid', $productQueryBuilder->createNamedParameter($cartProduct->getProductId(), \PDO::PARAM_INT))
-                )
-                ->execute()->fetch();
+                $product = $productQueryBuilder
+                    ->select('uid', 'handle_stock', 'handle_stock_in_variants')
+                    ->from('tx_cartproducts_domain_model_product_product')
+                    ->where(
+                        $productQueryBuilder->expr()->eq('uid', $productQueryBuilder->createNamedParameter($cartProduct->getProductId(), \PDO::PARAM_INT))
+                    )
+                    ->execute()->fetch();
 
-            if ($product['handle_stock']) {
-                if ($product['handle_stock_in_variants']) {
-                    $this->handleStockInBeVariant($cartProduct);
-                } else {
-                    $this->handleStockInProduct($cartProduct);
+                if ($product['handle_stock']) {
+                    if ($product['handle_stock_in_variants']) {
+                        $this->handleStockInBeVariant($cartProduct);
+                    } else {
+                        $this->handleStockInProduct($cartProduct);
+                    }
+
+                    $this->flushCache($product['uid']);
                 }
-
-                $this->flushCache($product['uid']);
             }
         }
     }

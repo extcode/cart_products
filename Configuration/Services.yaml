@@ -8,6 +8,14 @@ services:
     resource: '../Classes/*'
     exclude: '../Classes/Widgets/*'
 
+  Extcode\CartProducts\Domain\Finisher\Order\StockFinisher:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products-stock-finisher'
+        event: Extcode\Cart\Event\ProcessOrderCreateEvent
+        after: 'cart-order-finisher'
+        before: 'cart-email-finisher'
+
   Extcode\CartProducts\Domain\Finisher\Cart\AddToCartFinisher:
     public: true
 
