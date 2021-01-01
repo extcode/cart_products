@@ -30,7 +30,7 @@ EXT: Cart Products
       cart, products, configurable products, shopping
 
    :Autor:
-      Daniel Lorenz
+      Daniel Gohlke
 
    :E-Mail:
       ext.cart@extco.de

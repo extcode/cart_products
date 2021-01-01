@@ -6,11 +6,6 @@ use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Stock Utility
- *
- * @author Daniel Lorenz <ext.cart@extco.de>
- */
 class StockUtility
 {
     /**

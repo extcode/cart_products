@@ -14,12 +14,6 @@ namespace Extcode\CartProducts\ViewHelpers\Form;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
-/**
- * VariantSelect ViewHelper
- *
- * @author Daniel Lorenz <ext.cart@extco.de>
- */
 class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     /**
