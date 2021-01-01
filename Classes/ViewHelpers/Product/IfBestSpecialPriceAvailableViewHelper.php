@@ -17,11 +17,6 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
 
-/**
- * If SpecialPrice Available ViewHelper
- *
- * @author Daniel Lorenz <ext.cart@extco.de>
- */
 class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper implements CompilableInterface
 {
     /**

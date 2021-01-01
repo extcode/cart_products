@@ -16,11 +16,6 @@ namespace Extcode\CartProducts\ViewHelpers;
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * adds the canonical tag to header data
- *
- * @author Daniel Lorenz <ext.cart@extco.de>
- */
 class CanonicalTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
 {
     /**
