@@ -28,7 +28,7 @@
         "typo3/cms-core": "^10.4",
         "typo3/cms-extbase": "^10.4",
         "typo3/cms-fluid": "^10.4",
-        "extcode/cart": "dev-master as 7.0"
+        "extcode/cart": "7.0"
     },
     "require-dev": {
         "typo3/testing-framework": "^5.0",
@@ -50,21 +50,21 @@
         "extcode/cart_products": "self.version"
     },
     "config": {
-        "vendor-dir": ".Build/vendor",
-        "bin-dir": ".Build/bin"
+        "vendor-dir": ".build/vendor",
+        "bin-dir": ".build/bin"
     },
     "scripts": {
         "post-autoload-dump": [
-            "mkdir -p .Build/Web/typo3conf/ext/",
-            "[ -L .Build/Web/typo3conf/ext/cart_products ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/cart_products"
+            "mkdir -p .build/Web/typo3conf/ext/",
+            "[ -L .build/Web/typo3conf/ext/cart_products ] || ln -snvf ../../../../. .build/Web/typo3conf/ext/cart_products"
         ]
     },
     "extra": {
         "typo3/cms": {
             "extension-key": "cart_products",
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
-            "app-dir": ".Build",
-            "web-dir": ".Build/public"
+            "app-dir": ".build",
+            "web-dir": ".build/public"
         }
     }
 }
