@@ -11,7 +11,7 @@
             controller="Cart\Product"
             action="add"
             method="post"
-            pageType="{f:if(condition:'{settings.addToCartByAjax}', then:'{settings.addToCartByAjax}', else:'')}"
+            pageType="{settings.addToCartByAjax}"
             additionalAttributes="{data-ajax: '{f:if(condition: \'{settings.addToCartByAjax}\', then: \'1\', else: \'0\')}', data-type: 'slot', data-id: '{slot.uid}'}">
         <input type="hidden" name="tx_cart_cart[productType]" value="CartProducts">
         <input type="hidden" name="tx_cart_cart[product]" value="{product.uid}">
