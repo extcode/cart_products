@@ -1328,5 +1328,4 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
     {
         return $this->_localizedUid ?? $this->uid;
     }
-
 }
