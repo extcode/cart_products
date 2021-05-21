@@ -28,7 +28,7 @@
         "typo3/cms-core": "^10.4",
         "typo3/cms-extbase": "^10.4",
         "typo3/cms-fluid": "^10.4",
-        "extcode/cart": "^7.0"
+        "extcode/cart": "^7.2"
     },
     "require-dev": {
         "typo3/testing-framework": "^5.0",

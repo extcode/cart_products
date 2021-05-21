@@ -23,6 +23,19 @@ services:
         after: 'cart-products--process-order-create--handle-stock'
         before: 'cart--process-order-create--email'
 
+  Extcode\CartProducts\EventListener\Order\Stock\HandleStock:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--order--stock--handle-stock'
+        event: Extcode\Cart\Event\Order\StockEvent
+
+  Extcode\CartProducts\EventListener\Order\Stock\FlushCache:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--order--stock--flush-cache'
+        event: Extcode\Cart\Event\Order\StockEvent
+        after: 'cart-books--order--stock--handle-stock'
+
   Extcode\CartProducts\EventListener\RetrieveProductsFromRequest:
     tags:
       - name: event.listener
