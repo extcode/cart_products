@@ -9,10 +9,6 @@ namespace Extcode\CartProducts\EventListener\ProcessOrderCreate;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Event\ProcessOrderCreateEvent;
-use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 class FlushCache extends \Extcode\CartProducts\EventListener\Order\Stock\FlushCache
 {
 }

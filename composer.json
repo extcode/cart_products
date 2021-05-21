@@ -22,6 +22,30 @@
     "support": {
         "issues": "https://github.com/extcode/cart_products/issues"
     },
+    "autoload": {
+        "psr-4": {
+            "Extcode\\CartProducts\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Extcode\\CartProducts\\Tests\\": "Tests"
+        }
+    },
+    "config": {
+        "vendor-dir": ".build/vendor",
+        "bin-dir": ".build/bin"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "cart_products",
+            "app-dir": ".build",
+            "web-dir": ".build/public"
+        }
+    },
+    "replace": {
+        "extcode/cart_products": "self.version"
+    },
     "require": {
         "php": "^7.2 <7.5",
         "ext-pdo": "*",
@@ -36,35 +60,31 @@
         "helmich/typo3-typoscript-lint": "^2.0",
         "overtrue/phplint": "^1.1"
     },
-    "autoload": {
-        "psr-4": {
-            "Extcode\\CartProducts\\": "Classes/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Extcode\\CartProducts\\Tests\\": "Tests"
-        }
-    },
-    "replace": {
-        "extcode/cart_products": "self.version"
-    },
-    "config": {
-        "vendor-dir": ".build/vendor",
-        "bin-dir": ".build/bin"
-    },
     "scripts": {
+        "extcode:cgl": [
+            ".build/bin/php-cs-fixer fix --config=Build/.php_cs.dist -v --using-cache=no --path-mode=intersection ./"
+        ],
+        "extcode:test:php:lint": [
+            ".build/bin/phplint -c Build/phplint.yaml"
+        ],
+        "extcode:test:php:unit": [
+            ".build/bin/phpunit -c Build/UnitTests.xml"
+        ],
+        "extcode:test:php:functional": [
+            "typo3DatabaseDriver=\"pdo_sqlite\" .build/bin/phpunit -c Build/FunctionalTests.xml"
+        ],
+        "extcode:test:typoscript:lint": [
+            ".build/bin/typoscript-lint -c Build/typoscriptlint.yaml Configuration"
+        ],
+        "extcode:test": [
+            "@extcode:test:typoscript:lint",
+            "@extcode:test:php:lint",
+            "@extcode:test:php:unit",
+            "@extcode:test:php:functional"
+        ],
         "post-autoload-dump": [
-            "mkdir -p .build/Web/typo3conf/ext/",
-            "[ -L .build/Web/typo3conf/ext/cart_products ] || ln -snvf ../../../../. .build/Web/typo3conf/ext/cart_products"
+            "mkdir -p .build/public/typo3conf/ext/",
+            "[ -L .build/public/typo3conf/ext/cart_products ] || ln -snvf ../../../../. .build/public/typo3conf/ext/cart_products"
         ]
-    },
-    "extra": {
-        "typo3/cms": {
-            "extension-key": "cart_products",
-            "cms-package-dir": "{$vendor-dir}/typo3/cms",
-            "app-dir": ".build",
-            "web-dir": ".build/public"
-        }
     }
 }

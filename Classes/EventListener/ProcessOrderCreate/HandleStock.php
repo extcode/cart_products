@@ -9,11 +9,6 @@ namespace Extcode\CartProducts\EventListener\ProcessOrderCreate;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Domain\Model\Cart\Product as CartProduct;
-use Extcode\Cart\Event\ProcessOrderCreateEvent;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 class HandleStock extends \Extcode\CartProducts\EventListener\Order\Stock\HandleStock
 {
 }
