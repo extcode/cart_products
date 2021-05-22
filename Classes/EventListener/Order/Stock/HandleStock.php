@@ -10,13 +10,13 @@ namespace Extcode\CartProducts\EventListener\Order\Stock;
  */
 
 use Extcode\Cart\Domain\Model\Cart\Product as CartProduct;
-use Extcode\Cart\Event\Order\StockEvent;
+use Extcode\Cart\Event\Order\EventInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class HandleStock
 {
-    public function __invoke(StockEvent $event): void
+    public function __invoke(EventInterface $event): void
     {
         $cartProducts = $event->getCart()->getProducts();
 

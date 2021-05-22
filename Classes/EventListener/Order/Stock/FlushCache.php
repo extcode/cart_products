@@ -9,13 +9,13 @@ namespace Extcode\CartProducts\EventListener\Order\Stock;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Event\Order\StockEvent;
+use Extcode\Cart\Event\Order\EventInterface;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class FlushCache
 {
-    public function __invoke(StockEvent $event): void
+    public function __invoke(EventInterface $event): void
     {
         $cartProducts = $event->getCart()->getProducts();
 
