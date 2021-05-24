@@ -455,7 +455,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getBestSpecialPricePercentageDiscount($frontendUserGroupIds = [])
     {
-        if ($this->getPriceCalculated() !== 0) {
+        if ($this->getPriceCalculated() !== 0 && $this->getPriceCalculated() !== 0.0) {
             $bestSpecialPricePercentageDiscount = (($this->getBestSpecialPriceDiscount($frontendUserGroupIds)) / $this->getPriceCalculated()) * 100;
         }
 
