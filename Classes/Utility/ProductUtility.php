@@ -336,7 +336,9 @@ class ProductUtility
             $quantity = intval($request->getArgument('quantity'));
             $cartProductValues['quantity'] = $quantity ? $quantity : 1;
         }
-
+        if ($request->hasArgument('additional')) {
+            $cartProductValues['additional'] = ($request->getArgument('additional'));
+        }
         if ($request->hasArgument('feVariants')) {
             $requestFeVariants = $request->getArgument('feVariants');
             if (is_array($requestFeVariants)) {

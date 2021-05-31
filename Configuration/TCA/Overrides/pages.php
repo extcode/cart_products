@@ -36,6 +36,8 @@ call_user_func(function () {
                 'foreign_table' => 'tx_cartproducts_domain_model_product_product',
                 'minitems' => 0,
                 'maxitems' => 1,
+                'default' => 0,
+                'size' => 1,
             ],
         ],
     ];
