@@ -4,6 +4,7 @@ namespace Extcode\CartProducts\Tests\Unit\Domain\Model\Product;
 
 use Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute;
 use Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class BeVariantAttributeTest extends UnitTestCase
@@ -41,7 +42,7 @@ class BeVariantAttributeTest extends UnitTestCase
         $beVariantAttributeOption1 = new BeVariantAttributeOption();
         $beVariantAttributeOption2 = new BeVariantAttributeOption();
 
-        $objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorage = new ObjectStorage();
         $objectStorage->attach($beVariantAttributeOption1);
         $objectStorage->attach($beVariantAttributeOption2);
 

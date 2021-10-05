@@ -10,8 +10,11 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  */
 
 use Extcode\CartProducts\Domain\Model\Product;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class BeVariant extends AbstractEntity
 {
 
     /**
@@ -90,7 +93,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function __construct()
     {
-        $this->specialPrices = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->specialPrices = new ObjectStorage();
     }
 
     /**
@@ -129,7 +132,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param Product\BeVariantAttributeOption $beVariantAttributeOption1
      */
     public function setBeVariantAttributeOption1(
-        Product\BeVariantAttributeOption $beVariantAttributeOption1
+        BeVariantAttributeOption $beVariantAttributeOption1
     ) {
         $this->beVariantAttributeOption1 = $beVariantAttributeOption1;
     }
@@ -150,7 +153,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param Product\BeVariantAttributeOption $beVariantAttributeOption2
      */
     public function setBeVariantAttributeOption2(
-        Product\BeVariantAttributeOption $beVariantAttributeOption2
+        BeVariantAttributeOption $beVariantAttributeOption2
     ) {
         $this->beVariantAttributeOption2 = $beVariantAttributeOption2;
     }
@@ -171,7 +174,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param Product\BeVariantAttributeOption $beVariantAttributeOption3
      */
     public function setBeVariantAttributeOption3(
-        Product\BeVariantAttributeOption $beVariantAttributeOption3
+        BeVariantAttributeOption $beVariantAttributeOption3
     ) {
         $this->beVariantAttributeOption3 = $beVariantAttributeOption3;
     }
@@ -208,7 +211,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
                         'calc_price' => &$calc_price,
                     ];
 
-                    \TYPO3\CMS\Core\Utility\GeneralUtility::callUserFunction($funcRef, $params, $this);
+                    GeneralUtility::callUserFunction($funcRef, $params, $this);
                 }
             }
         }
@@ -261,7 +264,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
                         'calc_price' => &$calc_price,
                     ];
 
-                    \TYPO3\CMS\Core\Utility\GeneralUtility::callUserFunction($funcRef, $params, $this);
+                    GeneralUtility::callUserFunction($funcRef, $params, $this);
                 }
             }
         }
@@ -323,7 +326,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param Product\SpecialPrice $specialPrice
      */
-    public function addSpecialPrice(Product\SpecialPrice $specialPrice)
+    public function addSpecialPrice(SpecialPrice $specialPrice)
     {
         $this->specialPrices->attach($specialPrice);
     }
@@ -333,7 +336,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param Product\SpecialPrice $specialPriceToRemove
      */
-    public function removeSpecialPrice(Product\SpecialPrice $specialPriceToRemove)
+    public function removeSpecialPrice(SpecialPrice $specialPriceToRemove)
     {
         $this->specialPrices->detach($specialPriceToRemove);
     }
@@ -353,7 +356,7 @@ class BeVariant extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $specialPrices
      */
-    public function setSpecialPrices(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $specialPrices)
+    public function setSpecialPrices(ObjectStorage $specialPrices)
     {
         $this->specialPrices = $specialPrices;
     }

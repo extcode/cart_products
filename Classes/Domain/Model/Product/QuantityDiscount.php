@@ -9,7 +9,9 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
-class QuantityDiscount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
+class QuantityDiscount extends AbstractEntity
 {
     /**
      * Price

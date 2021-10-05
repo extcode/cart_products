@@ -14,7 +14,6 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-        'dividers2tabs' => true,
 
         'versioningWS' => true,
 
@@ -26,9 +25,6 @@ return [
         ],
         'searchFields' => 'price',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/QuantityDiscount.png'
-    ],
-    'interface' => [
-        'showRecordFieldList' => 'hidden, frontend_user_group, quantity, price',
     ],
     'types' => [
         '1' => ['showitem' => 'hidden, frontend_user_group, quantity, price'],

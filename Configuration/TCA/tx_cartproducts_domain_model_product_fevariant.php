@@ -12,7 +12,6 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-        'dividers2tabs' => true,
 
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -27,17 +26,9 @@ return [
         'searchFields' => 'title',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/FeVariant.png'
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, is_required, sku, title',
-    ],
     'types' => [
         '1' => [
-            'showitem' => '
-                sys_language_uid, l10n_parent, l10n_diffsource,
-                hidden,
-                is_required, sku, title,
-                --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access
-            '
+            'showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,is_required,sku,title,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access'
         ],
     ],
     'palettes' => [
@@ -64,7 +55,6 @@ return [
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
             'label' => $_LLL_general . ':LGL.l18n_parent',
             'config' => [
                 'type' => 'select',

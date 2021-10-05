@@ -63,7 +63,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
             ]
         ];
 
-        $uriBuilder = $this->controllerContext->getUriBuilder();
+        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $canonicalUrl = $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setCreateAbsoluteUri(true)

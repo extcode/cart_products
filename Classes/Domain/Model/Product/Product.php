@@ -9,7 +9,11 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
-class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
+use Extcode\Cart\Domain\Model\Tag;
+use TYPO3\CMS\Extbase\Domain\Model\Category;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
+class Product extends AbstractProduct
 {
 
     /**
@@ -269,8 +273,8 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      */
     public function __construct()
     {
-        $this->specialPrices = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->beVariants = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->specialPrices = new ObjectStorage();
+        $this->beVariants = new ObjectStorage();
     }
 
     /**
@@ -478,7 +482,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\SpecialPrice $specialPrice
      */
-    public function addSpecialPrice(\Extcode\CartProducts\Domain\Model\Product\SpecialPrice $specialPrice)
+    public function addSpecialPrice(SpecialPrice $specialPrice)
     {
         $this->specialPrices->attach($specialPrice);
     }
@@ -488,7 +492,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\SpecialPrice $specialPriceToRemove
      */
-    public function removeSpecialPrice(\Extcode\CartProducts\Domain\Model\Product\SpecialPrice $specialPriceToRemove)
+    public function removeSpecialPrice(SpecialPrice $specialPriceToRemove)
     {
         $this->specialPrices->detach($specialPriceToRemove);
     }
@@ -498,7 +502,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $specialPrices
      */
-    public function setSpecialPrices(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $specialPrices)
+    public function setSpecialPrices(ObjectStorage $specialPrices)
     {
         $this->specialPrices = $specialPrices;
     }
@@ -596,7 +600,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\QuantityDiscount $quantityDiscount
      */
-    public function addQuantityDiscount(\Extcode\CartProducts\Domain\Model\Product\QuantityDiscount $quantityDiscount)
+    public function addQuantityDiscount(QuantityDiscount $quantityDiscount)
     {
         $this->quantityDiscounts->attach($quantityDiscount);
     }
@@ -606,7 +610,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\QuantityDiscount $quantityDiscount
      */
-    public function removeQuantityDiscount(\Extcode\CartProducts\Domain\Model\Product\QuantityDiscount $quantityDiscount)
+    public function removeQuantityDiscount(QuantityDiscount $quantityDiscount)
     {
         $this->quantityDiscounts->detach($quantityDiscount);
     }
@@ -616,7 +620,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $quantityDiscounts
      */
-    public function setQuantityDiscounts(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $quantityDiscounts)
+    public function setQuantityDiscounts(ObjectStorage $quantityDiscounts)
     {
         $this->quantityDiscounts = $quantityDiscounts;
     }
@@ -829,7 +833,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute $beVariantAttribute1
      */
-    public function setBeVariantAttribute1(\Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute $beVariantAttribute1)
+    public function setBeVariantAttribute1(BeVariantAttribute $beVariantAttribute1)
     {
         $this->beVariantAttribute1 = $beVariantAttribute1;
     }
@@ -849,7 +853,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute $beVariantAttribute2
      */
-    public function setBeVariantAttribute2(\Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute $beVariantAttribute2)
+    public function setBeVariantAttribute2(BeVariantAttribute $beVariantAttribute2)
     {
         $this->beVariantAttribute2 = $beVariantAttribute2;
     }
@@ -869,7 +873,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute $beVariantAttribute3
      */
-    public function setBeVariantAttribute3(\Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute $beVariantAttribute3)
+    public function setBeVariantAttribute3(BeVariantAttribute $beVariantAttribute3)
     {
         $this->beVariantAttribute3 = $beVariantAttribute3;
     }
@@ -879,7 +883,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\BeVariant $variant
      */
-    public function addBeVariant(\Extcode\CartProducts\Domain\Model\Product\BeVariant $variant)
+    public function addBeVariant(BeVariant $variant)
     {
         $this->beVariants->attach($variant);
     }
@@ -889,7 +893,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\BeVariant $variantToRemove
      */
-    public function removeBeVariant(\Extcode\CartProducts\Domain\Model\Product\BeVariant $variantToRemove)
+    public function removeBeVariant(BeVariant $variantToRemove)
     {
         $this->beVariants->detach($variantToRemove);
     }
@@ -909,7 +913,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $variants
      */
-    public function setBeVariants(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $variants)
+    public function setBeVariants(ObjectStorage $variants)
     {
         $this->beVariants = $variants;
     }
@@ -919,7 +923,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\FeVariant $feVariant
      */
-    public function addFeVariant(\Extcode\CartProducts\Domain\Model\Product\FeVariant $feVariant)
+    public function addFeVariant(FeVariant $feVariant)
     {
         $this->feVariants->attach($feVariant);
     }
@@ -929,7 +933,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\FeVariant $feVariantToRemove
      */
-    public function removeFeVariant(\Extcode\CartProducts\Domain\Model\Product\FeVariant $feVariantToRemove)
+    public function removeFeVariant(FeVariant $feVariantToRemove)
     {
         $this->feVariants->detach($feVariantToRemove);
     }
@@ -949,7 +953,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $feVariants
      */
-    public function setFeVariants(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $feVariants)
+    public function setFeVariants(ObjectStorage $feVariants)
     {
         $this->feVariants = $feVariants;
     }
@@ -989,7 +993,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product> $relatedProducts
      */
-    public function setRelatedProducts(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedProducts)
+    public function setRelatedProducts(ObjectStorage $relatedProducts)
     {
         $this->relatedProducts = $relatedProducts;
     }
@@ -1029,7 +1033,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product> $relatedProductsFrom
      */
-    public function setRelatedProductsFrom(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedProductsFrom)
+    public function setRelatedProductsFrom(ObjectStorage $relatedProductsFrom)
     {
         $this->relatedProductsFrom = $relatedProductsFrom;
     }
@@ -1183,7 +1187,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
      */
-    public function addCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
+    public function addCategory(Category $category)
     {
         $this->categories->attach($category);
     }
@@ -1193,7 +1197,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove
      */
-    public function removeCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove)
+    public function removeCategory(Category $categoryToRemove)
     {
         $this->categories->detach($categoryToRemove);
     }
@@ -1229,7 +1233,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categories
      */
-    public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories)
+    public function setCategories(ObjectStorage $categories)
     {
         $this->categories = $categories;
     }
@@ -1284,7 +1288,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\Cart\Domain\Model\Tag $tag
      */
-    public function addTag(\Extcode\Cart\Domain\Model\Tag $tag)
+    public function addTag(Tag $tag)
     {
         $this->tags->attach($tag);
     }
@@ -1294,7 +1298,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param \Extcode\Cart\Domain\Model\Tag $tagToRemove
      */
-    public function removeTag(\Extcode\Cart\Domain\Model\Tag $tagToRemove)
+    public function removeTag(Tag $tagToRemove)
     {
         $this->tags->detach($tagToRemove);
     }
@@ -1314,7 +1318,7 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
      *
      * @param  \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Cart\Domain\Model\Tag> $tags
      */
-    public function setTags(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $tags)
+    public function setTags(ObjectStorage $tags)
     {
         $this->tags = $tags;
     }

@@ -10,9 +10,12 @@ namespace Extcode\CartProducts\Domain\Repository\Product;
  */
 
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
-class ProductRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class ProductRepository extends Repository
 {
     /**
      * @param ProductDemand $demand
@@ -84,18 +87,18 @@ class ProductRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $orderings = [];
 
-        $orderList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $demand->getOrder(), true);
+        $orderList = GeneralUtility::trimExplode(',', $demand->getOrder(), true);
 
         if (!empty($orderList)) {
             foreach ($orderList as $orderItem) {
                 list($orderField, $ascDesc) =
-                    \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $orderItem, true);
+                    GeneralUtility::trimExplode(' ', $orderItem, true);
                 if ($ascDesc) {
                     $orderings[$orderField] = ((strtolower($ascDesc) === 'desc') ?
-                        \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
-                        \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+                        QueryInterface::ORDER_DESCENDING :
+                        QueryInterface::ORDER_ASCENDING);
                 } else {
-                    $orderings[$orderField] = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;
+                    $orderings[$orderField] = QueryInterface::ORDER_ASCENDING;
                 }
             }
         }

@@ -9,12 +9,19 @@ namespace Extcode\CartProducts\Controller;
  * LICENSE file that was distributed with this source code.
  */
 
+use Extcode\Cart\Service\SessionHandler;
+use Extcode\Cart\Utility\CartUtility;
+use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
+use Extcode\CartProducts\Domain\Model\Product\Product;
+use Extcode\CartProducts\Domain\Repository\CategoryRepository;
+use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Web\RequestBuilder;
 
-class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class ProductController extends ActionController
 {
     /**
      * Session Handler
@@ -60,7 +67,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @param \Extcode\Cart\Service\SessionHandler $sessionHandler
      */
     public function injectSessionHandler(
-        \Extcode\Cart\Service\SessionHandler $sessionHandler
+        SessionHandler $sessionHandler
     ) {
         $this->sessionHandler = $sessionHandler;
     }
@@ -69,7 +76,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @param \Extcode\Cart\Utility\CartUtility $cartUtility
      */
     public function injectCartUtility(
-        \Extcode\Cart\Utility\CartUtility $cartUtility
+        CartUtility $cartUtility
     ) {
         $this->cartUtility = $cartUtility;
     }
@@ -78,7 +85,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @param \Extcode\CartProducts\Domain\Repository\Product\ProductRepository $productRepository
      */
     public function injectProductRepository(
-        \Extcode\CartProducts\Domain\Repository\Product\ProductRepository $productRepository
+        ProductRepository $productRepository
     ) {
         $this->productRepository = $productRepository;
     }
@@ -87,7 +94,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @param \Extcode\CartProducts\Domain\Repository\CategoryRepository $categoryRepository
      */
     public function injectCategoryRepository(
-        \Extcode\CartProducts\Domain\Repository\CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository
     ) {
         $this->categoryRepository = $categoryRepository;
     }
@@ -125,7 +132,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     {
         /** @var \Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand $demand */
         $demand = GeneralUtility::makeInstance(
-            \Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand::class
+            ProductDemand::class
         );
 
         if ($this->searchArguments['sku']) {
@@ -149,7 +156,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     protected function addCategoriesToDemandObjectFromSettings(&$demand)
     {
         if ($this->settings['categoriesList']) {
-            $selectedCategories = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(
+            $selectedCategories = GeneralUtility::intExplode(
                 ',',
                 $this->settings['categoriesList'],
                 true
@@ -199,7 +206,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      *
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("product")
      */
-    public function showAction(\Extcode\CartProducts\Domain\Model\Product\Product $product = null)
+    public function showAction(Product $product = null)
     {
         if (!$product) {
             $product = $this->getProduct();
@@ -222,7 +229,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      *
      * @param \Extcode\CartProducts\Domain\Model\Product\Product $product
      */
-    public function showFormAction(\Extcode\CartProducts\Domain\Model\Product\Product $product = null)
+    public function showFormAction(Product $product = null)
     {
         if (!$product) {
             $product = $this->getProduct();
@@ -298,7 +305,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                     $requestBuilder->injectConfigurationManager($configurationManager);
 
                     /**
-                     * @var \TYPO3\CMS\Extbase\Mvc\Web\Request $cartProductRequest
+                     * @var \TYPO3\CMS\Extbase\Mvc\Request $cartProductRequest
                      */
                     $cartProductRequest = $requestBuilder->build();
 
@@ -311,7 +318,7 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         if ($productUid > 0) {
             $productRepository = GeneralUtility::makeInstance(
-                \Extcode\CartProducts\Domain\Repository\Product\ProductRepository::class
+                ProductRepository::class
             );
 
             $product =  $productRepository->findByUid($productUid);

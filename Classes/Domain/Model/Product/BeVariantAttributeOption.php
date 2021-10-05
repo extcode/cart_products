@@ -9,6 +9,6 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
-class BeVariantAttributeOption extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
+class BeVariantAttributeOption extends AbstractProduct
 {
 }

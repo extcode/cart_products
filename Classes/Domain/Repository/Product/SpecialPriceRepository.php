@@ -9,6 +9,8 @@ namespace Extcode\CartProducts\Domain\Repository\Product;
  * LICENSE file that was distributed with this source code.
  */
 
-class SpecialPriceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
+class SpecialPriceRepository extends Repository
 {
 }

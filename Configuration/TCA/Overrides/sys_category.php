@@ -2,13 +2,15 @@
 
 defined('TYPO3_MODE') or die();
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 $_LLL_db = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf:';
 
 $newSysCategoryColumns = [
     'images' => [
         'exclude' => 1,
         'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.image',
-        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+        'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
             'images',
             [
                 'appearance' => [
@@ -65,14 +67,14 @@ $newSysCategoryColumns = [
     ],
 ];
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_category', $newSysCategoryColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+ExtensionManagementUtility::addTCAcolumns('sys_category', $newSysCategoryColumns);
+ExtensionManagementUtility::addToAllTCAtypes(
     'sys_category',
     '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.options, images',
     '',
     'before:description'
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+ExtensionManagementUtility::addToAllTCAtypes(
     'sys_category',
     'cart_product_list_pid, cart_product_show_pid',
     '',

@@ -6,6 +6,7 @@ use Extcode\CartProducts\Domain\Model\Product\BeVariant;
 use Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Model\Product\SpecialPrice;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProductTest extends UnitTestCase
@@ -246,7 +247,7 @@ class ProductTest extends UnitTestCase
         $specialPrice = new SpecialPrice();
         $specialPrice->setPrice($price);
 
-        $objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorage = new ObjectStorage();
         $objectStorage->attach($specialPrice);
 
         $this->product->setSpecialPrices($objectStorage);
@@ -1002,7 +1003,7 @@ class ProductTest extends UnitTestCase
     {
         $variant = new BeVariant();
 
-        $objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorage = new ObjectStorage();
         $objectStorage->attach($variant);
 
         $this->product->setBeVariants($objectStorage);

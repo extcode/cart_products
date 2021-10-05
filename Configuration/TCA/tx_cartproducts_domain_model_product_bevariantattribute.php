@@ -12,7 +12,6 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-        'dividers2tabs' => true,
 
         'versioningWS' => true,
 
@@ -27,9 +26,6 @@ return [
         ],
         'searchFields' => 'title,value,calc,',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/BeVariantAttribute.png'
-    ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sku, title, description, be_variant_attribute_options',
     ],
     'types' => [
         '1' => [
@@ -62,7 +58,6 @@ return [
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
             'label' => $_LLL_general . ':LGL.l18n_parent',
             'config' => [
                 'type' => 'select',

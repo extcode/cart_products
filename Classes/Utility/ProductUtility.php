@@ -9,8 +9,18 @@ namespace Extcode\CartProducts\Utility;
  * LICENSE file that was distributed with this source code.
  */
 
+use Extcode\Cart\Domain\Model\Cart\BeVariant;
+use Extcode\Cart\Domain\Model\Cart\Cart;
+use Extcode\Cart\Domain\Model\Cart\FeVariant;
+use Extcode\Cart\Domain\Model\Cart\Product;
+use Extcode\CartProducts\Domain\Repository\Product\BeVariantRepository;
+use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
 use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class ProductUtility
 {
@@ -32,7 +42,7 @@ class ProductUtility
         $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
         if ($feUserId) {
             $frontendUserRepository = GeneralUtility::makeInstance(
-                \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository::class
+                FrontendUserRepository::class
             );
             $feUser = $frontendUserRepository->findByUid($feUserId);
             $feGroups = $feUser->getUsergroup();
@@ -86,7 +96,7 @@ class ProductUtility
         $productId = intval($cartProductValues['productId']);
 
         $productRepository = GeneralUtility::makeInstance(
-            \Extcode\CartProducts\Domain\Repository\Product\ProductRepository::class
+            ProductRepository::class
         );
 
         /** @var \Extcode\CartProducts\Domain\Model\Product\Product $productProduct */
@@ -115,12 +125,12 @@ class ProductUtility
             $newFeVariant = null;
             if ($cartProductValues['feVariants']) {
                 $newFeVariant = GeneralUtility::makeInstance(
-                    \Extcode\Cart\Domain\Model\Cart\FeVariant::class,
+                    FeVariant::class,
                     $cartProductValues['feVariants']
                 );
             }
 
-            $cartProduct = new \Extcode\Cart\Domain\Model\Cart\Product(
+            $cartProduct = new Product(
                 'CartProducts',
                 $cartProductValues['productId'],
                 $productProduct->getSku(),
@@ -161,7 +171,7 @@ class ProductUtility
             ];
 
             $signalSlotDispatcher = GeneralUtility::makeInstance(
-                \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
+                Dispatcher::class
             );
             $slotReturn = $signalSlotDispatcher->dispatch(
                 __CLASS__,
@@ -236,7 +246,7 @@ class ProductUtility
 
             // get further data of variant
             $variantRepository = GeneralUtility::makeInstance(
-                \Extcode\CartProducts\Domain\Repository\Product\BeVariantRepository::class
+                BeVariantRepository::class
             );
             /** @var \Extcode\CartProducts\Domain\Model\Product\BeVariant $productBackendVariant */
             $productBackendVariant = $variantRepository->findByUid($variantId);
@@ -247,7 +257,7 @@ class ProductUtility
                 $bestSpecialPrice = $productBackendVariant->getBestSpecialPrice($frontendUserGroupIds);
 
                 $cartBackendVariant = GeneralUtility::makeInstance(
-                    \Extcode\Cart\Domain\Model\Cart\BeVariant::class,
+                    BeVariant::class,
                     $variantId,
                     $product,
                     $variant,
@@ -271,7 +281,7 @@ class ProductUtility
                 ];
 
                 $signalSlotDispatcher = GeneralUtility::makeInstance(
-                    \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
+                    Dispatcher::class
                 );
                 $slotReturn = $signalSlotDispatcher->dispatch(
                     __CLASS__,
@@ -293,8 +303,8 @@ class ProductUtility
      * @return array
      */
     public function checkProductBeforeAddToCart(
-        \Extcode\Cart\Domain\Model\Cart\Cart $cart,
-        \Extcode\Cart\Domain\Model\Cart\Product $product
+        Cart $cart,
+        Product $product
     ) {
         list($errors, $product) = $this->checkStockOfProduct($cart, $product);
 
@@ -305,7 +315,7 @@ class ProductUtility
         ];
 
         $signalSlotDispatcher = GeneralUtility::makeInstance(
-            \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
+            Dispatcher::class
         );
         $slotReturn = $signalSlotDispatcher->dispatch(
             __CLASS__,
@@ -361,7 +371,7 @@ class ProductUtility
         ];
 
         $signalSlotDispatcher = GeneralUtility::makeInstance(
-            \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
+            Dispatcher::class
         );
 
         $slotReturn = $signalSlotDispatcher->dispatch(
@@ -382,7 +392,7 @@ class ProductUtility
      *
      * @return int
      */
-    protected function getBackendVariantQuantityFromCart(\Extcode\Cart\Domain\Model\Cart\Cart $cart, $productId, $backendVariantId)
+    protected function getBackendVariantQuantityFromCart(Cart $cart, $productId, $backendVariantId)
     {
         if ($cart->getProduct($productId)) {
             $cartProduct = $cart->getProduct($productId);
@@ -402,8 +412,8 @@ class ProductUtility
      * @return array
      */
     public function checkStockOfProduct(
-        \Extcode\Cart\Domain\Model\Cart\Cart $cart,
-        \Extcode\Cart\Domain\Model\Cart\Product $product
+        Cart $cart,
+        Product $product
     ) {
         $errors = [];
 
@@ -425,7 +435,7 @@ class ProductUtility
      *
      * @return mixed
      */
-    protected function checkStockOfSimpleProduct(\Extcode\Cart\Domain\Model\Cart\Cart $cart, $errors, $product)
+    protected function checkStockOfSimpleProduct(Cart $cart, $errors, $product)
     {
         $qty = $product->getQuantity();
         if ($cart->getProduct($product->getId())) {
@@ -435,13 +445,13 @@ class ProductUtility
         if ($qty > $product->getStock()) {
             unset($product);
 
-            $message = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+            $message = LocalizationUtility::translate(
                 'tx_cartproducts.error.stock_handling.add',
                 'cart'
             );
             $error = [
                 'message' => $message,
-                'severity' => \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                'severity' => AbstractMessage::ERROR
             ];
 
             array_push($errors, $error);
@@ -456,7 +466,7 @@ class ProductUtility
      *
      * @return array
      */
-    protected function checkStockOfBackendVariants(\Extcode\Cart\Domain\Model\Cart\Cart $cart, $errors, $product)
+    protected function checkStockOfBackendVariants(Cart $cart, $errors, $product)
     {
         if ($product->getBeVariants()) {
             foreach ($product->getBeVariants() as $backendVariant) {
@@ -470,13 +480,13 @@ class ProductUtility
                 if ($qty > $backendVariant->getStock()) {
                     $product->removeBeVariants([$backendVariant->getId() => 1]);
 
-                    $message = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    $message = LocalizationUtility::translate(
                         'tx_cartproducts.error.stock_handling.add',
                         'cart'
                     );
                     $error = [
                         'message' => $message,
-                        'severity' => \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                        'severity' => AbstractMessage::ERROR
                     ];
 
                     array_push($errors, $error);

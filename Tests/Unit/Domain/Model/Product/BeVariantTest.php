@@ -6,6 +6,7 @@ use Extcode\CartProducts\Domain\Model\Product\BeVariant;
 use Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Model\Product\SpecialPrice;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class BeVariantTest extends UnitTestCase
@@ -158,7 +159,7 @@ class BeVariantTest extends UnitTestCase
     public function getSpecialPricesInitiallyReturnsEmptyObjectStorage()
     {
         $this->assertInstanceOf(
-            \TYPO3\CMS\Extbase\Persistence\ObjectStorage::class,
+            ObjectStorage::class,
             $this->beVariant->getSpecialPrices()
         );
     }

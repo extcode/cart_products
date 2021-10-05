@@ -2,6 +2,9 @@
 
 defined('TYPO3_MODE') or die();
 
+use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 $_LLL_general = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf';
 $_LLL_tca = 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf';
 $_LLL_ttc = 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf';
@@ -17,7 +20,6 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-        'dividers2tabs' => true,
 
         'sortby' => 'sorting',
 
@@ -34,9 +36,6 @@ return [
         ],
         'searchFields' => 'sku,title,teaser,description,price,',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/tx_cartproducts_domain_model_product_product.svg'
-    ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, product_type, sku, title, header_image, teaser, description, min_number_in_order, max_number_in_order, price, special_prices, quantity_discounts, price_measure, price_measure_unit, base_price_measure_unit, service_attribute1, service_attribute2, service_attribute3, tax_class_id, be_variant_attribute1, be_variant_attribute2, be_variant_attribute3, fe_variants, be_variants, related_products, category, categories, tags',
     ],
     'types' => [
         '1' => [
@@ -122,7 +121,6 @@ return [
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
             'label' => $_LLL_general . ':LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
@@ -617,7 +615,7 @@ return [
         'images' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.images',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
                 'images',
                 [
                     'appearance' => [
@@ -641,27 +639,27 @@ return [
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
+                            File::FILETYPE_TEXT => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                            File::FILETYPE_IMAGE => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
+                            File::FILETYPE_AUDIO => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
+                            File::FILETYPE_VIDEO => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
+                            File::FILETYPE_APPLICATION => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
@@ -678,7 +676,7 @@ return [
         'files' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.files',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
                 'files',
                 [
                     'appearance' => [
@@ -702,27 +700,27 @@ return [
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
+                            File::FILETYPE_TEXT => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                            File::FILETYPE_IMAGE => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
+                            File::FILETYPE_AUDIO => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
+                            File::FILETYPE_VIDEO => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
+                            File::FILETYPE_APPLICATION => [
                                 'showitem' => '
                                 --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                 --palette--;;filePalette'

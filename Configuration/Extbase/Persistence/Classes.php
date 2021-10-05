@@ -1,8 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use Extcode\CartProducts\Domain\Model\Category;
+use Extcode\CartProducts\Domain\Model\TtContent;
+
 return [
-    \Extcode\CartProducts\Domain\Model\TtContent::class => [
+    TtContent::class => [
         'tableName' => 'tt_content',
         'properties' => [
             'altText' => [
@@ -19,7 +22,7 @@ return [
             ],
         ],
     ],
-    \Extcode\CartProducts\Domain\Model\Category::class => [
+    Category::class => [
         'tableName' => 'sys_category',
         'properties' => [
             'parentcategory' => [

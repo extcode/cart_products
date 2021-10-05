@@ -9,7 +9,9 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
-abstract class AbstractProduct extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
+abstract class AbstractProduct extends AbstractEntity
 {
     /**
      * SKU

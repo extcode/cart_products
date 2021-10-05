@@ -1,5 +1,8 @@
 <?php
+
 defined('TYPO3_MODE') or die();
+
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 call_user_func(function () {
     $_LLL_be = 'LLL:' . 'EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
@@ -40,12 +43,12 @@ call_user_func(function () {
         ],
     ];
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
+    ExtensionManagementUtility::addTCAcolumns(
         'pages',
         $newPagesColumns
     );
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
+    ExtensionManagementUtility::addFieldsToPalette(
         'pages',
         'standard',
         ',--linebreak--,cart_products_product',
