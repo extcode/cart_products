@@ -1,6 +1,5 @@
 # Cart Products
 
-[![Build Status](https://travis-ci.org/extcode/cart_products.svg?branch=2.x)](https://travis-ci.org/extcode/cart_products)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/39ffda87c75d419ea82d1d8d132a3cf5)](https://www.codacy.com/manual/extcode/cart_products?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=extcode/cart_products&amp;utm_campaign=Badge_Grade)
 
 Cart is a small but powerful extension which "solely" adds a shopping cart to your TYPO3 installation.
