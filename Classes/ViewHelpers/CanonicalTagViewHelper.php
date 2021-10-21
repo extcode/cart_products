@@ -37,7 +37,7 @@ class CanonicalTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTa
     {
         $product = $this->arguments['product'];
 
-        /* get topic category */
+        // get topic category
         $category = $product->getCategory();
 
         if (!$category) {
