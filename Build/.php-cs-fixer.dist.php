@@ -4,7 +4,11 @@ if (PHP_SAPI !== 'cli') {
     die('This script supports command line usage only. Please check your command.');
 }
 
-return PhpCsFixer\Config::create()
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__ . '/../');
+
+$config = new PhpCsFixer\Config();
+$config
     ->setRiskyAllowed(true)
     ->setRules([
         '@PSR2' => true,
@@ -17,14 +21,14 @@ return PhpCsFixer\Config::create()
         'ordered_imports' => true,
         'single_quote' => true,
         'no_empty_statement' => true,
-        'no_extra_consecutive_blank_lines' => true,
+        'no_extra_blank_lines' => true,
         'phpdoc_no_package' => true,
         'phpdoc_scalar' => true,
         'no_blank_lines_after_phpdoc' => true,
         'array_syntax' => ['syntax' => 'short'],
         'whitespace_after_comma_in_array' => true,
         'function_typehint_space' => true,
-        'hash_to_slash_comment' => true,
+        'single_line_comment_style' => true,
         'no_alias_functions' => true,
         'lowercase_cast' => true,
         'no_leading_namespace_whitespace' => true,
@@ -35,13 +39,7 @@ return PhpCsFixer\Config::create()
         'phpdoc_no_empty_return' => true,
         'phpdoc_trim' => true
     ])
-    ->setFinder(
-        PhpCsFixer\Finder::create()
-            ->in(__DIR__ . '/../')
-            ->exclude('.build')
-            ->exclude('Documentation')
-            ->exclude('Resources')
-            ->notName('ext_emconf.php')
-            ->notName('ext_localconf.php')
-            ->notName('ext_tables.php')
-    );
+    ->setUsingCache(false)
+    ->setFinder($finder);
+
+return $config;

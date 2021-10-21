@@ -41,7 +41,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
     {
         $product = $this->arguments['product'];
 
-        /* get topic category */
+        // get topic category
         $category = $product->getCategory();
 
         if (!$category) {
