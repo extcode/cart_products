@@ -24,36 +24,26 @@ use TYPO3\CMS\Extbase\Mvc\Web\RequestBuilder;
 class ProductController extends ActionController
 {
     /**
-     * Session Handler
-     *
      * @var \Extcode\Cart\Service\SessionHandler
      */
     protected $sessionHandler;
 
     /**
-     * Cart Utility
-     *
      * @var \Extcode\Cart\Utility\CartUtility
      */
     protected $cartUtility;
 
     /**
-     * productRepository
-     *
-     * @var \Extcode\CartProducts\Domain\Repository\Product\ProductRepository
+     * @var ProductRepository
      */
     protected $productRepository;
 
     /**
-     * categoryRepository
-     *
-     * @var \Extcode\CartProducts\Domain\Repository\CategoryRepository
+     * @var CategoryRepository
      */
     protected $categoryRepository;
 
     /**
-     * Search Arguments
-     *
      * @var array
      */
     protected $searchArguments;
@@ -63,45 +53,26 @@ class ProductController extends ActionController
      */
     protected $cartSettings = [];
 
-    /**
-     * @param \Extcode\Cart\Service\SessionHandler $sessionHandler
-     */
-    public function injectSessionHandler(
-        SessionHandler $sessionHandler
-    ) {
+    public function injectSessionHandler(SessionHandler $sessionHandler): void
+    {
         $this->sessionHandler = $sessionHandler;
     }
 
-    /**
-     * @param \Extcode\Cart\Utility\CartUtility $cartUtility
-     */
-    public function injectCartUtility(
-        CartUtility $cartUtility
-    ) {
+    public function injectCartUtility(CartUtility $cartUtility): void
+    {
         $this->cartUtility = $cartUtility;
     }
 
-    /**
-     * @param \Extcode\CartProducts\Domain\Repository\Product\ProductRepository $productRepository
-     */
-    public function injectProductRepository(
-        ProductRepository $productRepository
-    ) {
+    public function injectProductRepository(ProductRepository $productRepository): void
+    {
         $this->productRepository = $productRepository;
     }
 
-    /**
-     * @param \Extcode\CartProducts\Domain\Repository\CategoryRepository $categoryRepository
-     */
-    public function injectCategoryRepository(
-        CategoryRepository $categoryRepository
-    ) {
+    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
+    {
         $this->categoryRepository = $categoryRepository;
     }
 
-    /**
-     * Action initializer
-     */
     protected function initializeAction()
     {
         $this->cartSettings = $this->configurationManager->getConfiguration(
@@ -123,14 +94,10 @@ class ProductController extends ActionController
 
     /**
      * Create the demand object which define which records will get shown
-     *
-     * @param array $settings
-     *
-     * @return \Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand
      */
-    protected function createDemandObjectFromSettings($settings)
+    protected function createDemandObjectFromSettings(array $settings): ProductDemand
     {
-        /** @var \Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand $demand */
+        /** @var ProductDemand $demand */
         $demand = GeneralUtility::makeInstance(
             ProductDemand::class
         );
@@ -150,10 +117,7 @@ class ProductController extends ActionController
         return $demand;
     }
 
-    /**
-     * @param \Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand $demand
-     */
-    protected function addCategoriesToDemandObjectFromSettings(&$demand)
+    protected function addCategoriesToDemandObjectFromSettings(ProductDemand $demand): void
     {
         if ($this->settings['categoriesList']) {
             $selectedCategories = GeneralUtility::intExplode(
@@ -180,10 +144,7 @@ class ProductController extends ActionController
         }
     }
 
-    /**
-     * action list
-     */
-    public function listAction()
+    public function listAction(): void
     {
         $demand = $this->createDemandObjectFromSettings($this->settings);
         $demand->setActionAndClass(__METHOD__, __CLASS__);
@@ -200,13 +161,9 @@ class ProductController extends ActionController
     }
 
     /**
-     * action show
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\Product $product
-     *
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("product")
      */
-    public function showAction(Product $product = null)
+    public function showAction(Product $product = null): void
     {
         if (!$product) {
             $product = $this->getProduct();
@@ -224,12 +181,7 @@ class ProductController extends ActionController
         $this->addCacheTags([$product]);
     }
 
-    /**
-     * action showForm
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\Product $product
-     */
-    public function showFormAction(Product $product = null)
+    public function showFormAction(Product $product = null): void
     {
         if (!$product) {
             $product = $this->getProduct();
@@ -241,10 +193,7 @@ class ProductController extends ActionController
         $this->assignCurrencyTranslationData();
     }
 
-    /**
-     * action teaser
-     */
-    public function teaserAction()
+    public function teaserAction(): void
     {
         $products = $this->productRepository->findByUids($this->settings['productUids']);
 
@@ -256,21 +205,15 @@ class ProductController extends ActionController
         $this->addCacheTags($products);
     }
 
-    /**
-     * action flexform
-     */
-    public function flexformAction()
+    public function flexformAction(): void
     {
-        $this->contentObj = $this->configurationManager->getContentObject();
-        $contentId = $this->contentObj->data['uid'];
+        $contentObj = $this->configurationManager->getContentObject();
+        $contentId = $contentObj->data['uid'];
 
         $this->view->assign('contentId', $contentId);
     }
 
-    /**
-     * @return \Extcode\CartProducts\Domain\Model\Product\Product
-     */
-    protected function getProduct()
+    protected function getProduct(): ?Product
     {
         $productUid = 0;
 
@@ -347,10 +290,7 @@ class ProductController extends ActionController
         }
     }
 
-    /**
-     * @param $products
-     */
-    protected function addCacheTags($products)
+    protected function addCacheTags(iterable $products): void
     {
         $cacheTags = [];
 

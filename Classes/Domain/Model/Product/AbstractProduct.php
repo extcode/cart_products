@@ -14,84 +14,48 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 abstract class AbstractProduct extends AbstractEntity
 {
     /**
-     * SKU
-     *
      * @var string
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $sku = '';
 
     /**
-     * Title
-     *
      * @var string
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $title = '';
 
     /**
-     * Description
-     *
      * @var string
      */
     protected $description = '';
 
-    /**
-     * Returns SKU
-     *
-     * @return string $sku
-     */
-    public function getSku()
+    public function getSku(): string
     {
         return $this->sku;
     }
 
-    /**
-     * Sets SKU
-     *
-     * @param string $sku
-     */
-    public function setSku($sku)
+    public function setSku(string $sku): void
     {
         $this->sku = $sku;
     }
 
-    /**
-     * Returns Title
-     *
-     * @return string $title
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * Sets Title
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * Returns Description
-     *
-     * @return string $description
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * Sets Description
-     *
-     * @param string $description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }

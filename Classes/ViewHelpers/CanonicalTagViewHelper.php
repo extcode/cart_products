@@ -37,7 +37,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
     /**
      * Override the canonical tag
      */
-    public function render()
+    public function render(): void
     {
         $product = $this->arguments['product'];
 

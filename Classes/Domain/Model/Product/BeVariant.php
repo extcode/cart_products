@@ -9,182 +9,109 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\CartProducts\Domain\Model\Product;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class BeVariant extends AbstractEntity
 {
-
     /**
-     * Product
-     *
-     * @var \Extcode\CartProducts\Domain\Model\Product\Product
+     * @var Product
      */
-    protected $product = null;
+    protected $product;
 
     /**
-     * Variant Attribute 1
-     *
-     * @var \Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption
+     * @var BeVariantAttributeOption
      */
-    protected $beVariantAttributeOption1 = null;
+    protected $beVariantAttributeOption1;
 
     /**
-     * Variant Attribute 2
-     *
-     * @var \Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption
+     * @var BeVariantAttributeOption
      */
-    protected $beVariantAttributeOption2 = null;
+    protected $beVariantAttributeOption2;
 
     /**
-     * Variant Attribute 3
-     *
-     * @var \Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption
+     * @var BeVariantAttributeOption
      */
-    protected $beVariantAttributeOption3 = null;
+    protected $beVariantAttributeOption3;
 
     /**
-     * Price
-     *
      * @var float
      */
     protected $price = 0.0;
 
     /**
-     * Product Special Price
-     *
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\SpecialPrice>
      */
     protected $specialPrices = null;
 
     /**
-     * Price Calc Method
-     *
      * @var int
      */
     protected $priceCalcMethod = 0;
 
     /**
-     * Price Measure
-     *
      * @var float
      */
     protected $priceMeasure = 0.0;
 
     /**
-     * Price Measure Unit
-     *
      * @var string
      */
     protected $priceMeasureUnit = '';
 
     /**
-     * stock
-     *
      * @var int
      */
     protected $stock = 0;
 
-    /**
-     * Product constructor.
-     */
     public function __construct()
     {
         $this->specialPrices = new ObjectStorage();
     }
 
-    /**
-     * Returns the Product
-     *
-     * @return Product\Product
-     */
-    public function getProduct()
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
-    /**
-     * Sets the Product
-     *
-     * @param Product\Product $product
-     */
-    public function setProduct(Product\Product $product)
+    public function setProduct(Product $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * Returns the Variant Attribute 1
-     *
-     * @return Product\BeVariantAttributeOption
-     */
-    public function getBeVariantAttributeOption1()
+    public function getBeVariantAttributeOption1(): ?BeVariantAttributeOption
     {
         return $this->beVariantAttributeOption1;
     }
 
-    /**
-     * Sets the Variant Attribute 1
-     *
-     * @param Product\BeVariantAttributeOption $beVariantAttributeOption1
-     */
-    public function setBeVariantAttributeOption1(
-        BeVariantAttributeOption $beVariantAttributeOption1
-    ) {
+    public function setBeVariantAttributeOption1(BeVariantAttributeOption $beVariantAttributeOption1): void
+    {
         $this->beVariantAttributeOption1 = $beVariantAttributeOption1;
     }
 
-    /**
-     * Returns the Variant Attribute 2
-     *
-     * @return Product\BeVariantAttributeOption
-     */
-    public function getBeVariantAttributeOption2()
+    public function getBeVariantAttributeOption2(): ?BeVariantAttributeOption
     {
         return $this->beVariantAttributeOption2;
     }
 
-    /**
-     * Sets the Variant Attribute 2
-     *
-     * @param Product\BeVariantAttributeOption $beVariantAttributeOption2
-     */
-    public function setBeVariantAttributeOption2(
-        BeVariantAttributeOption $beVariantAttributeOption2
-    ) {
+    public function setBeVariantAttributeOption2(BeVariantAttributeOption $beVariantAttributeOption2): void
+    {
         $this->beVariantAttributeOption2 = $beVariantAttributeOption2;
     }
 
-    /**
-     * Returns the Variant Attribute 3
-     *
-     * @return Product\BeVariantAttributeOption
-     */
-    public function getBeVariantAttributeOption3()
+    public function getBeVariantAttributeOption3(): ?BeVariantAttributeOption
     {
         return $this->beVariantAttributeOption3;
     }
 
-    /**
-     * Sets the Variant Attribute 3
-     *
-     * @param Product\BeVariantAttributeOption $beVariantAttributeOption3
-     */
-    public function setBeVariantAttributeOption3(
-        BeVariantAttributeOption $beVariantAttributeOption3
-    ) {
+    public function setBeVariantAttributeOption3(BeVariantAttributeOption $beVariantAttributeOption3): void
+    {
         $this->beVariantAttributeOption3 = $beVariantAttributeOption3;
     }
 
-    /**
-     * Gets Price Calculated
-     *
-     * @return float
-     */
-    public function getPriceCalculated()
+    public function getPriceCalculated(): float
     {
         $price = $this->getPrice();
 
@@ -232,12 +159,7 @@ class BeVariant extends AbstractEntity
         return $parentPrice + $price + $calc_price;
     }
 
-    /**
-     * Gets Price Calculated
-     *
-     * @return float
-     */
-    public function getBestPriceCalculated($frontendUserGroupIds = [])
+    public function getBestPriceCalculated($frontendUserGroupIds = []): float
     {
         $price = $this->getBestPrice($frontendUserGroupIds);
 
@@ -285,92 +207,52 @@ class BeVariant extends AbstractEntity
         return $parentPrice + $price + $calc_price;
     }
 
-    /**
-     * Returns the price
-     *
-     * @return float $price
-     */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * Sets the price
-     *
-     * @param float $price
-     */
-    public function setPrice($price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * @return int
-     */
-    public function getPriceCalcMethod()
+    public function getPriceCalcMethod(): int
     {
         return $this->priceCalcMethod;
     }
 
-    /**
-     * @param int $priceCalcMethod
-     */
-    public function setPriceCalcMethod($priceCalcMethod)
+    public function setPriceCalcMethod(int $priceCalcMethod): void
     {
         $this->priceCalcMethod = $priceCalcMethod;
     }
 
-    /**
-     * Adds a Special Price
-     *
-     * @param Product\SpecialPrice $specialPrice
-     */
-    public function addSpecialPrice(SpecialPrice $specialPrice)
+    public function addSpecialPrice(SpecialPrice $specialPrice): void
     {
         $this->specialPrices->attach($specialPrice);
     }
 
-    /**
-     * Removes a Special Price
-     *
-     * @param Product\SpecialPrice $specialPriceToRemove
-     */
-    public function removeSpecialPrice(SpecialPrice $specialPriceToRemove)
+    public function removeSpecialPrice(SpecialPrice $specialPrice): void
     {
-        $this->specialPrices->detach($specialPriceToRemove);
+        $this->specialPrices->detach($specialPrice);
     }
 
     /**
-     * Returns the Special Prices
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Cart\Domain\Model\specialPrice>
+     * @return ObjectStorage<SpecialPrice>
      */
-    public function getSpecialPrices()
+    public function getSpecialPrices(): ObjectStorage
     {
         return $this->specialPrices;
     }
 
-    /**
-     * Sets the Special Prices
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $specialPrices
-     */
-    public function setSpecialPrices(ObjectStorage $specialPrices)
+    public function setSpecialPrices(ObjectStorage $specialPrices): void
     {
         $this->specialPrices = $specialPrices;
     }
 
-    /**
-     * Returns Best Special Price
-     *
-     * @var array $frontendUserGroupIds
-     *
-     * @return Product\SpecialPrice
-     */
-    public function getBestSpecialPrice($frontendUserGroupIds = [])
+    public function getBestSpecialPrice(array $frontendUserGroupIds = []): ?SpecialPrice
     {
-        /** @var Product\SpecialPrice $bestSpecialPrice */
+        /** @var SpecialPrice $bestSpecialPrice */
         $bestSpecialPrice = null;
 
         if ($this->getSpecialPrices()) {
@@ -406,14 +288,7 @@ class BeVariant extends AbstractEntity
         return $bestSpecialPrice;
     }
 
-    /**
-     * Returns Best Price
-     *
-     * @var array $frontendUserGroupIds
-     *
-     * @return float
-     */
-    public function getBestPrice($frontendUserGroupIds = [])
+    public function getBestPrice(array $frontendUserGroupIds = []): float
     {
         $bestPrice = $this->price;
         $bestSpecialPrice = $this->getBestSpecialPrice($frontendUserGroupIds);
@@ -436,13 +311,7 @@ class BeVariant extends AbstractEntity
         return $bestPrice;
     }
 
-    /**
-     * Returns best Special Price Discount
-     *
-     * @var array $frontendUserGroupIds
-     * @return float
-     */
-    public function getBestSpecialPriceDiscount($frontendUserGroupIds = [])
+    public function getBestSpecialPriceDiscount(array $frontendUserGroupIds = []): float
     {
         $bestSpecialPrice = $this->getBestPriceCalculated($frontendUserGroupIds);
         $bestSpecialPriceDiscount = $this->getPriceCalculated() - $bestSpecialPrice;
@@ -450,13 +319,7 @@ class BeVariant extends AbstractEntity
         return $bestSpecialPriceDiscount;
     }
 
-    /**
-     * Returns best Special Price Percentage Discount
-     *
-     * @var array $frontendUserGroupIds
-     * @return float
-     */
-    public function getBestSpecialPricePercentageDiscount($frontendUserGroupIds = [])
+    public function getBestSpecialPricePercentageDiscount(array $frontendUserGroupIds = []): float
     {
         if ($this->getPriceCalculated() !== 0) {
             $bestSpecialPricePercentageDiscount = (($this->getBestSpecialPriceDiscount($frontendUserGroupIds)) / $this->getPriceCalculated()) * 100;
@@ -465,12 +328,7 @@ class BeVariant extends AbstractEntity
         return $bestSpecialPricePercentageDiscount;
     }
 
-    /**
-     * Returns the Base Price
-     *
-     * @return float $price
-     */
-    public function getBasePrice()
+    public function getBasePrice(): ?float
     {
         //TODO: respects different measuring units between variant and product
         if (!$this->getProduct()->getBasePriceMeasure() > 0) {
@@ -486,52 +344,27 @@ class BeVariant extends AbstractEntity
         return $price;
     }
 
-    /**
-     * Returns the Price Measure
-     *
-     * @return float $priceMeasure
-     */
-    public function getPriceMeasure()
+    public function getPriceMeasure(): float
     {
         return $this->priceMeasure;
     }
 
-    /**
-     * Sets the Price Measure
-     *
-     * @param float $priceMeasure
-     */
-    public function setPriceMeasure($priceMeasure)
+    public function setPriceMeasure(float $priceMeasure): void
     {
         $this->priceMeasure = $priceMeasure;
     }
 
-    /**
-     * Returns the Price Measure Unit
-     *
-     * @return string $priceMeasureUnit
-     */
-    public function getPriceMeasureUnit()
+    public function getPriceMeasureUnit(): string
     {
         return $this->priceMeasureUnit;
     }
 
-    /**
-     * Sets the Price Measure Unit
-     *
-     * @param string $priceMeasureUnit
-     */
-    public function setPriceMeasureUnit($priceMeasureUnit)
+    public function setPriceMeasureUnit(string $priceMeasureUnit): void
     {
         $this->priceMeasureUnit = $priceMeasureUnit;
     }
 
-    /**
-     * Check Measure Unit Compatibility
-     *
-     * @return bool
-     */
-    public function getIsMeasureUnitCompatibility()
+    public function getIsMeasureUnitCompatibility(): bool
     {
         foreach ($this->product->getMeasureUnits() as $measureUnit) {
             if (array_key_exists($this->product->getBasePriceMeasureUnit(), $measureUnit)
@@ -544,12 +377,7 @@ class BeVariant extends AbstractEntity
         return false;
     }
 
-    /**
-     * Get Measure Unit Faktor
-     *
-     * @return bool
-     */
-    public function getMeasureUnitFactor()
+    public function getMeasureUnitFactor(): float
     {
         $factor = 1.0;
 
@@ -566,8 +394,6 @@ class BeVariant extends AbstractEntity
     }
 
     /**
-     * Returns Calculated Base Price
-     *
      * @return float|bool
      */
     public function getCalculatedBasePrice()
@@ -579,62 +405,32 @@ class BeVariant extends AbstractEntity
         return false;
     }
 
-    /**
-     * Returns the Stock
-     *
-     * @return int
-     */
-    public function getStock()
+    public function getStock(): int
     {
         return $this->stock;
     }
 
-    /**
-     * Set the Stock
-     *
-     * @param int $stock
-     */
-    public function setStock($stock)
+    public function setStock(int $stock): void
     {
         $this->stock = $stock;
     }
 
-    /**
-     * Add To Stock
-     *
-     * @param int $stock
-     */
-    public function addToStock($stock)
+    public function addToStock(int $stock): void
     {
         $this->stock += $stock;
     }
 
-    /**
-     * Remove From Stock
-     *
-     * @param int $stock
-     */
-    public function removeFromStock($stock)
+    public function removeFromStock(int $stock): void
     {
         $this->stock -= $stock;
     }
 
-    /**
-     * Returns Is Available
-     *
-     * @return bool
-     */
-    public function getIsAvailable()
+    public function getIsAvailable(): bool
     {
         return boolval($this->stock);
     }
 
-    /**
-     * Returns the calculated SKU
-     *
-     * @return string
-     */
-    public function getSku()
+    public function getSku(): string
     {
         $skuArray = [];
 
@@ -656,12 +452,7 @@ class BeVariant extends AbstractEntity
         return implode('-', $skuArray);
     }
 
-    /**
-     * Returns the calculated Title
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         $titleArray = [];
 

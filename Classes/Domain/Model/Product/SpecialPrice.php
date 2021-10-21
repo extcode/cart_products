@@ -9,90 +9,55 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class SpecialPrice extends AbstractEntity
 {
     /**
-     * Title
-     *
      * @var string
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $title = '';
 
     /**
-     * Price
-     *
      * @var float
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $price = 0.0;
 
     /**
-     * Frontend User Group
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
+     * @var FrontendUserGroup
      */
     protected $frontendUserGroup;
 
-    /**
-     * Returns the Title
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * Sets the Title
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * Returns the Price
-     *
-     * @return float $price
-     */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * Sets the Price
-     *
-     * @param float $price
-     */
-    public function setPrice($price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * Returns the Frontend User Group
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
-     */
-    public function getFrontendUserGroup()
+    public function getFrontendUserGroup(): ?FrontendUserGroup
     {
         return $this->frontendUserGroup;
     }
 
-    /**
-     * Sets the Frontend User Group
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $frontendUserGroup
-     */
-    public function setFrontendUserGroup($frontendUserGroup)
+    public function setFrontendUserGroup(FrontendUserGroup $frontendUserGroup): void
     {
-        $this->setFrontendUserGroup = $frontendUserGroup;
+        $this->frontendUserGroup = $frontendUserGroup;
     }
 }

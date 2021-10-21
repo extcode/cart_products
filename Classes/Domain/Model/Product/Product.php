@@ -10,15 +10,15 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  */
 
 use Extcode\Cart\Domain\Model\Tag;
+use Extcode\CartProducts\Domain\Model\TtContent;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Product extends AbstractProduct
 {
 
     /**
-     * Measurement Units
-     *
      * @var array
      */
     protected $measureUnits = [
@@ -45,360 +45,252 @@ class Product extends AbstractProduct
     ];
 
     /**
-     * Product Type
-     *
      * @var string
      */
     protected $productType = 'simple';
 
     /**
-     * Images
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var ObjectStorage<FileReference>
      */
     protected $images;
 
     /**
-     * Files
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var ObjectStorage<FileReference>
      */
     protected $files;
 
     /**
-     * Teaser
-     *
      * @var string
      */
     protected $teaser = '';
 
     /**
-     * Product Content
-     *
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\TtContent>
+     * @var ObjectStorage<\Extcode\CartProducts\Domain\Model\TtContent>
      */
     protected $productContent;
 
     /**
-     * Min Number In Order
-     *
      * @var int
      */
     protected $minNumberInOrder = 0;
 
     /**
-     * Max Number in Order
-     *
      * @var int
      */
     protected $maxNumberInOrder = 0;
 
     /**
-     * Is Net Price
-     *
      * @var bool
      */
     protected $isNetPrice = false;
 
     /**
-     * Price
-     *
      * @var float
      */
     protected $price = 0.0;
 
     /**
-     * Product Special Price
-     *
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\SpecialPrice>
+     * @var ObjectStorage<SpecialPrice>
      */
     protected $specialPrices;
 
     /**
-     * Product Quantity Discount
-     *
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\QuantityDiscount>
+     * @var ObjectStorage<QuantityDiscount>
      */
     protected $quantityDiscounts;
 
     /**
-     * Price Measure
-     *
      * @var float
      */
     protected $priceMeasure = 0.0;
 
     /**
-     * Price Measure Unit
-     *
      * @var string
      */
     protected $priceMeasureUnit = '';
 
     /**
-     * Base Price Measure Unit
-     *
      * @var string
      */
     protected $basePriceMeasureUnit = '';
 
     /**
-     * Service Attriute 1
-     *
      * @var float
      */
     protected $serviceAttribute1 = 0.0;
 
     /**
-     * Service Attriute 2
-     *
      * @var float
      */
     protected $serviceAttribute2 = 0.0;
 
     /**
-     * Service Attriute 3
-     *
      * @var float
      */
     protected $serviceAttribute3 = 0.0;
 
     /**
-     * Tax Class Id
-     *
      * @var int
      */
     protected $taxClassId = 1;
 
     /**
-     * beVariantAttribute1
-     *
-     * @var \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute
+     * @var BeVariantAttribute
      */
-    protected $beVariantAttribute1 = null;
+    protected $beVariantAttribute1;
 
     /**
-     * beVariantAttribute2
-     *
-     * @var \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute
+     * @var BeVariantAttribute
      */
-    protected $beVariantAttribute2 = null;
+    protected $beVariantAttribute2;
 
     /**
-     * beVariantAttribute3
-     *
-     * @var \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute
+     * @var BeVariantAttribute
      */
-    protected $beVariantAttribute3 = null;
+    protected $beVariantAttribute3;
 
     /**
      * variants
      *
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\BeVariant>
+     * @var ObjectStorage<BeVariant>
      */
-    protected $beVariants = null;
+    protected $beVariants;
 
     /**
-     * Frontend Variants
-     *
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\FeVariant>
+     * @var ObjectStorage<FeVariant>
      */
-    protected $feVariants = null;
+    protected $feVariants;
 
     /**
-     * Related Products
-     *
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product>
+     * @var ObjectStorage<Product>
      */
-    protected $relatedProducts = null;
+    protected $relatedProducts;
 
     /**
-     * Related Products (from)
-     *
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product>
+     * @var ObjectStorage<Product>
      */
     protected $relatedProductsFrom;
 
     /**
-     * stock
-     *
      * @var int
      */
     protected $stock = 0;
 
     /**
-     * Handle Stock
-     *
      * @var bool
      */
     protected $handleStock = false;
 
     /**
-     * Handle Stock in Variants
-     *
      * @var bool
      */
     protected $handleStockInVariants = false;
 
     /**
-     * Category
-     *
-     * @var \Extcode\CartProducts\Domain\Model\Category
+     * @var Category
      */
     protected $category;
 
     /**
-     * Categories
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Category>
+     * @var ObjectStorage<Category>
      */
     protected $categories;
 
     /**
-     * Tags
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Cart\Domain\Model\Tag>
+     * @var ObjectStorage<Tag>
      */
     protected $tags;
 
-    /**
-     * Product constructor.
-     */
     public function __construct()
     {
         $this->specialPrices = new ObjectStorage();
         $this->beVariants = new ObjectStorage();
+        $this->feVariants = new ObjectStorage();
     }
 
-    /**
-     * Returns the Product Type
-     *
-     * @return string
-     */
-    public function getProductType()
+    public function getProductType(): string
     {
         return $this->productType;
     }
 
-    /**
-     * Set the Product Type
-     *
-     * @var string $productType
-     */
-    public function setProductType($productType)
+    public function setProductType(string $productType): void
     {
         $this->productType = $productType;
     }
 
-    /**
-     * Returns the Images
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $images
-     */
-    public function getImages()
+    public function getImages(): ?ObjectStorage
     {
         return $this->images;
     }
 
-    /**
-     * Returns the first Image
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
-     */
-    public function getFirstImage()
+    public function getFirstImage(): ?FileReference
     {
-        return array_shift($this->getImages()->toArray());
+        $images = $this->getImages();
+        if ($images) {
+            $imageArray = $images->toArray();
+            return array_shift($imageArray);
+        }
+
+        return null;
     }
 
     /**
-     * Sets the Images
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $images
+     * @param ObjectStorage<FileReference> $images
      */
-    public function setImages($images)
+    public function setImages(ObjectStorage $images)
     {
         $this->images = $images;
     }
 
-    /**
-     * Returns the Files
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $files
-     */
-    public function getFiles()
+    public function getFiles(): ?ObjectStorage
     {
         return $this->files;
     }
 
     /**
-     * Sets the Files
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $files
+     * @param ObjectStorage<FileReference> $files
      */
-    public function setFiles($files)
+    public function setFiles(ObjectStorage $files): void
     {
         $this->files = $files;
     }
 
-    /**
-     * Returns the teaser
-     *
-     * @return string $teaser
-     */
-    public function getTeaser()
+    public function getTeaser(): string
     {
         return $this->teaser;
     }
 
-    /**
-     * Sets the teaser
-     *
-     * @param string $teaser
-     */
-    public function setTeaser($teaser)
+    public function setTeaser(string $teaser): void
     {
         $this->teaser = $teaser;
     }
 
-    /**
-     * Returns the Product Content
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getProductContent()
+    public function getProductContent(): ?ObjectStorage
     {
         return $this->productContent;
     }
 
     /**
-     * Sets the Product Content
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $productContent
+     * @param ObjectStorage<TtContent> $productContent
      */
-    public function setProductContent($productContent)
+    public function setProductContent(ObjectStorage $productContent): void
     {
         $this->productContent = $productContent;
     }
 
-    /**
-     * @return int
-     */
-    public function getMinNumberInOrder()
+    public function getMinNumberInOrder(): int
     {
         return $this->minNumberInOrder;
     }
 
-    /**
-     * @param int $minNumberInOrder
-     */
-    public function setMinNumberInOrder($minNumberInOrder)
+    public function setMinNumberInOrder(int $minNumberInOrder): void
     {
         if ($minNumberInOrder < 0 || $minNumberInOrder > $this->maxNumberInOrder) {
             throw new \InvalidArgumentException;
@@ -407,18 +299,12 @@ class Product extends AbstractProduct
         $this->minNumberInOrder = $minNumberInOrder;
     }
 
-    /**
-     * @return int
-     */
-    public function getMaxNumberInOrder()
+    public function getMaxNumberInOrder(): int
     {
         return $this->maxNumberInOrder;
     }
 
-    /**
-     * @param int $maxNumberInOrder
-     */
-    public function setMaxNumberInOrder($maxNumberInOrder)
+    public function setMaxNumberInOrder(int $maxNumberInOrder)
     {
         if ($maxNumberInOrder < 0 || (($maxNumberInOrder !== 0) && ($maxNumberInOrder < $this->minNumberInOrder))) {
             throw new \InvalidArgumentException;
@@ -427,93 +313,53 @@ class Product extends AbstractProduct
         $this->maxNumberInOrder = $maxNumberInOrder;
     }
 
-    /**
-     * Returns the isNetPrice
-     *
-     * @return bool
-     */
-    public function getIsNetPrice()
+    public function getIsNetPrice(): bool
     {
         return $this->isNetPrice;
     }
 
-    /**
-     * Sets the isNetPrice
-     *
-     * @param bool $isNetPrice
-     */
-    public function setIsNetPrice($isNetPrice)
+    public function setIsNetPrice(bool $isNetPrice): void
     {
         $this->isNetPrice = $isNetPrice;
     }
 
-    /**
-     * Returns the price
-     *
-     * @return float $price
-     */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * Sets the price
-     *
-     * @param float $price
-     */
-    public function setPrice($price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
 
     /**
-     * Returns the Special Prices
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Cart\Domain\Model\SpecialPrice>
+     * @return ObjectStorage<SpecialPrice>
      */
-    public function getSpecialPrices()
+    public function getSpecialPrices(): ObjectStorage
     {
         return $this->specialPrices;
     }
 
-    /**
-     * Adds a Special Price
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\SpecialPrice $specialPrice
-     */
-    public function addSpecialPrice(SpecialPrice $specialPrice)
+    public function addSpecialPrice(SpecialPrice $specialPrice): void
     {
         $this->specialPrices->attach($specialPrice);
     }
 
-    /**
-     * Removes a Special Price
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\SpecialPrice $specialPriceToRemove
-     */
-    public function removeSpecialPrice(SpecialPrice $specialPriceToRemove)
+    public function removeSpecialPrice(SpecialPrice $specialPrice): void
     {
-        $this->specialPrices->detach($specialPriceToRemove);
+        $this->specialPrices->detach($specialPrice);
     }
 
     /**
-     * Sets the Special Prices
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $specialPrices
+     * @param ObjectStorage<SpecialPrice> $specialPrices
      */
-    public function setSpecialPrices(ObjectStorage $specialPrices)
+    public function setSpecialPrices(ObjectStorage $specialPrices): void
     {
         $this->specialPrices = $specialPrices;
     }
 
-    /**
-     * Returns best Special Price
-     *
-     * @var array $frontendUserGroupIds
-     * @return float
-     */
-    public function getBestSpecialPrice($frontendUserGroupIds = [])
+    public function getBestSpecialPrice(array $frontendUserGroupIds = []): float
     {
         $bestSpecialPrice = $this->price;
 
@@ -532,13 +378,7 @@ class Product extends AbstractProduct
         return $bestSpecialPrice;
     }
 
-    /**
-     * Returns best Special Price Discount
-     *
-     * @var array $frontendUserGroupIds
-     * @return float
-     */
-    public function getBestSpecialPriceDiscount($frontendUserGroupIds = [])
+    public function getBestSpecialPriceDiscount(array $frontendUserGroupIds = []): float
     {
         $bestSpecialPrice = $this->getBestSpecialPrice($frontendUserGroupIds);
         $bestSpecialPriceDiscount = $this->price - $bestSpecialPrice;
@@ -546,13 +386,7 @@ class Product extends AbstractProduct
         return $bestSpecialPriceDiscount;
     }
 
-    /**
-     * Returns best Special Price Percentage Discount
-     *
-     * @var array $frontendUserGroupIds
-     * @return float
-     */
-    public function getBestSpecialPricePercentageDiscount($frontendUserGroupIds = [])
+    public function getBestSpecialPricePercentageDiscount(array $frontendUserGroupIds = []): float
     {
         $bestSpecialPricePercentageDiscount = 0.0;
 
@@ -564,21 +398,14 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Returns the Quantity Discounts
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Cart\Domain\Model\QuantityDiscount>
+     * @return ObjectStorage<QuantityDiscount>
      */
-    public function getQuantityDiscounts()
+    public function getQuantityDiscounts(): ?ObjectStorage
     {
         return $this->quantityDiscounts;
     }
 
-    /**
-     * Returns the Quantity Discounts as Array
-     *
-     * @return array
-     */
-    public function getQuantityDiscountArray($frontendUserGroupIds = [])
+    public function getQuantityDiscountArray(array $frontendUserGroupIds = []): array
     {
         $quantityDiscountArray = [];
 
@@ -587,7 +414,7 @@ class Product extends AbstractProduct
                 if (!$quantityDiscount->getFrontendUserGroup() ||
                     in_array($quantityDiscount->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
                 ) {
-                    array_push($quantityDiscountArray, $quantityDiscount->toArray());
+                    $quantityDiscountArray[] = $quantityDiscount->toArray();
                 }
             }
         }
@@ -595,102 +422,55 @@ class Product extends AbstractProduct
         return $quantityDiscountArray;
     }
 
-    /**
-     * Adds a Quantity Discount
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\QuantityDiscount $quantityDiscount
-     */
-    public function addQuantityDiscount(QuantityDiscount $quantityDiscount)
+    public function addQuantityDiscount(QuantityDiscount $quantityDiscount): void
     {
         $this->quantityDiscounts->attach($quantityDiscount);
     }
 
-    /**
-     * Removes a Quantity Discount
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\QuantityDiscount $quantityDiscount
-     */
-    public function removeQuantityDiscount(QuantityDiscount $quantityDiscount)
+    public function removeQuantityDiscount(QuantityDiscount $quantityDiscount): void
     {
         $this->quantityDiscounts->detach($quantityDiscount);
     }
 
     /**
-     * Sets the Quantity Discounts
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $quantityDiscounts
+     * @param ObjectStorage<QuantityDiscount> $quantityDiscounts
      */
-    public function setQuantityDiscounts(ObjectStorage $quantityDiscounts)
+    public function setQuantityDiscounts(ObjectStorage $quantityDiscounts): void
     {
         $this->quantityDiscounts = $quantityDiscounts;
     }
 
-    /**
-     * Returns the Price Measure
-     *
-     * @return float $priceMeasure
-     */
-    public function getPriceMeasure()
+    public function getPriceMeasure(): float
     {
         return $this->priceMeasure;
     }
 
-    /**
-     * Sets the Price Measure
-     *
-     * @param float $priceMeasure
-     */
-    public function setPriceMeasure($priceMeasure)
+    public function setPriceMeasure(float $priceMeasure): void
     {
         $this->priceMeasure = $priceMeasure;
     }
 
-    /**
-     * Returns the Price Measure Unit
-     *
-     * @return string $priceMeasureUnit
-     */
-    public function getPriceMeasureUnit()
+    public function getPriceMeasureUnit(): string
     {
         return $this->priceMeasureUnit;
     }
 
-    /**
-     * Sets the Price Measure Unit
-     *
-     * @param string $priceMeasureUnit
-     */
-    public function setPriceMeasureUnit($priceMeasureUnit)
+    public function setPriceMeasureUnit(string $priceMeasureUnit): void
     {
         $this->priceMeasureUnit = $priceMeasureUnit;
     }
 
-    /**
-     * Returns the Base Price Measure Unit
-     *
-     * @return string $basePriceMeasureUnit
-     */
-    public function getBasePriceMeasureUnit()
+    public function getBasePriceMeasureUnit(): string
     {
         return $this->basePriceMeasureUnit;
     }
 
-    /**
-     * Sets the Basse Price Measure Unit
-     *
-     * @param string $basePriceMeasureUnit
-     */
-    public function setBasePriceMeasureUnit($basePriceMeasureUnit)
+    public function setBasePriceMeasureUnit(string $basePriceMeasureUnit): void
     {
         $this->basePriceMeasureUnit = $basePriceMeasureUnit;
     }
 
-    /**
-     * Check Measure Unit Compatibility
-     *
-     * @return bool
-     */
-    public function getIsMeasureUnitCompatibility()
+    public function getIsMeasureUnitCompatibility(): bool
     {
         foreach ($this->measureUnits as $measureUnit) {
             if (array_key_exists($this->basePriceMeasureUnit, $measureUnit)
@@ -703,12 +483,7 @@ class Product extends AbstractProduct
         return false;
     }
 
-    /**
-     * Get Measure Unit Faktor
-     *
-     * @return float
-     */
-    public function getMeasureUnitFactor()
+    public function getMeasureUnitFactor(): float
     {
         $factor = 1.0;
 
@@ -725,8 +500,6 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Returns Calculated Base Price
-     *
      * @return float|bool
      */
     public function getCalculatedBasePrice()
@@ -738,312 +511,181 @@ class Product extends AbstractProduct
         return false;
     }
 
-    /**
-     * Returns Service Attribute 1
-     *
-     * @return float
-     */
-    public function getServiceAttribute1()
+    public function getServiceAttribute1(): float
     {
         return $this->serviceAttribute1;
     }
 
-    /**
-     * Sets Service Attribute 1
-     *
-     * @param float $serviceAttribute1
-     */
-    public function setServiceAttribute1($serviceAttribute1)
+    public function setServiceAttribute1(float $serviceAttribute1): void
     {
         $this->serviceAttribute1 = $serviceAttribute1;
     }
 
-    /**
-     * Returns Service Attribute 2
-     *
-     * @return float
-     */
-    public function getServiceAttribute2()
+    public function getServiceAttribute2(): float
     {
         return $this->serviceAttribute2;
     }
 
-    /**
-     * Sets Service Attribute 2
-     *
-     * @param float $serviceAttribute2
-     */
-    public function setServiceAttribute2($serviceAttribute2)
+    public function setServiceAttribute2(float $serviceAttribute2): void
     {
         $this->serviceAttribute2 = $serviceAttribute2;
     }
 
-    /**
-     * Returns Service Attribute 3
-     *
-     * @return float
-     */
-    public function getServiceAttribute3()
+    public function getServiceAttribute3(): float
     {
         return $this->serviceAttribute3;
     }
 
-    /**
-     * Sets Service Attribute 3
-     *
-     * @param float $serviceAttribute3
-     */
-    public function setServiceAttribute3($serviceAttribute3)
+    public function setServiceAttribute3(float $serviceAttribute3): void
     {
         $this->serviceAttribute3 = $serviceAttribute3;
     }
 
-    /**
-     * Returns Tax Class Id
-     *
-     * @return int
-     */
-    public function getTaxClassId()
+    public function getTaxClassId(): int
     {
         return $this->taxClassId;
     }
 
-    /**
-     * Sets Tax Class Id
-     *
-     * @param int $taxClassId
-     */
-    public function setTaxClassId($taxClassId)
+    public function setTaxClassId(int $taxClassId): void
     {
         $this->taxClassId = $taxClassId;
     }
 
-    /**
-     * Returns the Variant Set 1
-     *
-     * @return \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute
-     */
-    public function getBeVariantAttribute1()
+    public function getBeVariantAttribute1(): ?BeVariantAttribute
     {
         return $this->beVariantAttribute1;
     }
 
-    /**
-     * Sets the Variant Set 1
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute $beVariantAttribute1
-     */
-    public function setBeVariantAttribute1(BeVariantAttribute $beVariantAttribute1)
+    public function setBeVariantAttribute1(BeVariantAttribute $beVariantAttribute1): void
     {
         $this->beVariantAttribute1 = $beVariantAttribute1;
     }
 
-    /**
-     * Returns the Variant Set 2
-     *
-     * @return \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute
-     */
-    public function getBeVariantAttribute2()
+    public function getBeVariantAttribute2(): ?BeVariantAttribute
     {
         return $this->beVariantAttribute2;
     }
 
-    /**
-     * Sets the Variant Set 2
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute $beVariantAttribute2
-     */
-    public function setBeVariantAttribute2(BeVariantAttribute $beVariantAttribute2)
+    public function setBeVariantAttribute2(BeVariantAttribute $beVariantAttribute2): void
     {
         $this->beVariantAttribute2 = $beVariantAttribute2;
     }
 
-    /**
-     * Returns the Variant Set 3
-     *
-     * @return \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute
-     */
-    public function getBeVariantAttribute3()
+    public function getBeVariantAttribute3(): ?BeVariantAttribute
     {
         return $this->beVariantAttribute3;
     }
 
-    /**
-     * Sets the Variant Set 3
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute $beVariantAttribute3
-     */
-    public function setBeVariantAttribute3(BeVariantAttribute $beVariantAttribute3)
+    public function setBeVariantAttribute3(BeVariantAttribute $beVariantAttribute3): void
     {
         $this->beVariantAttribute3 = $beVariantAttribute3;
     }
 
-    /**
-     * Adds a Variant
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\BeVariant $variant
-     */
-    public function addBeVariant(BeVariant $variant)
+    public function addBeVariant(BeVariant $beVariant): void
     {
-        $this->beVariants->attach($variant);
+        $this->beVariants->attach($beVariant);
+    }
+
+    public function removeBeVariant(BeVariant $beVariant): void
+    {
+        $this->beVariants->detach($beVariant);
     }
 
     /**
-     * Removes a Variant
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\BeVariant $variantToRemove
+     * @return ObjectStorage<BeVariant>
      */
-    public function removeBeVariant(BeVariant $variantToRemove)
-    {
-        $this->beVariants->detach($variantToRemove);
-    }
-
-    /**
-     * Returns the Variants
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\BeVariant> $variant
-     */
-    public function getBeVariants()
+    public function getBeVariants(): ObjectStorage
     {
         return $this->beVariants;
     }
 
     /**
-     * Sets the Variants
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $variants
+     * @param ObjectStorage<BeVariant> $beVariants
      */
-    public function setBeVariants(ObjectStorage $variants)
+    public function setBeVariants(ObjectStorage $beVariants): void
     {
-        $this->beVariants = $variants;
+        $this->beVariants = $beVariants;
     }
 
-    /**
-     * Adds a Frontend Variant
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\FeVariant $feVariant
-     */
-    public function addFeVariant(FeVariant $feVariant)
+    public function addFeVariant(FeVariant $feVariant): void
     {
         $this->feVariants->attach($feVariant);
     }
 
-    /**
-     * Removes a Frontend Variant
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\FeVariant $feVariantToRemove
-     */
-    public function removeFeVariant(FeVariant $feVariantToRemove)
+    public function removeFeVariant(FeVariant $feVariant): void
     {
-        $this->feVariants->detach($feVariantToRemove);
+        $this->feVariants->detach($feVariant);
     }
 
     /**
-     * Returns the Frontend Variants
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\FeVariant> $variant
+     * @return ObjectStorage<FeVariant>
      */
-    public function getFeVariants()
+    public function getFeVariants(): ObjectStorage
     {
         return $this->feVariants;
     }
 
     /**
-     * Sets the Frontend Variants
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $feVariants
+     * @param ObjectStorage<FeVariant> $feVariants
      */
-    public function setFeVariants(ObjectStorage $feVariants)
+    public function setFeVariants(ObjectStorage $feVariants): void
     {
         $this->feVariants = $feVariants;
     }
 
-    /**
-     * Adds a Related Product
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\Product $relatedProduct
-     */
-    public function addRelatedProduct(self $relatedProduct)
+    public function addRelatedProduct(self $relatedProduct): void
     {
         $this->relatedProducts->attach($relatedProduct);
     }
 
-    /**
-     * Removes a Related Product
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\Product $relatedProductToRemove
-     */
-    public function removeRelatedProduct(self $relatedProductToRemove)
+    public function removeRelatedProduct(self $relatedProduct): void
     {
-        $this->relatedProducts->detach($relatedProductToRemove);
+        $this->relatedProducts->detach($relatedProduct);
     }
 
     /**
-     * Returns the Related Products
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product> $relatedProduct
+     * @return ObjectStorage<Product>
      */
-    public function getRelatedProducts()
+    public function getRelatedProducts(): ?ObjectStorage
     {
         return $this->relatedProducts;
     }
 
     /**
-     * Sets the Related Products
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product> $relatedProducts
+     * @param ObjectStorage<Product> $relatedProducts
      */
-    public function setRelatedProducts(ObjectStorage $relatedProducts)
+    public function setRelatedProducts(ObjectStorage $relatedProducts): void
     {
         $this->relatedProducts = $relatedProducts;
     }
 
-    /**
-     * Adds a Related Product (from)
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\Product $relatedProductFrom
-     */
-    public function addRelatedProductFrom(self $relatedProductFrom)
+    public function addRelatedProductFrom(self $relatedProductFrom): void
     {
         $this->relatedProductsFrom->attach($relatedProductFrom);
     }
 
-    /**
-     * Removes a Related Product (from)
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Product\Product $relatedProductFromToRemove
-     */
-    public function removeRelatedProductFrom(self $relatedProductFromToRemove)
+    public function removeRelatedProductFrom(self $relatedProductFrom): void
     {
-        $this->relatedProductsFrom->detach($relatedProductFromToRemove);
+        $this->relatedProductsFrom->detach($relatedProductFrom);
     }
 
     /**
-     * Returns the Related Products (from)
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product> $relatedProductFrom
+     * @return ObjectStorage<Product>
      */
-    public function getRelatedProductsFrom()
+    public function getRelatedProductsFrom(): ?ObjectStorage
     {
         return $this->relatedProductsFrom;
     }
 
     /**
-     * Sets the Related Products (from)
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\Product> $relatedProductsFrom
+     * @param ObjectStorage<Product> $relatedProductsFrom
      */
-    public function setRelatedProductsFrom(ObjectStorage $relatedProductsFrom)
+    public function setRelatedProductsFrom(ObjectStorage $relatedProductsFrom): void
     {
         $this->relatedProductsFrom = $relatedProductsFrom;
     }
 
-    /**
-     * Returns the Stock
-     *
-     * @return int
-     */
-    public function getStock()
+    public function getStock(): int
     {
         if (!$this->handleStock) {
             return PHP_INT_MAX;
@@ -1062,99 +704,57 @@ class Product extends AbstractProduct
         return $this->stock;
     }
 
-    /**
-     * Set the Stock
-     *
-     * @param int $stock
-     */
-    public function setStock($stock)
+    public function setStock(int $stock): void
     {
         $this->stock = $stock;
     }
 
-    /**
-     * Add To Stock
-     *
-     * @param int $numberOfProducts
-     */
-    public function addToStock($numberOfProducts)
+    public function addToStock(int $numberOfProducts): void
     {
         if ($this->isHandleStock()) {
             $this->stock += $numberOfProducts;
         }
     }
 
-    /**
-     * Remove From Stock
-     *
-     * @param int $numberOfProducts
-     */
-    public function removeFromStock($numberOfProducts)
+    public function removeFromStock(int $numberOfProducts): void
     {
         if ($this->isHandleStock()) {
             $this->stock -= $numberOfProducts;
         }
     }
 
-    /**
-     * Returns Handle Stock
-     *
-     * @return bool
-     */
-    public function isHandleStock()
+    public function isHandleStock(): bool
     {
         return $this->handleStock;
     }
 
-    /**
-     * Sets Handle Stock
-     *
-     * @param bool $handleStock
-     */
-    public function setHandleStock($handleStock)
+    public function setHandleStock(bool $handleStock): void
     {
         $this->handleStock = $handleStock;
     }
 
-    /**
-     * Returns Handle Stock In Variants
-     *
-     * @return bool
-     */
-    public function isHandleStockInVariants()
+    public function isHandleStockInVariants(): bool
     {
         return $this->handleStockInVariants;
     }
 
-    /**
-     * Sets Handle Stock In Variants
-     *
-     * @param bool $handleStockInVariants
-     */
-    public function setHandleStockInVariants($handleStockInVariants)
+    public function setHandleStockInVariants(bool $handleStockInVariants): void
     {
         $this->handleStockInVariants = $handleStockInVariants;
     }
 
-    /**
-     * Returns Is Available
-     *
-     * @return bool
-     */
-    public function getIsAvailable()
+    public function getIsAvailable(): bool
     {
         if (!$this->handleStock) {
             return true;
-        } else {
-            if (!$this->handleStockInVariants) {
-                return boolval($this->stock);
-            } else {
-                if (count($this->beVariants)) {
-                    foreach ($this->beVariants as $beVariant) {
-                        if ($beVariant->getIsAvailable()) {
-                            return true;
-                        }
-                    }
+        }
+        if (!$this->handleStockInVariants) {
+            return boolval($this->stock);
+        }
+        if (count($this->beVariants)) {
+            foreach ($this->beVariants as $beVariant) {
+                if ($beVariant->getIsAvailable()) {
+                    return true;
                 }
             }
         }
@@ -1162,88 +762,54 @@ class Product extends AbstractProduct
         return false;
     }
 
-    /**
-     * Returns the Main Category
-     *
-     * @return \Extcode\CartProducts\Domain\Model\Category
-     */
-    public function getCategory()
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    /**
-     * Sets the Main Category
-     *
-     * @param \Extcode\CartProducts\Domain\Model\Category $category
-     */
-    public function setCategory($category)
+    public function setCategory(Category $category): void
     {
         $this->category = $category;
     }
 
-    /**
-     * Adds a Product Category
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
-     */
-    public function addCategory(Category $category)
+    public function addCategory(Category $category): void
     {
         $this->categories->attach($category);
     }
 
-    /**
-     * Removes a Category
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove
-     */
-    public function removeCategory(Category $categoryToRemove)
+    public function removeCategory(Category $category): void
     {
-        $this->categories->detach($categoryToRemove);
+        $this->categories->detach($category);
     }
 
     /**
-     * Returns the Categories
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Category> $categories
+     * @return ObjectStorage<Category>
      */
-    public function getCategories()
+    public function getCategories(): ?ObjectStorage
     {
         return $this->categories;
     }
 
-    /**
-     * Returns the First Category
-     *
-     * @return \Extcode\CartProducts\Domain\Model\Category
-     */
-    public function getFirstCategory()
+    public function getFirstCategory(): ?Category
     {
         $categories = $this->getCategories();
         if (!is_null($categories)) {
             $categories->rewind();
             return $categories->current();
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
-     * Sets the Categories
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categories
+     * @param ObjectStorage<Category> $categories
      */
-    public function setCategories(ObjectStorage $categories)
+    public function setCategories(ObjectStorage $categories): void
     {
         $this->categories = $categories;
     }
 
-    /**
-     * get the minimal Price from Variants
-     *
-     * @return float
-     */
-    public function getMinPrice()
+    public function getMinPrice(): float
     {
         $minPrice = null;
         if (count($this->getBeVariants())) {
@@ -1263,62 +829,38 @@ class Product extends AbstractProduct
         return $minPrice;
     }
 
-    /**
-     * Returns MeasureUnits
-     *
-     * @return array
-     */
-    public function getMeasureUnits()
+    public function getMeasureUnits(): array
     {
         return $this->measureUnits;
     }
 
-    /**
-     * Sets MeasureUnits
-     *
-     * @param array $measureUnits
-     */
-    public function setMeasureUnits($measureUnits)
+    public function setMeasureUnits(array $measureUnits): void
     {
         $this->measureUnits = $measureUnits;
     }
 
-    /**
-     * Adds a Tag
-     *
-     * @param \Extcode\Cart\Domain\Model\Tag $tag
-     */
-    public function addTag(Tag $tag)
+    public function addTag(Tag $tag): void
     {
         $this->tags->attach($tag);
     }
 
-    /**
-     * Removes a Tag
-     *
-     * @param \Extcode\Cart\Domain\Model\Tag $tagToRemove
-     */
-    public function removeTag(Tag $tagToRemove)
+    public function removeTag(Tag $tagToRemove): void
     {
         $this->tags->detach($tagToRemove);
     }
 
     /**
-     * Returns the Tags
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Cart\Domain\Model\Tag>
+     * @return ObjectStorage<Tag>
      */
-    public function getTags()
+    public function getTags(): ?ObjectStorage
     {
         return $this->tags;
     }
 
     /**
-     * Sets the Tags
-     *
-     * @param  \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\Cart\Domain\Model\Tag> $tags
+     * @param  ObjectStorage<Tag> $tags
      */
-    public function setTags(ObjectStorage $tags)
+    public function setTags(ObjectStorage $tags): void
     {
         $this->tags = $tags;
     }
