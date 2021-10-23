@@ -10,11 +10,23 @@ Main Configuration
             format.currency < plugin.tx_cart.settings.format.currency
 
             addToCartByAjax = {$plugin.tx_cart.settings.addToCartByAjax}
+
+            itemsPerPage = 9
         }
     }
 
-settings.format.currency
-""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+      plugin.tx_cartproducts.settings.addToCartByAjax
+   Data type
+      int
+   Description
+      Activates the option to add products via AJAX action. There is no forwarding to the shopping cart page.
+      The response can used to display messages or update the MiniCart-Plugin.
+   Default
+      The TypoScript template use the setting defined by the constant of the cart extension.
+
 .. container:: table-row
 
    Property
@@ -27,17 +39,13 @@ settings.format.currency
    Default
       The TypoScript template copy the setting from settings of the cart extension.
 
-
-settings.addToCartByAjax
-""""""""""""""""""""""""
 .. container:: table-row
 
    Property
-      plugin.tx_cartproducts.settings.addToCartByAjax
+      plugin.tx_cartproducts.settings.itemsPerPage
    Data type
       int
    Description
-      Activates the option to add products via AJAX action. There is no forwarding to the shopping cart page.
-      The response can used to display messages or update the MiniCart-Plugin.
+      Defines how many records should be displayed per page in the list action.
    Default
-      The TypoScript template use the setting defined by the constant of the cart extension.
+      The default value is 20 if there is no TypoScript configuration.

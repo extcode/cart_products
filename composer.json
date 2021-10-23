@@ -43,20 +43,17 @@
             "web-dir": ".build/public"
         }
     },
-    "replace": {
-        "extcode/cart_products": "self.version"
-    },
     "require": {
-        "php": "^7.2 <7.5",
+        "php": "^7.2 || ^7.3 || ^7.4 || ^8.0",
         "ext-pdo": "*",
-        "typo3/cms-core": "^10.4",
-        "typo3/cms-extbase": "^10.4",
-        "typo3/cms-fluid": "^10.4",
-        "extcode/cart": "^7.2"
+        "typo3/cms-core": "^10.4 || ^11.5",
+        "typo3/cms-extbase": "^10.4 || ^11.5",
+        "typo3/cms-fluid": "^10.4 || ^11.5",
+        "extcode/cart": "^8.0"
     },
     "require-dev": {
-        "typo3/testing-framework": "^5.0",
-        "typo3/cms-install": "^10.4",
+        "typo3/testing-framework": "^6.0",
+        "typo3/cms-dashboard": "^10.4 || ^11.5",
         "friendsofphp/php-cs-fixer": "^2.14",
         "helmich/typo3-typoscript-lint": "^2.0",
         "overtrue/phplint": "^1.1",

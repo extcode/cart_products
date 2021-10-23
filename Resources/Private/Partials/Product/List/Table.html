@@ -17,7 +17,7 @@
     </tr>
     </thead>
     <tbody>
-    <f:for each="{products}" as="product">
+    <f:for each="{paginator.paginatedItems}" as="product">
         <tr>
             <td>
                 <f:if condition="{product.images}">
@@ -42,4 +42,5 @@
     </f:for>
     </tbody>
 </table>
+<f:render partial="Utility/Paginator" arguments="{pagination: pagination, pages: pages, paginator: paginator}" />
 </html>

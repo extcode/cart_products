@@ -20,7 +20,7 @@
     </div>
 </f:section>
 
-<f:for each="{products}" as="product" iteration="iterator">
+<f:for each="{paginator.paginatedItems}" as="product" iteration="iterator">
     <f:if condition="{iterator.isFirst}">
         <div class="row">
     </f:if>
@@ -46,4 +46,7 @@
         </div>
     </f:if>
 </f:for>
+
+<f:render partial="Utility/Paginator" arguments="{pagination: pagination, pages: pages, paginator: paginator}" />
+
 </html>

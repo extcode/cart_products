@@ -15,11 +15,13 @@ use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Repository\CategoryRepository;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Web\RequestBuilder;
+use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 class ProductController extends ActionController
 {
@@ -144,15 +146,30 @@ class ProductController extends ActionController
         }
     }
 
-    public function listAction(): void
+    public function listAction(int $currentPage = 1): void
     {
         $demand = $this->createDemandObjectFromSettings($this->settings);
         $demand->setActionAndClass(__METHOD__, __CLASS__);
 
+        $itemsPerPage = $this->settings['itemsPerPage'] ?? 20;
+
         $products = $this->productRepository->findDemanded($demand);
+        $arrayPaginator = new QueryResultPaginator(
+            $products,
+            $currentPage,
+            $itemsPerPage
+        );
+        $pagination = new SimplePagination($arrayPaginator);
+        $this->view->assignMultiple(
+            [
+                'products' => $products,
+                'paginator' => $arrayPaginator,
+                'pagination' => $pagination,
+                'pages' => range(1, $pagination->getLastPageNumber()),
+            ]
+        );
 
         $this->view->assign('searchArguments', $this->searchArguments);
-        $this->view->assign('products', $products);
         $this->view->assign('cartSettings', $this->cartSettings);
 
         $this->assignCurrencyTranslationData();
@@ -250,7 +267,7 @@ class ProductController extends ActionController
                     /**
                      * @var \TYPO3\CMS\Extbase\Mvc\Request $cartProductRequest
                      */
-                    $cartProductRequest = $requestBuilder->build();
+                    $cartProductRequest = $requestBuilder->build($this->request);
 
                     if ($cartProductRequest->hasArgument('product')) {
                         $productUid = (int)$cartProductRequest->getArgument('product');

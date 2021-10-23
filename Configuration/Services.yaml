@@ -7,22 +7,6 @@ services:
   Extcode\CartProducts\:
     resource: '../Classes/*'
 
-  Extcode\CartProducts\EventListener\ProcessOrderCreate\HandleStock:
-    tags:
-      - name: event.listener
-        identifier: 'cart-products--process-order-create--handle-stock'
-        event: Extcode\Cart\Event\ProcessOrderCreateEvent
-        after: 'cart--process-order-create--order'
-        before: 'cart--process-order-create--email'
-
-  Extcode\CartProducts\EventListener\ProcessOrderCreate\FlushCache:
-    tags:
-      - name: event.listener
-        identifier: 'cart-products--process-order-create--flush-cache'
-        event: Extcode\Cart\Event\ProcessOrderCreateEvent
-        after: 'cart-products--process-order-create--handle-stock'
-        before: 'cart--process-order-create--email'
-
   Extcode\CartProducts\EventListener\Order\Stock\HandleStock:
     tags:
       - name: event.listener
