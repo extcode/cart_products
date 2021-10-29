@@ -25,18 +25,23 @@ Download and install the extension with the extension manager module.
 
 ### 2.2 Upgrade
 
-**If upgrading from cart version 4.8.1 or earlier: Please read the documentation very carefully! Please make a backup of your filesystem
-and database!** If possible test the update in a test copy of your TYPO3 instance.
+**Attention**, Before updating to a new minor version or upgrading to a new major version, be sure to check the
+changelog section in the documentation.
+Sometimes minor versions also result in minor adjustments to own templates or configurations.
 
 ## 3. Administration
 
 ## 3.1 Compatibility and supported Versions
 
-| Cart Products | TYPO3      | PHP       | Support/Development                                                                      |
-| ------------- | ---------- | ----------|------------------------------------------------------------------------------------------|
-| 3.x.x         | 10.4       | 7.2 - 7.4 | Features, Bugfixes, Security Updates                                                     |
-| 2.x.x         | 9.5        | 7.2 - 7.4 | Features, Bugfixes, Security Updates                                                     |
-| 1.x.x         | 8.7        | 7.0 - 7.4 | Bugfixes, Security Updates                                                     |
+| Cart Products | TYPO3      | PHP       | Support/Development                     |
+| ------------- | ---------- | ----------|-----------------------------------------|
+| 4.x.x         | 10.4, 11.5 | 7.2 - 8.0 | Features, Bugfixes, Security Updates    |
+| 3.x.x         | 10.4       | 7.2 - 7.4 | Bugfixes, Security Updates              |
+| 2.x.x         | 9.5        | 7.2 - 7.4 | Security Updates                        |
+| 1.x.x         | 8.7        | 7.0 - 7.4 |                                         |
+
+If you need extended support for features and bug fixes outside of the currently supported versions,
+we are happy to offer paid services.
 
 ### 3.2. Changelog
 
