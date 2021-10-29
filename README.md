@@ -32,11 +32,15 @@ and database!** If possible test the update in a test copy of your TYPO3 instanc
 
 ## 3.1 Compatibility and supported Versions
 
-| Cart Products | TYPO3      | PHP       | Support/Development                                                                      |
-| ------------- | ---------- | ----------|------------------------------------------------------------------------------------------|
-| 3.x.x         | 10.4       | 7.2 - 7.4 | Features, Bugfixes, Security Updates                                                     |
-| 2.x.x         | 9.5        | 7.2 - 7.4 | Features, Bugfixes, Security Updates                                                     |
-| 1.x.x         | 8.7        | 7.0 - 7.4 | Bugfixes, Security Updates                                                     |
+| Cart Products | TYPO3      | PHP       | Support/Development                     |
+| ------------- | ---------- | ----------|-----------------------------------------|
+| 4.x.x         | 10.4, 11.5 | 7.2 - 8.0 | Features, Bugfixes, Security Updates    |
+| 3.x.x         | 10.4       | 7.2 - 7.4 | Bugfixes, Security Updates              |
+| 2.x.x         | 9.5        | 7.2 - 7.4 | Security Updates                        |
+| 1.x.x         | 8.7        | 7.0 - 7.4 |                                         |
+
+If you need extended support for features and bug fixes outside of the currently supported versions,
+we are happy to offer paid services.
 
 ### 3.2. Changelog
 
