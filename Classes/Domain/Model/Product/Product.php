@@ -10,8 +10,8 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  */
 
 use Extcode\Cart\Domain\Model\Tag;
+use Extcode\CartProducts\Domain\Model\Category;
 use Extcode\CartProducts\Domain\Model\TtContent;
-use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
