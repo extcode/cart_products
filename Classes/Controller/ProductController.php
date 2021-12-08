@@ -212,7 +212,13 @@ class ProductController extends ActionController
 
     public function teaserAction(): void
     {
-        $products = $this->productRepository->findByUids($this->settings['productUids']);
+        //
+        // The TCA configuration only allows to select one entry,
+        // because the renderType selectSingle is in use.
+        // The repository method is changed to findByIdentifier,
+        // because the findByUids doesn't respect translated records
+        // and which results always in an empty result!
+        $products = [$this->productRepository->findByIdentifier((int)$this->settings['productUids'])];
 
         $this->view->assign('products', $products);
         $this->view->assign('cartSettings', $this->cartSettings);
