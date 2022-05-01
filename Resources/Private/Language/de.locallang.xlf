@@ -124,6 +124,10 @@
                 <source>Special Price</source>
                 <target>spezieller Preis</target>
             </trans-unit>
+            <trans-unit id="tx_cartproducts_domain_model_product_product.you_save">
+                <source>You save</source>
+                <target>Sie sparen</target>
+            </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_product_product.quantity_discounts">
                 <source>Quantity Discount</source>
                 <target>Mengenrabatt</target>
