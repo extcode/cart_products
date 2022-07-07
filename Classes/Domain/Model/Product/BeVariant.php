@@ -321,7 +321,9 @@ class BeVariant extends AbstractEntity
 
     public function getBestSpecialPricePercentageDiscount(array $frontendUserGroupIds = []): float
     {
-        if ($this->getPriceCalculated() !== 0) {
+        $bestSpecialPricePercentageDiscount = 0.0;
+
+        if ($this->getPriceCalculated() !== 0.0) {
             $bestSpecialPricePercentageDiscount = (($this->getBestSpecialPriceDiscount($frontendUserGroupIds)) / $this->getPriceCalculated()) * 100;
         }
 
