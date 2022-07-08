@@ -6,7 +6,7 @@ cache:
 
 variables:
   COMPOSER_CACHE_DIR: ".composer"
-  TYPO3_PATH_WEB: "$CI_PROJECT_DIR/.build/Web"
+  TYPO3_PATH_WEB: "$CI_PROJECT_DIR/.build/public"
   MYSQL_DATABASE: "typo3"
   MYSQL_ROOT_PASSWORD: "joh316"
   typo3DatabaseName: "typo3"
@@ -86,6 +86,7 @@ phpstan:analyse:
   before_script:
     - composer config platform.php 7.4
     - composer install --no-progress --no-ansi --no-interaction
+    - composer req tpwd/ke_search "^4.4"
   script:
     - .build/bin/phpstan analyse -c Build/phpstan.neon
 
