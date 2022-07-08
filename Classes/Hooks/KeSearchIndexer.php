@@ -9,6 +9,7 @@ namespace Extcode\CartProducts\Hooks;
  * LICENSE file that was distributed with this source code.
  */
 
+use Tpwd\KeSearch\Indexer\IndexerRunner;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\QueryGenerator;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -22,7 +23,7 @@ class KeSearchIndexer
      * @param array $params
      * @param $pObj
      */
-    public function registerIndexerConfiguration(&$params, $pObj)
+    public function registerIndexerConfiguration(array &$params, $pObj): void
     {
         $newArray = [
             'Cart Product Indexer',
@@ -32,14 +33,7 @@ class KeSearchIndexer
         $params['items'][] = $newArray;
     }
 
-    /**
-     * custom indexer for ke_search
-     *
-     * @param array $indexerConfig
-     * @param array $indexerObject
-     * @return string Output.
-     */
-    public function customIndexer(&$indexerConfig, &$indexerObject)
+    public function customIndexer(array &$indexerConfig, IndexerRunner &$indexerObject): string
     {
         if ($indexerConfig['type'] === 'cartproductindexer') {
             return $this->cartProductIndexer($indexerConfig, $indexerObject);
@@ -48,15 +42,7 @@ class KeSearchIndexer
         return '';
     }
 
-    /**
-     * cart indexer for ke_search
-     *
-     * @param array $indexerConfig
-     * @param array $indexerObject
-     *
-     * @return string
-     */
-    public function cartProductIndexer(&$indexerConfig, &$indexerObject)
+    public function cartProductIndexer(array &$indexerConfig, IndexerRunner &$indexerObject): string
     {
         $productIndexerName = 'Product Indexer "' . $indexerConfig['title'] . '"';
 
@@ -117,14 +103,7 @@ class KeSearchIndexer
         return '<p><b>' . $productIndexerName . '</b><br/><strong>' . $productIndexerMessage . '</strong></p>';
     }
 
-    /**
-     * Returns all Storage Pids for indexing
-     *
-     * @param $config
-     *
-     * @return string
-     */
-    protected function getPidList($config)
+    protected function getPidList(array $config): string
     {
         $recursivePids = $this->extendPidListByChildren($config['startingpoints_recursive'], 99);
         if ($config['sysfolder']) {
@@ -134,15 +113,7 @@ class KeSearchIndexer
         }
     }
 
-    /**
-     * Find all ids from given ids and level
-     *
-     * @param string $pidList
-     * @param int $recursive
-     *
-     * @return string
-     */
-    protected function extendPidListByChildren($pidList = '', $recursive = 0)
+    protected function extendPidListByChildren(string $pidList = '', int $recursive = 0): string
     {
         $recursive = (int)$recursive;
 
@@ -166,12 +137,8 @@ class KeSearchIndexer
 
     /**
      * Returns all products for a given PidList
-     *
-     * @param string $indexPids
-     *
-     * @return array
      */
-    protected function getProductsToIndex($indexPids)
+    protected function getProductsToIndex(string $indexPids): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_cartproducts_domain_model_product_product');
@@ -188,10 +155,7 @@ class KeSearchIndexer
         return $products;
     }
 
-    /**
-     *
-     */
-    protected function getTargetPidFormCategory($categoryUid)
+    protected function getTargetPidFormCategory($categoryUid): ?int
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('sys_category');
