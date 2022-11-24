@@ -1,4 +1,4 @@
-[page["doktype"] == 183]
+[page && page["doktype"] == 183]
 TCEFORM.tt_content.list_type {
     removeItems = cartproducts_products
 }
