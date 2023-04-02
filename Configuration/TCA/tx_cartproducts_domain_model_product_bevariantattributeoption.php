@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 $_LLL_general = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf';
 $_LLL = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf';
@@ -11,7 +11,6 @@ return [
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
 
         'versioningWS' => true,
 
@@ -26,16 +25,16 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,',
-        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/BeVariantAttributeOption.png'
+        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/BeVariantAttributeOption.png',
     ],
     'types' => [
         '1' => [
-            'showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sku, title, description'
+            'showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sku, title, description',
         ],
     ],
     'palettes' => [
         '1' => [
-            'showitem' => ''
+            'showitem' => '',
         ],
     ],
     'columns' => [
@@ -43,19 +42,7 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.language',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        $_LLL_general . ':LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ],
-                ],
-                'default' => 0,
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -64,7 +51,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattributeoption',
                 'foreign_table_where' => 'AND tx_cartproducts_domain_model_product_bevariantattributeoption.pid=###CURRENT_PID### AND tx_cartproducts_domain_model_product_bevariantattributeoption.sys_language_uid IN (-1,0)',
@@ -82,7 +69,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => 1,
@@ -102,7 +89,7 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
             ],
         ],
@@ -117,7 +104,7 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
             ],
         ],
@@ -128,7 +115,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,trim'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
 
@@ -138,7 +126,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,trim'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
 

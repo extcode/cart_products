@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -11,13 +11,13 @@ call_user_func(function () {
 
     $pluginNames = [
         'Products' => [
-            'subtypes_excludelist' => 'select_key'
+            'subtypes_excludelist' => 'select_key',
         ],
         'TeaserProducts' => [
-            'subtypes_excludelist' => 'select_key, pages, recursive'
+            'subtypes_excludelist' => 'select_key, pages, recursive',
         ],
         'SingleProduct' => [
-            'subtypes_excludelist' => 'select_key, pages, recursive'
+            'subtypes_excludelist' => 'select_key, pages, recursive',
         ],
     ];
 

@@ -29,7 +29,7 @@ class BeVariantAttributeTest extends UnitTestCase
      */
     public function getBeVariantAttributeOptionsInitiallyIsEmpty()
     {
-        $this->assertEmpty(
+        self::assertEmpty(
             $this->beVariantAttribute->getBeVariantAttributeOptions()
         );
     }
@@ -48,11 +48,11 @@ class BeVariantAttributeTest extends UnitTestCase
 
         $this->beVariantAttribute->setBeVariantAttributeOptions($objectStorage);
 
-        $this->assertContains(
+        self::assertContains(
             $beVariantAttributeOption1,
             $this->beVariantAttribute->getBeVariantAttributeOptions()
         );
-        $this->assertContains(
+        self::assertContains(
             $beVariantAttributeOption2,
             $this->beVariantAttribute->getBeVariantAttributeOptions()
         );
@@ -69,11 +69,11 @@ class BeVariantAttributeTest extends UnitTestCase
         $this->beVariantAttribute->addBeVariantAttributeOption($beVariantAttributeOption1);
         $this->beVariantAttribute->addBeVariantAttributeOption($beVariantAttributeOption2);
 
-        $this->assertContains(
+        self::assertContains(
             $beVariantAttributeOption1,
             $this->beVariantAttribute->getBeVariantAttributeOptions()
         );
-        $this->assertContains(
+        self::assertContains(
             $beVariantAttributeOption2,
             $this->beVariantAttribute->getBeVariantAttributeOptions()
         );
@@ -91,11 +91,11 @@ class BeVariantAttributeTest extends UnitTestCase
         $this->beVariantAttribute->addBeVariantAttributeOption($beVariantAttributeOption2);
         $this->beVariantAttribute->removeBeVariantAttributeOption($beVariantAttributeOption1);
 
-        $this->assertNotContains(
+        self::assertNotContains(
             $beVariantAttributeOption1,
             $this->beVariantAttribute->getBeVariantAttributeOptions()
         );
-        $this->assertContains(
+        self::assertContains(
             $beVariantAttributeOption2,
             $this->beVariantAttribute->getBeVariantAttributeOptions()
         );

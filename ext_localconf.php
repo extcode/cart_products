@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
@@ -52,26 +52,25 @@ $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
 // Icon Registry
 
-if (TYPO3_MODE === 'BE') {
-    $icons = [
-        'apps-pagetree-folder-cartproducts-products' => 'apps_pagetree_folder_cartproducts_products.svg',
-        'apps-pagetree-page-cartproducts-products' => 'apps_pagetree_page_cartproducts_products.svg',
-        'ext-cartproducts-wizard-icon' => 'cartproducts_plugin_wizard.svg',
-    ];
+$icons = [
+    'apps-pagetree-folder-cartproducts-products' => 'apps_pagetree_folder_cartproducts_products.svg',
+    'apps-pagetree-page-cartproducts-products' => 'apps_pagetree_page_cartproducts_products.svg',
+    'ext-cartproducts-extension-icon' => 'Extension.svg',
+    'ext-cartproducts-wizard-icon' => 'cartproducts_plugin_wizard.svg',
+];
 
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-        \TYPO3\CMS\Core\Imaging\IconRegistry::class
+$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    \TYPO3\CMS\Core\Imaging\IconRegistry::class
+);
+
+foreach ($icons as $identifier => $fileName) {
+    $iconRegistry->registerIcon(
+        $identifier,
+        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        [
+            'source' => 'EXT:cart_products/Resources/Public/Icons/' . $fileName,
+        ]
     );
-
-    foreach ($icons as $identifier => $fileName) {
-        $iconRegistry->registerIcon(
-            $identifier,
-            \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            [
-                'source' => 'EXT:cart_products/Resources/Public/Icons/' . $fileName,
-            ]
-        );
-    }
 }
 
 // TSconfig
@@ -81,13 +80,6 @@ if (TYPO3_MODE === 'BE') {
 ');
 
 // Cart Hooks
-
-// ke_search Hook - register indexer for products
-
-$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['registerIndexerConfiguration'][] =
-    \Extcode\CartProducts\Hooks\KeSearchIndexer::class;
-$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['customIndexer'][] =
-    \Extcode\CartProducts\Hooks\KeSearchIndexer::class;
 
 // processDatamapClass Hook
 

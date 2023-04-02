@@ -11,6 +11,4 @@ namespace Extcode\CartProducts\Domain\Repository\Product;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-class BeVariantAttributeRepository extends Repository
-{
-}
+class BeVariantAttributeRepository extends Repository {}

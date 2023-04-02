@@ -8,7 +8,6 @@ namespace Extcode\CartProducts\Domain\Repository\Product;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -18,8 +17,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 class ProductRepository extends Repository
 {
     /**
-     * @param ProductDemand $demand
-     *
      * @return QueryResultInterface|array
      */
     public function findDemanded(ProductDemand $demand)
@@ -59,12 +56,8 @@ class ProductRepository extends Repository
 
     /**
      * Find all products based on selected uids
-     *
-     * @param string $uids
-     *
-     * @return array
      */
-    public function findByUids($uids)
+    public function findByUids(string $uids): array
     {
         $uids = explode(',', $uids);
 
@@ -81,9 +74,9 @@ class ProductRepository extends Repository
     /**
      * @param ProductDemand $demand
      *
-     * @return array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface>
+     * @return array<string>
      */
-    protected function createOrderingsFromDemand(ProductDemand $demand)
+    protected function createOrderingsFromDemand(ProductDemand $demand): array
     {
         $orderings = [];
 
@@ -91,12 +84,13 @@ class ProductRepository extends Repository
 
         if (!empty($orderList)) {
             foreach ($orderList as $orderItem) {
-                list($orderField, $ascDesc) =
+                list($orderField, $orderDirection) =
                     GeneralUtility::trimExplode(' ', $orderItem, true);
-                if ($ascDesc) {
-                    $orderings[$orderField] = ((strtolower($ascDesc) === 'desc') ?
-                        QueryInterface::ORDER_DESCENDING :
-                        QueryInterface::ORDER_ASCENDING);
+                if (
+                    $orderDirection &&
+                    strtolower($orderDirection) === 'desc'
+                ) {
+                    $orderings[$orderField] = QueryInterface::ORDER_DESCENDING;
                 } else {
                     $orderings[$orderField] = QueryInterface::ORDER_ASCENDING;
                 }
@@ -106,13 +100,7 @@ class ProductRepository extends Repository
         return $orderings;
     }
 
-    /**
-     * @param QueryResultInterface $products
-     * @param array $uids
-     *
-     * @return array
-     */
-    protected function orderByField(QueryResultInterface $products, $uids)
+    protected function orderByField(QueryResultInterface $products, array $uids): array
     {
         $indexedProducts = [];
         $orderedProducts = [];

@@ -38,6 +38,11 @@
                 <target>End Datum</target>
             </trans-unit>
 
+            <trans-unit id="reaction.update-stock.description">
+                <source>Cart Products: Update Stock</source>
+                <target>Cart Products: Aktualisierung der Lagerbestands</target>
+            </trans-unit>
+
             <trans-unit id="tx_cartproducts_domain_model_product.filter.sku">
                 <source>SKU</source>
                 <target>Art.-Nr.</target>

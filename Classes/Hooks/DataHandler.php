@@ -14,7 +14,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DataHandler
 {
-
     /**
      * Flushes the cache if a news record was edited.
      * This happens on two levels: by UID and by PID.

@@ -8,6 +8,10 @@
                 <source>Shopping Cart - Example Configuration</source>
             </trans-unit>
 
+            <trans-unit id="tx_cart_domain_model_order_product.product_type.cart_products">
+                <source>Cart: Products</source>
+            </trans-unit>
+
             <trans-unit id="tx_cartproducts.flexform.productId">
                 <source>Product Id</source>
             </trans-unit>

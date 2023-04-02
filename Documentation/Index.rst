@@ -33,7 +33,7 @@ EXT: Cart Products
       Daniel Gohlke
 
    :E-Mail:
-      ext.cart@extco.de
+      ext@extco.de
 
    :License:
       This document is published under the Open Publication License

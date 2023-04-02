@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Extcode\CartProducts\Updates;
 
 /*
@@ -21,8 +23,8 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  */
 class SlugUpdater implements UpgradeWizardInterface, ChattyInterface
 {
-    const IDENTIFIER = 'cartProductsSlugUpdater';
-    const TABLE_NAME = 'tx_cartproducts_domain_model_product_product';
+    public const IDENTIFIER = 'cartProductsSlugUpdater';
+    public const TABLE_NAME = 'tx_cartproducts_domain_model_product_product';
 
     /**
      * @var OutputInterface
@@ -70,14 +72,7 @@ class SlugUpdater implements UpgradeWizardInterface, ChattyInterface
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable(self::TABLE_NAME);
         $queryBuilder->getRestrictions()->removeAll();
         $elementCount = $queryBuilder->count('uid')
-            ->from(self::TABLE_NAME)
-            ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq('path_segment', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)),
-                    $queryBuilder->expr()->isNull('path_segment')
-                )
-            )
-            ->execute()->fetchColumn(0);
+            ->from(self::TABLE_NAME)->where($queryBuilder->expr()->or($queryBuilder->expr()->eq('path_segment', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)), $queryBuilder->expr()->isNull('path_segment')))->executeQuery()->fetchFirstColumn();
 
         return (bool)$elementCount;
     }
@@ -100,14 +95,7 @@ class SlugUpdater implements UpgradeWizardInterface, ChattyInterface
         $queryBuilder = $connection->createQueryBuilder();
         $queryBuilder->getRestrictions()->removeAll();
         $statement = $queryBuilder->select('uid', 'title')
-            ->from(self::TABLE_NAME)
-            ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq('path_segment', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)),
-                    $queryBuilder->expr()->isNull('path_segment')
-                )
-            )
-            ->execute();
+            ->from(self::TABLE_NAME)->where($queryBuilder->expr()->or($queryBuilder->expr()->eq('path_segment', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)), $queryBuilder->expr()->isNull('path_segment')))->executeQuery();
         while ($record = $statement->fetch()) {
             $queryBuilder = $connection->createQueryBuilder();
             $queryBuilder->update(self::TABLE_NAME)

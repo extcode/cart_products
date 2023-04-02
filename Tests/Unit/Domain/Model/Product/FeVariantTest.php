@@ -14,7 +14,7 @@ class FeVariantTest extends UnitTestCase
 
     public function setUp(): void
     {
-        $this->feVariant = new FeVariant;
+        $this->feVariant = new FeVariant();
     }
 
     public function tearDown(): void
@@ -27,7 +27,7 @@ class FeVariantTest extends UnitTestCase
      */
     public function getSkuInitiallyReturnsEmptyString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->feVariant->getSku()
         );
@@ -40,7 +40,7 @@ class FeVariantTest extends UnitTestCase
     {
         $this->feVariant->setSku('SKU');
 
-        $this->assertSame(
+        self::assertSame(
             'SKU',
             $this->feVariant->getSku()
         );
@@ -51,7 +51,7 @@ class FeVariantTest extends UnitTestCase
      */
     public function getTitleInitiallyReturnsEmptyString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->feVariant->getTitle()
         );
@@ -64,7 +64,7 @@ class FeVariantTest extends UnitTestCase
     {
         $this->feVariant->setTitle('Title');
 
-        $this->assertSame(
+        self::assertSame(
             'Title',
             $this->feVariant->getTitle()
         );
@@ -75,7 +75,7 @@ class FeVariantTest extends UnitTestCase
      */
     public function getDescriptionInitiallyReturnsEmptyString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->feVariant->getDescription()
         );
@@ -88,7 +88,7 @@ class FeVariantTest extends UnitTestCase
     {
         $this->feVariant->setDescription('Description');
 
-        $this->assertSame(
+        self::assertSame(
             'Description',
             $this->feVariant->getDescription()
         );
@@ -99,7 +99,7 @@ class FeVariantTest extends UnitTestCase
      */
     public function getIsRequiredInitiallyReturnsFalse()
     {
-        $this->assertFalse(
+        self::assertFalse(
             $this->feVariant->getIsRequired()
         );
     }
@@ -111,7 +111,7 @@ class FeVariantTest extends UnitTestCase
     {
         $this->feVariant->setIsRequired(true);
 
-        $this->assertTrue(
+        self::assertTrue(
             $this->feVariant->getIsRequired()
         );
     }

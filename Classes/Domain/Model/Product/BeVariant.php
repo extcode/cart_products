@@ -10,61 +10,35 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class BeVariant extends AbstractEntity
 {
-    /**
-     * @var Product
-     */
-    protected $product;
+    protected ?Product $product = null;
+
+    protected ?BeVariantAttributeOption $beVariantAttributeOption1 = null;
+
+    protected ?BeVariantAttributeOption $beVariantAttributeOption2 = null;
+
+    protected ?BeVariantAttributeOption $beVariantAttributeOption3 = null;
+
+    protected float $price = 0.0;
 
     /**
-     * @var BeVariantAttributeOption
+     * @Cascade("remove")
+     * @var ObjectStorage<SpecialPrice>
      */
-    protected $beVariantAttributeOption1;
+    protected ObjectStorage $specialPrices;
 
-    /**
-     * @var BeVariantAttributeOption
-     */
-    protected $beVariantAttributeOption2;
+    protected int $priceCalcMethod = 0;
 
-    /**
-     * @var BeVariantAttributeOption
-     */
-    protected $beVariantAttributeOption3;
+    protected float $priceMeasure = 0.0;
 
-    /**
-     * @var float
-     */
-    protected $price = 0.0;
+    protected string $priceMeasureUnit = '';
 
-    /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Extcode\CartProducts\Domain\Model\Product\SpecialPrice>
-     */
-    protected $specialPrices = null;
-
-    /**
-     * @var int
-     */
-    protected $priceCalcMethod = 0;
-
-    /**
-     * @var float
-     */
-    protected $priceMeasure = 0.0;
-
-    /**
-     * @var string
-     */
-    protected $priceMeasureUnit = '';
-
-    /**
-     * @var int
-     */
-    protected $stock = 0;
+    protected int $stock = 0;
 
     public function __construct()
     {
@@ -128,7 +102,10 @@ class BeVariant extends AbstractEntity
                 $calc_price = 0;
         }
 
-        if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount']) {
+        if (
+            isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount']) &&
+            is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])
+        ) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'] as $funcRef) {
                 if ($funcRef) {
                     $params = [
@@ -176,7 +153,10 @@ class BeVariant extends AbstractEntity
                 $calc_price = 0;
         }
 
-        if (isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])) {
+        if (
+            isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount']) &&
+            is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])
+        ) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'] as $funcRef) {
                 if ($funcRef) {
                     $params = [
@@ -252,35 +232,32 @@ class BeVariant extends AbstractEntity
 
     public function getBestSpecialPrice(array $frontendUserGroupIds = []): ?SpecialPrice
     {
-        /** @var SpecialPrice $bestSpecialPrice */
         $bestSpecialPrice = null;
 
-        if ($this->getSpecialPrices()) {
-            foreach ($this->getSpecialPrices() as $specialPrice) {
-                if ($bestSpecialPrice === null) {
-                    if (!$specialPrice->getFrontendUserGroup() ||
-                        in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
-                    ) {
-                        $bestSpecialPrice = $specialPrice;
-                    }
-                    continue;
-                }
-
-                if (
-                    (
-                        ($specialPrice->getPrice() < $bestSpecialPrice->getPrice()) &&
-                        in_array($this->priceCalcMethod, [0, 1, 4, 5])
-                    ) ||
-                    (
-                        ($specialPrice->getPrice() > $bestSpecialPrice->getPrice()) &&
-                        in_array($this->priceCalcMethod, [2, 3])
-                    )
+        foreach ($this->getSpecialPrices() as $specialPrice) {
+            if ($bestSpecialPrice === null) {
+                if (!$specialPrice->getFrontendUserGroup() ||
+                    in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
                 ) {
-                    if (!$specialPrice->getFrontendUserGroup() ||
-                        in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
-                    ) {
-                        $bestSpecialPrice = $specialPrice;
-                    }
+                    $bestSpecialPrice = $specialPrice;
+                }
+                continue;
+            }
+
+            if (
+                (
+                    ($specialPrice->getPrice() < $bestSpecialPrice->getPrice()) &&
+                    in_array($this->priceCalcMethod, [0, 1, 4, 5])
+                ) ||
+                (
+                    ($specialPrice->getPrice() > $bestSpecialPrice->getPrice()) &&
+                    in_array($this->priceCalcMethod, [2, 3])
+                )
+            ) {
+                if (!$specialPrice->getFrontendUserGroup() ||
+                    in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
+                ) {
+                    $bestSpecialPrice = $specialPrice;
                 }
             }
         }
@@ -333,17 +310,15 @@ class BeVariant extends AbstractEntity
     public function getBasePrice(): ?float
     {
         //TODO: respects different measuring units between variant and product
-        if (!$this->getProduct()->getBasePriceMeasure() > 0) {
+        if (
+            !$this->product ||
+            !$this->product->getIsMeasureUnitCompatibility() ||
+            !$this->getPriceMeasure() > 0
+        ) {
             return null;
         }
-        if (!$this->getPriceMeasure() > 0) {
-            return null;
-        }
-        $ratio = $this->getProduct()->getBasePriceMeasure() / $this->getPriceMeasure();
 
-        $price = round($this->price * $ratio * 100.0) / 100.0;
-
-        return $price;
+        return round($this->price * $this->getMeasureUnitFactor() * 100.0) / 100.0;
     }
 
     public function getPriceMeasure(): float
@@ -429,7 +404,7 @@ class BeVariant extends AbstractEntity
 
     public function getIsAvailable(): bool
     {
-        return boolval($this->stock);
+        return (bool)($this->stock);
     }
 
     public function getSku(): string

@@ -9,6 +9,7 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
+use Extcode\Cart\Domain\Model\Product\AbstractProduct;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class BeVariantAttribute extends AbstractProduct
@@ -16,7 +17,7 @@ class BeVariantAttribute extends AbstractProduct
     /**
      * @var ObjectStorage<BeVariantAttributeOption>
      */
-    protected $beVariantAttributeOptions = null;
+    protected ObjectStorage $beVariantAttributeOptions;
 
     public function __construct()
     {

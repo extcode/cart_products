@@ -31,7 +31,7 @@ class ProductTest extends UnitTestCase
      *
      * @return array
      */
-    public function bestSpecialPriceProvider()
+    public static function bestSpecialPriceProvider()
     {
         return [
             [100.0, 80.0, 75.0, 90.0, 75.0],
@@ -45,7 +45,7 @@ class ProductTest extends UnitTestCase
      *
      * @return array
      */
-    public function bestSpecialPriceDiscountProvider()
+    public static function bestSpecialPriceDiscountProvider()
     {
         return [
             [100.0, 80.0, 75.0, 90.0, 25.0],
@@ -59,7 +59,7 @@ class ProductTest extends UnitTestCase
      */
     public function getProductTypeReturnsInitialValueForProductType()
     {
-        $this->assertSame(
+        self::assertSame(
             'simple',
             $this->product->getProductType()
         );
@@ -72,7 +72,7 @@ class ProductTest extends UnitTestCase
     {
         $this->product->setProductType('configurable');
 
-        $this->assertSame(
+        self::assertSame(
             'configurable',
             $this->product->getProductType()
         );
@@ -83,7 +83,7 @@ class ProductTest extends UnitTestCase
      */
     public function getTeaserReturnsInitialValueForTeaser()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->product->getTeaser()
         );
@@ -96,7 +96,7 @@ class ProductTest extends UnitTestCase
     {
         $this->product->setTeaser('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
             $this->product->getTeaser()
         );
@@ -107,7 +107,7 @@ class ProductTest extends UnitTestCase
      */
     public function getMinNumberInOrderInitiallyReturnsMinNumberInOrder()
     {
-        $this->assertSame(
+        self::assertSame(
             0,
             $this->product->getMinNumberInOrder()
         );
@@ -145,7 +145,7 @@ class ProductTest extends UnitTestCase
         $this->product->setMaxNumberInOrder($minNumber);
         $this->product->setMinNumberInOrder($minNumber);
 
-        $this->assertSame(
+        self::assertSame(
             $minNumber,
             $this->product->getMinNumberInOrder()
         );
@@ -156,7 +156,7 @@ class ProductTest extends UnitTestCase
      */
     public function getMaxNumberInOrderInitiallyReturnsMaxNumberInOrder()
     {
-        $this->assertSame(
+        self::assertSame(
             0,
             $this->product->getMaxNumberInOrder()
         );
@@ -182,7 +182,7 @@ class ProductTest extends UnitTestCase
 
         $this->product->setMaxNumberInOrder($maxNumber);
 
-        $this->assertSame(
+        self::assertSame(
             $maxNumber,
             $this->product->getMaxNumberInOrder()
         );
@@ -208,7 +208,7 @@ class ProductTest extends UnitTestCase
      */
     public function getPriceReturnsInitialValueForFloat()
     {
-        $this->assertSame(
+        self::assertSame(
             0.0,
             $this->product->getPrice()
         );
@@ -221,7 +221,7 @@ class ProductTest extends UnitTestCase
     {
         $this->product->setPrice(3.14159265);
 
-        $this->assertSame(
+        self::assertSame(
             3.14159265,
             $this->product->getPrice()
         );
@@ -232,7 +232,7 @@ class ProductTest extends UnitTestCase
      */
     public function getSpecialPricesInitiallyIsEmpty()
     {
-        $this->assertEmpty(
+        self::assertEmpty(
             $this->product->getSpecialPrices()
         );
     }
@@ -252,7 +252,7 @@ class ProductTest extends UnitTestCase
 
         $this->product->setSpecialPrices($objectStorage);
 
-        $this->assertContains(
+        self::assertContains(
             $specialPrice,
             $this->product->getSpecialPrices()
         );
@@ -270,7 +270,7 @@ class ProductTest extends UnitTestCase
 
         $this->product->addSpecialPrice($specialPrice);
 
-        $this->assertContains(
+        self::assertContains(
             $specialPrice,
             $this->product->getSpecialPrices()
         );
@@ -289,7 +289,7 @@ class ProductTest extends UnitTestCase
         $this->product->addSpecialPrice($specialPrice);
         $this->product->removeSpecialPrice($specialPrice);
 
-        $this->assertEmpty(
+        self::assertEmpty(
             $this->product->getSpecialPrices()
         );
     }
@@ -304,7 +304,7 @@ class ProductTest extends UnitTestCase
         $product = new Product();
         $product->setPrice($price);
 
-        $this->assertSame(
+        self::assertSame(
             0.0,
             $product->getBestSpecialPriceDiscount()
         );
@@ -336,7 +336,7 @@ class ProductTest extends UnitTestCase
         $specialPrice3->setPrice($special3);
         $product->addSpecialPrice($specialPrice3);
 
-        $this->assertSame(
+        self::assertSame(
             $expectedBestSpecialPrice,
             $product->getBestSpecialPrice()
         );
@@ -358,7 +358,7 @@ class ProductTest extends UnitTestCase
 
         $product->addSpecialPrice($specialPrice);
 
-        $this->assertSame(
+        self::assertSame(
             10.0,
             $product->getBestSpecialPricePercentageDiscount()
         );
@@ -390,7 +390,7 @@ class ProductTest extends UnitTestCase
         $specialPrice3->setPrice($special3);
         $product->addSpecialPrice($specialPrice3);
 
-        $this->assertSame(
+        self::assertSame(
             $expectedBestSpecialPriceDiscount,
             $product->getBestSpecialPriceDiscount()
         );
@@ -403,7 +403,7 @@ class ProductTest extends UnitTestCase
     {
         $product = new Product();
 
-        $this->assertSame(
+        self::assertSame(
             PHP_INT_MAX,
             $product->getStock()
         );
@@ -417,7 +417,7 @@ class ProductTest extends UnitTestCase
         $product = new Product();
         $product->setHandleStock(true);
 
-        $this->assertSame(
+        self::assertSame(
             0,
             $product->getStock()
         );
@@ -434,14 +434,14 @@ class ProductTest extends UnitTestCase
         $product->setStock($stock);
         $product->setHandleStock(true);
 
-        $this->assertSame(
+        self::assertSame(
             $stock,
             $product->getStock()
         );
 
         $product->setHandleStock(false);
 
-        $this->assertSame(
+        self::assertSame(
             PHP_INT_MAX,
             $product->getStock()
         );
@@ -458,7 +458,7 @@ class ProductTest extends UnitTestCase
         $product->setHandleStock(true);
         $product->addToStock($numberOfProducts);
 
-        $this->assertSame(
+        self::assertSame(
             $numberOfProducts,
             $product->getStock()
         );
@@ -477,7 +477,7 @@ class ProductTest extends UnitTestCase
         $product->setStock($stock);
         $product->removeFromStock($numberOfProducts);
 
-        $this->assertSame(
+        self::assertSame(
             ($stock - $numberOfProducts),
             $product->getStock()
         );
@@ -490,7 +490,7 @@ class ProductTest extends UnitTestCase
     {
         $product = new Product();
 
-        $this->assertFalse(
+        self::assertFalse(
             $product->isHandleStock()
         );
     }
@@ -503,7 +503,7 @@ class ProductTest extends UnitTestCase
         $product = new Product();
         $product->setHandleStock(true);
 
-        $this->assertTrue(
+        self::assertTrue(
             $product->isHandleStock()
         );
     }
@@ -515,7 +515,7 @@ class ProductTest extends UnitTestCase
     {
         $product = new Product();
 
-        $this->assertTrue(
+        self::assertTrue(
             $product->getIsAvailable()
         );
     }
@@ -528,7 +528,7 @@ class ProductTest extends UnitTestCase
         $product = new Product();
         $product->setHandleStock(true);
 
-        $this->assertFalse(
+        self::assertFalse(
             $product->getIsAvailable()
         );
     }
@@ -542,7 +542,7 @@ class ProductTest extends UnitTestCase
         $product->setStock(10);
         $product->setHandleStock(true);
 
-        $this->assertTrue(
+        self::assertTrue(
             $product->getIsAvailable()
         );
     }
@@ -557,7 +557,7 @@ class ProductTest extends UnitTestCase
         $product->setHandleStock(true);
         $product->setHandleStockInVariants(true);
 
-        $this->assertFalse(
+        self::assertFalse(
             $product->getIsAvailable()
         );
     }
@@ -570,7 +570,7 @@ class ProductTest extends UnitTestCase
         $productBackendVariant = $this->createMock(
             BeVariant::class
         );
-        $productBackendVariant->expects($this->any())->method('getIsAvailable')->will($this->returnValue(false));
+        $productBackendVariant->expects(self::any())->method('getIsAvailable')->willReturn(false);
 
         $product = new Product();
         $product->addBeVariant($productBackendVariant);
@@ -578,7 +578,7 @@ class ProductTest extends UnitTestCase
         $product->setHandleStock(true);
         $product->setHandleStockInVariants(true);
 
-        $this->assertFalse(
+        self::assertFalse(
             $product->getIsAvailable()
         );
     }
@@ -591,7 +591,7 @@ class ProductTest extends UnitTestCase
         $productBackendVariant = $this->createMock(
             BeVariant::class
         );
-        $productBackendVariant->expects($this->any())->method('getIsAvailable')->will($this->returnValue(true));
+        $productBackendVariant->expects(self::any())->method('getIsAvailable')->willReturn(true);
 
         $product = new Product();
         $product->addBeVariant($productBackendVariant);
@@ -599,289 +599,8 @@ class ProductTest extends UnitTestCase
         $product->setHandleStock(true);
         $product->setHandleStockInVariants(true);
 
-        $this->assertTrue(
+        self::assertTrue(
             $product->getIsAvailable()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPriceMeasure()
-    {
-        $this->assertSame(
-            0.0,
-            $this->product->getPriceMeasure()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setPriceMeasureSetsPriceMeasure()
-    {
-        $priceMeasure = 10.99;
-
-        $this->product->setPriceMeasure($priceMeasure);
-
-        $this->assertSame(
-            $priceMeasure,
-            $this->product->getPriceMeasure()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPriceMeasureUnit()
-    {
-        $this->assertSame(
-            '',
-            $this->product->getPriceMeasureUnit()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setPriceMeasureUnitSetsPriceMeasureUnit()
-    {
-        $priceMeasureUnit = 'l';
-
-        $this->product->setPriceMeasureUnit($priceMeasureUnit);
-
-        $this->assertSame(
-            $priceMeasureUnit,
-            $this->product->getPriceMeasureUnit()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getBasePriceMeasureUnit()
-    {
-        $this->assertSame(
-            '',
-            $this->product->getBasePriceMeasureUnit()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setBasePriceMeasureUnitSetsBasePriceMeasureUnit()
-    {
-        $priceBaseMeasureUnit = 'l';
-
-        $this->product->setBasePriceMeasureUnit($priceBaseMeasureUnit);
-
-        $this->assertSame(
-            $priceBaseMeasureUnit,
-            $this->product->getBasePriceMeasureUnit()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getIsMeasureUnitCompatibilityInitiallyRetrunsFalse()
-    {
-        $product = new Product();
-
-        $this->assertFalse(
-            $product->getIsMeasureUnitCompatibility()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getIsMeasureUnitCompatibilityAndNotSetPriceMeasureUnitsRetrunsFalse()
-    {
-        $product = new Product();
-        $product->setBasePriceMeasureUnit('l');
-
-        $this->assertFalse(
-            $product->getIsMeasureUnitCompatibility()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getIsMeasureUnitCompatibilityAndNotSetBasePriceMeasureUnitsRetrunsFalse()
-    {
-        $product = new Product();
-        $product->setPriceMeasureUnit('l');
-
-        $this->assertFalse(
-            $product->getIsMeasureUnitCompatibility()
-        );
-    }
-
-    /**
-     * Measurement Units Provider
-     *
-     * @return array
-     */
-    public function measureUnitsProvider()
-    {
-        return [
-            ['mg',  'kg', 1000000.0, 1000.0, 1000.0],
-            ['g',   'kg', 1000.0,    1000.0, 1.0],
-            ['kg',  'kg', 1.0,       1000.0, 0.001],
-            ['ml',  'l',  1000.0,    1000.0, 1.0],
-            ['cl',  'l',  100.0,     1000.0, 0.1],
-            ['l',   'l',  1.0,       1000.0, 0.001],
-            ['cbm', 'l',  0.001,     1.0,    0.001],
-            ['mm',  'm',  1000.0,    1000.0, 1.0],
-            ['cm',  'm',  100.0,     1000.0, 0.1],
-            ['m',   'm',  1.0,       2.0,    0.5],
-            ['km',  'm',  0.001,     2.0,    0.0005],
-            ['m2',  'm2', 1.0,       20.0,   0.05],
-        ];
-    }
-
-    /**
-     * @test
-     * @dataProvider measureUnitsProvider
-     */
-    public function getIsMeasureUnitCompatibilityRetrunsTrueOnSameTypeOfMeasureUnit(
-        $sourceMeasureUnit,
-        $targetMeasureUnit,
-        $factor,
-        $priceMeasure,
-        $calculatedBasePrice
-    ) {
-        $product = new Product();
-        $product->setPriceMeasureUnit($sourceMeasureUnit);
-        $product->setBasePriceMeasureUnit($targetMeasureUnit);
-
-        $this->assertTrue(
-            $product->getIsMeasureUnitCompatibility()
-        );
-    }
-
-    /**
-     * @test
-     * @dataProvider measureUnitsProvider
-     */
-    public function getMeasureUnitFactorForGivenPriceMeasureUnitAndBasePriceMeasureUnitRetrunsFactor(
-        $sourceMeasureUnit,
-        $targetMeasureUnit,
-        $factor,
-        $priceMeasure,
-        $calculatedBasePrice
-    ) {
-        $product = new Product();
-        $product->setPriceMeasureUnit($sourceMeasureUnit);
-        $product->setBasePriceMeasureUnit($targetMeasureUnit);
-        $product->setPriceMeasure(1);
-
-        $this->assertSame(
-            $factor,
-            $product->getMeasureUnitFactor()
-        );
-    }
-
-    /**
-     * @test
-     * @dataProvider measureUnitsProvider
-     */
-    public function getCalculatedBasePriceForGivenPriceMeasureUnitAndBasePriceMeasureUnitRetrunsPrice(
-        $sourceMeasureUnit,
-        $targetMeasureUnit,
-        $factor,
-        $priceMeasure,
-        $calculatedBasePrice
-    ) {
-        $product = new Product();
-        $product->setPriceMeasureUnit($sourceMeasureUnit);
-        $product->setBasePriceMeasureUnit($targetMeasureUnit);
-        $product->setPriceMeasure($priceMeasure);
-
-        $this->assertSame(
-            $calculatedBasePrice,
-            $product->getMeasureUnitFactor()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getServiceAttribute1ReturnsZero()
-    {
-        $this->assertSame(
-            0.0,
-            $this->product->getServiceAttribute1()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setServiceAttribute1SetsServiceAttribute1()
-    {
-        $serviceAttribute1 = 1.0;
-
-        $this->product->setServiceAttribute1($serviceAttribute1);
-
-        $this->assertSame(
-            $serviceAttribute1,
-            $this->product->getServiceAttribute1()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getServiceAttribute2ReturnsZero()
-    {
-        $this->assertSame(
-            0.0,
-            $this->product->getServiceAttribute2()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setServiceAttribute2SetsServiceAttribute2()
-    {
-        $serviceAttribute2 = 2.0;
-
-        $this->product->setServiceAttribute2($serviceAttribute2);
-
-        $this->assertSame(
-            $serviceAttribute2,
-            $this->product->getServiceAttribute2()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getServiceAttribute3ReturnsZero()
-    {
-        $this->assertSame(
-            0.0,
-            $this->product->getServiceAttribute3()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setServiceAttribute3SetsServiceAttribute3()
-    {
-        $serviceAttribute3 = 3.0;
-
-        $this->product->setServiceAttribute3($serviceAttribute3);
-
-        $this->assertSame(
-            $serviceAttribute3,
-            $this->product->getServiceAttribute3()
         );
     }
 
@@ -890,7 +609,7 @@ class ProductTest extends UnitTestCase
      */
     public function getTaxClassIdInitiallyReturnsTaxClassId()
     {
-        $this->assertSame(
+        self::assertSame(
             1,
             $this->product->getTaxClassId()
         );
@@ -905,7 +624,7 @@ class ProductTest extends UnitTestCase
 
         $this->product->setTaxClassId($taxClassId);
 
-        $this->assertSame(
+        self::assertSame(
             $taxClassId,
             $this->product->getTaxClassId()
         );
@@ -916,7 +635,7 @@ class ProductTest extends UnitTestCase
      */
     public function getBeVariantAttribute1InitiallyIsNull()
     {
-        $this->assertNull(
+        self::assertNull(
             $this->product->getBeVariantAttribute1()
         );
     }
@@ -930,7 +649,7 @@ class ProductTest extends UnitTestCase
 
         $this->product->setBeVariantAttribute1($beVariantAttribute);
 
-        $this->assertSame(
+        self::assertSame(
             $beVariantAttribute,
             $this->product->getBeVariantAttribute1()
         );
@@ -941,7 +660,7 @@ class ProductTest extends UnitTestCase
      */
     public function getBeVariantAttribute2InitiallyIsNull()
     {
-        $this->assertNull(
+        self::assertNull(
             $this->product->getBeVariantAttribute2()
         );
     }
@@ -955,7 +674,7 @@ class ProductTest extends UnitTestCase
 
         $this->product->setBeVariantAttribute2($beVariantAttribute);
 
-        $this->assertSame(
+        self::assertSame(
             $beVariantAttribute,
             $this->product->getBeVariantAttribute2()
         );
@@ -966,7 +685,7 @@ class ProductTest extends UnitTestCase
      */
     public function getBeVariantAttribute3InitiallyIsNull()
     {
-        $this->assertNull(
+        self::assertNull(
             $this->product->getBeVariantAttribute3()
         );
     }
@@ -980,7 +699,7 @@ class ProductTest extends UnitTestCase
 
         $this->product->setBeVariantAttribute3($beVariantAttribute);
 
-        $this->assertSame(
+        self::assertSame(
             $beVariantAttribute,
             $this->product->getBeVariantAttribute3()
         );
@@ -991,7 +710,7 @@ class ProductTest extends UnitTestCase
      */
     public function getVariantsInitiallyIsEmpty()
     {
-        $this->assertEmpty(
+        self::assertEmpty(
             $this->product->getBeVariants()
         );
     }
@@ -1008,7 +727,7 @@ class ProductTest extends UnitTestCase
 
         $this->product->setBeVariants($objectStorage);
 
-        $this->assertContains(
+        self::assertContains(
             $variant,
             $this->product->getBeVariants()
         );
@@ -1023,7 +742,7 @@ class ProductTest extends UnitTestCase
 
         $this->product->addBeVariant($variant);
 
-        $this->assertContains(
+        self::assertContains(
             $variant,
             $this->product->getBeVariants()
         );
@@ -1039,7 +758,7 @@ class ProductTest extends UnitTestCase
         $this->product->addBeVariant($variant);
         $this->product->removeBeVariant($variant);
 
-        $this->assertEmpty(
+        self::assertEmpty(
             $this->product->getBeVariants()
         );
     }

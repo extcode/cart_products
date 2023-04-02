@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Extcode\CartProducts\EventListener;
 
 /*
@@ -10,8 +12,8 @@ namespace Extcode\CartProducts\EventListener;
  */
 
 use Extcode\Cart\Event\CheckProductAvailabilityEvent;
+use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
-use Extcode\CartProducts\Utility\ProductUtility;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -24,17 +26,10 @@ class CheckProductAvailability
      */
     protected $productRepository;
 
-    /**
-     * @var ProductUtility
-     */
-    protected $productUtility;
-
     public function __construct(
-        ProductRepository $productRepository,
-        ProductUtility $productUtility
+        ProductRepository $productRepository
     ) {
         $this->productRepository = $productRepository;
-        $this->productUtility = $productUtility;
     }
 
     public function __invoke(CheckProductAvailabilityEvent $event): void
@@ -55,7 +50,10 @@ class CheckProductAvailability
 
         $product = $this->productRepository->findByIdentifier($cartProduct->getProductId());
 
-        if (!$product->isHandleStock()) {
+        if (
+            !$product instanceof Product ||
+            !$product->isHandleStock()
+        ) {
             return;
         }
 
@@ -65,8 +63,8 @@ class CheckProductAvailability
             } else {
                 $compareQuantity = $quantity;
             }
-            if (($mode === 'add') && $cart->getProduct($cartProduct->getId())) {
-                $compareQuantity += $cart->getProduct($cartProduct->getId())->getQuantity();
+            if (($mode === 'add') && $cart->getProductById($cartProduct->getId())) {
+                $compareQuantity += $cart->getProductById($cartProduct->getId())->getQuantity();
             }
 
             if ($compareQuantity > $product->getStock()) {
@@ -76,11 +74,15 @@ class CheckProductAvailability
             return;
         }
 
+        $compareQuantity = 0;
+
         foreach ($cartProduct->getBeVariants() as $beVariant) {
-            if (($mode === 'add') && $cart->getProduct($cartProduct->getId())) {
-                if ($cart->getProduct($cartProduct->getId())->getBeVariant($beVariant->getId())) {
-                    $compareQuantity += (int)$cart->getProduct($cartProduct->getId())->getBeVariant($beVariant->getId())->getQuantity();
-                }
+            if (
+                $mode === 'add' &&
+                $cart->getProductById($cartProduct->getId()) &&
+                $cart->getProductById($cartProduct->getId())->getBeVariantById($beVariant->getId())
+            ) {
+                $compareQuantity += (int)$cart->getProductById($cartProduct->getId())->getBeVariantById($beVariant->getId())->getQuantity();
             }
 
             if ($compareQuantity > $beVariant->getStock()) {
@@ -96,7 +98,7 @@ class CheckProductAvailability
     {
         $event->setAvailable(false);
         $event->addMessage(
-            $flashMessage = GeneralUtility::makeInstance(
+            GeneralUtility::makeInstance(
                 FlashMessage::class,
                 LocalizationUtility::translate(
                     'tx_cart.error.stock_handling.update',

@@ -9,18 +9,12 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class ProductRepositoryTest extends FunctionalTestCase
 {
-    /**
-     * @var ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/cart',
         'typo3conf/ext/cart_products',
     ];
+
+    protected ProductRepository $productRepository;
 
     public function setUp(): void
     {
@@ -28,9 +22,9 @@ class ProductRepositoryTest extends FunctionalTestCase
 
         $this->productRepository = GeneralUtility::makeInstance(ProductRepository::class);
 
-        $fixturePath = ORIGINAL_ROOT . 'typo3conf/ext/cart_products/Tests/Functional/Fixtures/';
-        $this->importDataSet($fixturePath . 'pages.xml');
-        $this->importDataSet($fixturePath . 'tx_cartproducts_domain_model_product_product.xml');
+        $fixturePath = __DIR__ . '/../../../Fixtures/';
+        $this->importCSVDataSet($fixturePath . 'pages.csv');
+        $this->importCSVDataSet($fixturePath . 'tx_cartproducts_domain_model_product_product.csv');
     }
 
     /**
@@ -45,7 +39,7 @@ class ProductRepositoryTest extends FunctionalTestCase
 
         $products = $this->productRepository->findDemanded($productDemand);
 
-        $this->assertCount(
+        self::assertCount(
             1,
             $products
         );
@@ -63,7 +57,7 @@ class ProductRepositoryTest extends FunctionalTestCase
 
         $products = $this->productRepository->findDemanded($productDemand);
 
-        $this->assertCount(
+        self::assertCount(
             1,
             $products
         );
@@ -72,7 +66,7 @@ class ProductRepositoryTest extends FunctionalTestCase
 
         $products = $this->productRepository->findDemanded($productDemand);
 
-        $this->assertCount(
+        self::assertCount(
             3,
             $products
         );
@@ -85,7 +79,7 @@ class ProductRepositoryTest extends FunctionalTestCase
     {
         $products = $this->productRepository->findByUids('3,1,2,5,4');
 
-        $this->assertCount(
+        self::assertCount(
             5,
             $products
         );
@@ -93,7 +87,7 @@ class ProductRepositoryTest extends FunctionalTestCase
         //product 6 and 7 are hidden or deleted
         $products = $this->productRepository->findByUids('3,1,2,5,4,6,7');
 
-        $this->assertCount(
+        self::assertCount(
             5,
             $products
         );
@@ -108,7 +102,7 @@ class ProductRepositoryTest extends FunctionalTestCase
         $products = $this->productRepository->findByUids(implode(',', $listOfProductIds));
 
         foreach ($products as $key => $product) {
-            $this->assertSame(
+            self::assertSame(
                 $listOfProductIds[$key],
                 $product->getUid()
             );

@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Extcode\CartProducts\Hooks;
 
 /*
@@ -87,10 +89,20 @@ class DatamapDataHandlerHook
         if (empty($listType) || substr($listType, 0, 11) !== 'cartproducts_') {
             return true;
         }
-        if (($doktype === 183) && ($listType === 'cartproducts_singleproduct')) {
-            return true;
-        }
-        if (($doktype !== 183) && ($listType === 'cartproducts_products' || $listType === 'cartproducts_slots')) {
+
+        if (
+            (
+                ($doktype === 183) && (
+                    $listType === 'cartproducts_singleproduct'
+                )
+            ) ||
+            (
+                ($doktype !== 183) && (
+                    $listType === 'cartproducts_products' ||
+                    $listType === 'cartproducts_slots'
+                )
+            )
+        ) {
             return true;
         }
 

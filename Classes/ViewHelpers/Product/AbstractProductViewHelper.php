@@ -9,9 +9,10 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
  * LICENSE file that was distributed with this source code.
  */
 
+use Extcode\Cart\Domain\Model\FrontendUser;
+use Extcode\Cart\Domain\Repository\FrontendUserRepository;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 abstract class AbstractProductViewHelper extends AbstractViewHelper
@@ -40,20 +41,32 @@ abstract class AbstractProductViewHelper extends AbstractViewHelper
      */
     protected function getFrontendUserGroupIds()
     {
-        $feGroupIds = [];
-        $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
-        if ($feUserId) {
-            $frontendUserRepository = GeneralUtility::makeInstance(
-                FrontendUserRepository::class
-            );
-            $feUser = $frontendUserRepository->findByUid($feUserId);
-            $feGroups = $feUser->getUsergroup();
-            if ($feGroups) {
-                foreach ($feGroups as $feGroup) {
-                    $feGroupIds[] = $feGroup->getUid();
-                }
-            }
+        $user = $GLOBALS['TSFE']->fe_user->user;
+        if (!$user || !(int)$user['uid']) {
+            return [];
         }
+
+        return $this->getFrontendUserIds((int)$user['uid']);
+    }
+
+    protected function getFrontendUserIds(int $feUserId): array
+    {
+        $feGroupIds = [];
+
+        $frontendUserRepository = GeneralUtility::makeInstance(
+            FrontendUserRepository::class
+        );
+        $feUser = $frontendUserRepository->findByUid($feUserId);
+
+        if (!$feUser instanceof FrontendUser) {
+            return [];
+        }
+
+        $feGroups = $feUser->getUsergroup();
+        foreach ($feGroups as $feGroup) {
+            $feGroupIds[] = $feGroup->getUid();
+        }
+
         return $feGroupIds;
     }
 }

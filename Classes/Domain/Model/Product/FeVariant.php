@@ -9,31 +9,24 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class FeVariant extends AbstractEntity
 {
     /**
-     * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
-    protected $sku = '';
+    protected string $sku = '';
 
     /**
-     * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
-    protected $title = '';
+    protected string $title = '';
 
-    /**
-     * @var string
-     */
-    protected $description = '';
+    protected string $description = '';
 
-    /**
-     * @var bool
-     */
-    protected $isRequired = false;
+    protected bool $isRequired = false;
 
     public function getSku(): string
     {

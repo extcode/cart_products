@@ -13,7 +13,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class TtContent extends AbstractEntity
 {
-
     /**
      * @var \DateTime
      */
@@ -349,34 +348,22 @@ class TtContent extends AbstractEntity
      */
     protected $txGridelementsColumns;
 
-    /**
-     * @return DateTime
-     */
-    public function getCrdate()
+    public function getCrdate(): \DateTime
     {
         return $this->crdate;
     }
 
-    /**
-     * @param $crdate
-     */
-    public function setCrdate($crdate)
+    public function setCrdate(\DateTime $crdate)
     {
         $this->crdate = $crdate;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getTstamp()
+    public function getTstamp(): \DateTime
     {
         return $this->tstamp;
     }
 
-    /**
-     * @param $tstamp
-     */
-    public function setTstamp($tstamp)
+    public function setTstamp(\DateTime $tstamp)
     {
         $this->tstamp = $tstamp;
     }

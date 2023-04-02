@@ -2,77 +2,52 @@
 
 namespace Extcode\CartProducts\Domain\Model;
 
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /*
  * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
 {
-    /**
-     * Images
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     */
-    protected $images;
+    protected int $cartProductListPid;
+
+    protected int $cartProductShowPid;
 
     /**
-     * Cart Product List Pid
-     *
-     * @var int
+     * @var ObjectStorage<FileReference>
      */
-    protected $cartProductListPid;
+    protected ObjectStorage $images;
 
-    /**
-     * Cart Product Single Pid
-     *
-     * @var int
-     */
-    protected $cartProductShowPid;
-
-    /**
-     * Returns Cart Product List Pid
-     *
-     * @return int
-     */
-    public function getCartProductListPid()
+    public function getCartProductListPid(): ?int
     {
         return $this->cartProductListPid;
     }
 
-    /**
-     * Returns Cart Product Single Pid
-     *
-     * @return int
-     */
-    public function getCartProductShowPid()
+    public function getCartProductShowPid(): ?int
     {
         return $this->cartProductShowPid;
     }
 
     /**
-     * Returns images
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @return ObjectStorage<FileReference>
      */
-    public function getImages()
+    public function getImages(): ObjectStorage
     {
         return $this->images;
     }
 
-    /**
-     * Returns the first image
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
-     */
-    public function getFirstImage()
+    public function getFirstImage(): ?FileReference
     {
         $images = $this->getImages();
+
         foreach ($images as $image) {
             return $image;
         }
+
         return null;
     }
 }

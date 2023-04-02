@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 $_LLL_general = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf';
 $_LLL = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf';
@@ -13,7 +13,6 @@ return [
         'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
 
         'versioningWS' => true,
 
@@ -21,10 +20,10 @@ return [
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
-            'fe_group' => 'frontend_user_group'
+            'fe_group' => 'frontend_user_group',
         ],
         'searchFields' => 'price',
-        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/QuantityDiscount.png'
+        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/QuantityDiscount.png',
     ],
     'types' => [
         '1' => ['showitem' => 'hidden, frontend_user_group, quantity, price'],
@@ -40,7 +39,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
 
         'hidden' => [
@@ -57,9 +56,10 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,int',
+                'eval' => 'int',
                 'default' => '0',
-            ]
+                'required' => true,
+            ],
         ],
         'price' => [
             'exclude' => 1,
@@ -67,9 +67,10 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,double2',
+                'eval' => 'double2',
                 'default' => '0.00',
-            ]
+                'required' => true,
+            ],
         ],
 
         'frontend_user_group' => [
@@ -82,11 +83,11 @@ return [
                 'foreign_table' => 'fe_groups',
                 'size' => 1,
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'minitems' => 0,
                 'maxitems' => 1,
-            ]
+            ],
         ],
 
         'product' => [

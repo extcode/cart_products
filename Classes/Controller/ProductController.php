@@ -9,69 +9,56 @@ namespace Extcode\CartProducts\Controller;
  * LICENSE file that was distributed with this source code.
  */
 
+use Extcode\Cart\Domain\Model\Cart\Cart;
 use Extcode\Cart\Service\SessionHandler;
 use Extcode\Cart\Utility\CartUtility;
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Repository\CategoryRepository;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\Web\RequestBuilder;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Service\ExtensionService;
 
 class ProductController extends ActionController
 {
-    /**
-     * @var \Extcode\Cart\Service\SessionHandler
-     */
-    protected $sessionHandler;
+    protected ExtensionService $extensionService;
 
-    /**
-     * @var \Extcode\Cart\Utility\CartUtility
-     */
-    protected $cartUtility;
+    protected SessionHandler $sessionHandler;
 
-    /**
-     * @var ProductRepository
-     */
-    protected $productRepository;
+    protected Cart $cart;
 
-    /**
-     * @var CategoryRepository
-     */
-    protected $categoryRepository;
+    protected CartUtility $cartUtility;
 
-    /**
-     * @var array
-     */
-    protected $searchArguments;
+    protected ProductRepository $productRepository;
 
-    /**
-     * @var array
-     */
-    protected $cartSettings = [];
+    protected CategoryRepository $categoryRepository;
 
-    public function injectSessionHandler(SessionHandler $sessionHandler): void
-    {
+    protected array $searchArguments = [];
+
+    protected array $cartSettings = [];
+
+    public function __construct(
+        ExtensionService $extensionService,
+        SessionHandler $sessionHandler,
+        CartUtility $cartUtility,
+        ProductRepository $productRepository,
+        CategoryRepository $categoryRepository
+    ) {
+        $this->extensionService = $extensionService;
         $this->sessionHandler = $sessionHandler;
-    }
-
-    public function injectCartUtility(CartUtility $cartUtility): void
-    {
         $this->cartUtility = $cartUtility;
-    }
-
-    public function injectProductRepository(ProductRepository $productRepository): void
-    {
         $this->productRepository = $productRepository;
-    }
-
-    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
-    {
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -85,13 +72,14 @@ class ProductController extends ActionController
         if (!empty($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE'])) {
             static $cacheTagsSet = false;
 
-            /** @var $typoScriptFrontendController \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController */
             $typoScriptFrontendController = $GLOBALS['TSFE'];
             if (!$cacheTagsSet) {
                 $typoScriptFrontendController->addCacheTags(['tx_cartproducts']);
                 $cacheTagsSet = true;
             }
         }
+
+        $this->settings['addToCartByAjax'] = isset($this->settings['addToCartByAjax']) ? (int)$this->settings['addToCartByAjax'] : 0;
     }
 
     /**
@@ -104,13 +92,19 @@ class ProductController extends ActionController
             ProductDemand::class
         );
 
-        if ($this->searchArguments['sku']) {
+        if (!empty($this->searchArguments['sku'])) {
             $demand->setSku($this->searchArguments['sku']);
         }
-        if ($this->searchArguments['title']) {
+        if (!empty($this->searchArguments['title'])) {
             $demand->setTitle($this->searchArguments['title']);
         }
         if ($settings['orderBy']) {
+            if (
+                !isset($settings['orderDirection']) &&
+                $settings['orderDirection'] !== 'DESC'
+            ) {
+                $settings['orderDirection'] = 'ASC';
+            }
             $demand->setOrder($settings['orderBy'] . ' ' . $settings['orderDirection']);
         }
 
@@ -146,7 +140,7 @@ class ProductController extends ActionController
         }
     }
 
-    public function listAction(int $currentPage = 1): void
+    public function listAction(int $currentPage = 1): ResponseInterface
     {
         $demand = $this->createDemandObjectFromSettings($this->settings);
         $demand->setActionAndClass(__METHOD__, __CLASS__);
@@ -175,18 +169,19 @@ class ProductController extends ActionController
         $this->assignCurrencyTranslationData();
 
         $this->addCacheTags($products);
+        return $this->htmlResponse();
     }
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("product")
+     * @IgnoreValidation("product")
      */
-    public function showAction(Product $product = null): void
+    public function showAction(Product $product = null): ResponseInterface
     {
         if (!$product) {
             $product = $this->getProduct();
         }
         if (!$product) {
-            $this->forward('list');
+            return new ForwardResponse('list');
         }
 
         $this->view->assign('user', $GLOBALS['TSFE']->fe_user->user);
@@ -196,9 +191,10 @@ class ProductController extends ActionController
         $this->assignCurrencyTranslationData();
 
         $this->addCacheTags([$product]);
+        return $this->htmlResponse();
     }
 
-    public function showFormAction(Product $product = null): void
+    public function showFormAction(Product $product = null): ResponseInterface
     {
         if (!$product) {
             $product = $this->getProduct();
@@ -208,9 +204,10 @@ class ProductController extends ActionController
         $this->view->assign('cartSettings', $this->cartSettings);
 
         $this->assignCurrencyTranslationData();
+        return $this->htmlResponse();
     }
 
-    public function teaserAction(): void
+    public function teaserAction(): ResponseInterface
     {
         $products = $this->productRepository->findByUids($this->settings['productUids']);
 
@@ -220,71 +217,81 @@ class ProductController extends ActionController
         $this->assignCurrencyTranslationData();
 
         $this->addCacheTags($products);
+        return $this->htmlResponse();
     }
 
-    public function flexformAction(): void
+    public function flexformAction(): ResponseInterface
     {
         $contentObj = $this->configurationManager->getContentObject();
         $contentId = $contentObj->data['uid'];
 
         $this->view->assign('contentId', $contentId);
+        return $this->htmlResponse();
     }
 
     protected function getProduct(): ?Product
     {
-        $productUid = 0;
+        $productUid = $this->getProductUid();
 
-        if ((int)$GLOBALS['TSFE']->page['doktype'] === 183) {
-            $productUid = (int)$GLOBALS['TSFE']->page['cart_products_product'];
-        } else {
-            if ($this->request->getPluginName() === 'ProductPartial') {
-                if ($productUid === 0) {
-                    $configurationManager = GeneralUtility::makeInstance(
-                        ConfigurationManager::class
-                    );
-                    $configuration = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK);
+        if ($productUid > 0) {
+            $product = $this->productRepository->findByUid($productUid);
 
-                    $typoscriptService = GeneralUtility::makeInstance(
-                        TypoScriptService::class
-                    );
-                    $configuration = $typoscriptService->convertPlainArrayToTypoScriptArray($configuration);
-                    $productUid = (int)$configurationManager->getContentObject()->cObjGetSingle($configuration['product'], $configuration['product.']);
-                }
-                if ($productUid === 0) {
-                    $requestBuilder = GeneralUtility::makeInstance(
-                        RequestBuilder::class
-                    );
-                    $configurationManager = GeneralUtility::makeInstance(
-                        ConfigurationManager::class
-                    );
-                    $configurationManager->setConfiguration([
-                        'vendorName' => 'Extcode',
-                        'extensionName' => 'CartProducts',
-                        'pluginName' => 'Products',
-                    ]);
-                    $requestBuilder->injectConfigurationManager($configurationManager);
-
-                    /**
-                     * @var \TYPO3\CMS\Extbase\Mvc\Request $cartProductRequest
-                     */
-                    $cartProductRequest = $requestBuilder->build($this->request);
-
-                    if ($cartProductRequest->hasArgument('product')) {
-                        $productUid = (int)$cartProductRequest->getArgument('product');
-                    }
-                }
+            if ($product instanceof Product) {
+                return $product;
             }
         }
 
-        if ($productUid > 0) {
-            $productRepository = GeneralUtility::makeInstance(
-                ProductRepository::class
-            );
+        return null;
+    }
 
-            $product =  $productRepository->findByUid($productUid);
+    /**
+     * @return int|mixed
+     * @throws InvalidConfigurationTypeException
+     */
+    public function getProductUid(): mixed
+    {
+        if ((int)$GLOBALS['TSFE']->page['doktype'] === 183) {
+            return (int)$GLOBALS['TSFE']->page['cart_products_product'];
         }
 
-        return $product;
+        if ($this->request->getPluginName() !== 'ProductPartial') {
+            return 0;
+        }
+
+        $configurationManager = GeneralUtility::makeInstance(
+            ConfigurationManager::class
+        );
+        $configuration = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK);
+
+        $typoscriptService = GeneralUtility::makeInstance(
+            TypoScriptService::class
+        );
+        $configuration = $typoscriptService->convertPlainArrayToTypoScriptArray($configuration);
+        $productUid = (int)$configurationManager->getContentObject()->cObjGetSingle($configuration['product'], $configuration['product.']);
+
+        if ($productUid === 0) {
+            $configurationManager->setConfiguration([
+                'vendorName' => 'Extcode',
+                'extensionName' => 'CartProducts',
+                'pluginName' => 'Products',
+            ]);
+            $requestBuilder = GeneralUtility::makeInstance(
+                RequestBuilder::class,
+                $this->configurationManager,
+                $this->extensionService
+            );
+
+            /**
+             * @var Request $cartProductRequest
+             */
+            $cartProductRequest = $requestBuilder->build($this->request);
+
+            if ($cartProductRequest->hasArgument('product')) {
+                $productUid = (int)$cartProductRequest->getArgument('product');
+            }
+        }
+
+        return $productUid;
     }
 
     /**
@@ -292,19 +299,15 @@ class ProductController extends ActionController
      */
     protected function assignCurrencyTranslationData()
     {
-        if (TYPO3_MODE === 'FE') {
-            $currencyTranslationData = [];
+        $this->restoreSession();
 
-            $cart = $this->sessionHandler->restore($this->settings['cart']['pid']);
+        $currencyTranslationData = [
+            'currencyCode' => $this->cart->getCurrencyCode(),
+            'currencySign' => $this->cart->getCurrencySign(),
+            'currencyTranslation' => $this->cart->getCurrencyTranslation(),
+        ];
 
-            if ($cart) {
-                $currencyTranslationData['currencyCode'] = $cart->getCurrencyCode();
-                $currencyTranslationData['currencySign'] = $cart->getCurrencySign();
-                $currencyTranslationData['currencyTranslation'] = $cart->getCurrencyTranslation();
-            }
-
-            $this->view->assign('currencyTranslationData', $currencyTranslationData);
-        }
+        $this->view->assign('currencyTranslationData', $currencyTranslationData);
     }
 
     protected function addCacheTags(iterable $products): void
@@ -318,5 +321,18 @@ class ProductController extends ActionController
         if (count($cacheTags) > 0) {
             $GLOBALS['TSFE']->addCacheTags($cacheTags);
         }
+    }
+
+    protected function restoreSession(): void
+    {
+        $cart = $this->sessionHandler->restoreCart($this->cartSettings['cart']['pid']);
+
+        if ($cart instanceof Cart) {
+            $this->cart = $cart;
+            return;
+        }
+
+        $this->cart = $this->cartUtility->getNewCart($this->cartSettings);
+        $this->sessionHandler->writeCart($this->cartSettings['cart']['pid'], $this->cart);
     }
 }

@@ -9,29 +9,25 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
+use Extcode\Cart\Domain\Model\FrontendUserGroup;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class QuantityDiscount extends AbstractEntity
 {
     /**
-     * @var float
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
-    protected $price = 0.0;
+    protected float $price = 0.0;
 
     /**
      * Quantity (lower bound)
      *
-     * @var int
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
-    protected $quantity = 0;
+    protected int $quantity = 0;
 
-    /**
-     * @var FrontendUserGroup
-     */
-    protected $frontendUserGroup;
+    protected FrontendUserGroup $frontendUserGroup;
 
     public function toArray(): array
     {

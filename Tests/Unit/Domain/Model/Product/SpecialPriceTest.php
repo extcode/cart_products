@@ -27,7 +27,7 @@ class SpecialPriceTest extends UnitTestCase
      */
     public function getTitleInitiallyReturnsEmptyString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->specialPrice->getTitle()
         );
@@ -42,7 +42,7 @@ class SpecialPriceTest extends UnitTestCase
 
         $this->specialPrice->setTitle($title);
 
-        $this->assertSame(
+        self::assertSame(
             $title,
             $this->specialPrice->getTitle()
         );
@@ -53,7 +53,7 @@ class SpecialPriceTest extends UnitTestCase
      */
     public function getPriceInitiallyReturnsZero()
     {
-        $this->assertSame(
+        self::assertSame(
             0.0,
             $this->specialPrice->getPrice()
         );
@@ -68,7 +68,7 @@ class SpecialPriceTest extends UnitTestCase
 
         $this->specialPrice->setPrice($price);
 
-        $this->assertSame(
+        self::assertSame(
             $price,
             $this->specialPrice->getPrice()
         );
