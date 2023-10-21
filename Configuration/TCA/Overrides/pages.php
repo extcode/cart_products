@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
@@ -34,7 +34,6 @@ call_user_func(function () {
             'label' => $_LLL_be . 'pages.singleview_cart_products_product',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_cartproducts_domain_model_product_product',
                 'foreign_table' => 'tx_cartproducts_domain_model_product_product',
                 'minitems' => 0,

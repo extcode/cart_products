@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -105,19 +105,7 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.language',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        $_LLL_general . ':LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ],
-                ],
-                'default' => 0,
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -581,7 +569,6 @@ return [
             'label' => $_LLL . 'tx_cartproducts_domain_model_product_product.related_products',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_cartproducts_domain_model_product_product',
                 'foreign_table' => 'tx_cartproducts_domain_model_product_product',
                 'MM_opposite_field' => 'related_products_from',
@@ -602,7 +589,6 @@ return [
             'label' => $_LLL . 'tx_cartproducts_domain_model_product_product.related_products_from',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'foreign_table' => 'tx_cartproducts_domain_model_product_product',
                 'allowed' => 'tx_cartproducts_domain_model_product_product',
                 'size' => 5,
@@ -816,7 +802,6 @@ return [
             'label' => $_LLL_cart . ':tx_cart_domain_model_tag',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_cart_domain_model_tag',
                 'foreign_table' => 'tx_cart_domain_model_tag',
                 'size' => 5,

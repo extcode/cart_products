@@ -8,7 +8,11 @@ namespace Extcode\CartProducts\Controller;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use Extcode\Cart\Service\SessionHandler;
 use Extcode\Cart\Utility\CartUtility;
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
@@ -26,12 +30,12 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 class ProductController extends ActionController
 {
     /**
-     * @var \Extcode\Cart\Service\SessionHandler
+     * @var SessionHandler
      */
     protected $sessionHandler;
 
     /**
-     * @var \Extcode\Cart\Utility\CartUtility
+     * @var CartUtility
      */
     protected $cartUtility;
 
@@ -146,7 +150,7 @@ class ProductController extends ActionController
         }
     }
 
-    public function listAction(int $currentPage = 1): void
+    public function listAction(int $currentPage = 1): ResponseInterface
     {
         $demand = $this->createDemandObjectFromSettings($this->settings);
         $demand->setActionAndClass(__METHOD__, __CLASS__);
@@ -175,18 +179,22 @@ class ProductController extends ActionController
         $this->assignCurrencyTranslationData();
 
         $this->addCacheTags($products);
+        return $this->htmlResponse();
     }
 
     /**
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("product")
      */
-    public function showAction(Product $product = null): void
+    /**
+     * @IgnoreValidation("product")
+     */
+    public function showAction(Product $product = null): ResponseInterface
     {
         if (!$product) {
             $product = $this->getProduct();
         }
         if (!$product) {
-            $this->forward('list');
+            return new ForwardResponse('list');
         }
 
         $this->view->assign('user', $GLOBALS['TSFE']->fe_user->user);
@@ -196,9 +204,10 @@ class ProductController extends ActionController
         $this->assignCurrencyTranslationData();
 
         $this->addCacheTags([$product]);
+        return $this->htmlResponse();
     }
 
-    public function showFormAction(Product $product = null): void
+    public function showFormAction(Product $product = null): ResponseInterface
     {
         if (!$product) {
             $product = $this->getProduct();
@@ -208,9 +217,10 @@ class ProductController extends ActionController
         $this->view->assign('cartSettings', $this->cartSettings);
 
         $this->assignCurrencyTranslationData();
+        return $this->htmlResponse();
     }
 
-    public function teaserAction(): void
+    public function teaserAction(): ResponseInterface
     {
         $products = $this->productRepository->findByUids($this->settings['productUids']);
 
@@ -220,14 +230,16 @@ class ProductController extends ActionController
         $this->assignCurrencyTranslationData();
 
         $this->addCacheTags($products);
+        return $this->htmlResponse();
     }
 
-    public function flexformAction(): void
+    public function flexformAction(): ResponseInterface
     {
         $contentObj = $this->configurationManager->getContentObject();
         $contentId = $contentObj->data['uid'];
 
         $this->view->assign('contentId', $contentId);
+        return $this->htmlResponse();
     }
 
     protected function getProduct(): ?Product
@@ -265,7 +277,7 @@ class ProductController extends ActionController
                     $requestBuilder->injectConfigurationManager($configurationManager);
 
                     /**
-                     * @var \TYPO3\CMS\Extbase\Mvc\Request $cartProductRequest
+                     * @var Request $cartProductRequest
                      */
                     $cartProductRequest = $requestBuilder->build($this->request);
 
@@ -292,7 +304,7 @@ class ProductController extends ActionController
      */
     protected function assignCurrencyTranslationData()
     {
-        if (TYPO3_MODE === 'FE') {
+        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()) {
             $currencyTranslationData = [];
 
             $cart = $this->sessionHandler->restore($this->settings['cart']['pid']);

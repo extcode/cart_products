@@ -8,7 +8,7 @@ namespace Extcode\CartProducts\Domain\Repository\Product;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -81,7 +81,7 @@ class ProductRepository extends Repository
     /**
      * @param ProductDemand $demand
      *
-     * @return array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface>
+     * @return array<ConstraintInterface>
      */
     protected function createOrderingsFromDemand(ProductDemand $demand)
     {

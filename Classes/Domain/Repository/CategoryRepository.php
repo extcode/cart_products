@@ -2,20 +2,20 @@
 
 namespace Extcode\CartProducts\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Domain\Model\Category;
 /*
  * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
 {
 
     /**
      * findAllAsRecursiveTreeArray
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $selectedCategory
+     * @param Category $selectedCategory
      * @return array $categories
      */
     public function findAllAsRecursiveTreeArray($selectedCategory = null)
@@ -28,7 +28,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
     /**
      * findAllAsArray
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $selectedCategory
+     * @param Category $selectedCategory
      * @return array $categories
      */
     public function findAllAsArray($selectedCategory = null)
@@ -53,7 +53,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
     /**
      * findSubcategoriesRecursiveAsArray
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $parentCategory
+     * @param Category $parentCategory
      * @return array $categories
      */
     public function findSubcategoriesRecursiveAsArray($parentCategory)

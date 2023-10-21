@@ -23,7 +23,7 @@ class VariantSelectViewHelper extends AbstractViewHelper
     protected $escapeOutput = false;
 
     /**
-     * @var \Extcode\CartProducts\Domain\Model\Product\Product
+     * @var Product
      */
     protected $product;
 

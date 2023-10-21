@@ -8,7 +8,7 @@ namespace Extcode\CartProducts\Utility;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
+use Extcode\Cart\Domain\Model\Cart\TaxClass;
 use Extcode\Cart\Domain\Model\Cart\BeVariant;
 use Extcode\Cart\Domain\Model\Cart\Cart;
 use Extcode\Cart\Domain\Model\Cart\FeVariant;
@@ -59,9 +59,9 @@ class ProductUtility
      * Get Cart/Product From Request
      *
      * @param Request $request Request
-     * @param \Extcode\Cart\Domain\Model\Cart\TaxClass[] $taxClasses Tax Class Array
+     * @param TaxClass[] $taxClasses Tax Class Array
      *
-     * @return \Extcode\Cart\Domain\Model\Cart\Product
+     * @return Product
      */
     public function getProductFromRequest(Request $request, array $taxClasses)
     {
@@ -87,7 +87,7 @@ class ProductUtility
      *
      * @param array $cartProductValues
      *
-     * @return \Extcode\Cart\Domain\Model\Cart\Product|null
+     * @return Product|null
      */
     protected function createCartProduct(array $cartProductValues)
     {
@@ -224,12 +224,12 @@ class ProductUtility
     /**
      * Get Variant From Repository
      *
-     * @param \Extcode\Cart\Domain\Model\Cart\Product $product
-     * @param \Extcode\Cart\Domain\Model\Cart\BeVariant $variant
+     * @param Product $product
+     * @param BeVariant $variant
      * @param $cartProductValues
      * @param $variantsValue
      *
-     * @return \Extcode\Cart\Domain\Model\Cart\BeVariant|null
+     * @return BeVariant|null
      */
     protected function createCartBackendVariant(
         $product,
@@ -297,8 +297,8 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
-     * @param \Extcode\Cart\Domain\Model\Cart\Product $products
+     * @param Cart $cart
+     * @param Product $products
      *
      * @return array
      */
@@ -386,7 +386,7 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
+     * @param Cart $cart
      * @param $productId
      * @param $backendVariantId
      *
@@ -406,8 +406,8 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
-     * @param \Extcode\Cart\Domain\Model\Cart\Product $product
+     * @param Cart $cart
+     * @param Product $product
      *
      * @return array
      */
@@ -429,7 +429,7 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
+     * @param Cart $cart
      * @param array $errors
      * @param $product
      *
@@ -460,7 +460,7 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
+     * @param Cart $cart
      * @param array $errors
      * @param $product
      *
