@@ -116,8 +116,8 @@ class ProductController extends ActionController
             $demand->setTitle($this->searchArguments['title']);
         }
 
-        if ($settings['orderBy']) {
-            $demand->setOrder($settings['orderBy'] . ' ' . $settings['orderDirection']);
+        if (is_array($this->searchArguments) && isset($this->searchArguments['orderBy'])) {
+            $demand->setTitle($this->searchArguments['orderBy']);
         }
 
         $this->addCategoriesToDemandObjectFromSettings($demand);
@@ -127,7 +127,7 @@ class ProductController extends ActionController
 
     protected function addCategoriesToDemandObjectFromSettings(ProductDemand $demand): void
     {
-        if ($this->settings['categoriesList']) {
+        if ($this->settings['categoriesList'] ?? 0) {
             $selectedCategories = GeneralUtility::intExplode(
                 ',',
                 $this->settings['categoriesList'],

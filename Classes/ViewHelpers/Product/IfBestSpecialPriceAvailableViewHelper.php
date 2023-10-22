@@ -53,7 +53,7 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
     protected static function getFrontendUserGroupIds(): array
     {
         $feGroupIds = [];
-        $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+        $feUserId = (int)($GLOBALS['TSFE']->fe_user->user['uid'] ?? 0);
         if ($feUserId) {
             $frontendUserRepository = GeneralUtility::makeInstance(
                 FrontendUserRepository::class
