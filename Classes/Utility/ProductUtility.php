@@ -39,7 +39,15 @@ class ProductUtility
     protected function getFrontendUserGroupIds()
     {
         $feGroupIds = [];
-        $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+        if (isset($GLOBALS['TSFE'])
+            && isset($GLOBALS['TSFE']->fe_user)
+            && isset($GLOBALS['TSFE']->fe_user->user)
+            && isset($GLOBALS['TSFE']->fe_user->user['uid'])
+        ) {
+            $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+        } else {
+            $feUserId = 0; // or another default value, if appropriate
+        }
         if ($feUserId) {
             $frontendUserRepository = GeneralUtility::makeInstance(
                 FrontendUserRepository::class
@@ -105,7 +113,7 @@ class ProductUtility
         if ($productProduct) {
             $frontendUserGroupIds = $this->getFrontendUserGroupIds();
 
-            $feVariantValues = $cartProductValues['feVariants'];
+            $feVariantValues = $cartProductValues['feVariants'] ?? 0;
 
             $feVariants = $productProduct->getFeVariants();
 
@@ -160,7 +168,7 @@ class ProductUtility
                 $cartProduct->setIsVirtualProduct(true);
             }
 
-            if (is_array($cartProductValues['additional'])) {
+            if (is_array($cartProductValues['additional'] ?? 0)) {
                 $cartProduct->setAdditionalArray($cartProductValues['additional']);
             }
 
@@ -183,7 +191,7 @@ class ProductUtility
 
             $newVariantArr = [];
 
-            if ($cartProductValues['beVariants']) {
+            if ($cartProductValues['beVariants']?? 0) {
                 foreach ($cartProductValues['beVariants'] as $variantsKey => $variantsValue) {
                     if ($variantsKey === 1) {
                         $newVariant = $this->createCartBackendVariant(
