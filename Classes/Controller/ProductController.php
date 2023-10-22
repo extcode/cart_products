@@ -108,12 +108,14 @@ class ProductController extends ActionController
             ProductDemand::class
         );
 
-        if ($this->searchArguments['sku']) {
+        if (is_array($this->searchArguments) && isset($this->searchArguments['sku'])) {
             $demand->setSku($this->searchArguments['sku']);
         }
-        if ($this->searchArguments['title']) {
+
+        if (is_array($this->searchArguments) && isset($this->searchArguments['title'])) {
             $demand->setTitle($this->searchArguments['title']);
         }
+
         if ($settings['orderBy']) {
             $demand->setOrder($settings['orderBy'] . ' ' . $settings['orderDirection']);
         }
@@ -288,6 +290,8 @@ class ProductController extends ActionController
             }
         }
 
+        $product = null; // Initializing the variable
+
         if ($productUid > 0) {
             $productRepository = GeneralUtility::makeInstance(
                 ProductRepository::class
@@ -307,7 +311,7 @@ class ProductController extends ActionController
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()) {
             $currencyTranslationData = [];
 
-            $cart = $this->sessionHandler->restore($this->settings['cart']['pid']);
+            $cart = $this->sessionHandler->restore($this->settings['cart']['pid'] ?? 0);
 
             if ($cart) {
                 $currencyTranslationData['currencyCode'] = $cart->getCurrencyCode();
