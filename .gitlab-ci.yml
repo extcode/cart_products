@@ -86,6 +86,12 @@ lint:php82:
   script:
     - find . -name \*.php -exec php -l "{}" \;
 
+lint:php83:
+  stage: lint
+  image: php:8.3-alpine
+  script:
+    - find . -name \*.php -exec php -l "{}" \;
+
 phpstan:analyse:
   image: composer:2
   stage: lint
@@ -182,6 +188,13 @@ test:php82:typo3_11:
   <<: *test_php
   variables:
     DOCKER_TAG: 8.2-alpine
+    TYPO3_VERSION: ^11.5
+    COVERAGE: 0
+
+test:php83:typo3_11:
+  <<: *test_php
+  variables:
+    DOCKER_TAG: 8.3-alpine
     TYPO3_VERSION: ^11.5
     COVERAGE: 1
 
