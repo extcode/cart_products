@@ -72,6 +72,10 @@
         </ul>
     </f:if>
 
+    <cartproducts:isExtensionLoaded extKey="watchlist">
+        <f:render partial="Product/WatchlistButtons" arguments="{product: product}"/>
+    </cartproducts:isExtensionLoaded>
+
     <f:link.external class="btn btn-default" uri="javascript:history.back();">{f:translate(key: 'tx_cartproducts.history_back')}</f:link.external>
 </f:section>
 </html>
