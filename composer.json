@@ -34,7 +34,11 @@
     },
     "config": {
         "vendor-dir": ".build/vendor",
-        "bin-dir": ".build/bin"
+        "bin-dir": ".build/bin",
+        "allow-plugins": {
+            "typo3/class-alias-loader": false,
+            "typo3/cms-composer-installers": false
+        }
     },
     "extra": {
         "typo3/cms": {
@@ -58,7 +62,8 @@
         "helmich/typo3-typoscript-lint": "^2.0",
         "overtrue/phplint": "^1.1",
         "rector/rector": "^0.11",
-        "phpstan/phpstan": "^0.12.99"
+        "phpstan/phpstan": "^0.12.99",
+        "werkraummedia/watchlist": "^1.0"
     },
     "scripts": {
         "test:cgl": [
@@ -104,5 +109,8 @@
             "mkdir -p .build/public/typo3conf/ext/",
             "[ -L .build/public/typo3conf/ext/cart_products ] || ln -snvf ../../../../. .build/public/typo3conf/ext/cart_products"
         ]
+    },
+    "suggest": {
+        "werkraummedia/watchlist": "^1.0"
     }
 }

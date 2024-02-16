@@ -6,6 +6,8 @@ services:
 
   Extcode\CartProducts\:
     resource: '../Classes/*'
+    exclude:
+      - '../Classes/Handler/*'
 
   Extcode\CartProducts\EventListener\Order\Stock\HandleStock:
     tags:

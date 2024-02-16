@@ -49,6 +49,13 @@
                 <source>back</source>
             </trans-unit>
 
+            <trans-unit id="tx_cartproducts.add_to_watchlist">
+                <source>add to watchlist</source>
+            </trans-unit>
+            <trans-unit id="tx_cartproducts.remove_from_watchlist">
+                <source>remove from watchlist</source>
+            </trans-unit>
+
             <trans-unit id="tx_cartproducts.module.productController.listAction.header">
                 <source>Product Listing</source>
             </trans-unit>
