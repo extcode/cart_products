@@ -8,7 +8,8 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use Extcode\Cart\Domain\Model\Tag;
 use Extcode\CartProducts\Domain\Model\Category;
 use Extcode\CartProducts\Domain\Model\TtContent;
@@ -65,8 +66,8 @@ class Product extends AbstractProduct
     protected $teaser = '';
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var ObjectStorage<\Extcode\CartProducts\Domain\Model\TtContent>
+     * @Lazy
+     * @var ObjectStorage<TtContent>
      */
     protected $productContent;
 
@@ -91,13 +92,13 @@ class Product extends AbstractProduct
     protected $price = 0.0;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @Cascade("remove")
      * @var ObjectStorage<SpecialPrice>
      */
     protected $specialPrices;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @Cascade("remove")
      * @var ObjectStorage<QuantityDiscount>
      */
     protected $quantityDiscounts;
@@ -155,25 +156,25 @@ class Product extends AbstractProduct
     /**
      * variants
      *
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @Cascade("remove")
      * @var ObjectStorage<BeVariant>
      */
     protected $beVariants;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @Cascade("remove")
      * @var ObjectStorage<FeVariant>
      */
     protected $feVariants;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      * @var ObjectStorage<Product>
      */
     protected $relatedProducts;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      * @var ObjectStorage<Product>
      */
     protected $relatedProductsFrom;

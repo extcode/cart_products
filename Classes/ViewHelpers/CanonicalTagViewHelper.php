@@ -8,7 +8,8 @@ namespace Extcode\CartProducts\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
+use TYPO3\CMS\Core\Http\ApplicationType;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -76,11 +77,11 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * @return \TYPO3\CMS\Core\Page\PageRenderer
+     * @return PageRenderer
      */
     protected function getPageRenderer()
     {
-        if ('FE' === TYPO3_MODE && is_callable([$this->getTypoScriptFrontendController(), 'getPageRenderer'])) {
+        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend() && is_callable([$this->getTypoScriptFrontendController(), 'getPageRenderer'])) {
             return $this->getTypoScriptFrontendController()->getPageRenderer();
         }
 
@@ -88,7 +89,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     * @return TypoScriptFrontendController
      */
     protected function getTypoScriptFrontendController()
     {

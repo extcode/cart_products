@@ -8,7 +8,7 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
@@ -16,13 +16,13 @@ class SpecialPrice extends AbstractEntity
 {
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $title = '';
 
     /**
      * @var float
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $price = 0.0;
 

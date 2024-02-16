@@ -8,7 +8,7 @@ namespace Extcode\CartProducts\Utility;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
+use Extcode\Cart\Domain\Model\Cart\TaxClass;
 use Extcode\Cart\Domain\Model\Cart\BeVariant;
 use Extcode\Cart\Domain\Model\Cart\Cart;
 use Extcode\Cart\Domain\Model\Cart\FeVariant;
@@ -39,7 +39,15 @@ class ProductUtility
     protected function getFrontendUserGroupIds()
     {
         $feGroupIds = [];
-        $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+        if (isset($GLOBALS['TSFE'])
+            && isset($GLOBALS['TSFE']->fe_user)
+            && isset($GLOBALS['TSFE']->fe_user->user)
+            && isset($GLOBALS['TSFE']->fe_user->user['uid'])
+        ) {
+            $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
+        } else {
+            $feUserId = 0; // or another default value, if appropriate
+        }
         if ($feUserId) {
             $frontendUserRepository = GeneralUtility::makeInstance(
                 FrontendUserRepository::class
@@ -59,9 +67,9 @@ class ProductUtility
      * Get Cart/Product From Request
      *
      * @param Request $request Request
-     * @param \Extcode\Cart\Domain\Model\Cart\TaxClass[] $taxClasses Tax Class Array
+     * @param TaxClass[] $taxClasses Tax Class Array
      *
-     * @return \Extcode\Cart\Domain\Model\Cart\Product
+     * @return Product
      */
     public function getProductFromRequest(Request $request, array $taxClasses)
     {
@@ -87,7 +95,7 @@ class ProductUtility
      *
      * @param array $cartProductValues
      *
-     * @return \Extcode\Cart\Domain\Model\Cart\Product|null
+     * @return Product|null
      */
     protected function createCartProduct(array $cartProductValues)
     {
@@ -105,7 +113,7 @@ class ProductUtility
         if ($productProduct) {
             $frontendUserGroupIds = $this->getFrontendUserGroupIds();
 
-            $feVariantValues = $cartProductValues['feVariants'];
+            $feVariantValues = $cartProductValues['feVariants'] ?? 0;
 
             $feVariants = $productProduct->getFeVariants();
 
@@ -160,7 +168,7 @@ class ProductUtility
                 $cartProduct->setIsVirtualProduct(true);
             }
 
-            if (is_array($cartProductValues['additional'])) {
+            if (is_array($cartProductValues['additional'] ?? 0)) {
                 $cartProduct->setAdditionalArray($cartProductValues['additional']);
             }
 
@@ -183,7 +191,7 @@ class ProductUtility
 
             $newVariantArr = [];
 
-            if ($cartProductValues['beVariants']) {
+            if ($cartProductValues['beVariants']?? 0) {
                 foreach ($cartProductValues['beVariants'] as $variantsKey => $variantsValue) {
                     if ($variantsKey === 1) {
                         $newVariant = $this->createCartBackendVariant(
@@ -224,12 +232,12 @@ class ProductUtility
     /**
      * Get Variant From Repository
      *
-     * @param \Extcode\Cart\Domain\Model\Cart\Product $product
-     * @param \Extcode\Cart\Domain\Model\Cart\BeVariant $variant
+     * @param Product $product
+     * @param BeVariant $variant
      * @param $cartProductValues
      * @param $variantsValue
      *
-     * @return \Extcode\Cart\Domain\Model\Cart\BeVariant|null
+     * @return BeVariant|null
      */
     protected function createCartBackendVariant(
         $product,
@@ -297,8 +305,8 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
-     * @param \Extcode\Cart\Domain\Model\Cart\Product $products
+     * @param Cart $cart
+     * @param Product $products
      *
      * @return array
      */
@@ -386,7 +394,7 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
+     * @param Cart $cart
      * @param $productId
      * @param $backendVariantId
      *
@@ -406,8 +414,8 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
-     * @param \Extcode\Cart\Domain\Model\Cart\Product $product
+     * @param Cart $cart
+     * @param Product $product
      *
      * @return array
      */
@@ -429,7 +437,7 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
+     * @param Cart $cart
      * @param array $errors
      * @param $product
      *
@@ -460,7 +468,7 @@ class ProductUtility
     }
 
     /**
-     * @param \Extcode\Cart\Domain\Model\Cart\Cart $cart
+     * @param Cart $cart
      * @param array $errors
      * @param $product
      *

@@ -2,19 +2,20 @@
 
 namespace Extcode\CartProducts\Domain\Model;
 
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 /*
  * This file is part of the package extcode/cart-products.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
 {
     /**
      * Images
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var ObjectStorage<FileReference>
      */
     protected $images;
 
@@ -55,7 +56,7 @@ class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
     /**
      * Returns images
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @return ObjectStorage<FileReference>
      */
     public function getImages()
     {
@@ -65,7 +66,7 @@ class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
     /**
      * Returns the first image
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
+     * @return FileReference|null
      */
     public function getFirstImage()
     {
