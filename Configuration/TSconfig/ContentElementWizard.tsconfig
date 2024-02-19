@@ -1,10 +1,10 @@
 [traverse(page, "doktype") == 183]
 TCEFORM.tt_content.list_type {
-    removeItems = cartproducts_products
+    removeItems := addToList(cartproducts_products)
 }
 [ELSE]
 TCEFORM.tt_content.list_type {
-    removeItems = cartproducts_singleproduct
+    removeItems := addToList(cartproducts_singleproduct)
 }
 
 mod.wizards.newContentElement.wizardItems.plugins {
