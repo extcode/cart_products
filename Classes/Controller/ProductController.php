@@ -46,7 +46,7 @@ class ProductController extends ActionController
 
     protected array $searchArguments = [];
 
-    protected array $cartSettings = [];
+    protected array $cartConfiguration = [];
 
     public function __construct(
         ExtensionService $extensionService,
@@ -64,8 +64,8 @@ class ProductController extends ActionController
 
     protected function initializeAction()
     {
-        $this->cartSettings = $this->configurationManager->getConfiguration(
-            ConfigurationManager::CONFIGURATION_TYPE_SETTINGS,
+        $this->cartConfiguration = $this->configurationManager->getConfiguration(
+            ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK,
             'Cart'
         );
 
@@ -164,7 +164,7 @@ class ProductController extends ActionController
         );
 
         $this->view->assign('searchArguments', $this->searchArguments);
-        $this->view->assign('cartSettings', $this->cartSettings);
+        $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
 
         $this->assignCurrencyTranslationData();
 
@@ -186,7 +186,7 @@ class ProductController extends ActionController
 
         $this->view->assign('user', $GLOBALS['TSFE']->fe_user->user);
         $this->view->assign('product', $product);
-        $this->view->assign('cartSettings', $this->cartSettings);
+        $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
 
         $this->assignCurrencyTranslationData();
 
@@ -201,7 +201,7 @@ class ProductController extends ActionController
         }
 
         $this->view->assign('product', $product);
-        $this->view->assign('cartSettings', $this->cartSettings);
+        $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
 
         $this->assignCurrencyTranslationData();
         return $this->htmlResponse();
@@ -212,7 +212,7 @@ class ProductController extends ActionController
         $products = $this->productRepository->findByUids($this->settings['productUids']);
 
         $this->view->assign('products', $products);
-        $this->view->assign('cartSettings', $this->cartSettings);
+        $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
 
         $this->assignCurrencyTranslationData();
 
@@ -325,14 +325,14 @@ class ProductController extends ActionController
 
     protected function restoreSession(): void
     {
-        $cart = $this->sessionHandler->restoreCart($this->cartSettings['cart']['pid']);
+        $cart = $this->sessionHandler->restoreCart($this->cartConfiguration['settings']['cart']['pid']);
 
         if ($cart instanceof Cart) {
             $this->cart = $cart;
             return;
         }
 
-        $this->cart = $this->cartUtility->getNewCart($this->cartSettings);
-        $this->sessionHandler->writeCart($this->cartSettings['cart']['pid'], $this->cart);
+        $this->cart = $this->cartUtility->getNewCart($this->cartConfiguration);
+        $this->sessionHandler->writeCart($this->cartConfiguration['settings']['cart']['pid'], $this->cart);
     }
 }
