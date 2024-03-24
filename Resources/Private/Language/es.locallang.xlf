@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z" product-name="cart_products" target-language="de">
+  <file source-language="en" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z" product-name="cart_products" target-language="es-ES">
     <header/>
     <body>
       <trans-unit id="tx_cartproducts.error.stock_handling.add">
         <source>Desired number of this item not available.</source>
-        <target state="translated">Gewünschte Anzahl dieses Artikels nicht verfügbar.</target>
+        <target state="needs-translation">Desired number of this item not available.</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts.error.stock_handling.update">
         <source>Desired number of this item not available.</source>
-        <target state="translated">Gewünschte Anzahl dieses Artikels nicht verfügbar.</target>
+        <target state="needs-translation">Desired number of this item not available.</target>
       </trans-unit>
       <trans-unit id="filter">
         <source>filter</source>
@@ -17,43 +17,43 @@
       </trans-unit>
       <trans-unit id="filterCustomer">
         <source>Customer</source>
-        <target state="translated">Kunde</target>
+        <target state="needs-translation">Customer</target>
       </trans-unit>
       <trans-unit id="filterOrderNumber">
         <source>Order Number</source>
-        <target state="translated">Bestellnummer</target>
+        <target state="needs-translation">Order Number</target>
       </trans-unit>
       <trans-unit id="filterInvoiceNumber">
         <source>Invoice Number</source>
-        <target state="translated">Rechnungsnummer</target>
+        <target state="needs-translation">Invoice Number</target>
       </trans-unit>
       <trans-unit id="filterStartDate">
         <source>Start Date</source>
-        <target state="translated">Start Datum</target>
+        <target state="needs-translation">Start Date</target>
       </trans-unit>
       <trans-unit id="filterEndDate">
         <source>End Date</source>
-        <target state="translated">End Datum</target>
+        <target state="needs-translation">End Date</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product.filter.sku">
         <source>SKU</source>
-        <target state="translated">Art.-Nr.</target>
+        <target state="needs-translation">SKU</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product.filter.title">
         <source>Title</source>
-        <target state="translated">Titel</target>
+        <target state="needs-translation">Title</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts.add_product">
         <source>Add to cart</source>
-        <target state="translated">in den Warenkorb</target>
+        <target state="needs-translation">Add to cart</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts.variants-select.choose">
         <source>Please choose ...</source>
-        <target state="translated">Bitte auswählen ...</target>
+        <target state="needs-translation">Please choose ...</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts.history_back">
         <source>back</source>
-        <target state="translated">zurück</target>
+        <target state="needs-translation">back</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts.module.productController.listAction.header">
         <source>Product Listing</source>
@@ -73,11 +73,11 @@
       </trans-unit>
       <trans-unit id="tx_cartproducts.module.action.filter">
         <source>Filter List</source>
-        <target state="translated">Filter Liste</target>
+        <target state="needs-translation">Filter List</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts.plugin.form.submit">
         <source>Add to cart</source>
-        <target state="translated">in den Warenkorb</target>
+        <target state="needs-translation">Add to cart</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.filter.sku">
         <source>SKU</source>
@@ -93,7 +93,7 @@
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.sku">
         <source>Sku</source>
-        <target state="translated">Art.-Nr.</target>
+        <target state="needs-translation">Sku</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.title">
         <source>Title</source>
@@ -109,35 +109,35 @@
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.price">
         <source>Price</source>
-        <target state="translated">Preis</target>
+        <target state="needs-translation">Price</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.unit_price">
         <source>Unit Price</source>
-        <target state="translated">Stückpreis</target>
+        <target state="needs-translation">Unit Price</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.count">
         <source>Count</source>
-        <target state="translated">Anzahl</target>
+        <target state="needs-translation">Count</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.subtotal">
         <source>Subtotal</source>
-        <target state="translated">Zwischensumme</target>
+        <target state="needs-translation">Subtotal</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.regular_price">
         <source>Regular Price</source>
-        <target state="translated">regulärer Preis</target>
+        <target state="needs-translation">Regular Price</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.special_price">
         <source>Special Price</source>
-        <target state="translated">spezieller Preis</target>
+        <target state="needs-translation">Special Price</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.quantity_discounts">
         <source>Quantity Discount</source>
-        <target state="translated">Mengenrabatt</target>
+        <target state="needs-translation">Quantity Discount</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.quantity_discount_from">
         <source>from %s</source>
-        <target state="translated">ab %s</target>
+        <target state="needs-translation">from %s</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_product.price.from">
         <source>from</source>
@@ -209,7 +209,7 @@
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_productvariantattribute.sku">
         <source>Sku</source>
-        <target state="translated">Art.-Nr.</target>
+        <target state="needs-translation">Sku</target>
       </trans-unit>
       <trans-unit id="tx_cartproducts_domain_model_product_productvariantattribute.title">
         <source>Title</source>
