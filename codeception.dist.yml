@@ -1,0 +1,49 @@
+namespace: 'Extcode\CartProducts\Tests\Acceptance\Support'
+
+paths:
+  tests: 'Tests/Acceptance'
+  output: '.build/Tests/Acceptance/_output'
+  data: '.build/Tests/Acceptance/_data'
+  support: 'Tests/Acceptance/Support'
+
+settings:
+  debug: true
+
+extensions:
+  enabled:
+    -
+      'Codeception\Extension\RunProcess':
+        - 'TYPO3_PATH_APP="$INSTANCE_PATH" TYPO3_PATH_ROOT="$INSTANCE_PATH" TYPO3_CONTEXT=Testing php -S 127.0.0.1:8080 -t "$INSTANCE_PATH" > .build/Tests/Acceptance/_output/php.log 2>&1'
+    -
+      'Codeception\Extension\Recorder'
+    -
+      'Extcode\CartProducts\Tests\Acceptance\Support\Environment':
+        typo3DatabaseDriver: 'pdo_sqlite'
+
+suites:
+  acceptance:
+    actor: 'Tester'
+    path: '.'
+    modules:
+      enabled:
+        -
+          WebDriver:
+            url: 'http://127.0.0.1:8080/'
+            browser: 'firefox'
+            restart: true
+            path: ''
+            wait: 5
+            # Scrolling within iFrame doesn't work so well, so we use a bigger window size.
+            window_size: '1920x1080'
+            capabilities:
+              moz:firefoxOptions:
+                args:
+                  - '-headless'
+        -
+          Db:
+            dsn: 'sqlite:.build/public/typo3temp/var/tests/acceptance-sqlite-dbs/test_acceptance.sqlite'
+            user: ''
+            password: ''
+
+    step_decorators:
+      - 'Codeception\Step\Retry'

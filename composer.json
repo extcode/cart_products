@@ -29,12 +29,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Extcode\\CartProducts\\Tests\\": "Tests"
+            "Extcode\\CartProducts\\Tests\\": "Tests/"
         }
     },
     "config": {
-        "vendor-dir": ".build/vendor",
-        "bin-dir": ".build/bin",
         "allow-plugins": {
             "typo3/cms-composer-installers": true,
             "typo3/class-alias-loader": true,
@@ -44,7 +42,6 @@
     "extra": {
         "typo3/cms": {
             "extension-key": "cart_products",
-            "app-dir": ".build",
             "web-dir": ".build/public"
         }
     },
@@ -57,6 +54,10 @@
         "typo3/cms-fluid": "^12.4"
     },
     "require-dev": {
+        "codappix/typo3-php-datasets": "^1.5",
+        "codeception/codeception": "^5.0",
+        "codeception/module-db": "^3.1",
+        "codeception/module-webdriver": "^4.0",
         "friendsofphp/php-cs-fixer": "^3.16",
         "helmich/typo3-typoscript-lint": "^3.1",
         "overtrue/phplint": "^5.5",
@@ -64,6 +65,7 @@
         "sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": "^0.0.1",
         "ssch/typo3-rector": "^1.2",
         "typo3/cms-dashboard": "^12.4",
+        "typo3/cms-fluid-styled-content": "^12.4",
         "typo3/cms-reactions": "^12.4",
         "typo3/testing-framework": "^8.0"
     },
