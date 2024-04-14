@@ -2,6 +2,8 @@
       xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
+<f:asset.script identifier="add-to-cart" src="EXT:cart/Resources/Public/JavaScript/add_to_cart.js" />
+
 <div class="cart_form">
     <f:form id="product-{product.uid}"
             class="add-to-cart-form"
@@ -18,6 +20,7 @@
 
         <input class="form-control" type="text" value="1" name="tx_cart_cart[quantity]">
         <f:if condition="{product.beVariants}">
+            <f:asset.script identifier="change-be-variant" src="EXT:cart/Resources/Public/JavaScript/change_be_variant.js" />
             <cartproducts:form.variantSelect
                     id="be-variants-select"
                     class="form-control"
