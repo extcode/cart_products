@@ -8,7 +8,7 @@ Information about the installation and configuration of the extension.
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :titlesonly:
 
    Installation/Index
