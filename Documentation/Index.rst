@@ -66,4 +66,5 @@ be purchased with the cart of EXT:cart.
 
    Introduction/Index
    Administrator/Index
+   Editor/Index
    Changelog/Index
