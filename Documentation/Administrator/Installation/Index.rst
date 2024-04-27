@@ -49,12 +49,12 @@ Include TypoScript via TYPO3 backend
 
 . Switch to the root page of your site.
 
-#. Switch to the **Template module** and select *Info/Modify*.
+#. Switch to the :guilabel:`Template module` and select *Info/Modify*.
 
-#. Press the link **Edit the whole template record** and switch to the tab
+#. Press the link :guilabel:`Edit the whole template record` and switch to the tab
    *Includes*.
 
-#. Select **Shopping Cart - Cart Products** at the field *Include static (from
+#. Select :guilabel:`Shopping Cart - Cart Products` at the field *Include static (from
    extensions):*
 
 

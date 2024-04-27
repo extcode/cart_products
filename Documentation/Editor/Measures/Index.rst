@@ -15,7 +15,7 @@ The three fields in this group are used together. The following example shows
 the usage. To stay with the example from
 above you might enter:
 
-* Price = 10 € (defined in the tab 'Prices').
+* Price = 10 € (defined in the tab :guilabel:`Prices`).
 * Price Measure = 200
 * Price Measure Unit = g
 * Base Price Measure Unit = kg
@@ -40,9 +40,12 @@ Example 'Output weight and dimensions'
 
 Simply display the weight and the dimensions of the product in the frontend.
 
-* Use field 'Service Attribute 1' and overwrite its label with 'Weight'.
-* Use field 'Service Attribute 2' and overwrite its label with 'Dimensions'
-* Suppress the output of 'Service Attribute 3' to not confuse editors.
+* Use field :guilabel:`Service Attribute 1` and overwrite its label with
+  'Weight'.
+* Use field :guilabel:`Service Attribute 2` and overwrite its label with
+  'Dimensions'
+* Suppress the output of :guilabel:`Service Attribute 2` to not confuse
+  editors.
 * Output the weight and dimensions in the detail view
   (`/Resources/Private/Templates/Product/Show.html`) with
   `{product.serviceAttribute1}` and `{product.serviceAttribute2}`.
@@ -53,7 +56,8 @@ Example 'Shipping costs depending on total weight of order'
 The shipping costs shall depend on the weight of the sum of all products in the
 order.
 
-* Use field 'Service Attribute 1' and overwrite its label with 'Weight'.
+* Use field :guilabel:`Service Attribute 1` and overwrite its label with
+  'Weight'.
 * Suppress the output of the other two fields to not confuse editors.
 * Set in TypoScript (here for Germany (`de`))
   `plugin.tx_cart.shipping.countries.de.options.1.extra = by_service_attribute_1_sum`
