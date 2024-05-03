@@ -201,6 +201,18 @@
             <trans-unit id="tx_cartproducts_domain_model_product_productvariant.price">
                 <source>Price</source>
             </trans-unit>
+			<trans-unit id="tx_cartproducts.stock.in_stock_singular">
+				<source>In stock (%1$s piece)</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.stock.in_stock_plural">
+				<source>In stock (%1$s pieces)</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.stock.not_in_stock">
+				<source>Not in stock</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.stock.out_of_stock">
+				<source>out of stock</source>
+			</trans-unit>
 
         </body>
     </file>
