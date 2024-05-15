@@ -56,6 +56,11 @@
                 <source>Add to cart</source>
                 <target>in den Warenkorb</target>
             </trans-unit>
+            <trans-unit id="tx_cartproducts.you_save">
+                <source>You save</source>
+                <source>Sie sparen</source>
+            </trans-unit>
+
             <trans-unit id="tx_cartproducts.variants-select.choose">
                 <source>Please choose ...</source>
                 <target>Bitte auswählen ...</target>
