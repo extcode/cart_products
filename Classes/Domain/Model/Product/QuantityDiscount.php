@@ -27,7 +27,7 @@ class QuantityDiscount extends AbstractEntity
      */
     protected int $quantity = 0;
 
-    protected FrontendUserGroup $frontendUserGroup;
+    protected ?FrontendUserGroup $frontendUserGroup = null;
 
     public function toArray(): array
     {
