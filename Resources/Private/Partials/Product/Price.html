@@ -50,4 +50,36 @@
         </div>
     </f:then>
 </f:if>
+
+<f:if condition="{product.handleStock}">
+    <div class="available_stock">
+        <f:if condition="{product.handleStockInVariants}">
+            <f:then>
+                <span class="stock in-stock" data-stock-singular="{f:translate(key: 'tx_cartproducts.stock.in_stock_singular')}"
+                      data-stock-plural="{f:translate(key: 'tx_cartproducts.stock.in_stock_plural')}">&nbsp;</span>
+            </f:then>
+            <f:else>
+                <f:if condition="{product.stock} > 0">
+                    <f:then>
+                        <span class="stock in-stock">
+                        <f:if condition="{product.stock} == 1">
+                            <f:then>
+                                <f:translate key="tx_cartproducts.stock.in_stock_singular" arguments="{0:product.stock}"/>
+                            </f:then>
+                            <f:else>
+                                <f:translate key="tx_cartproducts.stock.in_stock_plural" arguments="{0:product.stock}"/>
+                            </f:else>
+                        </f:if>
+                            </span>
+                    </f:then>
+                    <f:else>
+                        <span class="stock not-in-stock">
+                        <f:translate key="tx_cartproducts.stock.not_in_stock"/>
+                        </span>
+                    </f:else>
+                </f:if>
+            </f:else>
+        </f:if>
+    </div>
+</f:if>
 </html>

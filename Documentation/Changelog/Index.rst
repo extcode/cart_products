@@ -1,5 +1,6 @@
 .. include:: ../Includes.txt
 
+=========
 ChangeLog
 =========
 
@@ -7,6 +8,7 @@ ChangeLog
    :maxdepth: 5
    :titlesonly:
 
+   5.0/Index
    4.0/Index
    3.0/Index
    2.4/Index

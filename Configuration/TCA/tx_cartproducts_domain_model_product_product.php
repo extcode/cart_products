@@ -625,7 +625,7 @@ return [
             'config' => [
                 'type' => 'file',
                 'appearance' => [
-                    'createNewRelationLinkTitle' => $_LLL_ttc . ':images.addFileReference',
+                    'createNewRelationLinkTitle' => $_LLL_ttc . ':media.addFileReference',
                     'showPossibleLocalizationRecords' => true,
                     'showRemovedLocalizationRecords' => true,
                     'showAllLocalizationLink' => true,
