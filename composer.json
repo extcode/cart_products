@@ -107,11 +107,5 @@
             "@test:typoscript:lint",
             "@test:php"
         ]
-    },
-    "repositories": {
-        "extcode/cart": {
-            "type": "vcs",
-            "url": "ssh://git@code.extco.de:22722/cart/cart.git"
-        }
     }
 }
