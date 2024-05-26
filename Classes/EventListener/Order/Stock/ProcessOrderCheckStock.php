@@ -56,9 +56,14 @@ class ProcessOrderCheckStock
             }
 
             foreach ($product->getBeVariants() as $beVariant) {
-                $quantityInStock = $beVariant->getStock();
-                if ($compareQuantity > $quantityInStock) {
-                    $this->falseAvailability($event, $product->getTitle(), $beVariant->getSku(), $quantityInStock);
+                foreach ($cartProduct->getBeVariants() as $cartBeVariant) {
+                    if($cartBeVariant->getSku() !== $beVariant->getSku()) {
+                        continue;
+                    }
+                    $quantityInStock = $beVariant->getStock();
+                    if ($compareQuantity > $quantityInStock) {
+                        $this->falseAvailability($event, $product->getTitle(), $beVariant->getSku(), $quantityInStock);
+                    }
                 }
             }
         }
@@ -71,8 +76,8 @@ class ProcessOrderCheckStock
         int $quantityInStock
     ): void
     {
-        $event->setNotAllProductsAreAvailable();
-        $event->addMessage(
+        $event->setNotEveryProductAvailable();
+        $event->addInsufficientStockMessage(
             GeneralUtility::makeInstance(
                 FlashMessage::class,
                 LocalizationUtility::translate(
