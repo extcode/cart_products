@@ -168,14 +168,12 @@ test:php83:typo3_12:
 
 .test_codeception: &test_codeception
   stage: test
-  services:
-    - mysql:5
   image: php:$DOCKER_TAG
   only:
     - branches
   before_script:
     - apk add --no-cache bash curl git mercurial openssh openssl parallel subversion tini zlib-dev libzip-dev zip icu-dev g++ firefox
-    - docker-php-ext-install mysqli && docker-php-ext-install zip && docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
+    - docker-php-ext-install zip && docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
     - wget https://github.com/mozilla/geckodriver/releases/download/${GECKODRIVER_VERSION}/geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz
     - tar -xvzf geckodriver*
     - chmod +x geckodriver
@@ -190,10 +188,12 @@ test:php83:typo3_12:
     - composer config --no-plugins allow-plugins.typo3/class-alias-loader true
     - composer require typo3/cms-core="${TYPO3_VERSION}"
   script:
-    - geckodriver &
     - mkdir -p .build/public/typo3temp/var/tests/acceptance-sqlite-dbs
-    - export INSTANCE_PATH="$(pwd)/.build/public/typo3temp/var/tests/acceptance"
-    - vendor/bin/codecept build
+    - export typo3DatabaseDriver=pdo_sqlite
+    - export PROJECT_ROOT="$(pwd)"
+    - export INSTANCE_PATH="$(pwd)/.build/web/typo3temp/var/tests/acceptance"
+    - mkdir -p "$INSTANCE_PATH"
+    - mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-logs/"
     - vendor/bin/codecept run
   artifacts:
     paths:

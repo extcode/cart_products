@@ -42,7 +42,7 @@
     "extra": {
         "typo3/cms": {
             "extension-key": "cart_products",
-            "web-dir": "vendor/public"
+            "web-dir": ".build/web"
         }
     },
     "require": {
@@ -62,7 +62,6 @@
         "helmich/typo3-typoscript-lint": "^3.1",
         "overtrue/phplint": "^5.5",
         "phpstan/phpstan": "^1.10",
-        "sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": "^0.0.1",
         "ssch/typo3-rector": "^1.2",
         "typo3/cms-dashboard": "^12.4",
         "typo3/cms-fluid-styled-content": "^12.4",

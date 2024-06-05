@@ -2,8 +2,8 @@ namespace: 'Extcode\CartProducts\Tests\Acceptance\Support'
 
 paths:
   tests: 'Tests/Acceptance'
-  output: '.build/Tests/Acceptance/_output'
-  data: '.build/Tests/Acceptance/_data'
+  data: 'Tests/Acceptance/Data'
+  output: '.build/web/typo3temp/var/tests/AcceptanceReports'
   support: 'Tests/Acceptance/Support'
 
 settings:
@@ -13,7 +13,8 @@ extensions:
   enabled:
     -
       'Codeception\Extension\RunProcess':
-        - 'TYPO3_PATH_APP="$INSTANCE_PATH" TYPO3_PATH_ROOT="$INSTANCE_PATH" TYPO3_CONTEXT=Testing php -S 127.0.0.1:8080 -t "$INSTANCE_PATH" > .build/Tests/Acceptance/_output/php.log 2>&1'
+        - 'geckodriver > .build/web/typo3temp/var/tests/acceptance-logs/geckodriver.log 2>&1'
+        - 'TYPO3_PATH_APP="$INSTANCE_PATH" TYPO3_PATH_ROOT="$INSTANCE_PATH" php -S 127.0.0.1:8080 -t "$INSTANCE_PATH" > .build/web/typo3temp/var/tests/acceptance-logs/php.log 2>&1'
     -
       'Codeception\Extension\Recorder'
     -
@@ -39,11 +40,6 @@ suites:
               moz:firefoxOptions:
                 args:
                   - '-headless'
-        -
-          Db:
-            dsn: 'sqlite:.build/public/typo3temp/var/tests/acceptance-sqlite-dbs/test_acceptance.sqlite'
-            user: ''
-            password: ''
 
     step_decorators:
       - 'Codeception\Step\Retry'
