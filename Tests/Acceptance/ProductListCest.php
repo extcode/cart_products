@@ -70,10 +70,15 @@ class ProductListCest
         $xpath = '//select[@id="be-variants-select"]/option';
 
         $regularPrice = $I->grabAttributeFrom(Locator::elementAt($xpath, 6), 'data-regular-price');
-        assertEquals('149,49 €', $regularPrice);
+        $expectedPrice = html_entity_decode('149,49&nbsp;&euro;');
+        assertEquals($expectedPrice, $regularPrice);
+
         $regularPrice = $I->grabAttributeFrom(Locator::elementAt($xpath, 7), 'data-regular-price');
-        assertEquals('169,99 €', $regularPrice);
+        $expectedPrice = html_entity_decode('169,99&nbsp;&euro;');
+        assertEquals($expectedPrice, $regularPrice);
+
         $regularPrice = $I->grabAttributeFrom(Locator::elementAt($xpath, 8), 'data-regular-price');
-        assertEquals('149,49 €', $regularPrice);
+        $expectedPrice = html_entity_decode('149,49&nbsp;&euro;');
+        assertEquals($expectedPrice, $regularPrice);
     }
 }
