@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 
 let
-  php = pkgs.php83.buildEnv {
+  php = pkgs.php81.buildEnv {
     extensions = { enabled, all }: enabled ++ (with all; [
       xdebug
     ]);
@@ -11,7 +11,7 @@ let
       memory_limit = 4G
     '';
   };
-  inherit(pkgs.php83Packages) composer;
+  inherit(pkgs.php81Packages) composer;
 
   projectInstall = pkgs.writeShellApplication {
     name = "project-install";
@@ -61,13 +61,13 @@ let
     text = ''
       project-install
 
-      geckodriver &
+      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance"
+      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-logs"
+      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-reports"
+      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-sqlite-dbs"
 
-      export INSTANCE_PATH="$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance"
-      export typo3DatabaseDriver=pdo_sqlite
+      export INSTANCE_PATH="$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance"
 
-      mkdir -p "$INSTANCE_PATH"
-      ./vendor/bin/codecept build
       ./vendor/bin/codecept run
     '';
   };
@@ -85,5 +85,7 @@ in pkgs.mkShellNoCC {
 
   shellHook = ''
     export PROJECT_ROOT="$(pwd)"
+
+    export typo3DatabaseDriver=pdo_sqlite
   '';
 }

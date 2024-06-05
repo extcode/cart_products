@@ -3,7 +3,7 @@ namespace: 'Extcode\CartProducts\Tests\Acceptance\Support'
 paths:
   tests: 'Tests/Acceptance'
   data: 'Tests/Acceptance/Data'
-  output: '.build/web/typo3temp/var/tests/AcceptanceReports'
+  output: '.build/web/typo3temp/var/tests/acceptance-reports'
   support: 'Tests/Acceptance/Support'
 
 settings:

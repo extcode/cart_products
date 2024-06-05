@@ -78,3 +78,18 @@ jobs:
 
       - name: Code Quality (by PHPStan)
         run: vendor/bin/phpstan analyse -c Build/phpstan.neon
+
+  tests-acceptance:
+    runs-on: ubuntu-latest
+    needs:
+      - coding-guideline
+      - code-quality
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: cachix/install-nix-action@v17
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - name: Run Acceptance Tests
+        run: nix-shell --pure --run project-test-acceptance
