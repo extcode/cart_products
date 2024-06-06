@@ -1,7 +1,10 @@
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { }
+  ,phpVersion ? "php81"
+}:
 
 let
-  php = pkgs.php81.buildEnv {
+  php = pkgs.${phpVersion}.buildEnv {
     extensions = { enabled, all }: enabled ++ (with all; [
       xdebug
     ]);
@@ -11,7 +14,7 @@ let
       memory_limit = 4G
     '';
   };
-  inherit(pkgs.php81Packages) composer;
+  inherit(pkgs."${phpVersion}Packages") composer;
 
   projectInstall = pkgs.writeShellApplication {
     name = "project-install";
@@ -56,6 +59,7 @@ let
       pkgs.sqlite
       pkgs.firefox
       pkgs.geckodriver
+      pkgs.procps
       php
     ];
     text = ''
@@ -69,6 +73,8 @@ let
       export INSTANCE_PATH="$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance"
 
       ./vendor/bin/codecept run
+
+      pgrep -f "php -S" | xargs -r kill
     '';
   };
 
