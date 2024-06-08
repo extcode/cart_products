@@ -36,7 +36,7 @@ let
     ];
 
     text = ''
-      PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --diff
+      ./vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --diff
     '';
   };
 
@@ -48,7 +48,31 @@ let
     ];
 
     text = ''
-      PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer fix
+      ./vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php
+    '';
+  };
+
+  projectTestUnit = pkgs.writeShellApplication {
+    name = "project-test-unit";
+    runtimeInputs = [
+      php
+      projectInstall
+    ];
+    text = ''
+      project-install
+      ./vendor/bin/phpunit -c Build/UnitTests.xml
+    '';
+  };
+
+  projectTestFunctional = pkgs.writeShellApplication {
+    name = "project-test-functional";
+    runtimeInputs = [
+      php
+      projectInstall
+    ];
+    text = ''
+      project-install
+      ./vendor/bin/phpunit -c Build/FunctionalTests.xml
     '';
   };
 
@@ -86,6 +110,8 @@ in pkgs.mkShellNoCC {
     projectInstall
     projectCgl
     projectCglFix
+    projectTestUnit
+    projectTestFunctional
     projectTestAcceptance
   ];
 

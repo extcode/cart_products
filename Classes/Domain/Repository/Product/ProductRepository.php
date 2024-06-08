@@ -38,12 +38,12 @@ class ProductRepository extends Repository
                 $categoryConstraints[] = $query->contains('category', $category);
                 $categoryConstraints[] = $query->contains('categories', $category);
             }
-            $constraints = $query->logicalOr($categoryConstraints);
+            $constraints[] = $query->logicalOr(...array_values($categoryConstraints));
         }
 
         if (!empty($constraints)) {
             $query->matching(
-                $query->logicalAnd($constraints)
+                $query->logicalAnd(...array_values($constraints))
             );
         }
 
