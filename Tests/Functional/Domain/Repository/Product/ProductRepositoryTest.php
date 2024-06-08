@@ -33,7 +33,7 @@ class ProductRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findDemandedWithGivenSkuReturnsProducts()
+    public function findDemandedWithGivenSkuReturnsProducts(): void
     {
         $querySettings = GeneralUtility::makeInstance(QuerySettingsInterface::class);
         $querySettings->setStoragePageIds([110]);
@@ -53,7 +53,7 @@ class ProductRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findDemandedWithGivenTitleReturnsProducts()
+    public function findDemandedWithGivenTitleReturnsProducts(): void
     {
         $querySettings = GeneralUtility::makeInstance(QuerySettingsInterface::class);
         $querySettings->setStoragePageIds([110]);
@@ -82,7 +82,7 @@ class ProductRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findByUidsDoesNotRespectStoragePid()
+    public function findByUidsDoesNotRespectStoragePid(): void
     {
         $products = $this->productRepository->findByUids('3,1,2,5,4');
 
@@ -103,7 +103,7 @@ class ProductRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findByUidsReturnsCorrectOrder()
+    public function findByUidsReturnsCorrectOrder(): void
     {
         $listOfProductIds = [3, 1, 2, 5, 4];
         $products = $this->productRepository->findByUids(implode(',', $listOfProductIds));

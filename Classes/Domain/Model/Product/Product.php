@@ -32,9 +32,9 @@ class Product extends AbstractProduct
     protected string $productType = 'simple';
 
     /**
-     * @Lazy
      * @var ObjectStorage<TtContent>
      */
+    #[Lazy]
     protected ?ObjectStorage $productContent = null;
 
     protected int $minNumberInOrder = 0;
@@ -46,35 +46,35 @@ class Product extends AbstractProduct
     protected float $price = 0.0;
 
     /**
-     * @Cascade("remove")
      * @var ObjectStorage<SpecialPrice>
      */
+    #[Cascade(['value' => 'remove'])]
     protected ObjectStorage $specialPrices;
 
     /**
-     * @Cascade("remove")
      * @var ObjectStorage<QuantityDiscount>
      */
+    #[Cascade(['value' => 'remove'])]
     protected ObjectStorage $quantityDiscounts;
 
     protected int $taxClassId = 1;
 
     /**
-     * @Cascade("remove")
      * @var ObjectStorage<FeVariant>
      */
+    #[Cascade(['value' => 'remove'])]
     protected ObjectStorage $feVariants;
 
     /**
-     * @Lazy
      * @var ObjectStorage<Product>
      */
+    #[Lazy]
     protected ?ObjectStorage $relatedProducts = null;
 
     /**
-     * @Lazy
      * @var ObjectStorage<Product>
      */
+    #[Lazy]
     protected ?ObjectStorage $relatedProductsFrom = null;
 
     protected int $stock = 0;
@@ -132,7 +132,7 @@ class Product extends AbstractProduct
         return $this->maxNumberInOrder;
     }
 
-    public function setMaxNumberInOrder(int $maxNumberInOrder)
+    public function setMaxNumberInOrder(int $maxNumberInOrder): void
     {
         if ($maxNumberInOrder < 0 || (($maxNumberInOrder !== 0) && ($maxNumberInOrder < $this->minNumberInOrder))) {
             throw new \InvalidArgumentException();

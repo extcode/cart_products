@@ -19,15 +19,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CreateCartBackendVariants
 {
-    protected BeVariantRepository $beVariantRepository;
-
     protected array $frontendUserGroupIds;
 
     public function __construct(
-        BeVariantRepository $beVariantRepository
-    ) {
-        $this->beVariantRepository = $beVariantRepository;
-    }
+        protected BeVariantRepository $beVariantRepository
+    ) {}
 
     public function __invoke(RetrieveProductsFromRequestEvent $event): void
     {
@@ -48,10 +44,10 @@ class CreateCartBackendVariants
             foreach ($requestBeVariants as $variantsKey => $variantId) {
                 if ($variantsKey === 1) {
                     $newVariant = $this->createCartBackendVariant(
-                        $cartProduct,
-                        null,
                         $quantity,
-                        $variantId
+                        $variantId,
+                        $cartProduct,
+                        null
                     );
 
                     if ($newVariant) {
@@ -62,10 +58,10 @@ class CreateCartBackendVariants
                     }
                 } else {
                     $newVariant = $this->createCartBackendVariant(
-                        null,
-                        $newVariantArr[$variantsKey - 1],
                         $quantity,
-                        $variantId
+                        $variantId,
+                        null,
+                        $newVariantArr[$variantsKey - 1]
                     );
 
                     if ($newVariant) {
@@ -80,10 +76,10 @@ class CreateCartBackendVariants
     }
 
     protected function createCartBackendVariant(
-        Product $product = null,
-        BeVariant $variant = null,
         int $quantity,
-        string $variantId
+        string $variantId,
+        Product $product = null,
+        BeVariant $variant = null
     ): ?BeVariant {
         $productBackendVariant = $this->beVariantRepository->findByUid($variantId);
 

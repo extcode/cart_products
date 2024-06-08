@@ -15,16 +15,13 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class QuantityDiscount extends AbstractEntity
 {
-    /**
-     * @Validate("NotEmpty")
-     */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected float $price = 0.0;
 
     /**
      * Quantity (lower bound)
-     *
-     * @Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected int $quantity = 0;
 
     protected ?FrontendUserGroup $frontendUserGroup = null;

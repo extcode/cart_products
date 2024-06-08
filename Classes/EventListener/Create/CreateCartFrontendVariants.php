@@ -18,10 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CreateCartFrontendVariants
 {
-    /**
-     * @var ProductRepository
-     */
-    protected $productRepository;
+    protected ProductRepository $productRepository;
 
     public function __construct(
         ProductRepository $productRepository,

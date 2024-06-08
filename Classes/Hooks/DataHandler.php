@@ -17,10 +17,8 @@ class DataHandler
     /**
      * Flushes the cache if a news record was edited.
      * This happens on two levels: by UID and by PID.
-     *
-     * @param array $params
      */
-    public function clearCachePostProc(array $params)
+    public function clearCachePostProc(array $params): void
     {
         if (isset($params['table']) && ($params['table'] === 'tx_cartproducts_domain_model_product_product')) {
             $cacheTagsToFlush = [];

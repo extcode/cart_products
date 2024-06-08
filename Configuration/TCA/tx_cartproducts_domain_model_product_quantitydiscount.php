@@ -54,9 +54,8 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_quantitydiscount.quantity',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'int',
                 'default' => '0',
                 'required' => true,
             ],
@@ -65,11 +64,11 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_quantitydiscount.price',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2',
                 'default' => '0.00',
                 'required' => true,
+                'format' => 'decimal',
             ],
         ],
 

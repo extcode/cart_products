@@ -30,7 +30,7 @@ class HandleStock
 
                 $product = $productQueryBuilder
                     ->select('uid', 'handle_stock', 'handle_stock_in_variants')
-                    ->from('tx_cartproducts_domain_model_product_product')->where($productQueryBuilder->expr()->eq('uid', $productQueryBuilder->createNamedParameter($cartProduct->getProductId(), \PDO::PARAM_INT)))->executeQuery()->fetch();
+                    ->from('tx_cartproducts_domain_model_product_product')->where($productQueryBuilder->expr()->eq('uid', $productQueryBuilder->createNamedParameter($cartProduct->getProductId(), \PDO::PARAM_INT)))->executeQuery()->fetchAssociative();
 
                 if ($product['handle_stock']) {
                     if ($product['handle_stock_in_variants']) {
@@ -51,7 +51,7 @@ class HandleStock
 
         $product = $productQueryBuilder
             ->select('stock')
-            ->from('tx_cartproducts_domain_model_product_product')->where($productQueryBuilder->expr()->eq('uid', $productQueryBuilder->createNamedParameter($cartProduct->getProductId(), \PDO::PARAM_INT)))->executeQuery()->fetch();
+            ->from('tx_cartproducts_domain_model_product_product')->where($productQueryBuilder->expr()->eq('uid', $productQueryBuilder->createNamedParameter($cartProduct->getProductId(), \PDO::PARAM_INT)))->executeQuery()->fetchAssociative();
 
         $productQueryBuilder
             ->update('tx_cartproducts_domain_model_product_product')
@@ -72,7 +72,7 @@ class HandleStock
             $beVariantQueryBuilder = $beVariantConnection->createQueryBuilder();
             $beVariant = $beVariantQueryBuilder
                 ->select('stock')
-                ->from('tx_cartproducts_domain_model_product_bevariant')->where($beVariantQueryBuilder->expr()->eq('uid', $beVariantQueryBuilder->createNamedParameter($cartBeVariant->getId(), \PDO::PARAM_INT)))->executeQuery()->fetch();
+                ->from('tx_cartproducts_domain_model_product_bevariant')->where($beVariantQueryBuilder->expr()->eq('uid', $beVariantQueryBuilder->createNamedParameter($cartBeVariant->getId(), \PDO::PARAM_INT)))->executeQuery()->fetchAssociative();
 
             $beVariantQueryBuilder
                 ->update('tx_cartproducts_domain_model_product_bevariant')

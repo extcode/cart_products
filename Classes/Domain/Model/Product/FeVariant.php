@@ -14,14 +14,10 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class FeVariant extends AbstractEntity
 {
-    /**
-     * @Validate("NotEmpty")
-     */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected string $sku = '';
 
-    /**
-     * @Validate("NotEmpty")
-     */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected string $title = '';
 
     protected string $description = '';

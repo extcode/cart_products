@@ -19,10 +19,6 @@ use TYPO3\CMS\Extbase\Mvc\Request;
 
 final class RetrieveProductsFromRequestEvent implements RetrieveProductsFromRequestEventInterface
 {
-    private Request $request;
-
-    private array $taxClasses = [];
-
     private ?ProductProduct $productProduct = null;
 
     private ?CartProduct $cartProduct = null;
@@ -39,12 +35,9 @@ final class RetrieveProductsFromRequestEvent implements RetrieveProductsFromRequ
     private bool $isPropagationStopped = false;
 
     public function __construct(
-        Request $request,
-        array $taxClasses
-    ) {
-        $this->request = $request;
-        $this->taxClasses = $taxClasses;
-    }
+        private readonly Request $request,
+        private readonly array $taxClasses
+    ) {}
 
     public function getRequest(): Request
     {

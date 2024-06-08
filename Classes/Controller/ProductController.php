@@ -22,6 +22,7 @@ use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -32,40 +33,22 @@ use TYPO3\CMS\Extbase\Service\ExtensionService;
 
 class ProductController extends ActionController
 {
-    protected ExtensionService $extensionService;
-
-    protected SessionHandler $sessionHandler;
-
     protected Cart $cart;
-
-    protected CartUtility $cartUtility;
-
-    protected ProductRepository $productRepository;
-
-    protected CategoryRepository $categoryRepository;
-
     protected array $searchArguments = [];
-
     protected array $cartConfiguration = [];
 
     public function __construct(
-        ExtensionService $extensionService,
-        SessionHandler $sessionHandler,
-        CartUtility $cartUtility,
-        ProductRepository $productRepository,
-        CategoryRepository $categoryRepository
-    ) {
-        $this->extensionService = $extensionService;
-        $this->sessionHandler = $sessionHandler;
-        $this->cartUtility = $cartUtility;
-        $this->productRepository = $productRepository;
-        $this->categoryRepository = $categoryRepository;
-    }
+        protected readonly ExtensionService $extensionService,
+        protected readonly SessionHandler $sessionHandler,
+        protected readonly CartUtility $cartUtility,
+        protected readonly ProductRepository $productRepository,
+        protected readonly CategoryRepository $categoryRepository
+    ) {}
 
     protected function initializeAction()
     {
         $this->cartConfiguration = $this->configurationManager->getConfiguration(
-            ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK,
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
             'Cart'
         );
 
@@ -143,7 +126,7 @@ class ProductController extends ActionController
     public function listAction(int $currentPage = 1): ResponseInterface
     {
         $demand = $this->createDemandObjectFromSettings($this->settings);
-        $demand->setActionAndClass(__METHOD__, __CLASS__);
+        $demand->setActionAndClass(__METHOD__, self::class);
 
         $itemsPerPage = $this->settings['itemsPerPage'] ?? 20;
 
@@ -172,9 +155,7 @@ class ProductController extends ActionController
         return $this->htmlResponse();
     }
 
-    /**
-     * @IgnoreValidation("product")
-     */
+    #[IgnoreValidation(['value' => 'product'])]
     public function showAction(Product $product = null): ResponseInterface
     {
         if (!$product) {
@@ -222,7 +203,7 @@ class ProductController extends ActionController
 
     public function flexformAction(): ResponseInterface
     {
-        $contentObj = $this->configurationManager->getContentObject();
+        $contentObj = $this->request->getAttribute('currentContentObject');
         $contentId = $contentObj->data['uid'];
 
         $this->view->assign('contentId', $contentId);
@@ -267,7 +248,7 @@ class ProductController extends ActionController
             TypoScriptService::class
         );
         $configuration = $typoscriptService->convertPlainArrayToTypoScriptArray($configuration);
-        $productUid = (int)$configurationManager->getContentObject()->cObjGetSingle($configuration['product'], $configuration['product.']);
+        $productUid = (int)$this->request->getAttribute('currentContentObject')->cObjGetSingle($configuration['product'], $configuration['product.']);
 
         if ($productUid === 0) {
             $configurationManager->setConfiguration([
