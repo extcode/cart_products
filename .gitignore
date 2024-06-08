@@ -1,7 +1,7 @@
 .build
 composer.lock
 
-.php_cs.cache
+.php-cs-fixer.cache
 .phplint.cache
 Build/.phpunit.cache
 
@@ -12,6 +12,7 @@ Documentation-GENERATED-temp/
 .idea
 
 var/
+vendor/
 
 phpunit.coverage.xml
 phpunit.report.xml

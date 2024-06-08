@@ -2,29 +2,32 @@
 
 namespace Extcode\CartProducts\Tests\Functional\Domain\Repository\Product;
 
+use Codappix\Typo3PhpDatasets\TestingFramework;
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class ProductRepositoryTest extends FunctionalTestCase
 {
-    protected array $testExtensionsToLoad = [
-        'typo3conf/ext/cart',
-        'typo3conf/ext/cart_products',
-    ];
+    use TestingFramework;
 
     protected ProductRepository $productRepository;
 
     public function setUp(): void
     {
+        $this->testExtensionsToLoad[] = 'extcode/cart';
+        $this->testExtensionsToLoad[] = 'extcode/cart-products';
+
+        $this->coreExtensionsToLoad[] = 'typo3/cms-reactions';
+
         parent::setUp();
 
         $this->productRepository = GeneralUtility::makeInstance(ProductRepository::class);
 
-        $fixturePath = __DIR__ . '/../../../Fixtures/';
-        $this->importCSVDataSet($fixturePath . 'pages.csv');
-        $this->importCSVDataSet($fixturePath . 'tx_cartproducts_domain_model_product_product.csv');
+        $this->importPHPDataSet(__DIR__ . '/../../../Fixtures/Pages.php');
+        $this->importPHPDataSet(__DIR__ . '/../../../Fixtures/Products.php');
     }
 
     /**
@@ -32,7 +35,9 @@ class ProductRepositoryTest extends FunctionalTestCase
      */
     public function findDemandedWithGivenSkuReturnsProducts()
     {
-        $_GET['id'] = 110;
+        $querySettings = GeneralUtility::makeInstance(QuerySettingsInterface::class);
+        $querySettings->setStoragePageIds([110]);
+        $this->productRepository->setDefaultQuerySettings($querySettings);
 
         $productDemand = GeneralUtility::makeInstance(ProductDemand::class);
         $productDemand->setSku('first');
@@ -50,7 +55,9 @@ class ProductRepositoryTest extends FunctionalTestCase
      */
     public function findDemandedWithGivenTitleReturnsProducts()
     {
-        $_GET['id'] = 110;
+        $querySettings = GeneralUtility::makeInstance(QuerySettingsInterface::class);
+        $querySettings->setStoragePageIds([110]);
+        $this->productRepository->setDefaultQuerySettings($querySettings);
 
         $productDemand = GeneralUtility::makeInstance(ProductDemand::class);
         $productDemand->setTitle('First');

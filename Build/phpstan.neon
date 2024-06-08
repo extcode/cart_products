@@ -6,3 +6,5 @@ parameters:
     - ../Tests
     - ../ext_emconf.php
     - ../ext_localconf.php
+  excludePaths:
+    - ../Tests/Acceptance
