@@ -108,7 +108,7 @@ phpstan:analyse:
       if [[ "$COVERAGE" == "1" ]]; then
         XDEBUG_MODE=coverage TYPO3_PATH_WEB=${TYPO3_PATH_WEB} vendor/bin/phpunit --coverage-clover=phpunit.coverage.xml --log-junit=phpunit.report.xml -c Build/UnitTests.xml Tests/Unit
       fi
-#    - typo3DatabaseDriver=pdo_sqlite vendor/bin/phpunit -c Build/FunctionalTests.xml
+    - typo3DatabaseDriver=pdo_sqlite vendor/bin/phpunit -c Build/FunctionalTests.xml
   artifacts:
     paths:
       - phpunit.coverage.xml
