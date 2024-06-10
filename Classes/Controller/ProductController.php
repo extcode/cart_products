@@ -281,10 +281,14 @@ class ProductController extends ActionController
                 ProductRepository::class
             );
 
-            $product =  $productRepository->findByUid($productUid);
+            $product = $productRepository->findByUid($productUid);
+
+            if ($product instanceof Product) {
+                return $product;
+            }
         }
 
-        return $product;
+        return null;
     }
 
     /**
