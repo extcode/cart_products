@@ -32,7 +32,8 @@ class CreateCartProduct
             $taxClasses[$productProduct->getTaxClassId()],
             (int)$request->getArgument('quantity'),
             $productProduct->getIsNetPrice(),
-            $event->getCartFeVariant()
+            $event->getCartFeVariant(),
+            $request->getArgument('detailViewParameter')
         );
 
         $cartProduct->setMaxNumberInCart($productProduct->getMaxNumberInOrder());
@@ -52,6 +53,10 @@ class CreateCartProduct
         if ($productProduct->getProductType() === 'virtual' || $productProduct->getProductType() === 'downloadable') {
             $cartProduct->setIsVirtualProduct(true);
         }
+
+        $cartProduct->addDetailViewParameter('extensionName', 'cartproducts');
+        $cartProduct->addDetailViewParameter('pluginName', 'products');
+        $cartProduct->addDetailViewParameter('controller', 'product');
 
         $event->setCartProduct($cartProduct);
     }

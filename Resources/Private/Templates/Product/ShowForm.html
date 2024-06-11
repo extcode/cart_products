@@ -6,7 +6,8 @@
 <f:section name="main">
     <f:if condition="{product}">
         <f:if condition="{cartSettings.cart.pid}">
-            <f:render partial="Product/CartForm" arguments="{product: product, pid: cartSettings.cart.pid}"/>
+            <f:render partial="Product/CartForm"
+                      arguments="{product: product, pid: cartSettings.cart.pid, detailViewPageUid: detailViewPageUid}"/>
         </f:if>
 
         <div id="product-price">
