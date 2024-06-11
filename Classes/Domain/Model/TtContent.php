@@ -76,19 +76,10 @@ class TtContent extends AbstractEntity
     protected int $sysLanguageUid;
     protected int $starttime;
     protected int $endtime;
-    protected string $txGridelementsBackendLayout;
-    protected int $txGridelementsChildren;
-    protected int $txGridelementsContainer;
-    protected int $txGridelementsColumns;
 
     public function getCrdate(): \DateTime
     {
         return $this->crdate;
-    }
-
-    public function setCrdate(\DateTime $crdate): void
-    {
-        $this->crdate = $crdate;
     }
 
     public function getTstamp(): \DateTime
@@ -96,1052 +87,308 @@ class TtContent extends AbstractEntity
         return $this->tstamp;
     }
 
-    public function setTstamp(\DateTime $tstamp): void
-    {
-        $this->tstamp = $tstamp;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContentType()
+    public function getContentType(): string
     {
         return $this->contentType;
     }
 
-    /**
-     * @param $contentType
-     */
-    public function setContentType($contentType): void
-    {
-        $this->contentType = $contentType;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHeader()
+    public function getHeader(): string
     {
         return $this->header;
     }
 
-    /**
-     * @param $header
-     */
-    public function setHeader($header): void
-    {
-        $this->header = $header;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHeaderPosition()
+    public function getHeaderPosition(): string
     {
         return $this->headerPosition;
     }
 
-    /**
-     * @param $headerPosition
-     */
-    public function setHeaderPosition($headerPosition): void
-    {
-        $this->headerPosition = $headerPosition;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBodytext()
+    public function getBodytext(): string
     {
         return $this->bodytext;
     }
 
-    /**
-     * @param $bodytext
-     */
-    public function setBodytext($bodytext): void
+    public function getColPos(): int
     {
-        $this->bodytext = $bodytext;
+        return $this->colPos;
     }
 
-    /**
-     * Get the colpos
-     *
-     * @return int
-     */
-    public function getColPos()
-    {
-        return (int)$this->colPos;
-    }
-
-    /**
-     * Set colpos
-     *
-     * @param int $colPos
-     */
-    public function setColPos($colPos): void
-    {
-        $this->colPos = $colPos;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImage()
+    public function getImage(): string
     {
         return $this->image;
     }
 
-    /**
-     * @param $image
-     */
-    public function setImage($image): void
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * @return int
-     */
-    public function getImagewidth()
+    public function getImagewidth(): int
     {
         return $this->imagewidth;
     }
 
-    /**
-     * @param $imagewidth
-     */
-    public function setImagewidth($imagewidth): void
-    {
-        $this->imagewidth = $imagewidth;
-    }
-
-    /**
-     * @return int
-     */
-    public function getImageheight()
+    public function getImageheight(): int
     {
         return $this->imageheight;
     }
 
-    /**
-     * @param $imageheight
-     */
-    public function setImageheight($imageheight): void
-    {
-        $this->imageheight = $imageheight;
-    }
-
-    /**
-     * @return int
-     */
-    public function getImageorient()
+    public function getImageorient(): int
     {
         return $this->imageorient;
     }
 
-    /**
-     * @param $imageorient
-     */
-    public function setImageorient($imageorient): void
-    {
-        $this->imageorient = $imageorient;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImagecaption()
+    public function getImagecaption(): string
     {
         return $this->imagecaption;
     }
 
-    /**
-     * @param $imagecaption
-     */
-    public function setImagecaption($imagecaption): void
-    {
-        $this->imagecaption = $imagecaption;
-    }
-
-    /**
-     * @return int
-     */
-    public function getImagecols()
+    public function getImagecols(): int
     {
         return $this->imagecols;
     }
 
-    /**
-     * @param $imagecols
-     */
-    public function setImagecols($imagecols): void
-    {
-        $this->imagecols = $imagecols;
-    }
-
-    /**
-     * @return int
-     */
-    public function getImageborder()
+    public function getImageborder(): int
     {
         return $this->imageborder;
     }
 
-    /**
-     * @param $imageborder
-     */
-    public function setImageborder($imageborder): void
-    {
-        $this->imageborder = $imageborder;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMedia()
+    public function getMedia(): string
     {
         return $this->media;
     }
 
-    /**
-     * @param $media
-     */
-    public function setMedia($media): void
-    {
-        $this->media = $media;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLayout()
+    public function getLayout(): string
     {
         return $this->layout;
     }
 
-    /**
-     * @param $layout
-     */
-    public function setLayout($layout): void
-    {
-        $this->layout = $layout;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCols()
+    public function getCols(): int
     {
         return $this->cols;
     }
 
-    /**
-     * @param $cols
-     */
-    public function setCols($cols): void
-    {
-        $this->cols = $cols;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSubheader()
+    public function getSubheader(): string
     {
         return $this->subheader;
     }
 
-    /**
-     * @param $subheader
-     */
-    public function setSubheader($subheader): void
-    {
-        $this->subheader = $subheader;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHeaderLink()
+    public function getHeaderLink(): string
     {
         return $this->headerLink;
     }
 
-    /**
-     * @param $headerLink
-     */
-    public function setHeaderLink($headerLink): void
-    {
-        $this->headerLink = $headerLink;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageLink()
+    public function getImageLink(): string
     {
         return $this->imageLink;
     }
 
-    /**
-     * @param $imageLink
-     */
-    public function setImageLink($imageLink): void
-    {
-        $this->imageLink = $imageLink;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageZoom()
+    public function getImageZoom(): string
     {
         return $this->imageZoom;
     }
 
-    /**
-     * @param $imageZoom
-     */
-    public function setImageZoom($imageZoom): void
-    {
-        $this->imageZoom = $imageZoom;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAltText()
+    public function getAltText(): string
     {
         return $this->altText;
     }
 
-    /**
-     * @param $altText
-     */
-    public function setAltText($altText): void
-    {
-        $this->altText = $altText;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitleText()
+    public function getTitleText(): string
     {
         return $this->titleText;
     }
 
-    /**
-     * @param $titleText
-     */
-    public function setTitleText($titleText): void
-    {
-        $this->titleText = $titleText;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHeaderLayout()
+    public function getHeaderLayout(): string
     {
         return $this->headerLayout;
     }
 
-    /**
-     * @param $headerLayout
-     */
-    public function setHeaderLayout($headerLayout): void
-    {
-        $this->headerLayout = $headerLayout;
-    }
-
-    /**
-     * @return string
-     */
-    public function getListType()
+    public function getListType(): string
     {
         return $this->listType;
     }
 
-    /**
-     * @param string $listType
-     */
-    public function setListType($listType): void
-    {
-        $this->listType = $listType;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRecords()
+    public function getRecords(): string
     {
         return $this->records;
     }
 
-    /**
-     * @param $records
-     */
-    public function setRecords($records): void
-    {
-        $this->records = $records;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPages()
+    public function getPages(): string
     {
         return $this->pages;
     }
 
-    /**
-     * @param $pages
-     */
-    public function setPages($pages): void
-    {
-        $this->pages = $pages;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFeGroup()
+    public function getFeGroup(): string
     {
         return $this->feGroup;
     }
 
-    /**
-     * @param $feGroup
-     */
-    public function setFeGroup($feGroup): void
-    {
-        $this->feGroup = $feGroup;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImagecaptionPosition()
+    public function getImagecaptionPosition(): string
     {
         return $this->imagecaptionPosition;
     }
 
-    /**
-     * @param $imagecaptionPosition
-     */
-    public function setImagecaptionPosition($imagecaptionPosition): void
-    {
-        $this->imagecaptionPosition = $imagecaptionPosition;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLongdescUrl()
+    public function getLongdescUrl(): string
     {
         return $this->longdescUrl;
     }
 
-    /**
-     * @param $longdescUrl
-     */
-    public function setLongdescUrl($longdescUrl): void
-    {
-        $this->longdescUrl = $longdescUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMenuType()
+    public function getMenuType(): string
     {
         return $this->menuType;
     }
 
-    /**
-     * @param $menuType
-     */
-    public function setMenuType($menuType): void
-    {
-        $this->menuType = $menuType;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSelectKey()
+    public function getSelectKey(): string
     {
         return $this->selectKey;
     }
 
-    /**
-     * @param $selectKey
-     */
-    public function setSelectKey($selectKey): void
-    {
-        $this->selectKey = $selectKey;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFileCollections()
+    public function getFileCollections(): string
     {
         return $this->fileCollections;
     }
 
-    /**
-     * @param $fileCollections
-     */
-    public function setFileCollections($fileCollections): void
-    {
-        $this->fileCollections = $fileCollections;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFilelinkSorting()
+    public function getFilelinkSorting(): string
     {
         return $this->filelinkSorting;
     }
 
-    /**
-     * @param $filelinkSorting
-     */
-    public function setFilelinkSorting($filelinkSorting): void
-    {
-        $this->filelinkSorting = $filelinkSorting;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTarget()
+    public function getTarget(): string
     {
         return $this->target;
     }
 
-    /**
-     * @param $target
-     */
-    public function setTarget($target): void
-    {
-        $this->target = $target;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMultimedia()
+    public function getMultimedia(): string
     {
         return $this->multimedia;
     }
 
-    /**
-     * @param $multimedia
-     */
-    public function setMultimedia($multimedia): void
-    {
-        $this->multimedia = $multimedia;
-    }
-
-    /**
-     * @return string
-     */
     public function getPiFlexform()
     {
         return $this->piFlexform;
     }
 
-    /**
-     * @param $piFlexform
-     */
-    public function setPiFlexform($piFlexform): void
-    {
-        $this->piFlexform = $piFlexform;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAccessibilityTitle()
+    public function getAccessibilityTitle(): string
     {
         return $this->accessibilityTitle;
     }
 
-    /**
-     * @param $accessibilityTitle
-     */
-    public function setAccessibilityTitle($accessibilityTitle): void
-    {
-        $this->accessibilityTitle = $accessibilityTitle;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAccessibilityBypassText()
+    public function getAccessibilityBypassText(): string
     {
         return $this->accessibilityBypassText;
     }
 
-    /**
-     * @param $accessibilityBypassText
-     */
-    public function setAccessibilityBypassText($accessibilityBypassText): void
-    {
-        $this->accessibilityBypassText = $accessibilityBypassText;
-    }
-
-    /**string
-     * @return string
-     */
-    public function getSelectedCategories()
+    public function getSelectedCategories(): string
     {
         return $this->selectedCategories;
     }
 
-    /**
-     * @param $selectedCategories
-     */
-    public function setSelectedCategories($selectedCategories): void
-    {
-        $this->selectedCategories = $selectedCategories;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCategoryField()
+    public function getCategoryField(): string
     {
         return $this->categoryField;
     }
 
-    /**
-     * @param $categoryField
-     */
-    public function setCategoryField($categoryField): void
-    {
-        $this->categoryField = $categoryField;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSpaceBefore()
+    public function getSpaceBefore(): int
     {
         return $this->spaceBefore;
     }
 
-    /**
-     * @param $spaceBefore
-     */
-    public function setSpaceBefore($spaceBefore): void
-    {
-        $this->spaceBefore = $spaceBefore;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSpaceAfter()
+    public function getSpaceAfter(): int
     {
         return $this->spaceAfter;
     }
 
-    /**
-     * @param $spaceAfter
-     */
-    public function setSpaceAfter($spaceAfter): void
-    {
-        $this->spaceAfter = $spaceAfter;
-    }
-
-    /**
-     * @return int
-     */
-    public function getImageNoRows()
+    public function getImageNoRows(): int
     {
         return $this->imageNoRows;
     }
 
-    /**
-     * @param $imageNoRows
-     */
-    public function setImageNoRows($imageNoRows): void
-    {
-        $this->imageNoRows = $imageNoRows;
-    }
-
-    /**
-     * @return int
-     */
-    public function getImageEffects()
+    public function getImageEffects(): int
     {
         return $this->imageEffects;
     }
 
-    /**
-     * @param $imageEffects
-     */
-    public function setImageEffects($imageEffects): void
-    {
-        $this->imageEffects = $imageEffects;
-    }
-
-    /**
-     * @return int
-     */
-    public function getImageCompression()
+    public function getImageCompression(): int
     {
         return $this->imageCompression;
     }
 
-    /**
-     * @param $imageCompression
-     */
-    public function setImageCompression($imageCompression): void
-    {
-        $this->imageCompression = $imageCompression;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTableBorder()
+    public function getTableBorder(): int
     {
         return $this->tableBorder;
     }
 
-    /**
-     * @param $tableBorder
-     */
-    public function setTableBorder($tableBorder): void
-    {
-        $this->tableBorder = $tableBorder;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTableCellspacing()
+    public function getTableCellspacing(): int
     {
         return $this->tableCellspacing;
     }
 
-    /**
-     * @param $tableCellspacing
-     */
-    public function setTableCellspacing($tableCellspacing): void
-    {
-        $this->tableCellspacing = $tableCellspacing;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTableCellpadding()
+    public function getTableCellpadding(): int
     {
         return $this->tableCellpadding;
     }
 
-    /**
-     * @param $tableCellpadding
-     */
-    public function setTableCellpadding($tableCellpadding): void
-    {
-        $this->tableCellpadding = $tableCellpadding;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTableBgColor()
+    public function getTableBgColor(): int
     {
         return $this->tableBgColor;
     }
 
-    /**
-     * @param $tableBgColor
-     */
-    public function setTableBgColor($tableBgColor): void
-    {
-        $this->tableBgColor = $tableBgColor;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSectionIndex()
+    public function getSectionIndex(): int
     {
         return $this->sectionIndex;
     }
 
-    /**
-     * @param $sectionIndex
-     */
-    public function setSectionIndex($sectionIndex): void
-    {
-        $this->sectionIndex = $sectionIndex;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLinkToTop()
+    public function getLinkToTop(): int
     {
         return $this->linkToTop;
     }
 
-    /**
-     * @param $linkToTop
-     */
-    public function setLinkToTop($linkToTop): void
-    {
-        $this->linkToTop = $linkToTop;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFilelinkSize()
+    public function getFilelinkSize(): int
     {
         return $this->filelinkSize;
     }
 
-    /**
-     * @param $filelinkSize
-     */
-    public function setFilelinkSize($filelinkSize): void
-    {
-        $this->filelinkSize = $filelinkSize;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSectionFrame()
+    public function getSectionFrame(): int
     {
         return $this->sectionFrame;
     }
 
-    /**
-     * @param $sectionFrame
-     */
-    public function setSectionFrame($sectionFrame): void
-    {
-        $this->sectionFrame = $sectionFrame;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDate()
+    public function getDate(): int
     {
         return $this->date;
     }
 
-    /**
-     * @param $date
-     */
-    public function setDate($date): void
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * @return int
-     */
-    public function getImageFrames()
+    public function getImageFrames(): int
     {
         return $this->imageFrames;
     }
 
-    /**
-     * @param $imageFrames
-     */
-    public function setImageFrames($imageFrames): void
-    {
-        $this->imageFrames = $imageFrames;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRecursive()
+    public function getRecursive(): int
     {
         return $this->recursive;
     }
 
-    /**
-     * @param $recursive
-     */
-    public function setRecursive($recursive): void
-    {
-        $this->recursive = $recursive;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRteEnabled()
+    public function getRteEnabled(): int
     {
         return $this->rteEnabled;
     }
 
-    /**
-     * @param $rteEnabled
-     */
-    public function setRteEnabled($rteEnabled): void
-    {
-        $this->rteEnabled = $rteEnabled;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTxImpexpOriguid()
+    public function getTxImpexpOriguid(): int
     {
         return $this->txImpexpOriguid;
     }
 
-    /**
-     * @param $txImpexpOriguid
-     */
-    public function setTxImpexpOriguid($txImpexpOriguid): void
-    {
-        $this->txImpexpOriguid = $txImpexpOriguid;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAccessibilityBypass()
+    public function getAccessibilityBypass(): int
     {
         return $this->accessibilityBypass;
     }
 
-    /**
-     * @param $accessibilityBypass
-     */
-    public function setAccessibilityBypass($accessibilityBypass): void
-    {
-        $this->accessibilityBypass = $accessibilityBypass;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSysLanguageUid()
+    public function getSysLanguageUid(): int
     {
         return $this->sysLanguageUid;
     }
 
-    /**
-     * @param $sysLanguageUid
-     */
-    public function setSysLanguageUid($sysLanguageUid): void
-    {
-        $this->sysLanguageUid = $sysLanguageUid;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStarttime()
+    public function getStarttime(): int
     {
         return $this->starttime;
     }
 
-    /**
-     * @param $starttime
-     */
-    public function setStarttime($starttime): void
-    {
-        $this->starttime = $starttime;
-    }
-
-    /**
-     * @return int
-     */
-    public function getEndtime()
+    public function getEndtime(): int
     {
         return $this->endtime;
-    }
-
-    /**
-     * @param $endtime
-     */
-    public function setEndtime($endtime): void
-    {
-        $this->endtime = $endtime;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTxGridelementsBackendLayout()
-    {
-        return $this->txGridelementsBackendLayout;
-    }
-
-    /**
-     * @param $txGridelementsBackendLayout
-     */
-    public function setTxGridelementsBackendLayout($txGridelementsBackendLayout): void
-    {
-        $this->txGridelementsBackendLayout = $txGridelementsBackendLayout;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTxGridelementsChildren()
-    {
-        return $this->txGridelementsChildren;
-    }
-
-    /**
-     * @param $txGridelementsChildren
-     */
-    public function setTxGridelementsChildren($txGridelementsChildren): void
-    {
-        $this->txGridelementsChildren = $txGridelementsChildren;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTxGridelementsContainer()
-    {
-        return $this->txGridelementsContainer;
-    }
-
-    /**
-     * @param $txGridelementsContainer
-     */
-    public function setTxGridelementsContainer($txGridelementsContainer): void
-    {
-        $this->txGridelementsContainer = $txGridelementsContainer;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTxGridelementsColumns()
-    {
-        return $this->txGridelementsColumns;
-    }
-
-    /**
-     * @param $txGridelementsColumns
-     */
-    public function setTxGridelementsColumns($txGridelementsColumns): void
-    {
-        $this->txGridelementsColumns = $txGridelementsColumns;
     }
 }
