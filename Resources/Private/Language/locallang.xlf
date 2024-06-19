@@ -44,6 +44,9 @@
             <trans-unit id="tx_cartproducts.add_product">
                 <source>Add to cart</source>
             </trans-unit>
+            <trans-unit id="tx_cartproducts.you_save">
+                <source>You save</source>
+            </trans-unit>
 
             <trans-unit id="tx_cartproducts.variants-select.choose">
                 <source>Please choose ...</source>
