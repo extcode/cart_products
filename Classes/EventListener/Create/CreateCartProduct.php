@@ -32,8 +32,7 @@ class CreateCartProduct
             $taxClasses[$productProduct->getTaxClassId()],
             (int)$request->getArgument('quantity'),
             $productProduct->getIsNetPrice(),
-            $event->getCartFeVariant(),
-            $request->getArgument('detailViewParameter')
+            $event->getCartFeVariant()
         );
 
         $cartProduct->setMaxNumberInCart($productProduct->getMaxNumberInOrder());
@@ -54,9 +53,10 @@ class CreateCartProduct
             $cartProduct->setIsVirtualProduct(true);
         }
 
-        $cartProduct->addDetailViewParameter('extensionName', 'cartproducts');
-        $cartProduct->addDetailViewParameter('pluginName', 'products');
-        $cartProduct->addDetailViewParameter('controller', 'product');
+        $cartProduct->addDetailPageParameter('pageUid', $request->getArgument('detailPageUid'));
+        $cartProduct->addDetailPageParameter('extensionName', 'cartproducts');
+        $cartProduct->addDetailPageParameter('pluginName', 'products');
+        $cartProduct->addDetailPageParameter('controller', 'product');
 
         $event->setCartProduct($cartProduct);
     }
