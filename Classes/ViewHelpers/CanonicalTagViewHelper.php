@@ -23,7 +23,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
      */
     protected $tagName = 'link';
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -36,9 +36,6 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
         );
     }
 
-    /**
-     * Override the canonical tag
-     */
     public function render(): string
     {
         $product = $this->arguments['product'];
@@ -80,10 +77,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
         return '';
     }
 
-    /**
-     * @return PageRenderer
-     */
-    protected function getPageRenderer()
+    protected function getPageRenderer(): PageRenderer
     {
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend() && is_callable([$this->getTypoScriptFrontendController(), 'getPageRenderer'])) {
             return $this->getTypoScriptFrontendController()->getPageRenderer();
@@ -92,10 +86,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
         return GeneralUtility::makeInstance(PageRenderer::class);
     }
 
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
     }

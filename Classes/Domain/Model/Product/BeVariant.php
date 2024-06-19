@@ -27,9 +27,9 @@ class BeVariant extends AbstractEntity
     protected float $price = 0.0;
 
     /**
-     * @Cascade("remove")
      * @var ObjectStorage<SpecialPrice>
      */
+    #[Cascade(['value' => 'remove'])]
     protected ObjectStorage $specialPrices;
 
     protected int $priceCalcMethod = 0;
@@ -91,16 +91,11 @@ class BeVariant extends AbstractEntity
 
         $parentPrice = $this->getProduct()->getPrice();
 
-        switch ($this->priceCalcMethod) {
-            case 3:
-                $calc_price = -1 * (($price / 100) * ($parentPrice));
-                break;
-            case 5:
-                $calc_price = ($price / 100) * ($parentPrice);
-                break;
-            default:
-                $calc_price = 0;
-        }
+        $calc_price = match ($this->priceCalcMethod) {
+            3 => -1 * (($price / 100) * ($parentPrice)),
+            5 => ($price / 100) * ($parentPrice),
+            default => 0,
+        };
 
         if (
             isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount']) &&
@@ -142,16 +137,11 @@ class BeVariant extends AbstractEntity
 
         $parentPrice = $this->getProduct()->getBestSpecialPrice($frontendUserGroupIds);
 
-        switch ($this->priceCalcMethod) {
-            case 3:
-                $calc_price = -1 * (($price / 100) * ($parentPrice));
-                break;
-            case 5:
-                $calc_price = ($price / 100) * ($parentPrice);
-                break;
-            default:
-                $calc_price = 0;
-        }
+        $calc_price = match ($this->priceCalcMethod) {
+            3 => -1 * (($price / 100) * ($parentPrice)),
+            5 => ($price / 100) * ($parentPrice),
+            default => 0,
+        };
 
         if (
             isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount']) &&

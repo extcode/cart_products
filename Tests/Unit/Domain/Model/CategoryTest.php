@@ -27,7 +27,7 @@ class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCartProductShowPidReturnsShowPid()
+    public function getCartProductShowPidReturnsShowPid(): void
     {
         $cartProductShowPid = 123;
 

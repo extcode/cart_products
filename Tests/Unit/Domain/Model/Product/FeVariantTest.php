@@ -25,7 +25,7 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSkuInitiallyReturnsEmptyString()
+    public function getSkuInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -36,7 +36,7 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSkuForStringSetsSku()
+    public function setSkuForStringSetsSku(): void
     {
         $this->feVariant->setSku('SKU');
 
@@ -49,7 +49,7 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleInitiallyReturnsEmptyString()
+    public function getTitleInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -60,7 +60,7 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->feVariant->setTitle('Title');
 
@@ -73,7 +73,7 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDescriptionInitiallyReturnsEmptyString()
+    public function getDescriptionInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -84,7 +84,7 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDescriptionForStringSetsDescription()
+    public function setDescriptionForStringSetsDescription(): void
     {
         $this->feVariant->setDescription('Description');
 
@@ -97,7 +97,7 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getIsRequiredInitiallyReturnsFalse()
+    public function getIsRequiredInitiallyReturnsFalse(): void
     {
         self::assertFalse(
             $this->feVariant->getIsRequired()
@@ -107,7 +107,7 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setIsRequiredSetsIsRequired()
+    public function setIsRequiredSetsIsRequired(): void
     {
         $this->feVariant->setIsRequired(true);
 
