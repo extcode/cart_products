@@ -7,7 +7,7 @@
     <f:if condition="{product}">
         <f:if condition="{cartSettings.cart.pid}">
             <f:render partial="Product/CartForm"
-                      arguments="{product: product, pid: cartSettings.cart.pid, detailViewPageUid: detailViewPageUid}"/>
+                      arguments="{product: product, pid: cartSettings.cart.pid, detailPageUid: detailPageUid}"/>
         </f:if>
 
         <div id="product-price">
