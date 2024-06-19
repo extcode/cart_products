@@ -201,11 +201,11 @@ class ProductController extends ActionController
         }
 
         $frontendController = $this->request->getAttribute('frontend.controller');
-        $detailViewPageUid = $frontendController->getRequestedId();
+        $detailPageUid = $frontendController->getRequestedId();
 
         $this->view->assign('product', $product);
         $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
-        $this->view->assign('detailViewPageUid', $detailViewPageUid);
+        $this->view->assign('detailPageUid', $detailPageUid);
 
         $this->assignCurrencyTranslationData();
         return $this->htmlResponse();
