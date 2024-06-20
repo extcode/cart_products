@@ -11,11 +11,14 @@ namespace Extcode\CartProducts\EventListener\Create;
  * LICENSE file that was distributed with this source code.
  */
 
+use Extcode\Cart\Domain\Model\Cart\DetailPageLinkFactoryInterface;
 use Extcode\Cart\Domain\Model\Cart\Product;
 use Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent;
 
 class CreateCartProduct
 {
+    public function __construct(protected DetailPageLinkFactoryInterface $detailPageLinkFactory)
+    {}
     public function __invoke(RetrieveProductsFromRequestEvent $event): void
     {
         $request = $event->getRequest();
@@ -53,10 +56,16 @@ class CreateCartProduct
             $cartProduct->setIsVirtualProduct(true);
         }
 
-        $cartProduct->addDetailPageParameter('pageUid', $request->getArgument('detailPageUid'));
-        $cartProduct->addDetailPageParameter('extensionName', 'cartproducts');
-        $cartProduct->addDetailPageParameter('pluginName', 'products');
-        $cartProduct->addDetailPageParameter('controller', 'product');
+        if($request->getArgument('detailPageUid')){
+            $detailPageLink = $this->detailPageLinkFactory->getDetailPageLink(
+                (int)$request->getArgument('detailPageUid'),
+                'cartproducts',
+                'products',
+                'product'
+            );
+            $cartProduct->setDetailPageLink($detailPageLink);
+        }
+
 
         $event->setCartProduct($cartProduct);
     }
