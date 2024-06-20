@@ -26,10 +26,5 @@ return [
 
     Category::class => [
         'tableName' => 'sys_category',
-        'properties' => [
-            'parentcategory' => [
-                'fieldName' => 'parent',
-            ],
-        ],
     ],
 ];
