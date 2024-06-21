@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace Extcode\CartProducts\Hooks;
 
 /*
@@ -46,7 +47,7 @@ class DatamapDataHandlerHook
             $page = BackendUtility::getRecord('pages', abs($pageId));
             $listType = $incomingFieldArray['list_type'] ?? '';
 
-            if (!$this->isAllowedTargetPage($listType , $page['doktype'])) {
+            if (!$this->isAllowedTargetPage($listType, $page['doktype'])) {
                 unset($dataHandler->datamap['tt_content'][$id]);
                 $dataHandler->log(
                     'tt_content',
