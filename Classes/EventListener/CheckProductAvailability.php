@@ -66,7 +66,7 @@ class CheckProductAvailability
             return;
         }
 
-        $compareQuantity = 0;
+        $compareQuantity = (int)$quantity;
 
         foreach ($cartProduct->getBeVariants() as $beVariant) {
             if (
