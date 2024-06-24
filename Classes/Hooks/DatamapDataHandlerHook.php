@@ -25,7 +25,7 @@ class DatamapDataHandlerHook
     /**
      * @param DataHandler $dataHandler
      */
-    public function processDatamap_beforeStart(DataHandler $dataHandler)
+    public function processDatamap_beforeStart(DataHandler $dataHandler): void
     {
         $datamap = $dataHandler->datamap;
         if (empty($datamap['tt_content']) || $dataHandler->bypassAccessCheckForRecords) {
@@ -65,7 +65,7 @@ class DatamapDataHandlerHook
         }
     }
 
-    public function processDatamap_afterAllOperations(DataHandler $dataHandler)
+    public function processDatamap_afterAllOperations(DataHandler $dataHandler): void
     {
         $newIdUidArray = $dataHandler->substNEWwithIDs;
 
@@ -86,7 +86,7 @@ class DatamapDataHandlerHook
 
     protected function isAllowedTargetPage($listType, $doktype)
     {
-        if (empty($listType) || substr($listType, 0, 11) !== 'cartproducts_') {
+        if (empty($listType) || substr((string)$listType, 0, 11) !== 'cartproducts_') {
             return true;
         }
 

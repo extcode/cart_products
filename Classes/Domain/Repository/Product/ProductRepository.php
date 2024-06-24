@@ -16,10 +16,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class ProductRepository extends Repository
 {
-    /**
-     * @return QueryResultInterface|array
-     */
-    public function findDemanded(ProductDemand $demand)
+    public function findDemanded(ProductDemand $demand): QueryResultInterface
     {
         $query = $this->createQuery();
 
@@ -38,12 +35,12 @@ class ProductRepository extends Repository
                 $categoryConstraints[] = $query->contains('category', $category);
                 $categoryConstraints[] = $query->contains('categories', $category);
             }
-            $constraints = $query->logicalOr($categoryConstraints);
+            $constraints[] = $query->logicalOr(...array_values($categoryConstraints));
         }
 
         if (!empty($constraints)) {
             $query->matching(
-                $query->logicalAnd($constraints)
+                $query->logicalAnd(...array_values($constraints))
             );
         }
 
@@ -54,9 +51,6 @@ class ProductRepository extends Repository
         return $query->execute();
     }
 
-    /**
-     * Find all products based on selected uids
-     */
     public function findByUids(string $uids): array
     {
         $uids = explode(',', $uids);
@@ -71,11 +65,6 @@ class ProductRepository extends Repository
         return $this->orderByField($query->execute(), $uids);
     }
 
-    /**
-     * @param ProductDemand $demand
-     *
-     * @return array<string>
-     */
     protected function createOrderingsFromDemand(ProductDemand $demand): array
     {
         $orderings = [];
@@ -84,7 +73,7 @@ class ProductRepository extends Repository
 
         if (!empty($orderList)) {
             foreach ($orderList as $orderItem) {
-                list($orderField, $orderDirection) =
+                [$orderField, $orderDirection] =
                     GeneralUtility::trimExplode(' ', $orderItem, true);
                 if (
                     $orderDirection &&

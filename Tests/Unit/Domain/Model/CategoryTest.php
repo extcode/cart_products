@@ -27,7 +27,7 @@ class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCartProductShowPidReturnsShowPid()
+    public function getCartProductShowPidReturnsShowPid(): void
     {
         $cartProductShowPid = 123;
 
@@ -76,10 +76,6 @@ class CategoryTest extends UnitTestCase
         bool $callOriginalClone = true,
         bool $callAutoload = true
     ) {
-        if ($originalClassName === '') {
-            throw new \InvalidArgumentException('$originalClassName must not be empty.', 1334701880);
-        }
-
         $mockBuilder = $this->getMockBuilder($this->buildAccessibleProxy($originalClassName))
             ->addMethods($methods)
             ->setConstructorArgs($arguments)

@@ -10,27 +10,19 @@ namespace Extcode\CartProducts\EventListener;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 use Extcode\Cart\Event\CheckProductAvailabilityEvent;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class CheckProductAvailability
 {
-    /**
-     * @var ProductRepository
-     */
-    protected $productRepository;
-
     public function __construct(
-        ProductRepository $productRepository
-    ) {
-        $this->productRepository = $productRepository;
-    }
+        private readonly ProductRepository $productRepository
+    ) {}
 
     public function __invoke(CheckProductAvailabilityEvent $event): void
     {
@@ -74,7 +66,7 @@ class CheckProductAvailability
             return;
         }
 
-        $compareQuantity = 0;
+        $compareQuantity = (int)$quantity;
 
         foreach ($cartProduct->getBeVariants() as $beVariant) {
             if (
@@ -105,7 +97,7 @@ class CheckProductAvailability
                     'cart'
                 ),
                 '',
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             )
         );
     }

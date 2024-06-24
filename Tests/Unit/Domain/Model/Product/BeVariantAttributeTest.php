@@ -27,7 +27,7 @@ class BeVariantAttributeTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBeVariantAttributeOptionsInitiallyIsEmpty()
+    public function getBeVariantAttributeOptionsInitiallyIsEmpty(): void
     {
         self::assertEmpty(
             $this->beVariantAttribute->getBeVariantAttributeOptions()
@@ -37,7 +37,7 @@ class BeVariantAttributeTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTransactionsSetsTransactions()
+    public function setTransactionsSetsTransactions(): void
     {
         $beVariantAttributeOption1 = new BeVariantAttributeOption();
         $beVariantAttributeOption2 = new BeVariantAttributeOption();
@@ -61,7 +61,7 @@ class BeVariantAttributeTest extends UnitTestCase
     /**
      * @test
      */
-    public function addTransactionAddsTransaction()
+    public function addTransactionAddsTransaction(): void
     {
         $beVariantAttributeOption1 = new BeVariantAttributeOption();
         $beVariantAttributeOption2 = new BeVariantAttributeOption();
@@ -82,7 +82,7 @@ class BeVariantAttributeTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeTransactionRemovesTransaction()
+    public function removeTransactionRemovesTransaction(): void
     {
         $beVariantAttributeOption1 = new BeVariantAttributeOption();
         $beVariantAttributeOption2 = new BeVariantAttributeOption();

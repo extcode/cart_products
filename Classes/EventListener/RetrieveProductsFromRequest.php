@@ -21,17 +21,10 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class RetrieveProductsFromRequest
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    protected ProductRepository $productRepository;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        ProductRepository $productRepository
-    ) {
-        $this->eventDispatcher = $eventDispatcher;
-        $this->productRepository = $productRepository;
-    }
+        private readonly EventDispatcherInterface $eventDispatcher,
+        protected ProductRepository $productRepository
+    ) {}
 
     public function __invoke(RetrieveProductsFromRequestEvent $event): void
     {
@@ -59,9 +52,6 @@ class RetrieveProductsFromRequest
         $event->addProduct($createEvent->getCartProduct());
     }
 
-    /**
-     * Get Frontend User Group
-     */
     protected function getFrontendUserGroupIds(): array
     {
         $feGroupIds = [];

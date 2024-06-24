@@ -23,7 +23,7 @@ call_user_func(function () {
 
     foreach ($pluginNames as $pluginName => $pluginConf) {
         $pluginSignature = 'cartproducts_' . strtolower($pluginName);
-        $pluginNameSC = strtolower(preg_replace('/[A-Z]/', '_$0', lcfirst($pluginName)));
+        $pluginNameSC = strtolower((string)preg_replace('/[A-Z]/', '_$0', lcfirst($pluginName)));
         ExtensionUtility::registerPlugin(
             'CartProducts',
             $pluginName,

@@ -1,16 +1,18 @@
 .build
 composer.lock
 
-.php_cs.cache
+.php-cs-fixer.cache
 .phplint.cache
 Build/.phpunit.cache
 
 Documentation/_make
+Documentation-GENERATED-temp/
 
 .DS_Store
 .idea
 
 var/
+vendor/
 
 phpunit.coverage.xml
 phpunit.report.xml

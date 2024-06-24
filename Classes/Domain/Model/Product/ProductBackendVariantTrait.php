@@ -21,9 +21,9 @@ trait ProductBackendVariantTrait
     protected ?BeVariantAttribute $beVariantAttribute3 = null;
 
     /**
-     * @Cascade("remove")
      * @var ObjectStorage<BeVariant>
      */
+    #[Cascade(['value' => 'remove'])]
     protected ObjectStorage $beVariants;
 
     public function getBeVariantAttribute1(): ?BeVariantAttribute

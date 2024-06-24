@@ -141,10 +141,8 @@ return [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 13,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
@@ -156,10 +154,8 @@ return [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 13,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
@@ -251,9 +247,8 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.min_number_in_order',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'int',
             ],
         ],
 
@@ -261,9 +256,8 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.max_number_in_order',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'int',
             ],
         ],
 
@@ -279,11 +273,11 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.price',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2',
                 'default' => '0.00',
                 'required' => true,
+                'format' => 'decimal',
             ],
         ],
 
@@ -331,10 +325,10 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.price_measure',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2',
                 'default' => '0.00',
+                'format' => 'decimal',
             ],
         ],
 
@@ -400,33 +394,33 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.service_attribute1',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2',
                 'default' => '0.00',
                 'required' => true,
+                'format' => 'decimal',
             ],
         ],
         'service_attribute2' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.service_attribute2',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2',
                 'default' => '0.00',
                 'required' => true,
+                'format' => 'decimal',
             ],
         ],
         'service_attribute3' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.service_attribute3',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2',
                 'default' => '0.00',
                 'required' => true,
+                'format' => 'decimal',
             ],
         ],
 
@@ -625,7 +619,7 @@ return [
             'config' => [
                 'type' => 'file',
                 'appearance' => [
-                    'createNewRelationLinkTitle' => $_LLL_ttc . ':images.addFileReference',
+                    'createNewRelationLinkTitle' => $_LLL_ttc . ':media.addFileReference',
                     'showPossibleLocalizationRecords' => true,
                     'showRemovedLocalizationRecords' => true,
                     'showAllLocalizationLink' => true,
@@ -651,7 +645,6 @@ return [
                 'appearance' => [
                     'levelLinksPosition' => 'top',
                     'showPossibleLocalizationRecords' => true,
-                    'showRemovedLocalizationRecords' => true,
                     'showAllLocalizationLink' => true,
                     'showSynchronizationLink' => true,
                     'enabledControls' => [
@@ -706,9 +699,8 @@ return [
             ],
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.stock',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'int',
                 'default' => 0,
             ],
             'l10n_mode' => 'exclude',

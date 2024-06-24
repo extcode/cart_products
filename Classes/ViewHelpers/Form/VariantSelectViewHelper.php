@@ -32,7 +32,7 @@ class VariantSelectViewHelper extends AbstractViewHelper
      *
      * @api
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -119,16 +119,12 @@ class VariantSelectViewHelper extends AbstractViewHelper
              * @var BeVariant $beVariant
              */
             $currencyViewHelper->setRenderChildrenClosure(
-                function () use ($beVariant) {
-                    return $beVariant->getPriceCalculated();
-                }
+                fn() => $beVariant->getPriceCalculated()
             );
             $regularPrice = $currencyViewHelper->render();
 
             $currencyViewHelper->setRenderChildrenClosure(
-                function () use ($beVariant) {
-                    return $beVariant->getBestPriceCalculated();
-                }
+                fn() => $beVariant->getBestPriceCalculated()
             );
             $specialPrice = $currencyViewHelper->render();
 

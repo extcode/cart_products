@@ -1,0 +1,15 @@
+{
+  "name": "extcode/cart-products-test",
+  "description": "Add a cart_products test extension",
+  "type": "typo3-cms-extension",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "typo3/cms-core": "*",
+    "extcode/cart-products": "@dev"
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "cart_products_test"
+    }
+  }
+}

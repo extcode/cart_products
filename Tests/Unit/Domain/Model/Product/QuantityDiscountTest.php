@@ -25,7 +25,7 @@ class QuantityDiscountTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPriceInitiallyReturnsZero()
+    public function getPriceInitiallyReturnsZero(): void
     {
         self::assertSame(
             0.0,
@@ -36,7 +36,7 @@ class QuantityDiscountTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPriceSetThePrice()
+    public function setPriceSetThePrice(): void
     {
         $price = 1.00;
 
@@ -51,7 +51,7 @@ class QuantityDiscountTest extends UnitTestCase
     /**
      * @test
      */
-    public function getQuantityInitiallyReturnsZero()
+    public function getQuantityInitiallyReturnsZero(): void
     {
         self::assertSame(
             0,
@@ -62,7 +62,7 @@ class QuantityDiscountTest extends UnitTestCase
     /**
      * @test
      */
-    public function setQuantitySetTheQuantity()
+    public function setQuantitySetTheQuantity(): void
     {
         $quantity = 10;
 

@@ -10,10 +10,9 @@ namespace Extcode\CartProducts\EventListener\Create;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 use Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class CheckRequest
@@ -30,10 +29,10 @@ class CheckRequest
                 new FlashMessage(
                     LocalizationUtility::translate(
                         'tx_cart.error.parameter.no_product',
-                        'cart_products'
+                        'CartProducts'
                     ),
                     '',
-                    AbstractMessage::ERROR
+                    ContextualFeedbackSeverity::ERROR
                 )
             );
             $event->setPropagationStopped(true);
@@ -47,10 +46,10 @@ class CheckRequest
                 new FlashMessage(
                     LocalizationUtility::translate(
                         'tx_cart.error.invalid_quantity',
-                        'cart_products'
+                        'CartProducts'
                     ),
                     '',
-                    AbstractMessage::WARNING
+                    ContextualFeedbackSeverity::WARNING
                 )
             );
             $event->setPropagationStopped(true);
