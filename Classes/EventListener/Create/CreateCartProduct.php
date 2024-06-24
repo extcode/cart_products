@@ -17,8 +17,7 @@ use Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent;
 
 class CreateCartProduct
 {
-    public function __construct(protected DetailPageLinkFactoryInterface $detailPageLinkFactory)
-    {}
+    public function __construct(protected DetailPageLinkFactoryInterface $detailPageLinkFactory) {}
     public function __invoke(RetrieveProductsFromRequestEvent $event): void
     {
         $request = $event->getRequest();
@@ -56,7 +55,7 @@ class CreateCartProduct
             $cartProduct->setIsVirtualProduct(true);
         }
 
-        if($request->getArgument('detailPageUid')){
+        if ($request->getArgument('detailPageUid')) {
             $detailPageLink = $this->detailPageLinkFactory->getDetailPageLink(
                 (int)$request->getArgument('detailPageUid'),
                 'cartproducts',
@@ -65,7 +64,6 @@ class CreateCartProduct
             );
             $cartProduct->setDetailPageLink($detailPageLink);
         }
-
 
         $event->setCartProduct($cartProduct);
     }
