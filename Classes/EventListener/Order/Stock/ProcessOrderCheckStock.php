@@ -23,8 +23,7 @@ class ProcessOrderCheckStock
 {
     public function __construct(
         protected readonly ProductRepository $productRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(ProcessOrderCheckStockEvent $event): void
     {
@@ -57,7 +56,7 @@ class ProcessOrderCheckStock
 
             foreach ($product->getBeVariants() as $beVariant) {
                 foreach ($cartProduct->getBeVariants() as $cartBeVariant) {
-                    if($cartBeVariant->getSku() !== $beVariant->getSku()) {
+                    if ($cartBeVariant->getSku() !== $beVariant->getSku()) {
                         continue;
                     }
                     $quantityInStock = $beVariant->getStock();
@@ -74,8 +73,7 @@ class ProcessOrderCheckStock
         string $title,
         string $sku,
         int $quantityInStock
-    ): void
-    {
+    ): void {
         $event->setNotEveryProductAvailable();
         $event->addInsufficientStockMessage(
             GeneralUtility::makeInstance(
