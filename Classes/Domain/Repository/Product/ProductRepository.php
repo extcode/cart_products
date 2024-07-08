@@ -32,7 +32,7 @@ class ProductRepository extends Repository
         if ((!empty($demand->getCategories()))) {
             $categoryConstraints = [];
             foreach ($demand->getCategories() as $category) {
-                $categoryConstraints[] = $query->contains('category', $category);
+                $categoryConstraints[] = $query->equals('category', $category);
                 $categoryConstraints[] = $query->contains('categories', $category);
             }
             $constraints[] = $query->logicalOr(...array_values($categoryConstraints));
