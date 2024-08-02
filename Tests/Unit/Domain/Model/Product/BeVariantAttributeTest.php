@@ -4,6 +4,7 @@ namespace Extcode\CartProducts\Tests\Unit\Domain\Model\Product;
 
 use Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute;
 use Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -24,9 +25,7 @@ class BeVariantAttributeTest extends UnitTestCase
         unset($this->beVariantAttribute);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBeVariantAttributeOptionsInitiallyIsEmpty(): void
     {
         self::assertEmpty(
@@ -34,9 +33,7 @@ class BeVariantAttributeTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTransactionsSetsTransactions(): void
     {
         $beVariantAttributeOption1 = new BeVariantAttributeOption();
@@ -58,9 +55,7 @@ class BeVariantAttributeTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addTransactionAddsTransaction(): void
     {
         $beVariantAttributeOption1 = new BeVariantAttributeOption();
@@ -79,9 +74,7 @@ class BeVariantAttributeTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeTransactionRemovesTransaction(): void
     {
         $beVariantAttributeOption1 = new BeVariantAttributeOption();
