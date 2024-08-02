@@ -346,10 +346,10 @@
                 <source>Cart: Product Category Image</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_category.cart_product_list_pid">
-                <source>Cart: Page where Products of this category are listed.</source>
+                <source>Cart: Page for the list view of Products of this category.</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_category.cart_product_show_pid">
-                <source>Cart: Page where Products of this category are shown.</source>
+                <source>Cart: Page for the detail view of Products of this category.</source>
             </trans-unit>
 
         </body>
