@@ -46,12 +46,12 @@
         }
     },
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-pdo": "*",
-        "extcode/cart": "^9.0",
-        "typo3/cms-core": "^12.4",
-        "typo3/cms-extbase": "^12.4",
-        "typo3/cms-fluid": "^12.4"
+        "extcode/cart": "dev-main",
+        "typo3/cms-core": "^13.4",
+        "typo3/cms-extbase": "^13.4",
+        "typo3/cms-fluid": "^13.4"
     },
     "require-dev": {
         "codappix/typo3-php-datasets": "^1.5",
@@ -61,12 +61,11 @@
         "friendsofphp/php-cs-fixer": "^3.16",
         "helmich/typo3-typoscript-lint": "^3.1",
         "phpstan/phpstan": "^1.10",
-        "ssch/typo3-rector": "^2.6",
-        "typo3/cms-dashboard": "^12.4",
-        "typo3/cms-fluid-styled-content": "^12.4",
-        "typo3/cms-install": "^12.4",
-        "typo3/cms-reactions": "^12.4",
-        "typo3/testing-framework": "^8.0"
+        "typo3/cms-dashboard": "^13.4",
+        "typo3/cms-fluid-styled-content": "^13.4",
+        "typo3/cms-install": "^13.4",
+        "typo3/cms-reactions": "^13.4",
+        "typo3/testing-framework": "^8.2"
     },
     "scripts": {
         "test:cgl": [

@@ -3,6 +3,7 @@
 namespace Extcode\CartProducts\Tests\Unit\Domain\Model;
 
 use Extcode\CartProducts\Domain\Model\Category;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -24,9 +25,7 @@ class CategoryTest extends UnitTestCase
         unset($this->category);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCartProductShowPidReturnsShowPid(): void
     {
         $cartProductShowPid = 123;

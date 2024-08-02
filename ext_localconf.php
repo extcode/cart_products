@@ -3,7 +3,7 @@
 use Extcode\CartProducts\Controller\ProductController;
 use Extcode\CartProducts\Hooks\DataHandler;
 use Extcode\CartProducts\Hooks\DatamapDataHandlerHook;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die();
@@ -66,23 +66,17 @@ ExtensionUtility::configurePlugin(
     ]
 );
 
-// TSconfig
-
-ExtensionManagementUtility::addPageTSConfig('
-    <INCLUDE_TYPOSCRIPT: source="FILE:EXT:cart_products/Configuration/TSconfig/ContentElementWizard.tsconfig">
-');
-
 // Cart Hooks
 
 // processDatamapClass Hook
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['cartproducts_allowed'] =
-    DatamapDataHandlerHook::class;
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['cartproducts_allowed']
+    = DatamapDataHandlerHook::class;
 
 // clearCachePostProc Hook
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['cartproducts_clearcache'] =
-    DataHandler::class . '->clearCachePostProc';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['cartproducts_clearcache']
+    = DataHandler::class . '->clearCachePostProc';
 
 // register "cartproducts:" namespace
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['cartproducts'][]
@@ -94,6 +88,6 @@ $GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['list_pro
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['teaser_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.table', 'table'];
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['teaser_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.grid', 'grid'];
 
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Domain\Model\Category::class] = [
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][Category::class] = [
     'className' => \Extcode\CartProducts\Domain\Model\Category::class,
 ];

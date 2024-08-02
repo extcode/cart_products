@@ -1,6 +1,6 @@
 {
   pkgs ? import <nixpkgs> { }
-  ,phpVersion ? "php81"
+  ,phpVersion ? "php82"
 }:
 
 let
@@ -133,6 +133,7 @@ in pkgs.mkShellNoCC {
     php
     composer
     projectInstall
+    projectPhpstan
     projectCgl
     projectCglFix
     projectLint

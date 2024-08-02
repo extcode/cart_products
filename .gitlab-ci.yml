@@ -24,18 +24,18 @@ stages:
   - analysis
 
 lint:cgl:
-  image: $CI_REGISTRY/containers/phpunit-with-php-8.1:main
+  image: $CI_REGISTRY/containers/phpunit-with-php-8.2:main
   stage: lint
   before_script:
     - sed -i -e "s#ssh://git@code.extco.de:22722#https://gitlab-ci-token:$CI_JOB_TOKEN@code.extco.de#g" composer.json
-    - composer config platform.php 8.1
+    - composer config platform.php 8.2
     - composer remove typo3/cms-core --no-update
     - composer install --no-progress --no-ansi --no-interaction
   script:
     - vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --using-cache=no --path-mode=intersection ./
 
 lint:typoscriptcgl:
-  image: php:8.1-alpine
+  image: php:8.2-alpine
   stage: lint
   before_script:
     - apk add --no-cache bash curl git mercurial openssh openssl parallel subversion tini zlib-dev libzip-dev zip icu-dev g++
@@ -46,7 +46,7 @@ lint:typoscriptcgl:
     - php composer-setup.php --no-ansi --install-dir=/usr/bin --filename=composer
     - php -r "unlink('composer-setup.php'); unlink('installer.sig');"
     - sed -i -e "s#ssh://git@code.extco.de:22722#https://gitlab-ci-token:$CI_JOB_TOKEN@code.extco.de#g" composer.json
-    - composer config platform.php 8.1
+    - composer config platform.php 8.2
     - composer remove typo3/cms-core --no-update
     - composer install --no-progress --no-ansi --no-interaction
   script:
@@ -66,12 +66,6 @@ lint:yaml:
   script:
     - find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
 
-lint:php81:
-  <<: *lint_php
-  stage: lint
-  variables:
-    CONTAINER_IMAGE: php:8.1-alpine
-
 lint:php82:
   <<: *lint_php
   variables:
@@ -83,11 +77,11 @@ lint:php83:
     CONTAINER_IMAGE: php:8.3-alpine
 
 phpstan:analyse:
-  image: $CI_REGISTRY/containers/phpunit-with-php-8.1:main
+  image: $CI_REGISTRY/containers/phpunit-with-php-8.2:main
   stage: lint
   before_script:
     - sed -i -e "s#ssh://git@code.extco.de:22722#https://gitlab-ci-token:$CI_JOB_TOKEN@code.extco.de#g" composer.json
-    - composer config platform.php 8.1
+    - composer config platform.php 8.2
     - composer install --no-progress --no-ansi --no-interaction
   script:
     - vendor/bin/phpstan analyse -c Build/phpstan.neon --memory-limit 256M
@@ -120,28 +114,20 @@ phpstan:analyse:
     expire_in: 1 day
     when: always
 
-# Build in PHP 8.1 and TYPO3 12.4
-test:php81:typo3_12:
-  <<: *test_php
-  variables:
-    CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.1:main
-    TYPO3_VERSION: ^12.4
-    COVERAGE: 0
-
-# Build in PHP 8.2 and TYPO3 12.4
-test:php82:typo3_12:
+# Build in PHP 8.2 and TYPO3 13.2
+test:php82:typo3_13:
   <<: *test_php
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.2:main
-    TYPO3_VERSION: ^12.4
+    TYPO3_VERSION: ^13.2
     COVERAGE: 0
 
-# Build in PHP 8.3 and TYPO3 12.4
-test:php83:typo3_12:
+# Build in PHP 8.3 and TYPO3 13.2
+test:php83:typo3_13:
   <<: *test_php
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.3:main
-    TYPO3_VERSION: ^12.4
+    TYPO3_VERSION: ^13.2
     COVERAGE: 1
 
 .test_codeception: &test_codeception
@@ -168,32 +154,22 @@ test:php83:typo3_12:
     expire_in: 1 day
     when: always
 
-# Build in PHP 8.1 and TYPO3 12.4
-test:codception:php81:typo3_12:
+# Build in PHP 8.2 and TYPO3 13.2
+test:codception:php82:typo3_13:
   <<: *test_codeception
-  variables:
-    CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.1:main
-    TYPO3_VERSION: ^12.4
-    GECKODRIVER_VERSION: v0.34.0
-
-# Build in PHP 8.2 and TYPO3 12.4
-test:codception:php82:typo3_12:
-  <<: *test_codeception
-  needs:
-    - test:codception:php81:typo3_12
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.2:main
-    TYPO3_VERSION: ^12.4
+    TYPO3_VERSION: ^13.2
     GECKODRIVER_VERSION: v0.34.0
 
 # Build in PHP 8.3 and TYPO3 12.4
-test:codception:php83:typo3_12:
+test:codception:php83:typo3_13:
   <<: *test_codeception
   needs:
-    - test:codception:php82:typo3_12
+    - test:codception:php82:typo3_13
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.3:main
-    TYPO3_VERSION: ^12.4
+    TYPO3_VERSION: ^13.2
     GECKODRIVER_VERSION: v0.34.0
 
 documentation:
@@ -223,7 +199,7 @@ sonarqube:
     SONAR_SOURCES: "./Classes"
     SONAR_GITLAB_PROJECT_ID: "$CI_PROJECT_ID"
   script:
-    - echo "sonar.projectKey=cart_products-5.x" > sonar-project.properties
+    - echo "sonar.projectKey=cart_products-6.x" > sonar-project.properties
     - gitlab-sonar-scanner -Dsonar.php.coverage.reportPath=phpunit.coverage.xml -Dsonar.php.tests.reportPath=phpunit.report.xml
   allow_failure: true
 
@@ -239,5 +215,5 @@ sonarqube-reports:
     SONAR_SOURCES: "./Classes"
     SONAR_TESTS: "./Tests"
   script:
-    - echo "sonar.projectKey=cart_products-5.x" > sonar-project.properties
+    - echo "sonar.projectKey=cart_products-6.x" > sonar-project.properties
     - gitlab-sonar-scanner -Dsonar.php.coverage.reportPath=phpunit.coverage.xml -Dsonar.php.tests.reportPath=phpunit.report.xml

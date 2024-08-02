@@ -5,6 +5,9 @@ namespace Extcode\CartProducts\Tests\Functional\Domain\Repository\Product;
 use Codappix\Typo3PhpDatasets\TestingFramework;
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
+use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -24,15 +27,16 @@ class ProductRepositoryTest extends FunctionalTestCase
 
         parent::setUp();
 
+        $GLOBALS['TYPO3_REQUEST'] = (new ServerRequest())
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+
         $this->productRepository = GeneralUtility::makeInstance(ProductRepository::class);
 
         $this->importPHPDataSet(__DIR__ . '/../../../Fixtures/Pages.php');
         $this->importPHPDataSet(__DIR__ . '/../../../Fixtures/Products.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function findDemandedWithGivenSkuReturnsProducts(): void
     {
         $querySettings = GeneralUtility::makeInstance(QuerySettingsInterface::class);
@@ -50,9 +54,7 @@ class ProductRepositoryTest extends FunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function findDemandedWithGivenTitleReturnsProducts(): void
     {
         $querySettings = GeneralUtility::makeInstance(QuerySettingsInterface::class);
@@ -79,9 +81,7 @@ class ProductRepositoryTest extends FunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function findByUidsDoesNotRespectStoragePid(): void
     {
         $products = $this->productRepository->findByUids('3,1,2,5,4');
@@ -100,9 +100,7 @@ class ProductRepositoryTest extends FunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function findByUidsReturnsCorrectOrder(): void
     {
         $listOfProductIds = [3, 1, 2, 5, 4];
