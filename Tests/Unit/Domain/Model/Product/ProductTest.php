@@ -6,6 +6,8 @@ use Extcode\CartProducts\Domain\Model\Product\BeVariant;
 use Extcode\CartProducts\Domain\Model\Product\BeVariantAttribute;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Model\Product\SpecialPrice;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -54,9 +56,7 @@ class ProductTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getProductTypeReturnsInitialValueForProductType(): void
     {
         self::assertSame(
@@ -65,9 +65,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setProductTypeSetsProductType(): void
     {
         $this->product->setProductType('configurable');
@@ -78,9 +76,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTeaserReturnsInitialValueForTeaser(): void
     {
         self::assertSame(
@@ -89,9 +85,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTeaserForStringSetsTeaser(): void
     {
         $this->product->setTeaser('Conceived at T3CON10');
@@ -102,9 +96,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getMinNumberInOrderInitiallyReturnsMinNumberInOrder(): void
     {
         self::assertSame(
@@ -113,9 +105,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setNegativeMinNumberThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -124,9 +114,7 @@ class ProductTest extends UnitTestCase
         $this->product->setMinNumberInOrder($minNumber);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setMinNumberGreaterThanMaxNumberThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -135,9 +123,7 @@ class ProductTest extends UnitTestCase
         $this->product->setMinNumberInOrder($minNumber);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setMinNumberInOrderSetsMinNumberInOrder(): void
     {
         $minNumber = 10;
@@ -151,9 +137,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getMaxNumberInOrderInitiallyReturnsMaxNumberInOrder(): void
     {
         self::assertSame(
@@ -162,9 +146,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setNegativeMaxNumberThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -173,9 +155,7 @@ class ProductTest extends UnitTestCase
         $this->product->setMaxNumberInOrder($maxNumber);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setMaxNumberInOrderSetsMaxNumberInOrder(): void
     {
         $maxNumber = 10;
@@ -188,9 +168,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setMaxNumberLesserThanMinNumberThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -203,9 +181,7 @@ class ProductTest extends UnitTestCase
         $this->product->setMaxNumberInOrder($maxNumber);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPriceReturnsInitialValueForFloat(): void
     {
         self::assertSame(
@@ -214,9 +190,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setPriceSetsPrice(): void
     {
         $this->product->setPrice(3.14159265);
@@ -227,9 +201,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSpecialPricesInitiallyIsEmpty(): void
     {
         self::assertEmpty(
@@ -237,9 +209,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setSpecialPricesSetsSpecialPrices(): void
     {
         $price = 10.00;
@@ -258,9 +228,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addSpecialPriceAddsSpecialPrice(): void
     {
         $price = 10.00;
@@ -276,9 +244,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeSpecialPriceRemovesSpecialPrice(): void
     {
         $price = 10.00;
@@ -294,9 +260,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBestSpecialPriceDiscountForEmptySpecialPriceReturnsDiscount(): void
     {
         $price = 10.00;
@@ -310,10 +274,8 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     * @dataProvider bestSpecialPriceProvider
-     */
+    #[DataProvider('bestSpecialPriceProvider')]
+    #[Test]
     public function getBestSpecialPriceForGivenSpecialPricesReturnsBestSpecialPrice(
         $price,
         $special1,
@@ -342,9 +304,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBestSpecialPriceDiscountForGivenSpecialPriceReturnsPercentageDiscount(): void
     {
         $price = 10.0;
@@ -364,10 +324,8 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     * @dataProvider bestSpecialPriceDiscountProvider
-     */
+    #[DataProvider('bestSpecialPriceDiscountProvider')]
+    #[Test]
     public function getBestSpecialPriceDiscountForGivenSpecialPricesReturnsBestPercentageDiscount(
         $price,
         $special1,
@@ -396,9 +354,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getStockWithoutHandleStockInitiallyReturnsIntMax(): void
     {
         $product = new Product();
@@ -409,9 +365,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getStockWithHandleStockInitiallyReturnsZero(): void
     {
         $product = new Product();
@@ -423,9 +377,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setStockWithHandleStockSetsStock(): void
     {
         $stock = 10;
@@ -447,9 +399,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addToStockAddsANumberOfProductsToStock(): void
     {
         $numberOfProducts = 10;
@@ -464,9 +414,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeFromStockAddsRemovesANumberOfProductsFromStock(): void
     {
         $stock = 100;
@@ -483,9 +431,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleStockInitiallyReturnsFalse(): void
     {
         $product = new Product();
@@ -495,9 +441,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setHandleStockSetsHandleStock(): void
     {
         $product = new Product();
@@ -508,9 +452,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isAvailableInitiallyReturnsTrue(): void
     {
         $product = new Product();
@@ -520,9 +462,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isAvailableWithHandleStockIsEnabledAndEmptyStockReturnsFalse(): void
     {
         $product = new Product();
@@ -533,9 +473,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isAvailableWithHandleStockIsEnabledAndNotEmptyStockReturnsTrue(): void
     {
         $product = new Product();
@@ -547,9 +485,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isAvailableWithHandleStockAndHandleStockInVariantsIsEnabledAndNoBackendVariantsConfiguredReturnsFalse(): void
     {
         $product = new Product();
@@ -562,9 +498,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isAvailableWithHandleStockAndHandleStockInVariantsIsEnabledAndBackendVariantConfiguredIsNotAvailableReturnsFalse(): void
     {
         $productBackendVariant = $this->createMock(
@@ -583,9 +517,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isAvailableWithHandleStockAndHandleStockInVariantsIsEnabledAndBackendVariantConfiguredIsAvailableReturnsFalse(): void
     {
         $productBackendVariant = $this->createMock(
@@ -604,9 +536,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTaxClassIdInitiallyReturnsTaxClassId(): void
     {
         self::assertSame(
@@ -615,9 +545,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTaxClassIdSetsTaxClassId(): void
     {
         $taxClassId = 2;
@@ -630,9 +558,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBeVariantAttribute1InitiallyIsNull(): void
     {
         self::assertNull(
@@ -640,9 +566,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setBeVariantAttribute1SetsBeVariantAttribute1(): void
     {
         $beVariantAttribute = new BeVariantAttribute();
@@ -655,9 +579,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBeVariantAttribute2InitiallyIsNull(): void
     {
         self::assertNull(
@@ -665,9 +587,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setBeVariantAttribute2SetsBeVariantAttribute2(): void
     {
         $beVariantAttribute = new BeVariantAttribute();
@@ -680,9 +600,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBeVariantAttribute3InitiallyIsNull(): void
     {
         self::assertNull(
@@ -690,9 +608,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setBeVariantAttribute3SetsBeVariantAttribute3(): void
     {
         $beVariantAttribute = new BeVariantAttribute();
@@ -705,9 +621,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getVariantsInitiallyIsEmpty(): void
     {
         self::assertEmpty(
@@ -715,9 +629,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setVariantsSetsVariants(): void
     {
         $variant = new BeVariant();
@@ -733,9 +645,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addVariantAddsVariant(): void
     {
         $variant = new BeVariant();
@@ -748,9 +658,7 @@ class ProductTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeVariantRemovesVariant(): void
     {
         $variant = new BeVariant();

@@ -11,6 +11,7 @@ namespace Extcode\CartProducts\EventListener\Order\Stock;
  * LICENSE file that was distributed with this source code.
  */
 
+use Doctrine\DBAL\ParameterType;
 use Extcode\Cart\Domain\Model\Cart\Product as CartProduct;
 use Extcode\Cart\Event\Order\EventInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -30,7 +31,7 @@ class HandleStock
 
                 $product = $productQueryBuilder
                     ->select('uid', 'handle_stock', 'handle_stock_in_variants')
-                    ->from('tx_cartproducts_domain_model_product_product')->where($productQueryBuilder->expr()->eq('uid', $productQueryBuilder->createNamedParameter($cartProduct->getProductId(), \PDO::PARAM_INT)))->executeQuery()->fetchAssociative();
+                    ->from('tx_cartproducts_domain_model_product_product')->where($productQueryBuilder->expr()->eq('uid', $productQueryBuilder->createNamedParameter($cartProduct->getProductId(), ParameterType::INTEGER)))->executeQuery()->fetchAssociative();
 
                 if ($product['handle_stock']) {
                     if ($product['handle_stock_in_variants']) {

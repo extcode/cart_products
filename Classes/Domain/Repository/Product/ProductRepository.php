@@ -70,20 +70,26 @@ class ProductRepository extends Repository
     {
         $orderings = [];
 
+        if (is_null($demand->getOrder())) {
+            return $orderings;
+        }
+
         $orderList = GeneralUtility::trimExplode(',', $demand->getOrder(), true);
 
-        if (!empty($orderList)) {
-            foreach ($orderList as $orderItem) {
-                [$orderField, $orderDirection] =
-                    GeneralUtility::trimExplode(' ', $orderItem, true);
-                if (
-                    $orderDirection &&
-                    strtolower($orderDirection) === 'desc'
-                ) {
-                    $orderings[$orderField] = QueryInterface::ORDER_DESCENDING;
-                } else {
-                    $orderings[$orderField] = QueryInterface::ORDER_ASCENDING;
-                }
+        if (empty($orderList)) {
+            return $orderings;
+        }
+
+        foreach ($orderList as $orderItem) {
+            [$orderField, $orderDirection] =
+                GeneralUtility::trimExplode(' ', $orderItem, true);
+            if (
+                $orderDirection &&
+                strtolower($orderDirection) === 'desc'
+            ) {
+                $orderings[$orderField] = QueryInterface::ORDER_DESCENDING;
+            } else {
+                $orderings[$orderField] = QueryInterface::ORDER_ASCENDING;
             }
         }
 

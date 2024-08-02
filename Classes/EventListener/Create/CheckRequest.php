@@ -54,7 +54,5 @@ class CheckRequest
             );
             $event->setPropagationStopped(true);
         }
-
-        return;
     }
 }

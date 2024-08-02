@@ -17,12 +17,13 @@ use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Repository\CategoryRepository;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
+use TYPO3\CMS\Extbase\Configuration\Exception;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -37,6 +38,7 @@ class ProductController extends ActionController
     protected array $cartConfiguration = [];
 
     public function __construct(
+        protected readonly Context $context,
         protected readonly ExtensionService $extensionService,
         protected readonly SessionHandler $sessionHandler,
         protected readonly CartUtility $cartUtility,
@@ -44,7 +46,7 @@ class ProductController extends ActionController
         protected readonly CategoryRepository $categoryRepository
     ) {}
 
-    protected function initializeAction()
+    protected function initializeAction(): void
     {
         $this->cartConfiguration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
@@ -183,7 +185,7 @@ class ProductController extends ActionController
 
     public function showAction(Product $product = null): ResponseInterface
     {
-        $this->view->assign('user', $GLOBALS['TSFE']->fe_user->user);
+        $this->view->assign('user', $this->context->getAspect('frontend.user'));
         $this->view->assign('product', $product);
         $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
 
@@ -245,7 +247,7 @@ class ProductController extends ActionController
 
     /**
      * @return int|mixed
-     * @throws InvalidConfigurationTypeException
+     * @throws Exception
      */
     public function getProductUid(): mixed
     {

@@ -6,6 +6,8 @@ use Extcode\CartProducts\Domain\Model\Product\BeVariant;
 use Extcode\CartProducts\Domain\Model\Product\BeVariantAttributeOption;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Model\Product\SpecialPrice;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -26,9 +28,7 @@ class BeVariantTest extends UnitTestCase
         unset($this->beVariant);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getProductInitiallyReturnsNull(): void
     {
         self::assertNull(
@@ -36,9 +36,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setProductSetsProduct(): void
     {
         $product = new Product();
@@ -50,9 +48,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBeVariantAttributeOption1InitiallyIsNull(): void
     {
         self::assertNull(
@@ -60,9 +56,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setBeVariantAttributeOption1SetsBeVariantAttributeOption1(): void
     {
         $beVariantAttributeOption = new BeVariantAttributeOption();
@@ -75,9 +69,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBeVariantAttributeOption2InitiallyIsNull(): void
     {
         self::assertNull(
@@ -85,9 +77,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setBeVariantAttributeOption2SetsBeVariantAttributeOption2(): void
     {
         $beVariantAttributeOption = new BeVariantAttributeOption();
@@ -100,9 +90,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBeVariantAttributeOption3InitiallyIsNull(): void
     {
         self::assertNull(
@@ -110,9 +98,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setBeVariantAttributeOption3SetsBeVariantAttributeOption3(): void
     {
         $beVariantAttributeOption = new BeVariantAttributeOption();
@@ -125,9 +111,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPriceInitiallyReturnsZero(): void
     {
         $price = 0.0;
@@ -138,9 +122,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setPriceSetsPrice(): void
     {
         $price = 100.0;
@@ -153,9 +135,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSpecialPricesInitiallyReturnsEmptyObjectStorage(): void
     {
         self::assertInstanceOf(
@@ -164,9 +144,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addSpecialPriceAddsSpecialPrice(): void
     {
         $specialPrice = new SpecialPrice();
@@ -179,9 +157,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBestSpecialPriceWithOneSpecialPriceReturnsSpecialPrice(): void
     {
         $specialPrice = new SpecialPrice();
@@ -223,10 +199,8 @@ class BeVariantTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider bestSpecialPriceProvider
-     */
+    #[DataProvider('bestSpecialPriceProvider')]
+    #[Test]
     public function getBestSpecialPriceWithMoreSpecialPricesReturnsBestSpecialPrice(
         $priceCalcMethod,
         $priceForSpecialPrice1,
@@ -259,9 +233,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBestPriceInitiallyReturnsPrice(): void
     {
         $price = 100.0;
@@ -297,10 +269,8 @@ class BeVariantTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider bestPriceProvider
-     */
+    #[DataProvider('bestPriceProvider')]
+    #[Test]
     public function getBestPriceWithSpecialPriceAndDifferentPriceCalcMethodsReturnsBestSpecialPrice(
         $priceCalcMethod,
         $price,
@@ -345,10 +315,8 @@ class BeVariantTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider bestPriceCalculatedProvider
-     */
+    #[DataProvider('bestPriceCalculatedProvider')]
+    #[Test]
     public function getBestPriceCalculatedWithPriceCalcMethod0ReturnsPrice(
         $priceCalcMethod,
         $productPrice,
@@ -375,9 +343,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getStockInitiallyReturnsZero(): void
     {
         self::assertSame(
@@ -386,9 +352,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setStockSetsStock(): void
     {
         $stock = 10;
@@ -400,9 +364,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getIsAvailableInitiallyReturnsFalse(): void
     {
         self::assertFalse(
@@ -410,9 +372,7 @@ class BeVariantTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getIsAvailableWithStockGreaterZeroReturnsTrue(): void
     {
         $this->beVariant->setStock(10);
