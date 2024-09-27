@@ -4,10 +4,7 @@ use Extcode\CartProducts\Controller\ProductController;
 use Extcode\CartProducts\Hooks\DataHandler;
 use Extcode\CartProducts\Hooks\DatamapDataHandlerHook;
 use Extcode\CartProducts\Updates\SlugUpdater;
-use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
-use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die();
@@ -59,29 +56,6 @@ ExtensionUtility::configurePlugin(
         ProductController::class => 'showForm',
     ]
 );
-
-// Icon Registry
-
-$icons = [
-    'apps-pagetree-folder-cartproducts-products' => 'apps_pagetree_folder_cartproducts_products.svg',
-    'apps-pagetree-page-cartproducts-products' => 'apps_pagetree_page_cartproducts_products.svg',
-    'ext-cartproducts-extension-icon' => 'Extension.svg',
-    'ext-cartproducts-wizard-icon' => 'cartproducts_plugin_wizard.svg',
-];
-
-$iconRegistry = GeneralUtility::makeInstance(
-    IconRegistry::class
-);
-
-foreach ($icons as $identifier => $fileName) {
-    $iconRegistry->registerIcon(
-        $identifier,
-        SvgIconProvider::class,
-        [
-            'source' => 'EXT:cart_products/Resources/Public/Icons/' . $fileName,
-        ]
-    );
-}
 
 // TSconfig
 
