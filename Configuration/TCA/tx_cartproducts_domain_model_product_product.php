@@ -708,6 +708,7 @@ return [
         ],
 
         'category' => [
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.category',
             'config' => [
                 'type' => 'category',
                 'relationship' => 'oneToOne',
@@ -715,6 +716,7 @@ return [
         ],
 
         'categories' => [
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.categories',
             'config' => [
                 'type' => 'category',
             ],
