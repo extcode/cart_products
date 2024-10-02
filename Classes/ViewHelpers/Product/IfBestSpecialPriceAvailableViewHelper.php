@@ -9,9 +9,8 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Domain\Model\FrontendUser;
-use Extcode\Cart\Domain\Repository\FrontendUserRepository;
 use Extcode\CartProducts\Domain\Model\Product\Product;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
@@ -46,34 +45,9 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
         return $bestSpecialPrice < $product->getMinPrice();
     }
 
-    /**
-     * Get Frontend User Group
-     *
-     * @return array
-     */
     protected static function getFrontendUserGroupIds(): array
     {
-        $user = $GLOBALS['TSFE']->fe_user->user;
-        if (!$user || !(int)$user['uid']) {
-            return [];
-        }
-
-        $feGroupIds = [];
-
-        $frontendUserRepository = GeneralUtility::makeInstance(
-            FrontendUserRepository::class
-        );
-        $feUser = $frontendUserRepository->findByUid((int)$user['uid']);
-
-        if (!$feUser instanceof FrontendUser) {
-            return [];
-        }
-
-        $feGroups = $feUser->getUsergroup();
-        foreach ($feGroups as $feGroup) {
-            $feGroupIds[] = $feGroup->getUid();
-        }
-
-        return $feGroupIds;
+        $context = GeneralUtility::makeInstance(Context::class);
+        return $context->getPropertyFromAspect('frontend.user', 'groupIds') ?? [];
     }
 }

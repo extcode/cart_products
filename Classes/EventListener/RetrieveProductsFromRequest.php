@@ -11,17 +11,15 @@ namespace Extcode\CartProducts\EventListener;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Domain\Model\FrontendUser;
-use Extcode\Cart\Domain\Repository\FrontendUserRepository;
 use Extcode\Cart\Event\RetrieveProductsFromRequestEvent;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Core\Context\Context;
 
 class RetrieveProductsFromRequest
 {
     public function __construct(
+        private readonly Context $context,
         private readonly EventDispatcherInterface $eventDispatcher,
         protected ProductRepository $productRepository
     ) {}
@@ -54,33 +52,6 @@ class RetrieveProductsFromRequest
 
     protected function getFrontendUserGroupIds(): array
     {
-        $feGroupIds = [];
-
-        $user = $GLOBALS['TSFE']->fe_user->user;
-        if (!$user || !(int)$user['uid']) {
-            return $feGroupIds;
-        }
-
-        $feGroups = $this->getFeGroups((int)$user['uid']);
-        if ($feGroups) {
-            foreach ($feGroups as $feGroup) {
-                $feGroupIds[] = $feGroup->getUid();
-            }
-        }
-
-        return $feGroupIds;
-    }
-
-    protected function getFeGroups(int $uid): ?ObjectStorage
-    {
-        $frontendUserRepository = GeneralUtility::makeInstance(
-            FrontendUserRepository::class
-        );
-        $feUser = $frontendUserRepository->findByUid((int)$uid);
-        if (!$feUser instanceof FrontendUser) {
-            return null;
-        }
-
-        return $feUser->getUsergroup();
+        return $this->context->getPropertyFromAspect('frontend.user', 'groupIds') ?? [];
     }
 }
