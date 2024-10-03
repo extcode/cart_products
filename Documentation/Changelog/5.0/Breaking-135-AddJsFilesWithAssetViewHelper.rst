@@ -1,20 +1,20 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 ==================================================
 Breaking: #135 - Add JS files with AssetViewHelper
 ==================================================
 
-See :issue:`135`
+See `Issue 135 <https://github.com/extcode/cart_products/issues/135>`__
 
 Description
 ===========
 
 EXT:cart v9 uses modularized JavaScript without jQuery (see
-:ref:` [TASK] Switch from jQuery to vanilla JavaScript #438 <https://github.com/extcode/cart/pull/438>`).
+`[TASK] Switch from jQuery to vanilla JavaScript #438 <https://github.com/extcode/cart/pull/438>`).
 
 This allows to add the JavaScript only on pages where it's really needed which
 is good for performance. The JavaScript is for detail pages is now loaded with
-the TYPO3 :ref:`Asset.script ViewHelper<https://docs.typo3.org/other/typo3/view-helper-reference/12.4/en-us/typo3/fluid/latest/Asset/Script.html>`.
+the TYPO3 `Asset.script ViewHelper <https://docs.typo3.org/other/typo3/view-helper-reference/12.4/en-us/typo3/fluid/latest/Asset/Script.html>`.
 
 Affected Installations
 ======================

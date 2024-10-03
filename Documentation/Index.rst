@@ -1,8 +1,11 @@
-.. include:: Includes.txt
+.. include:: Includes.rst.txt
 
 .. _start:
 
-=============================================
+=============
+Cart Products
+=============
+
 Cart Products - extend EXT:cart with products
 =============================================
 
@@ -25,14 +28,8 @@ Cart Products - extend EXT:cart with products
    :Language:
       en
 
-   :Keywords:
-      cart, shop, shopping, e-commerce, ecommerce, products
-
    :Author:
-      Daniel Gohlke
-
-   :Email:
-      ext@extco.de
+      Daniel Gohlke & Contributors
 
    :License:
       This document is published under the
@@ -41,27 +38,23 @@ Cart Products - extend EXT:cart with products
    :Rendered:
       |today|
 
-   :Classification:
-      cart
-
-   :Version:
-      |release|
-
 -----
 
-Cart Products needs to be used together with EXT:cart. EXT:cart itself is only
-the base for a webshop. EXT:cart_products provides products which can be created
-in the TYPO3 backend. Those products fit many use cases for "usual products"
-(no books, no events). The products can be displayed on the website with a list
-view and a detail view. As said does it extend EXT:cart so those products can
-be purchased with the cart of EXT:cart.
+Cart Products needs to be used together with EXT:cart.
+
+* EXT:cart itself is only the base for a webshop.
+* EXT:cart_products provides products which can be created in the TYPO3 backend.
+
+  * Those products fit many use cases for "usual products" (no books, no events).
+  * The products can be displayed on the website with a list view and a detail view.
+  * As said does it extend EXT:cart so those products can be purchased with the cart of EXT:cart.
 
 -----
 
 **Table of Contents**
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 1
    :titlesonly:
 
    Introduction/Index

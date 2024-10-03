@@ -1,10 +1,10 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 =========================================================
 Breaking: #288 - Removal of the Unfinished Backend Module
 =========================================================
 
-See :issue:`288`
+See `Issue 288 <https://github.com/extcode/cart_products/issues/288>`__
 
 Description
 ===========
