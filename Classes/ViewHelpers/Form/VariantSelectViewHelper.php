@@ -12,6 +12,7 @@ namespace Extcode\CartProducts\ViewHelpers\Form;
 use Extcode\Cart\ViewHelpers\Format\CurrencyViewHelper;
 use Extcode\CartProducts\Domain\Model\Product\BeVariant;
 use Extcode\CartProducts\Domain\Model\Product\Product;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -26,6 +27,10 @@ class VariantSelectViewHelper extends AbstractViewHelper
      * @var Product
      */
     protected $product;
+
+    public function __construct(
+        private readonly Context $context,
+    ) {}
 
     /**
      * Initialize arguments.
@@ -123,9 +128,12 @@ class VariantSelectViewHelper extends AbstractViewHelper
             );
             $regularPrice = $currencyViewHelper->render();
 
+            $frontendUserGroupIds = $this->context->getPropertyFromAspect('frontend.user', 'groupIds');
+
             $currencyViewHelper->setRenderChildrenClosure(
-                fn() => $beVariant->getBestPriceCalculated()
+                fn() => $beVariant->getBestPriceCalculated($frontendUserGroupIds)
             );
+
             $specialPrice = $currencyViewHelper->render();
 
             $specialPricePercentageDiscount = number_format($beVariant->getBestSpecialPricePercentageDiscount(), 2);
