@@ -1,13 +1,21 @@
 .. include:: ../Includes.rst.txt
 
+.. _introduction:
+
 ============
 Introduction
 ============
 
-EXT:cart_products needs to be used together with EXT:cart. EXT:cart itself is
-only the base for a webshop. Only using EXT:cart does not allow to sell anything
-because there are no products. Therefore EXT:cart needs other extensions. One of
-those other extensions is EXT:cart_products.
+EXT:cart_products needs to be used together with :t3ext:`cart`.
+
+EXT:cart itself is only the base for a webshop.
+
+Only using EXT:cart does not allow to sell anything because there are no products.
+
+Therefore EXT:cart needs other extensions. One of those other extensions is EXT:cart_products.
+
+
+**Features:**
 
 * It provides products which can be created in the TYPO3 backend.
 * The data for those products are stored in own data tables.
@@ -17,6 +25,8 @@ those other extensions is EXT:cart_products.
   view.
 * As it extends EXT:cart are the products compatible with EXT:cart and can
   therefore be be purchased with the cart functionality of EXT:cart.
+
+**Further pages:**
 
 .. toctree::
    :maxdepth: 5
