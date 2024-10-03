@@ -1,10 +1,10 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 ===================================================
 Breaking: #99 - Move Fluid Pagination to Controller
 ===================================================
 
-See :issue:`99`
+See `Issue 99 <https://github.com/extcode/cart_products/issues/99>`__
 
 Description
 ===========

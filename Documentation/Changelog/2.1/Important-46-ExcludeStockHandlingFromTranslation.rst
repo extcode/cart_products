@@ -1,10 +1,10 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 ========================================================
 Important: #46 - Exclude Stock Handling from Translation
 ========================================================
 
-See :issue:`46`
+See `Issue 46 <https://github.com/extcode/cart_products/issues/46>`__
 
 Description
 ===========

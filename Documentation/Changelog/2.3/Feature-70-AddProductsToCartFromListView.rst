@@ -1,10 +1,10 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 ==================================================
 Feature: #70 - Add Products from Cart in List View
 ==================================================
 
-See :issue:`70`
+See `Issue 70 <https://github.com/extcode/cart_products/issues/70>`__
 
 Description
 ===========
