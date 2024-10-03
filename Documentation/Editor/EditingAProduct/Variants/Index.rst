@@ -1,4 +1,4 @@
-.. include:: ../../Includes.rst.txt
+.. include:: ../../../Includes.rst.txt
 
 ========
 Variants
@@ -55,7 +55,7 @@ you get used to it.
    The record for a *Backend Variant Attribute* is created directly within a
    TYPO3 page.
 
-   .. figure:: ../../Images/Editor/Records/Variants/Product-BackendVariantAttribute.png
+   .. figure:: ../../../Images/Editor/Records/Variants/Product-BackendVariantAttribute.png
       :width: 820
       :alt: Backend Variant Attributes
       :class: with-shadow
@@ -72,7 +72,7 @@ you get used to it.
 
    Such an attribute is created within a *Backend Variant Attribute*.
 
-   .. figure:: ../../Images/Editor/Records/Variants/Product-BackendVariantAttributeOptions.png
+   .. figure:: ../../../Images/Editor/Records/Variants/Product-BackendVariantAttributeOptions.png
       :width: 820
       :alt: Backend Variant Attributes Options
       :class: with-shadow
@@ -86,7 +86,7 @@ you get used to it.
    within a product, e.g. *size*, *color* and *cut*. The available combinations
    are defined in the next step.
 
-   .. figure:: ../../Images/Editor/Records/Variants/Product-BackendVariantAttributes-in-Product.png
+   .. figure:: ../../../Images/Editor/Records/Variants/Product-BackendVariantAttributes-in-Product.png
       :width: 820
       :alt: Backend Variant Attributes
       :class: with-shadow
@@ -99,7 +99,7 @@ you get used to it.
    *Backend Variant Attribute* an *Backend Variant Attribute Option*
    (as defined in step 2).
 
-   .. figure:: ../../Images/Editor/Records/Variants/Product-BackendVariant.png
+   .. figure:: ../../../Images/Editor/Records/Variants/Product-BackendVariant.png
       :width: 820
       :alt: Backend Variant Attributes
       :class: with-shadow
@@ -112,7 +112,7 @@ you get used to it.
 Price calculation for Backend Variants
 --------------------------------------
 
-.. figure:: ../../Images/Editor/Records/Variants/Product-BackendVariant-PriceCalcMethods.png
+.. figure:: ../../../Images/Editor/Records/Variants/Product-BackendVariant-PriceCalcMethods.png
    :width: 820
    :alt: Backend Variant Attributes
    :class: with-shadow mb-3
@@ -135,7 +135,7 @@ Create Frontend Variants
 
 A *Frontend Variant* is created directly within the product in the tab Variants.
 
-.. figure:: ../../Images/Editor/Records/Variants/Product-FrontendVariant.png
+.. figure:: ../../../Images/Editor/Records/Variants/Product-FrontendVariant.png
    :width: 820
    :alt: Backend Variant Attributes
    :class: with-shadow

@@ -1,4 +1,5 @@
 .. include:: ../Includes.rst.txt
+
 .. _editor:
 
 ===========
@@ -11,13 +12,5 @@ Information how to use the extension as editor in the TYPO3 backend.
    :maxdepth: 1
    :titlesonly:
 
-   General/Index
-   Description/Index
-   ImagesFiles/Index
-   Prices/Index
-   Measures/Index
-   Stock/Index
-   Variants/Index
-   RelatedProducts/Index
-   TagsAndCategories/Index
-   Access/Index
+   EditingAProduct/Index
+   Plugins/Index

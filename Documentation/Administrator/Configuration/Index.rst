@@ -9,4 +9,3 @@ Configuration
    :titlesonly:
 
    TypoScript/Index
-   RouteEnhancers/Index
