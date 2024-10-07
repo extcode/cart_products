@@ -10,6 +10,7 @@ namespace Extcode\CartProducts\Domain\Repository\Product;
  */
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -96,7 +97,8 @@ class ProductRepository extends Repository
 
         // Create an associative array
         foreach ($products as $object) {
-            $indexedProducts[$object->getUid()] = $object;
+            $uid = $object->_getProperty(AbstractDomainObject::PROPERTY_LOCALIZED_UID);
+            $indexedProducts[$uid] = $object;
         }
         // add to ordered array in right order
         foreach ($uids as $uid) {
