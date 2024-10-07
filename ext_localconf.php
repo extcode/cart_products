@@ -3,7 +3,6 @@
 use Extcode\CartProducts\Controller\ProductController;
 use Extcode\CartProducts\Hooks\DataHandler;
 use Extcode\CartProducts\Hooks\DatamapDataHandlerHook;
-use Extcode\CartProducts\Updates\SlugUpdater;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
