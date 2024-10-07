@@ -59,7 +59,7 @@ final class ImageReferencesUpgradeWizard implements UpgradeWizardInterface
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable(self::TABLE_NAME);
         $queryBuilder->getRestrictions()->removeAll();
-        $records = $queryBuilder->select('uid')
+        $count = $queryBuilder->count('uid')
             ->from(self::TABLE_NAME)->where(
                 $queryBuilder->expr()->eq(
                     'fieldname',
@@ -69,9 +69,9 @@ final class ImageReferencesUpgradeWizard implements UpgradeWizardInterface
                     'tablenames',
                     $queryBuilder->createNamedParameter(self::IDENTIFIER, Connection::PARAM_STR)
                 ),
-            )->executeQuery()->fetchAllAssociative();
+            )->executeQuery()->fetchOne();
 
-        return count($records) > 0;
+        return (bool)$count;
     }
 
     public function getPrerequisites(): array
