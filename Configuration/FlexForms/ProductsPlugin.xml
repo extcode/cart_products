@@ -8,153 +8,139 @@
                 <type>array</type>
                 <el>
                     <switchableControllerActions>
-                        <TCEforms>
-                            <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.switch</label>
-                            <onChange>reload</onChange>
-                            <config>
-                                <type>select</type>
-                                <items>
-                                    <numIndex index="0">
-                                        <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list_and_show</numIndex>
-                                        <numIndex index="1">Product->show;Product->list</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1">
-                                        <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.show</numIndex>
-                                        <numIndex index="1">Product->show</numIndex>
-                                    </numIndex>
-                                </items>
-                                <renderType>selectSingle</renderType>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.switch</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>select</type>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list_and_show</numIndex>
+                                    <numIndex index="1">Product->show;Product->list</numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.show</numIndex>
+                                    <numIndex index="1">Product->show</numIndex>
+                                </numIndex>
+                            </items>
+                            <renderType>selectSingle</renderType>
+                        </config>
                     </switchableControllerActions>
 
                     <settings.templateLayout>
-                        <TCEforms>
-                            <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
-                            <config>
-                                <type>select</type>
-                                <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
-                                <extKey>cart_products</extKey>
-                                <pluginName>Products</pluginName>
-                                <renderType>selectSingle</renderType>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout</label>
+                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <config>
+                            <type>select</type>
+                            <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
+                            <extKey>cart_products</extKey>
+                            <pluginName>Products</pluginName>
+                            <renderType>selectSingle</renderType>
+                        </config>
                     </settings.templateLayout>
 
                     <settings.orderBy>
-                        <TCEforms>
-                            <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
-                            <config>
-                                <type>select</type>
-                                <items>
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0"></numIndex>
-                                        <numIndex index="1"></numIndex>
-                                    </numIndex>
-                                    <numIndex index="1">
-                                        <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.tstamp</numIndex>
-                                        <numIndex index="1">tstamp</numIndex>
-                                    </numIndex>
-                                    <numIndex index="2">
-                                        <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.sorting</numIndex>
-                                        <numIndex index="1">sorting</numIndex>
-                                    </numIndex>
-                                    <numIndex index="3">
-                                        <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.crdate</numIndex>
-                                        <numIndex index="1">crdate</numIndex>
-                                    </numIndex>
-                                    <numIndex index="4">
-                                        <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.title</numIndex>
-                                        <numIndex index="1">title</numIndex>
-                                    </numIndex>
-                                </items>
-                                <renderType>selectSingle</renderType>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy</label>
+                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <config>
+                            <type>select</type>
+                            <items>
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0"></numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.tstamp</numIndex>
+                                    <numIndex index="1">tstamp</numIndex>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.sorting</numIndex>
+                                    <numIndex index="1">sorting</numIndex>
+                                </numIndex>
+                                <numIndex index="3">
+                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.crdate</numIndex>
+                                    <numIndex index="1">crdate</numIndex>
+                                </numIndex>
+                                <numIndex index="4">
+                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.title</numIndex>
+                                    <numIndex index="1">title</numIndex>
+                                </numIndex>
+                            </items>
+                            <renderType>selectSingle</renderType>
+                        </config>
                     </settings.orderBy>
 
                     <settings.orderDirection>
-                        <TCEforms>
-                            <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
-                            <config>
-                                <type>select</type>
-                                <items>
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0"></numIndex>
-                                        <numIndex index="1"></numIndex>
-                                    </numIndex>
-                                    <numIndex index="1">
-                                        <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.asc</numIndex>
-                                        <numIndex index="1">asc</numIndex>
-                                    </numIndex>
-                                    <numIndex index="2">
-                                        <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.desc</numIndex>
-                                        <numIndex index="1">desc</numIndex>
-                                    </numIndex>
-                                </items>
-                                <renderType>selectSingle</renderType>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection</label>
+                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <config>
+                            <type>select</type>
+                            <items>
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0"></numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.asc</numIndex>
+                                    <numIndex index="1">asc</numIndex>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.desc</numIndex>
+                                    <numIndex index="1">desc</numIndex>
+                                </numIndex>
+                            </items>
+                            <renderType>selectSingle</renderType>
+                        </config>
                     </settings.orderDirection>
 
                     <settings.showPageUids>
-                        <TCEforms>
-                            <exclude>1</exclude>
-                            <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.select.show_pid</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
-                            <config>
-                                <type>group</type>
-                                <internal_type>db</internal_type>
-                                <allowed>pages</allowed>
-                                <size>1</size>
-                                <maxitems>1</maxitems>
-                                <minitems>0</minitems>
-                                <show_thumbs>1</show_thumbs>
-                                <wizards>
-                                    <suggest>
-                                        <type>suggest</type>
-                                    </suggest>
-                                </wizards>
-                            </config>
-                        </TCEforms>
+                        <exclude>1</exclude>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.select.show_pid</label>
+                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                            <wizards>
+                                <suggest>
+                                    <type>suggest</type>
+                                </suggest>
+                            </wizards>
+                        </config>
                     </settings.showPageUids>
 
                     <settings.categoriesList>
-                        <TCEforms>
-                            <exclude>1</exclude>
-                            <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.categories</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
-                            <config>
-                                <type>select</type>
-                                <autoSizeMax>50</autoSizeMax>
-                                <foreign_table>sys_category</foreign_table>
-                                <foreign_table_where>AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC
-                                </foreign_table_where>
-                                <maxitems>99</maxitems>
-                                <renderType>selectTree</renderType>
-                                <size>10</size>
-                                <treeConfig>
-                                    <appearance>
-                                        <expandAll>1</expandAll>
-                                        <showHeader>1</showHeader>
-                                    </appearance>
-                                    <parentField>parent</parentField>
-                                </treeConfig>
-                            </config>
-                        </TCEforms>
+                        <exclude>1</exclude>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.categories</label>
+                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <config>
+                            <type>select</type>
+                            <autoSizeMax>50</autoSizeMax>
+                            <foreign_table>sys_category</foreign_table>
+                            <foreign_table_where>AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC
+                            </foreign_table_where>
+                            <maxitems>99</maxitems>
+                            <renderType>selectTree</renderType>
+                            <size>10</size>
+                            <treeConfig>
+                                <appearance>
+                                    <expandAll>1</expandAll>
+                                    <showHeader>1</showHeader>
+                                </appearance>
+                                <parentField>parent</parentField>
+                            </treeConfig>
+                        </config>
                     </settings.categoriesList>
 
                     <settings.listSubcategories>
-                        <TCEforms>
-                            <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.subcategories</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
-                            <config>
-                                <type>check</type>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.subcategories</label>
+                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <config>
+                            <type>check</type>
+                        </config>
                     </settings.listSubcategories>
                 </el>
             </ROOT>
