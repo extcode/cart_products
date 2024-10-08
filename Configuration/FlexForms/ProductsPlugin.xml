@@ -13,13 +13,13 @@
                         <config>
                             <type>select</type>
                             <items>
-                                <label>
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list_and_show</numIndex>
-                                    <value>Product->show;Product->list</numIndex>
+                                <numIndex index="0">
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list_and_show</label>
+                                    <value>Product->show;Product->list</value>
                                 </numIndex>
-                                <value>
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.show</numIndex>
-                                    <value>Product->show</numIndex>
+                                <numIndex index="1">
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.show</label>
+                                    <value>Product->show</value>
                                 </numIndex>
                             </items>
                             <renderType>selectSingle</renderType>
