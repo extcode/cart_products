@@ -8,9 +8,9 @@ ExtensionManagementUtility::addTcaSelectItem(
     'sys_reaction',
     'reaction_type',
     [
-        UpdateStockReaction::getDescription(),
-        UpdateStockReaction::getType(),
-        UpdateStockReaction::getIconIdentifier(),
+        'label' => UpdateStockReaction::getDescription(),
+        'value' => UpdateStockReaction::getType(),
+        'icon' => UpdateStockReaction::getIconIdentifier(),
     ]
 );
 
