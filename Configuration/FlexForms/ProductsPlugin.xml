@@ -13,13 +13,13 @@
                         <config>
                             <type>select</type>
                             <items>
-                                <numIndex index="0">
-                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list_and_show</numIndex>
-                                    <numIndex index="1">Product->show;Product->list</numIndex>
+                                <label>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list_and_show</numIndex>
+                                    <value>Product->show;Product->list</numIndex>
                                 </numIndex>
-                                <numIndex index="1">
-                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.show</numIndex>
-                                    <numIndex index="1">Product->show</numIndex>
+                                <value>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.show</numIndex>
+                                    <value>Product->show</numIndex>
                                 </numIndex>
                             </items>
                             <renderType>selectSingle</renderType>
@@ -45,24 +45,24 @@
                             <type>select</type>
                             <items>
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0"></numIndex>
-                                    <numIndex index="1"></numIndex>
+                                    <label></label>
+                                    <value></value>
                                 </numIndex>
                                 <numIndex index="1">
-                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.tstamp</numIndex>
-                                    <numIndex index="1">tstamp</numIndex>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.tstamp</label>
+                                    <value>tstamp</value>
                                 </numIndex>
                                 <numIndex index="2">
-                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.sorting</numIndex>
-                                    <numIndex index="1">sorting</numIndex>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.sorting</label>
+                                    <value>sorting</value>
                                 </numIndex>
                                 <numIndex index="3">
-                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.crdate</numIndex>
-                                    <numIndex index="1">crdate</numIndex>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.crdate</label>
+                                    <value>crdate</value>
                                 </numIndex>
                                 <numIndex index="4">
-                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.title</numIndex>
-                                    <numIndex index="1">title</numIndex>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.title</label>
+                                    <value>title</value>
                                 </numIndex>
                             </items>
                             <renderType>selectSingle</renderType>
@@ -76,16 +76,16 @@
                             <type>select</type>
                             <items>
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0"></numIndex>
-                                    <numIndex index="1"></numIndex>
+                                    <label></label>
+                                    <value></value>
                                 </numIndex>
                                 <numIndex index="1">
-                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.asc</numIndex>
-                                    <numIndex index="1">asc</numIndex>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.asc</label>
+                                    <value>asc</value>
                                 </numIndex>
                                 <numIndex index="2">
-                                    <numIndex index="0">LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.desc</numIndex>
-                                    <numIndex index="1">desc</numIndex>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.desc</label>
+                                    <value>desc</value>
                                 </numIndex>
                             </items>
                             <renderType>selectSingle</renderType>

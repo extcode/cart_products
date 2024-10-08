@@ -8,19 +8,19 @@ call_user_func(function () {
     $_LLL_be = 'LLL:' . 'EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
     $GLOBALS['TCA']['pages']['columns']['doktype']['config']['items'][] = [
-        $_LLL_be . 'pages.doktype.182',
-        182,
-        'apps-pagetree-page-cartproducts-products',
+        'label' => $_LLL_be . 'pages.doktype.182',
+        'value' => 182,
+        'icon' => 'apps-pagetree-page-cartproducts-products',
     ];
     $GLOBALS['TCA']['pages']['columns']['doktype']['config']['items'][] = [
-        $_LLL_be . 'pages.doktype.183',
-        183,
-        'apps-pagetree-page-cartproducts-products',
+        'label' => $_LLL_be . 'pages.doktype.183',
+        'value' => 183,
+        'icon' => 'apps-pagetree-page-cartproducts-products',
     ];
     $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
-        'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tcarecords-pages-contains.cart_products',
-        'cartproducts',
-        'apps-pagetree-folder-cartproducts-products',
+        'label' => 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tcarecords-pages-contains.cart_products',
+        'value' => 'cartproducts',
+        'icon' => 'apps-pagetree-folder-cartproducts-products',
     ];
 
     $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes'][182] = 'apps-pagetree-page-cartproducts-products';
