@@ -113,6 +113,27 @@ return [
             'l10n_parent' => 9,
             'l10n_source' => 9,
         ],
+        10 => [
+            'uid' => '11',
+            'pid' => '1',
+            'title' => 'Product Teaser',
+            'doktype' => PageRepository::DOKTYPE_DEFAULT,
+            'slug' => '/product-teaser',
+            'sorting' => '128',
+            'deleted' => '0',
+        ],
+        11 => [
+            'uid' => '12',
+            'pid' => '1',
+            'title' => 'Produkt Teaser',
+            'doktype' => PageRepository::DOKTYPE_DEFAULT,
+            'slug' => '/produkt-teaser',
+            'sorting' => '128',
+            'deleted' => '0',
+            'sys_language_uid' => 2,
+            'l10n_parent' => 11,
+            'l10n_source' => 11,
+        ],
     ],
     'sys_template' => [
         0 => [
