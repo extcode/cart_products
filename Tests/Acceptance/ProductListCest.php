@@ -33,6 +33,7 @@ class ProductListCest
 
         $I->click('Simple Product 1');
         $I->see('Simple Product 1', 'h1');
+        $I->see('10', '.in-stock');
     }
 
     public function testProductListAndDetailViewForConfigurableProducts(Tester $I): void
@@ -61,14 +62,16 @@ class ProductListCest
         assertEquals('green', $arrayOfSelectOptions[3]);
     }
 
-    public function testDifferentPricesForConfigurableProducts(Tester $I): void
+    public function testDifferentPricesAndStockForConfigurableProducts(Tester $I): void
     {
         $I->amOnUrl('http://127.0.0.1:8080/products/');
         $I->see('Configurable Product 2');
         $I->click('Configurable Product 2');
+        $I->see('10', '.in-stock');
 
         $xpath = '//select[@id="be-variants-select"]/option';
 
+        // Test prices
         $regularPrice = $I->grabAttributeFrom(Locator::elementAt($xpath, 6), 'data-regular-price');
         $expectedPrice = html_entity_decode('149,49&nbsp;&euro;');
         assertEquals($expectedPrice, $regularPrice);
@@ -80,5 +83,19 @@ class ProductListCest
         $regularPrice = $I->grabAttributeFrom(Locator::elementAt($xpath, 8), 'data-regular-price');
         $expectedPrice = html_entity_decode('149,49&nbsp;&euro;');
         assertEquals($expectedPrice, $regularPrice);
+
+        // Test stock
+        $stock = $I->grabAttributeFrom(Locator::elementAt($xpath, 6), 'data-available-stock');
+        $expectedStock = '5';
+        assertEquals($expectedStock, $stock);
+
+        $stock = $I->grabAttributeFrom(Locator::elementAt($xpath, 7), 'data-available-stock');
+        $expectedStock = '6';
+        assertEquals($expectedStock, $stock);
+
+        $stock = $I->grabAttributeFrom(Locator::elementAt($xpath, 8), 'data-available-stock');
+        $expectedStock = '7';
+        assertEquals($expectedStock, $stock);
+
     }
 }
