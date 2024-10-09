@@ -23,6 +23,12 @@ class ProductTeaserCest
         $I->see('19,99 €');
         $I->see('Simple Product 3');
         $I->see('29,99 €');
+        $I->see('Simple Product 5');
+        $I->see('29,99 €');
+
+        $I->seeAboveInPageSource('Simple Product 1', 'Simple Product 2');
+        $I->seeAboveInPageSource('Simple Product 2', 'Simple Product 5');
+        $I->seeAboveInPageSource('Simple Product 5', 'Simple Product 3');
     }
 
     public function testTranslatedProductTeaserViewForSimpleProducts(Tester $I): void
@@ -33,5 +39,10 @@ class ProductTeaserCest
         $I->see('9,99 €');
         $I->see('Einfaches Produkt 3');
         $I->see('29,99 €');
+        $I->see('Einfaches Produkt 5');
+        $I->see('29,99 €');
+
+        $I->seeAboveInPageSource('Einfaches Produkt 1', 'Einfaches Produkt 5');
+        $I->seeAboveInPageSource('Einfaches Produkt 5', 'Einfaches Produkt 3');
     }
 }

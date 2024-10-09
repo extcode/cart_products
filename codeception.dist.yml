@@ -40,6 +40,9 @@ suites:
               moz:firefoxOptions:
                 args:
                   - '-headless'
+        -
+          Extcode\CartProducts\Tests\Acceptance\Support\Helper:
+            depends: 'WebDriver'
 
     step_decorators:
       - 'Codeception\Step\Retry'
