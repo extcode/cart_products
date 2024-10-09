@@ -55,10 +55,9 @@ class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
 
     public function getDescription(): string
     {
-        $description = 'The old Cart: Products plugin using switchableControllerActions has been split into 2 separate plugins. ';
-        $description .= 'This update wizard migrates all existing plugin settings and changes the Plugin (list_type) ';
-        $description .= 'to use the new plugins available.';
-        return $description;
+        return 'The old Cart: Products plugin using switchableControllerActions has been split into 2 separate plugins. '
+            . 'This update wizard migrates all existing plugin settings and changes the Plugin (list_type) '
+            . 'to use the new plugins available.';
     }
 
     public function getPrerequisites(): array

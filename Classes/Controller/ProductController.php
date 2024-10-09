@@ -125,10 +125,9 @@ class ProductController extends ActionController
     protected function isActionAllowed(string $action): bool
     {
         $frameworkConfiguration = $this->configurationManager->getConfiguration($this->configurationManager::CONFIGURATION_TYPE_FRAMEWORK);
-        // @extensionScannerIgnoreLine
-        $allowedActions = $frameworkConfiguration['controllerConfiguration']['Extcode\CartProducts\Controller\ProductController']['actions'] ?? [];
+        $allowedActions = $frameworkConfiguration['controllerConfiguration'][\Extcode\CartProducts\Controller\ProductController::class]['actions'] ?? [];
 
-        return \in_array($action, $allowedActions, true);
+        return in_array($action, $allowedActions, true);
     }
 
     /**

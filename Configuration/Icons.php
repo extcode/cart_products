@@ -17,8 +17,12 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:cart_products/Resources/Public/Icons/cartproducts_plugin_wizard-list.svg',
     ],
-    'ext-cartproducts-wizard-icon-single' => [
+    'ext-cartproducts-wizard-icon-show' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => 'EXT:cart_products/Resources/Public/Icons/cartproducts_plugin_wizard-single.svg',
+        'source' => 'EXT:cart_products/Resources/Public/Icons/cartproducts_plugin_wizard-show.svg',
+    ],
+    'ext-cartproducts-wizard-icon-teaser' => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => 'EXT:cart_products/Resources/Public/Icons/cartproducts_plugin_wizard-teaser.svg',
     ],
 ];
