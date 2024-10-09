@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z" product-name="cart_products">
-        <header/>
-        <body>
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z" product-name="cart_products">
+		<header/>
+		<body>
 
-            <trans-unit id="extmng.categoryRestriction" xml:space="preserve">
+			<trans-unit id="extmng.categoryRestriction" xml:space="preserve">
                 <source>
                     Category restriction: Restrict the available categories in product records.
                     PageTsConfig:
@@ -12,123 +12,116 @@
                     TCEFORM.tx_cartproducts_domain_model_product_product.categories.PAGE_TSCONFIG_ID=120.
                 </source>
             </trans-unit>
-            <trans-unit id="extmng.categoryRestriction.current_pid" xml:space="preserve">
+			<trans-unit id="extmng.categoryRestriction.current_pid" xml:space="preserve">
                 <source>Categories from current page</source>
             </trans-unit>
-            <trans-unit id="extmng.categoryRestriction.siteroot" xml:space="preserve">
+			<trans-unit id="extmng.categoryRestriction.siteroot" xml:space="preserve">
                 <source>Categories from site root</source>
             </trans-unit>
-            <trans-unit id="extmng.categoryRestriction.pages_tsconfig" xml:space="preserve">
+			<trans-unit id="extmng.categoryRestriction.pages_tsconfig" xml:space="preserve">
                 <source>Page TsConfig</source>
             </trans-unit>
-            <trans-unit id="extmng.categoryRestriction.none" xml:space="preserve">
+			<trans-unit id="extmng.categoryRestriction.none" xml:space="preserve">
                 <source>No restriction</source>
             </trans-unit>
 
-            <trans-unit id="tcarecords-pages-contains.cart_products">
-                <source>Cart: Products</source>
-            </trans-unit>
+			<trans-unit id="tcarecords-pages-contains.cart_products">
+				<source>Cart: Products</source>
+			</trans-unit>
 
-            <trans-unit id="flexforms_template.templateLayout">
-                <source>Template Layout</source>
-            </trans-unit>
-            <trans-unit id="flexforms_template.templateLayout.products.table">
-                <source>Table</source>
-            </trans-unit>
-            <trans-unit id="flexforms_template.templateLayout.products.grid">
-                <source>Grid</source>
-            </trans-unit>
+			<trans-unit id="flexforms_template.templateLayout">
+				<source>Template Layout</source>
+			</trans-unit>
+			<trans-unit id="flexforms_template.templateLayout.table">
+				<source>Table</source>
+			</trans-unit>
+			<trans-unit id="flexforms_template.templateLayout.grid">
+				<source>Grid</source>
+			</trans-unit>
 
-            <trans-unit id="tx_cartproducts.module.main">
-                <source>Shopping Cart</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.module.products">
-                <source>Products</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.module.products.action.delete_record.title">
-                <source>Delete product (!)</source>
-            </trans-unit>
+			<trans-unit id="tx_cartproducts.module.main">
+				<source>Shopping Cart</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.module.products">
+				<source>Products</source>
+			</trans-unit>
 
-            <trans-unit id="pages.singleview_cart_products_product">
-                <source>Product of this Page</source>
-            </trans-unit>
+			<trans-unit id="pages.singleview_cart_products_product">
+				<source>Product of this Page</source>
+			</trans-unit>
 
-            <trans-unit id="tx_cartproducts.plugin.products.title">
-                <source>Cart: Products</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.description">
-                <source>list and show products</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.switch">
-                <source>Display Type</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list_and_show">
-                <source>List (and Show) View</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.show">
-                <source>Show View</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.teaser">
-                <source>Teaser View</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.select.show_pid">
-                <source>Product Detail Page</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderBy">
-                <source>Sort by</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderBy.uid">
-                <source>Uid</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderBy.tstamp">
-                <source>Last edited</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderBy.sorting">
-                <source>Backend Sorting</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderBy.crdate">
-                <source>Created</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderBy.title">
-                <source>Title</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderDirection">
-                <source>Sort direction</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderDirection.asc">
-                <source>Ascending</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.orderDirection.desc">
-                <source>Descending</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.categories">
-                <source>Categories</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.list.subcategories">
-                <source>with Subcategories</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.action.product.teaser.select.product">
-                <source>Choose teaser product</source>
-            </trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.general.show_pid">
+				<source>Product Detail Page</source>
+			</trans-unit>
 
-            <trans-unit id="tx_cartproducts.plugin.teaser_products.title">
-                <source>Cart: selected Products</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.teaser_products.description">
-                <source>list or tease selected products</source>
-            </trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.show_product.title">
+				<source>Cart: Show a Product</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.show_product.description">
+				<source>Detail view to show a product</source>
+			</trans-unit>
 
-            <trans-unit id="tx_cartproducts.plugin.single_product.title">
-                <source>Cart: Single Product</source>
-            </trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.title">
+				<source>Cart: List Products</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.description">
+				<source>List products</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.orderBy">
+				<source>Sort by</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.orderBy.uid">
+				<source>Uid</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.orderBy.tstamp">
+				<source>Last edited</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.orderBy.sorting">
+				<source>Backend Sorting</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.orderBy.crdate">
+				<source>Created</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.orderBy.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.orderDirection">
+				<source>Sort direction</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.products.orderDirection.asc">
+				<source>Ascending</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.products.orderDirection.desc">
+				<source>Descending</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.categories">
+				<source>Categories</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.list_products.subcategories">
+				<source>With Subcategories</source>
+			</trans-unit>
 
-            <trans-unit id="pages.doktype.182">
-                <source>Cart: Products</source>
-            </trans-unit>
-            <trans-unit id="pages.doktype.183">
-                <source>Cart: Product</source>
-            </trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.teaser_products.title">
+				<source>Cart: Selected Products</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.teaser_products.description">
+				<source>List or tease selected products</source>
+			</trans-unit>
+			<trans-unit id="tx_cartproducts.plugin.teaser.select.product">
+				<source>Choose teaser product</source>
+			</trans-unit>
 
-        </body>
-    </file>
+			<trans-unit id="tx_cartproducts.plugin.single_product.title">
+				<source>Cart: Single Product</source>
+			</trans-unit>
+
+			<trans-unit id="pages.doktype.182">
+				<source>Cart: Products</source>
+			</trans-unit>
+			<trans-unit id="pages.doktype.183">
+				<source>Cart: Product</source>
+			</trans-unit>
+
+		</body>
+	</file>
 </xliff>

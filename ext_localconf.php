@@ -11,12 +11,22 @@ defined('TYPO3') or die();
 $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
 // configure plugins
+ExtensionUtility::configurePlugin(
+    'cart_products',
+    'ShowProduct',
+    [
+        ProductController::class => 'show, showForm',
+    ],
+    [
+        ProductController::class => 'showForm',
+    ]
+);
 
 ExtensionUtility::configurePlugin(
     'cart_products',
-    'Products',
+    'ListProducts',
     [
-        ProductController::class => 'show, list, teaser, showForm',
+        ProductController::class => 'list, show, showForm',
     ],
     [
         ProductController::class => 'showForm',
@@ -79,10 +89,10 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['cartproducts'][]
     = 'Extcode\\CartProducts\\ViewHelpers';
 
 // register listTemplateLayouts
-$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['products'][] = [$_LLL_be . 'flexforms_template.templateLayout.products.table', 'table'];
-$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['products'][] = [$_LLL_be . 'flexforms_template.templateLayout.products.grid', 'grid'];
-$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['teaser_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.products.table', 'table'];
-$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['teaser_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.products.grid', 'grid'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['list_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.table', 'table'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['list_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.grid', 'grid'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['teaser_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.table', 'table'];
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['cart_products']['templateLayouts']['teaser_products'][] = [$_LLL_be . 'flexforms_template.templateLayout.grid', 'grid'];
 
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Domain\Model\Category::class] = [
     'className' => \Extcode\CartProducts\Domain\Model\Category::class,

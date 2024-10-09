@@ -20,7 +20,6 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
@@ -123,8 +122,36 @@ class ProductController extends ActionController
         }
     }
 
+    protected function isActionAllowed(string $action): bool
+    {
+        $frameworkConfiguration = $this->configurationManager->getConfiguration($this->configurationManager::CONFIGURATION_TYPE_FRAMEWORK);
+        // @extensionScannerIgnoreLine
+        $allowedActions = $frameworkConfiguration['controllerConfiguration']['Extcode\CartProducts\Controller\ProductController']['actions'] ?? [];
+
+        return \in_array($action, $allowedActions, true);
+    }
+
+    /**
+     * When list action is called along with a product argument, we forward to show action.
+     */
+    protected function forwardToShowActionWhenRequested(): ?ForwardResponse
+    {
+        if (!$this->isActionAllowed('show') || !$this->request->hasArgument('product')
+        ) {
+            return null;
+        }
+
+        $forwardResponse = new ForwardResponse('show');
+        return $forwardResponse->withArguments(['product' => $this->request->getArgument('product')]);
+    }
+
     public function listAction(int $currentPage = 1): ResponseInterface
     {
+        $possibleRedirect = $this->forwardToShowActionWhenRequested();
+        if ($possibleRedirect) {
+            return $possibleRedirect;
+        }
+
         $demand = $this->createDemandObjectFromSettings($this->settings);
         $demand->setActionAndClass(__METHOD__, self::class);
 
@@ -155,16 +182,8 @@ class ProductController extends ActionController
         return $this->htmlResponse();
     }
 
-    #[IgnoreValidation(['value' => 'product'])]
     public function showAction(Product $product = null): ResponseInterface
     {
-        if (!$product) {
-            $product = $this->getProduct();
-        }
-        if (!$product) {
-            return new ForwardResponse('list');
-        }
-
         $this->view->assign('user', $GLOBALS['TSFE']->fe_user->user);
         $this->view->assign('product', $product);
         $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
@@ -250,15 +269,19 @@ class ProductController extends ActionController
         $configuration = $typoscriptService->convertPlainArrayToTypoScriptArray($configuration);
         $productUid = (int)$this->request->getAttribute('currentContentObject')->cObjGetSingle($configuration['product'], $configuration['product.']);
 
+        $pluginName = array_key_exists('tx_cartproducts_showproduct', $this->request->getQueryParams())
+            ? 'ShowProduct'
+            : 'ListProducts';
+
         if ($productUid === 0) {
             $configurationManager->setConfiguration([
                 'vendorName' => 'Extcode',
                 'extensionName' => 'CartProducts',
-                'pluginName' => 'Products',
+                'pluginName' => $pluginName,
             ]);
             $requestBuilder = GeneralUtility::makeInstance(
                 RequestBuilder::class,
-                $this->configurationManager,
+                $configurationManager,
                 $this->extensionService
             );
 

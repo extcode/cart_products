@@ -10,7 +10,10 @@ call_user_func(function () {
     $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
     $pluginNames = [
-        'Products' => [
+        'ShowProduct' => [
+            'subtypes_excludelist' => 'select_key, pages, recursive',
+        ],
+        'ListProducts' => [
             'subtypes_excludelist' => 'select_key',
         ],
         'TeaserProducts' => [
@@ -27,7 +30,9 @@ call_user_func(function () {
         ExtensionUtility::registerPlugin(
             'CartProducts',
             $pluginName,
-            $_LLL_be . 'tx_cartproducts.plugin.' . $pluginNameSC . '.title'
+            $_LLL_be . 'tx_cartproducts.plugin.' . $pluginNameSC . '.title',
+            null,
+            'cart'
         );
 
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = $pluginConf['subtypes_excludelist'];

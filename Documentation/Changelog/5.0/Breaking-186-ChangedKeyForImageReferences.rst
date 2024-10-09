@@ -4,7 +4,7 @@
 Breaking: #186 - Changed key for image reference
 ================================================
 
-See :issue:`186`
+See :Issue 186 <https://github.com/extcode/cart_products/issues/186>`
 
 Description
 ===========
@@ -12,7 +12,7 @@ Description
 With the version for TYPO3 v12 the references uses the key 'images' in
 column `fieldname` of table `sys_file_reference`. Before the key was 'image'
 (singular). Due to this the images are no longer shown, neither in the backend
-nor in the frontend. 
+nor in the frontend.
 
 Affected Installations
 ======================

@@ -88,12 +88,18 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
         if ($page) {
             $this->arguments['pageUid'] = $page['uid'];
         } else {
-            $pluginName = 'Products';
+            $pluginName = 'ShowProduct';
 
             if ($product->getCategory() && $product->getCategory()->getCartProductShowPid()) {
                 $pageUid = $product->getCategory()->getCartProductShowPid();
             } elseif ($this->arguments['settings']['showPageUids']) {
                 $pageUid = $this->arguments['settings']['showPageUids'];
+            }
+
+            // A missing $pageUid means the product does not have a defined detail view via category or flexform
+            // In this case the product detail view must be displayed within the ListProducts plugin.
+            if (!$pageUid) {
+                $pluginName = 'ListProducts';
             }
 
             $action = 'show';

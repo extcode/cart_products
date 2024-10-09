@@ -13,8 +13,12 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:cart_products/Resources/Public/Icons/Extension.svg',
     ],
-    'ext-cartproducts-wizard-icon' => [
+    'ext-cartproducts-wizard-icon-list' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => 'EXT:cart_products/Resources/Public/Icons/cartproducts_plugin_wizard.svg',
+        'source' => 'EXT:cart_products/Resources/Public/Icons/cartproducts_plugin_wizard-list.svg',
+    ],
+    'ext-cartproducts-wizard-icon-single' => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => 'EXT:cart_products/Resources/Public/Icons/cartproducts_plugin_wizard-single.svg',
     ],
 ];
