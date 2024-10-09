@@ -11,7 +11,7 @@ To get speaking URLs it's necessary to add a Route Enhancer for the detail view.
 Be aware that you need to adapt the `limitToPages` entry.
 
 .. code-block:: yaml
-   :caption: e.g. EXT:sitepackage/Configuration/TypoScript/setup.typoscript
+   :caption: config/sites/<your-site>/config.yaml
 
     routeEnhancers:
       CartProducts:
@@ -19,7 +19,7 @@ Be aware that you need to adapt the `limitToPages` entry.
         limitToPages:
           - 123
         extension: CartProducts
-        plugin: Products
+        plugin: ShowProduct
         routes:
           - routePath: '/{product-title}'
             _controller: 'Product::show'

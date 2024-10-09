@@ -2,9 +2,7 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>Optionen</sheetTitle>
-                </TCEforms>
+                <sheetTitle>Options</sheetTitle>
                 <type>array</type>
                 <el>
                     <settings.templateLayout>
@@ -20,7 +18,7 @@
 
                     <settings.showPageUids>
                         <exclude>1</exclude>
-                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.select.show_pid</label>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.general.show_pid</label>
                         <config>
                             <type>group</type>
                             <allowed>pages</allowed>
@@ -38,7 +36,7 @@
 
                     <settings.productUids>
                         <exclude>1</exclude>
-                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.teaser.select.product</label>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.teaser.select.product</label>
                         <config>
                             <type>select</type>
                             <foreign_table>tx_cartproducts_domain_model_product_product</foreign_table>

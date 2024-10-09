@@ -2,66 +2,43 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>Optionen</sheetTitle>
-                </TCEforms>
+                <sheetTitle>Options</sheetTitle>
                 <type>array</type>
                 <el>
-                    <switchableControllerActions>
-                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.switch</label>
-                        <onChange>reload</onChange>
-                        <config>
-                            <type>select</type>
-                            <items>
-                                <numIndex index="0">
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list_and_show</label>
-                                    <value>Product->show;Product->list</value>
-                                </numIndex>
-                                <numIndex index="1">
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.show</label>
-                                    <value>Product->show</value>
-                                </numIndex>
-                            </items>
-                            <renderType>selectSingle</renderType>
-                        </config>
-                    </switchableControllerActions>
-
                     <settings.templateLayout>
                         <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout</label>
-                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
                         <config>
                             <type>select</type>
                             <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
                             <extKey>cart_products</extKey>
-                            <pluginName>Products</pluginName>
+                            <pluginName>ListProducts</pluginName>
                             <renderType>selectSingle</renderType>
                         </config>
                     </settings.templateLayout>
 
                     <settings.orderBy>
-                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy</label>
-                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy</label>
                         <config>
                             <type>select</type>
                             <items>
-                                <numIndex index="0" type="array">
+                                <numIndex index="0">
                                     <label></label>
                                     <value></value>
                                 </numIndex>
                                 <numIndex index="1">
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.tstamp</label>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy.tstamp</label>
                                     <value>tstamp</value>
                                 </numIndex>
                                 <numIndex index="2">
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.sorting</label>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy.sorting</label>
                                     <value>sorting</value>
                                 </numIndex>
                                 <numIndex index="3">
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.crdate</label>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy.crdate</label>
                                     <value>crdate</value>
                                 </numIndex>
                                 <numIndex index="4">
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderBy.title</label>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy.title</label>
                                     <value>title</value>
                                 </numIndex>
                             </items>
@@ -70,21 +47,20 @@
                     </settings.orderBy>
 
                     <settings.orderDirection>
-                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection</label>
-                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderDirection</label>
                         <config>
                             <type>select</type>
                             <items>
-                                <numIndex index="0" type="array">
+                                <numIndex index="0">
                                     <label></label>
                                     <value></value>
                                 </numIndex>
                                 <numIndex index="1">
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.asc</label>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderDirection.asc</label>
                                     <value>asc</value>
                                 </numIndex>
                                 <numIndex index="2">
-                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.orderDirection.desc</label>
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderDirection.desc</label>
                                     <value>desc</value>
                                 </numIndex>
                             </items>
@@ -94,8 +70,7 @@
 
                     <settings.showPageUids>
                         <exclude>1</exclude>
-                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.select.show_pid</label>
-                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.general.show_pid</label>
                         <config>
                             <type>group</type>
                             <allowed>pages</allowed>
@@ -113,8 +88,7 @@
 
                     <settings.categoriesList>
                         <exclude>1</exclude>
-                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.categories</label>
-                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.categories</label>
                         <config>
                             <type>select</type>
                             <autoSizeMax>50</autoSizeMax>
@@ -135,8 +109,7 @@
                     </settings.categoriesList>
 
                     <settings.listSubcategories>
-                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.products.action.product.list.subcategories</label>
-                        <displayCond>FIELD:switchableControllerActions:=:Product->show;Product->list</displayCond>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.subcategories</label>
                         <config>
                             <type>check</type>
                         </config>

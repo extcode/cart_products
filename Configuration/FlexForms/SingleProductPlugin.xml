@@ -2,13 +2,9 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>Optionen</sheetTitle>
-                </TCEforms>
+                <sheetTitle>Options</sheetTitle>
                 <type>array</type>
                 <el>
-
-                    <!-- Template Layout -->
                     <settings.templateLayout>
                         <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout</label>
                         <config>
@@ -19,7 +15,6 @@
                             <renderType>selectSingle</renderType>
                         </config>
                     </settings.templateLayout>
-
                 </el>
             </ROOT>
         </sDEF>

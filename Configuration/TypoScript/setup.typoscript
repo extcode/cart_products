@@ -18,13 +18,6 @@ plugin.tx_cartproducts {
         }
     }
 
-    mvc {
-        callDefaultActionIfActionCantBeResolved = 1
-    }
-    features {
-        skipDefaultArguments = 1
-    }
-
     settings {
         format.currency < plugin.tx_cart.settings.format.currency
 
