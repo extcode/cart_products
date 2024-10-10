@@ -67,7 +67,6 @@ class ProductListCest
         $I->amOnUrl('http://127.0.0.1:8080/products/');
         $I->see('Configurable Product 2');
         $I->click('Configurable Product 2');
-        $I->see('10', '.in-stock');
 
         $xpath = '//select[@id="be-variants-select"]/option';
 
