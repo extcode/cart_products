@@ -17,7 +17,10 @@
             additionalAttributes="{data-ajax: '{f:if(condition: \'{settings.addToCartByAjax}\', then: \'1\', else: \'0\')}', data-type: 'slot', data-id: '{slot.uid}'}">
         <input type="hidden" name="tx_cart_cart[productType]" value="CartProducts">
         <input type="hidden" name="tx_cart_cart[product]" value="{product.uid}">
-        <input type="hidden" name="tx_cart_cart[detailPageUid]" value="{detailPageUid}">
+        <input type="hidden" name="tx_cart_cart[detailPageUid]" value="{detailLinkData.uid}">
+        <input type="hidden" name="tx_cart_cart[detailPagePluginName]" value="{detailLinkData.pluginName}">
+        <input type="hidden" name="tx_cart_cart[detailPageController]" value="{detailLinkData.controller}">
+        <input type="hidden" name="tx_cart_cart[detailPageAction]" value="{detailLinkData.action}">
 
         <input class="form-control" type="number" value="1" name="tx_cart_cart[quantity]">
         <f:if condition="{product.beVariants}">

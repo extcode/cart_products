@@ -59,8 +59,9 @@ class CreateCartProduct
             $detailPageLink = $this->detailPageLinkFactory->getDetailPageLink(
                 (int)$request->getArgument('detailPageUid'),
                 'cartproducts',
-                'products',
-                'product'
+                $request->getArgument('detailPagePluginName'),
+                $request->getArgument('detailPageController'),
+                $request->getArgument('detailPageAction')
             );
             $cartProduct->setDetailPageLink($detailPageLink);
         }

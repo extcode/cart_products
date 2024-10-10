@@ -203,12 +203,11 @@ class ProductController extends ActionController
             $product = $this->getProduct();
         }
 
-        $frontendController = $this->request->getAttribute('frontend.controller');
-        $detailPageUid = $frontendController->getRequestedId();
+        $detailLinkData = $this->getDetailLinkData($this->request);
 
         $this->view->assign('product', $product);
         $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
-        $this->view->assign('detailPageUid', $detailPageUid);
+        $this->view->assign('detailLinkData', $detailLinkData);
 
         $this->assignCurrencyTranslationData();
         return $this->htmlResponse();
@@ -345,5 +344,28 @@ class ProductController extends ActionController
 
         $this->cart = $this->cartUtility->getNewCart($this->cartConfiguration);
         $this->sessionHandler->writeCart($this->cartConfiguration['settings']['cart']['pid'], $this->cart);
+    }
+
+    private function getDetailLinkData(Request $request): array
+    {
+        $frontendController = $request->getAttribute('frontend.controller');
+        $requestArguments = $frontendController->getPageArguments()->getArguments();
+
+        $pluginNamespace = preg_grep('/tx_cartproducts_.*/', array_keys($requestArguments));
+        $pluginNamespace = array_shift($pluginNamespace);
+
+        $pluginArguments = $requestArguments[$pluginNamespace];
+        $controller = $pluginArguments['controller'];
+        $action = $pluginArguments['action'];
+        $pluginName = preg_replace('/tx_cartproducts_/', '', $pluginNamespace);
+
+        $detailPageUid = $frontendController->getRequestedId();
+
+        return [
+            'uid' => $detailPageUid,
+            'pluginName' => $pluginName,
+            'controller' => $controller,
+            'action' => $action,
+        ];
     }
 }
