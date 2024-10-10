@@ -14,6 +14,7 @@ use Extcode\CartProducts\Domain\Model\Product\BeVariant;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class VariantSelectViewHelper extends AbstractViewHelper
@@ -166,6 +167,15 @@ class VariantSelectViewHelper extends AbstractViewHelper
             $disabled = '';
             if (!$beVariant->getIsAvailable() && $beVariant->getProduct()->isHandleStockInVariants()) {
                 $disabled = 'disabled';
+                $labelOutofStock = LocalizationUtility::translate(
+                    'tx_cartproducts.stock.out_of_stock',
+                    'cart_products'
+                );
+                $optionLabel .= ' (' . $labelOutofStock . ')';
+            }
+
+            if ($beVariant->getProduct()->isHandleStockInVariants()) {
+                $data .= ' data-available-stock="' . $beVariant->getStock() . '"';
             }
 
             $option = '<option ' . $value . ' ' . $data . ' ' . $disabled . '>' . $optionLabel . '</option>';

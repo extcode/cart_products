@@ -14,6 +14,8 @@ return [
             'description' => '',
             'path_segment' => 'simple-product-1',
             'price' => 9.99,
+            'handle_stock' => 1,
+            'stock' => 10,
         ],
         1 => [
             'uid' => '2',
@@ -72,6 +74,8 @@ return [
             'price' => 149.49,
             'be_variant_attribute1' => 1,
             'be_variant_attribute2' => 2,
+            'handle_stock' => 1,
+            'handle_stock_in_variants' => 1,
         ],
         6 => [
             'uid' => '7',
@@ -274,6 +278,7 @@ return [
             'be_variant_attribute_option2' => '9',
             'be_variant_attribute_option3' => '0',
             'sorting' => '1',
+            'stock' => '1',
         ],
         4 => [
             'uid' => '5',
@@ -283,6 +288,7 @@ return [
             'be_variant_attribute_option2' => '8',
             'be_variant_attribute_option3' => '0',
             'sorting' => '2',
+            'stock' => '2',
         ],
         5 => [
             'uid' => '6',
@@ -292,6 +298,7 @@ return [
             'be_variant_attribute_option2' => '8',
             'be_variant_attribute_option3' => '0',
             'sorting' => '3',
+            'stock' => '3',
         ],
         6 => [
             'uid' => '7',
@@ -301,6 +308,7 @@ return [
             'be_variant_attribute_option2' => '8',
             'be_variant_attribute_option3' => '0',
             'sorting' => '4',
+            'stock' => '4',
         ],
         7 => [
             'uid' => '8',
@@ -310,6 +318,7 @@ return [
             'be_variant_attribute_option2' => '7',
             'be_variant_attribute_option3' => '0',
             'sorting' => '5',
+            'stock' => '5',
         ],
         8 => [
             'uid' => '9',
@@ -321,6 +330,7 @@ return [
             'sorting' => '6',
             'price' => '169.99',
             'price_calc_method' => '1',
+            'stock' => '6',
         ],
         9 => [
             'uid' => '10',
@@ -330,6 +340,7 @@ return [
             'be_variant_attribute_option2' => '7',
             'be_variant_attribute_option3' => '0',
             'sorting' => '7',
+            'stock' => '7',
         ],
     ],
 ];
