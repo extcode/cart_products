@@ -66,10 +66,10 @@ services:
         identifier: 'cart-products--check-product-availability'
         event: Extcode\Cart\Event\CheckProductAvailabilityEvent
 
-  Extcode\CartProducts\EventListener\Order\Stock\ProcessOrderCheckStock:
+  Extcode\CartProducts\EventListener\Order\Stock\CheckStock:
     tags:
       - name: event.listener
-        identifier: 'cart-products--process-order-check-stock'
+        identifier: 'cart-products--order--stock-check-stock'
         event: Extcode\Cart\Event\ProcessOrderCheckStockEvent
 
 
