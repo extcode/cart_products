@@ -40,6 +40,7 @@
                         <config>
                             <type>select</type>
                             <foreign_table>tx_cartproducts_domain_model_product_product</foreign_table>
+                            <foreign_table_where>AND tx_cartproducts_domain_model_product_product.sys_language_uid = ###REC_FIELD_sys_language_uid###</foreign_table_where>
                             <size>3</size>
                             <minitems>1</minitems>
                             <maxitems>99</maxitems>
