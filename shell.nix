@@ -52,6 +52,30 @@ let
     '';
   };
 
+  projectLint = pkgs.writeShellApplication {
+    name = "project-lint";
+
+    runtimeInputs = [
+      php
+    ];
+
+    text = ''
+      find ./*.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+    '';
+  };
+
+  projectPhpstan = pkgs.writeShellApplication {
+    name = "project-phpstan";
+
+    runtimeInputs = [
+      php
+    ];
+
+    text = ''
+      ./vendor/bin/phpstan analyse -c Build/phpstan.neon --memory-limit 256M
+    '';
+  };
+
   projectTestUnit = pkgs.writeShellApplication {
     name = "project-test-unit";
     runtimeInputs = [
@@ -110,6 +134,8 @@ in pkgs.mkShellNoCC {
     projectInstall
     projectCgl
     projectCglFix
+    projectLint
+    projectPhpstan
     projectTestUnit
     projectTestFunctional
     projectTestAcceptance
