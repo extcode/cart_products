@@ -54,19 +54,24 @@ class CheckProductAvailability
         $mode = $this->event->getMode();
 
         $quantity = $this->event->getQuantity();
+        // $quantity is an array in the event that the number of products with variants is updated in the shopping cart.
+        // In this case, the number from the update request must be added up, as stock management for all variants
+        // together takes place in the product.
+        // $quantity is not an array if a product or a product variant is added via the product page. In this case, the
+        // value for the quantity must be taken directly.
         if (is_array($quantity)) {
-            $compareQuantity = array_sum($quantity);
+            $quantityInCart = array_sum($quantity);
         } else {
-            $compareQuantity = (int)$quantity;
+            $quantityInCart = (int)$quantity;
         }
 
         if (($mode === 'add') && $cart->getProductById($cartProduct->getId())) {
-            $compareQuantity += $cart->getProductById($cartProduct->getId())->getQuantity();
+            $quantityInCart += $cart->getProductById($cartProduct->getId())->getQuantity();
         }
 
-        $currentStock = $this->productRepository->getStock($cartProduct->getProductId());
+        $quantityInStock = $this->productRepository->getStock($cartProduct->getProductId());
 
-        if ($compareQuantity > $currentStock) {
+        if ($quantityInStock < $quantityInCart) {
             $this->falseAvailability();
         }
     }
@@ -77,10 +82,14 @@ class CheckProductAvailability
         $mode = $this->event->getMode();
 
         $quantity = $this->event->getQuantity();
+        // $quantity is an array in the event that the number of products with variants is updated in the shopping cart.
+        // In this case, the correct quantity from the update request must be used.
+        // $quantity is not an array if a variant is added via the product page. In this case, the value for the
+        // quantity must be taken directly.
         if (is_array($quantity)) {
-            $compareQuantity = array_sum($quantity);
+            $quantityInCart = (int)$quantity[$cartProductBeVariant->getId()];
         } else {
-            $compareQuantity = (int)$quantity;
+            $quantityInCart = (int)$quantity;
         }
 
         if (
@@ -88,12 +97,12 @@ class CheckProductAvailability
             $cart->getProductById($cartProduct->getId()) &&
             $cart->getProductById($cartProduct->getId())->getBeVariantById($cartProductBeVariant->getId())
         ) {
-            $compareQuantity += $cart->getProductById($cartProduct->getId())->getBeVariantById($cartProductBeVariant->getId())->getQuantity();
+            $quantityInCart += $cart->getProductById($cartProduct->getId())->getBeVariantById($cartProductBeVariant->getId())->getQuantity();
         }
 
-        $currentStock = $this->beVariantRepository->getStock((int)$cartProductBeVariant->getId());
+        $quantityInStock = $this->beVariantRepository->getStock((int)$cartProductBeVariant->getId());
 
-        if ($compareQuantity > $currentStock) {
+        if ($quantityInStock < $quantityInCart) {
             $this->falseAvailability();
         }
     }
