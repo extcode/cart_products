@@ -215,7 +215,7 @@
 				<source>Not in stock</source>
 			</trans-unit>
 			<trans-unit id="tx_cartproducts.stock.out_of_stock">
-				<source>out of stock</source>
+				<source> (out of stock)</source>
 			</trans-unit>
 
         </body>
