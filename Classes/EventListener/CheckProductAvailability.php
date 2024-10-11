@@ -54,8 +54,8 @@ class CheckProductAvailability
         $mode = $this->event->getMode();
 
         $quantity = $this->event->getQuantity();
-        // $quantity is an array in the event that the number of products with variants is updated in the shopping cart.
-        // In this case, the number from the update request must be added up, as stock management for all variants
+        // $quantity is an array in the case that the amount of a product with variants is updated within the shopping
+        // cart. In this case, the number from the update request must be added up, as stock management for all variants
         // together takes place in the product.
         // $quantity is not an array if a product or a product variant is added via the product page. In this case, the
         // value for the quantity must be taken directly.
@@ -82,8 +82,8 @@ class CheckProductAvailability
         $mode = $this->event->getMode();
 
         $quantity = $this->event->getQuantity();
-        // $quantity is an array in the event that the number of products with variants is updated in the shopping cart.
-        // In this case, the correct quantity from the update request must be used.
+        // $quantity is an array in the case that the amount of a product with variants is updated within the shopping
+        // cart. In this case, the correct quantity from the update request must be used.
         // $quantity is not an array if a variant is added via the product page. In this case, the value for the
         // quantity must be taken directly.
         if (is_array($quantity)) {
