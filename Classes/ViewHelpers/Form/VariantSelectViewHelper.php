@@ -53,6 +53,7 @@ class VariantSelectViewHelper extends AbstractViewHelper
         $this->registerArgument('name', 'string', 'name for select');
         $this->registerArgument('blank', 'string', 'blank adds blank option');
         $this->registerArgument('required', 'bool', 'required adds html5 required', false, true);
+        $this->registerArgument('showOutOfStockMessage', 'bool', 'render "out of stock" in select field', false, true);
     }
 
     /**
@@ -167,11 +168,14 @@ class VariantSelectViewHelper extends AbstractViewHelper
             $disabled = '';
             if (!$beVariant->getIsAvailable() && $beVariant->getProduct()->isHandleStockInVariants()) {
                 $disabled = 'disabled';
-                $labelOutofStock = LocalizationUtility::translate(
-                    'tx_cartproducts.stock.out_of_stock',
-                    'cart_products'
-                );
-                $optionLabel .= ' (' . $labelOutofStock . ')';
+
+                if ($this->arguments['showOutOfStockMessage']) {
+                    $labelOutofStock = LocalizationUtility::translate(
+                        'tx_cartproducts.stock.out_of_stock',
+                        'cart_products'
+                    );
+                    $optionLabel .= $labelOutofStock;
+                }
             }
 
             if ($beVariant->getProduct()->isHandleStockInVariants()) {
