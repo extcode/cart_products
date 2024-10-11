@@ -10,9 +10,12 @@ namespace Extcode\CartProducts\EventListener;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
+
+use Extcode\Cart\Domain\Model\Cart\BeVariant as CartProductBeVariant;
+use Extcode\Cart\Domain\Model\Cart\Product as CartProduct;
 use Extcode\Cart\Event\CheckProductAvailabilityEvent;
-use Extcode\CartProducts\Domain\Model\Product\Product;
-use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
+use Extcode\CartProducts\Domain\DoctrineRepository\Product\BeVariantRepository;
+use Extcode\CartProducts\Domain\DoctrineRepository\Product\ProductRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -20,76 +23,85 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class CheckProductAvailability
 {
+    private CheckProductAvailabilityEvent $event;
+
     public function __construct(
-        private readonly ProductRepository $productRepository
+        private readonly ProductRepository $productRepository,
+        private readonly BeVariantRepository $beVariantRepository,
     ) {}
 
     public function __invoke(CheckProductAvailabilityEvent $event): void
     {
-        $cart = $event->getCart();
+        $this->event = $event;
         $cartProduct = $event->getProduct();
-        $quantity = $event->getQuantity();
 
-        $mode = $event->getMode();
-
-        if ($cartProduct->getProductType() !== 'CartProducts') {
+        if ($cartProduct->getProductType() !== 'CartProducts' || $cartProduct->isHandleStock() === false) {
             return;
         }
 
-        $querySettings = $this->productRepository->createQuery()->getQuerySettings();
-        $querySettings->setRespectStoragePage(false);
-        $this->productRepository->setDefaultQuerySettings($querySettings);
-
-        $product = $this->productRepository->findByIdentifier($cartProduct->getProductId());
-
-        if (
-            !$product instanceof Product ||
-            !$product->isHandleStock()
-        ) {
-            return;
-        }
-
-        if (!$product->isHandleStockInVariants()) {
-            if (is_array($quantity)) {
-                $compareQuantity = array_sum($quantity);
-            } else {
-                $compareQuantity = $quantity;
+        if ($cartProduct->isHandleStockInVariants()) {
+            foreach ($cartProduct->getBeVariants() as $cartProductBeVariant) {
+                $this->checkStockForBeVariant($cartProductBeVariant, $cartProduct);
             }
-            if (($mode === 'add') && $cart->getProductById($cartProduct->getId())) {
-                $compareQuantity += $cart->getProductById($cartProduct->getId())->getQuantity();
-            }
-
-            if ($compareQuantity > $product->getStock()) {
-                $this->falseAvailability($event);
-            }
-
-            return;
-        }
-
-        $compareQuantity = (int)$quantity;
-
-        foreach ($cartProduct->getBeVariants() as $beVariant) {
-            if (
-                $mode === 'add' &&
-                $cart->getProductById($cartProduct->getId()) &&
-                $cart->getProductById($cartProduct->getId())->getBeVariantById($beVariant->getId())
-            ) {
-                $compareQuantity += (int)$cart->getProductById($cartProduct->getId())->getBeVariantById($beVariant->getId())->getQuantity();
-            }
-
-            if ($compareQuantity > $beVariant->getStock()) {
-                $this->falseAvailability($event);
-            }
+        } else {
+            $this->checkStockForProduct($cartProduct);
         }
     }
 
-    /**
-     * @param CheckProductAvailabilityEvent $event
-     */
-    protected function falseAvailability(CheckProductAvailabilityEvent $event): void
+    private function checkStockForProduct(CartProduct $cartProduct): void
     {
-        $event->setAvailable(false);
-        $event->addMessage(
+        $cart = $this->event->getCart();
+        $mode = $this->event->getMode();
+
+        $quantity = $this->event->getQuantity();
+        if (is_array($quantity)) {
+            $compareQuantity = array_sum($quantity);
+        } else {
+            $compareQuantity = (int)$quantity;
+        }
+
+        if (($mode === 'add') && $cart->getProductById($cartProduct->getId())) {
+            $compareQuantity += $cart->getProductById($cartProduct->getId())->getQuantity();
+        }
+
+        $currentStock = $this->productRepository->getStock($cartProduct->getProductId());
+
+        if ($compareQuantity > $currentStock) {
+            $this->falseAvailability();
+        }
+    }
+
+    public function checkStockForBeVariant(CartProductBeVariant $cartProductBeVariant, CartProduct $cartProduct): void
+    {
+        $cart = $this->event->getCart();
+        $mode = $this->event->getMode();
+
+        $quantity = $this->event->getQuantity();
+        if (is_array($quantity)) {
+            $compareQuantity = array_sum($quantity);
+        } else {
+            $compareQuantity = (int)$quantity;
+        }
+
+        if (
+            $mode === 'add' &&
+            $cart->getProductById($cartProduct->getId()) &&
+            $cart->getProductById($cartProduct->getId())->getBeVariantById($cartProductBeVariant->getId())
+        ) {
+            $compareQuantity += $cart->getProductById($cartProduct->getId())->getBeVariantById($cartProductBeVariant->getId())->getQuantity();
+        }
+
+        $currentStock = $this->beVariantRepository->getStock((int)$cartProductBeVariant->getId());
+
+        if ($compareQuantity > $currentStock) {
+            $this->falseAvailability();
+        }
+    }
+
+    private function falseAvailability(): void
+    {
+        $this->event->setAvailable(false);
+        $this->event->addMessage(
             GeneralUtility::makeInstance(
                 FlashMessage::class,
                 LocalizationUtility::translate(

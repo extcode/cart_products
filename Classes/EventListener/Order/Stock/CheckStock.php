@@ -43,7 +43,7 @@ class CheckStock
 
             if ($cartProduct->isHandleStockInVariants()) {
                 foreach ($cartProduct->getBeVariants() as $cartProductBeVariant) {
-                    $this->checkStockForBackendVariant($cartProductBeVariant, $cartProduct);
+                    $this->checkStockForBeVariant($cartProductBeVariant, $cartProduct);
                 }
             } else {
                 $this->checkStockForProduct($cartProduct);
@@ -60,7 +60,7 @@ class CheckStock
         }
     }
 
-    public function checkStockForBackendVariant(CartProductBeVariant $cartProductBeVariant, CartProduct $cartProduct): void
+    public function checkStockForBeVariant(CartProductBeVariant $cartProductBeVariant, CartProduct $cartProduct): void
     {
         $quantityInStock = $this->beVariantRepository->getStock((int)$cartProductBeVariant->getId());
 

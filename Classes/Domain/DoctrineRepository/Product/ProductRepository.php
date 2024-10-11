@@ -10,6 +10,7 @@ namespace Extcode\CartProducts\Domain\DoctrineRepository\Product;
  */
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 class ProductRepository
 {
@@ -19,16 +20,44 @@ class ProductRepository
 
     public function getStock(int $uid): int
     {
-        $queryBuilder = $this
-            ->connectionPool
-            ->getConnectionForTable('tx_cartproducts_domain_model_product_product')
-            ->createQueryBuilder();
+        $queryBuilder = $this->getQueryBuilder();
 
         return $queryBuilder
             ->select('stock')
             ->from('tx_cartproducts_domain_model_product_product')
             ->where(
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
-            )->executeQuery()->fetchOne();
+            )
+            ->orWhere(
+                $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
+            )
+            ->executeQuery()
+            ->fetchOne();
+    }
+
+    public function addQuantityToStock(int $uid, int $quantity)
+    {
+        $currentStock = $this->getStock($uid);
+
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->update('tx_cartproducts_domain_model_product_product')
+            ->where(
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
+            )
+            ->orWhere(
+                $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
+            )
+            ->set('stock', $currentStock + $quantity)
+            ->executeStatement();
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this
+            ->connectionPool
+            ->getConnectionForTable('tx_cartproducts_domain_model_product_product')
+            ->createQueryBuilder();
     }
 }
