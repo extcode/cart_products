@@ -89,10 +89,10 @@
             <trans-unit id="tx_cartproducts.plugin.list_products.orderDirection">
                 <source>Sort direction</source>
             </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.orderDirection.asc">
+            <trans-unit id="tx_cartproducts.plugin.list_products.orderDirection.asc">
                 <source>Ascending</source>
             </trans-unit>
-            <trans-unit id="tx_cartproducts.plugin.products.orderDirection.desc">
+            <trans-unit id="tx_cartproducts.plugin.list_products.orderDirection.desc">
                 <source>Descending</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts.plugin.list_products.categories">
