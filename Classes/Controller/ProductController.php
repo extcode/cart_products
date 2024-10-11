@@ -183,7 +183,6 @@ class ProductController extends ActionController
 
     public function showAction(Product $product = null): ResponseInterface
     {
-        $this->view->assign('user', $GLOBALS['TSFE']->fe_user->user);
         $this->view->assign('product', $product);
         $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
 

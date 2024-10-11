@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 ================================================
 Breaking: #186 - Changed key for image reference
