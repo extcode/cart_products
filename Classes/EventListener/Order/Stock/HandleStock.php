@@ -45,13 +45,11 @@ class HandleStock
 
     private function handleStockInProduct(CartProduct $cartProduct): void
     {
-        $quantityToAdd = -1 * $cartProduct->getQuantity();
-        $this->productRepository->addQuantityToStock($cartProduct->getProductId(), $quantityToAdd);
+        $this->productRepository->subtractQuantityFromStock($cartProduct->getProductId(), $cartProduct->getQuantity());
     }
 
     private function handleStockInBeVariant(CartProductBeVariant $cartProductBeVariant): void
     {
-        $quantityToAdd = -1 * $cartProductBeVariant->getQuantity();
-        $this->beVariantRepository->addQuantityToStock((int)$cartProductBeVariant->getId(), $quantityToAdd);
+        $this->beVariantRepository->subtractQuantityFromStock((int)$cartProductBeVariant->getId(), $cartProductBeVariant->getQuantity());
     }
 }

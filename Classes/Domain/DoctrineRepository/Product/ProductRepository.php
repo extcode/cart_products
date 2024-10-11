@@ -53,6 +53,12 @@ class ProductRepository
             ->executeStatement();
     }
 
+    public function subtractQuantityFromStock(int $uid, int $quantity): void
+    {
+        $quantity = -1 * $quantity;
+        $this->addQuantityToStock($uid, $quantity);
+    }
+
     private function getQueryBuilder(): QueryBuilder
     {
         return $this
