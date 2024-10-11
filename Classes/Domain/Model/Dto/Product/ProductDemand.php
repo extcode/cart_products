@@ -13,172 +13,81 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class ProductDemand extends AbstractEntity
 {
-    /**
-     * Sku
-     *
-     * @var string
-     */
-    protected $sku;
+    protected ?string $sku = null;
 
-    /**
-     * Title
-     *
-     * @var string
-     */
-    protected $title;
+    protected ?string $title = null;
 
-    /**
-     * Categories
-     *
-     * @var array
-     */
-    protected $categories;
+    protected array $categories = [];
 
-    /**
-     * Order
-     *
-     * @var string
-     */
-    protected $order;
+    protected ?string $order = null;
 
-    /**
-     * Action
-     *
-     * @var string
-     */
-    protected $action;
+    protected ?string $action = null;
 
-    /**
-     * Class
-     *
-     * @var string
-     */
-    protected $class;
+    protected ?string $class = null;
 
-    /**
-     * Returns sku
-     *
-     * @return mixed
-     */
-    public function getSku()
+    public function getSku(): ?string
     {
         return $this->sku;
     }
 
-    /**
-     * Sets sku
-     *
-     * @param mixed $sku
-     */
-    public function setSku($sku)
+    public function setSku(string $sku): void
     {
         $this->sku = $sku;
     }
 
-    /**
-     * Returns title
-     *
-     * @return mixed
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * Sets title
-     *
-     * @param mixed $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCategories()
+    public function getCategories(): array
     {
         return $this->categories;
     }
 
-    /**
-     * @param mixed $categories
-     */
-    public function setCategories($categories)
+    public function setCategories(array $categories): void
     {
         $this->categories = $categories;
     }
 
-    /**
-     * Returns order
-     *
-     * @return string
-     */
-    public function getOrder()
+    public function getOrder(): ?string
     {
         return $this->order;
     }
 
-    /**
-     * Sets order
-     *
-     * @param string $order
-     */
-    public function setOrder($order)
+    public function setOrder(string $order): void
     {
         $this->order = $order;
     }
 
-    /**
-     * Returns action
-     *
-     * @return string
-     */
-    public function getAction()
+    public function getAction(): ?string
     {
         return $this->action;
     }
 
-    /**
-     * Sets action
-     *
-     * @param string $action
-     */
-    public function setAction($action)
+    public function setAction(string $action): void
     {
         $this->action = $action;
     }
-    /**
-     * Returns class
-     *
-     * @return string
-     */
-    public function getClass()
+
+    public function getClass(): ?string
     {
         return $this->class;
     }
 
-    /**
-     * Sets class
-     *
-     * @param string $class
-     */
-    public function setClass($class)
+    public function setClass(string $class): void
     {
         $this->class = $class;
     }
 
-    /**
-     * Sets action and class
-     *
-     * @param string $action
-     * @param string $controller
-     */
-    public function setActionAndClass($action, $controller)
+    public function setActionAndClass(string $action, string $class): void
     {
         $this->action = $action;
-        $this->class = $controller;
+        $this->class = $class;
     }
 }

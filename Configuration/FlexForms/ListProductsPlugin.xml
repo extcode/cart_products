@@ -1,0 +1,121 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <sheetTitle>Options</sheetTitle>
+                <type>array</type>
+                <el>
+                    <settings.templateLayout>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:flexforms_template.templateLayout</label>
+                        <config>
+                            <type>select</type>
+                            <itemsProcFunc>Extcode\Cart\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
+                            <extKey>cart_products</extKey>
+                            <pluginName>ListProducts</pluginName>
+                            <renderType>selectSingle</renderType>
+                        </config>
+                    </settings.templateLayout>
+
+                    <settings.orderBy>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy</label>
+                        <config>
+                            <type>select</type>
+                            <items>
+                                <numIndex index="0">
+                                    <label></label>
+                                    <value></value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy.tstamp</label>
+                                    <value>tstamp</value>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy.sorting</label>
+                                    <value>sorting</value>
+                                </numIndex>
+                                <numIndex index="3">
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy.crdate</label>
+                                    <value>crdate</value>
+                                </numIndex>
+                                <numIndex index="4">
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderBy.title</label>
+                                    <value>title</value>
+                                </numIndex>
+                            </items>
+                            <renderType>selectSingle</renderType>
+                        </config>
+                    </settings.orderBy>
+
+                    <settings.orderDirection>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderDirection</label>
+                        <config>
+                            <type>select</type>
+                            <items>
+                                <numIndex index="0">
+                                    <label></label>
+                                    <value></value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderDirection.asc</label>
+                                    <value>asc</value>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.orderDirection.desc</label>
+                                    <value>desc</value>
+                                </numIndex>
+                            </items>
+                            <renderType>selectSingle</renderType>
+                        </config>
+                    </settings.orderDirection>
+
+                    <settings.showPageUids>
+                        <exclude>1</exclude>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.general.show_pid</label>
+                        <config>
+                            <type>group</type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                            <wizards>
+                                <suggest>
+                                    <type>suggest</type>
+                                </suggest>
+                            </wizards>
+                        </config>
+                    </settings.showPageUids>
+
+                    <settings.categoriesList>
+                        <exclude>1</exclude>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.categories</label>
+                        <config>
+                            <type>select</type>
+                            <autoSizeMax>50</autoSizeMax>
+                            <foreign_table>sys_category</foreign_table>
+                            <foreign_table_where>AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC
+                            </foreign_table_where>
+                            <maxitems>99</maxitems>
+                            <renderType>selectTree</renderType>
+                            <size>10</size>
+                            <treeConfig>
+                                <appearance>
+                                    <expandAll>1</expandAll>
+                                    <showHeader>1</showHeader>
+                                </appearance>
+                                <parentField>parent</parentField>
+                            </treeConfig>
+                        </config>
+                    </settings.categoriesList>
+
+                    <settings.listSubcategories>
+                        <label>LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.plugin.list_products.subcategories</label>
+                        <config>
+                            <type>check</type>
+                        </config>
+                    </settings.listSubcategories>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

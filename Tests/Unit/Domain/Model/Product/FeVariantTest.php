@@ -14,7 +14,7 @@ class FeVariantTest extends UnitTestCase
 
     public function setUp(): void
     {
-        $this->feVariant = new FeVariant;
+        $this->feVariant = new FeVariant();
     }
 
     public function tearDown(): void
@@ -25,9 +25,9 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSkuInitiallyReturnsEmptyString()
+    public function getSkuInitiallyReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->feVariant->getSku()
         );
@@ -36,11 +36,11 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSkuForStringSetsSku()
+    public function setSkuForStringSetsSku(): void
     {
         $this->feVariant->setSku('SKU');
 
-        $this->assertSame(
+        self::assertSame(
             'SKU',
             $this->feVariant->getSku()
         );
@@ -49,9 +49,9 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleInitiallyReturnsEmptyString()
+    public function getTitleInitiallyReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->feVariant->getTitle()
         );
@@ -60,11 +60,11 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->feVariant->setTitle('Title');
 
-        $this->assertSame(
+        self::assertSame(
             'Title',
             $this->feVariant->getTitle()
         );
@@ -73,9 +73,9 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDescriptionInitiallyReturnsEmptyString()
+    public function getDescriptionInitiallyReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->feVariant->getDescription()
         );
@@ -84,11 +84,11 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDescriptionForStringSetsDescription()
+    public function setDescriptionForStringSetsDescription(): void
     {
         $this->feVariant->setDescription('Description');
 
-        $this->assertSame(
+        self::assertSame(
             'Description',
             $this->feVariant->getDescription()
         );
@@ -97,9 +97,9 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getIsRequiredInitiallyReturnsFalse()
+    public function getIsRequiredInitiallyReturnsFalse(): void
     {
-        $this->assertFalse(
+        self::assertFalse(
             $this->feVariant->getIsRequired()
         );
     }
@@ -107,11 +107,11 @@ class FeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setIsRequiredSetsIsRequired()
+    public function setIsRequiredSetsIsRequired(): void
     {
         $this->feVariant->setIsRequired(true);
 
-        $this->assertTrue(
+        self::assertTrue(
             $this->feVariant->getIsRequired()
         );
     }

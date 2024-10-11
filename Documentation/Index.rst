@@ -1,20 +1,26 @@
-.. include:: Includes.txt
+.. include:: Includes.rst.txt
 
 .. _start:
 
-===========================
-EXT: Cart Products
-===========================
+=============
+Cart Products
+=============
+
+Cart Products - extend EXT:cart with products
+=============================================
 
 .. image:: Images/cart_products_logo.png
-   :height: 200
-   :width: 200
+   :height: 100
+   :width: 100
 
 
 .. only:: html
 
-   :Classification:
-      cart
+   :Extension key:
+      cart_products
+
+   :Package name:
+      extcode/cart_products
 
    :Version:
       |release|
@@ -22,35 +28,68 @@ EXT: Cart Products
    :Language:
       en
 
-   :Description:
-      Cart is a small but powerful extension which "solely" adds a shopping cart to your TYPO3 installation.
-      Cart Products provides an own data storage for simple and configurable products. Products can be offered via a list and detail view and can be purchased via cart function of the Cart extension.
-
-   :Keywords:
-      cart, products, configurable products, shopping
-
-   :Autor:
-      Daniel Gohlke
-
-   :E-Mail:
-      ext.cart@extco.de
+   :Author:
+      Daniel Gohlke & Contributors
 
    :License:
-      This document is published under the Open Publication License
-      available from http://www.opencontent.org/openpub/
+      This document is published under the
+      `Open Publication License <https://www.opencontent.org/openpub/>`__.
 
    :Rendered:
-       |today|
+      |today|
 
-   The content of this document is related to TYPO3,
-   a GNU/GPL CMS/Framework available from `www.typo3.org <https://typo3.org/>`_.
+-----
 
-   **Table of Contents**
+*Cart Products* needs to be used together with :t3ext:`cart`.
+
+* EXT:cart itself is only the base for a webshop.
+* EXT:cart_products provides products which can be created in the TYPO3 backend.
+
+  * Those products fit many use cases for "usual products" (no books, no events).
+  * The products can be displayed on the website with a list view and a detail view.
+  * As said does it extend EXT:cart so those products can be purchased with the cart of EXT:cart.
+
+-----
+
+..  card-grid::
+    :columns: 1
+    :columns-md: 2
+    :gap: 4
+    :class: pb-4
+    :card-height: 100
+
+    ..  card:: :ref:`Introduction <introduction>`
+
+        Introduction to the extension cart, general information.
+
+    ..  card:: :ref:`For Administrators <administrator>`
+
+        Install the extension and configure it correctly.
+
+    ..  card:: :ref:`For Editors <editor>`
+
+        Information about how to use this extension in the backend.
+
+    ..  card:: :ref:`For Developers <developer>`
+
+        Information about existing events to extend functionality.
+
+    ..  card:: :ref:`Tutorials <tutorials>`
+
+        Tutorials for a smooth setup of the extension.
+
+    ..  card:: :ref:`Changelog <changelog>`
+
+        Changes of this extension during updates.
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 1
    :titlesonly:
+   :hidden:
 
    Introduction/Index
-   AdministratorManual/Index
+   Administrator/Index
+   Editor/Index
+   Developer/Index
+   Tutorials/Index
    Changelog/Index

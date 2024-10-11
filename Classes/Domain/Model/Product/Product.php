@@ -8,205 +8,80 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
-use Extcode\Cart\Domain\Model\Tag;
+use Extcode\Cart\Domain\Model\Product\AbstractProduct;
+use Extcode\Cart\Domain\Model\Product\CategoryTrait;
+use Extcode\Cart\Domain\Model\Product\FileAndImageTrait;
+use Extcode\Cart\Domain\Model\Product\MeasureTrait;
+use Extcode\Cart\Domain\Model\Product\ServiceAttributeTrait;
+use Extcode\Cart\Domain\Model\Product\TagTrait;
 use Extcode\CartProducts\Domain\Model\Category;
 use Extcode\CartProducts\Domain\Model\TtContent;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Product extends AbstractProduct
 {
+    use CategoryTrait;
+    use FileAndImageTrait;
+    use ProductBackendVariantTrait;
+    use MeasureTrait;
+    use ServiceAttributeTrait;
+    use TagTrait;
+
+    protected string $productType = 'simple';
 
     /**
-     * @var array
+     * @var ObjectStorage<TtContent>
      */
-    protected $measureUnits = [
-        'weight' => [
-            'mg' => 1000,
-            'g' => 1,
-            'kg' => 0.001,
-        ],
-        'volume' => [
-            'ml' => 1000,
-            'cl' => 100,
-            'l' => 1,
-            'cbm' => 0.001,
-        ],
-        'length' => [
-            'mm' => 1000,
-            'cm' => 100,
-            'm' => 1,
-            'km' => 0.001,
-        ],
-        'area' => [
-            'm2' => 1,
-        ]
-    ];
+    #[Lazy]
+    protected ?ObjectStorage $productContent = null;
+
+    protected int $minNumberInOrder = 0;
+
+    protected int $maxNumberInOrder = 0;
+
+    protected bool $isNetPrice = false;
+
+    protected float $price = 0.0;
 
     /**
-     * @var string
-     */
-    protected $productType = 'simple';
-
-    /**
-     * @var ObjectStorage<FileReference>
-     */
-    protected $images;
-
-    /**
-     * @var ObjectStorage<FileReference>
-     */
-    protected $files;
-
-    /**
-     * @var string
-     */
-    protected $teaser = '';
-
-    /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var ObjectStorage<\Extcode\CartProducts\Domain\Model\TtContent>
-     */
-    protected $productContent;
-
-    /**
-     * @var int
-     */
-    protected $minNumberInOrder = 0;
-
-    /**
-     * @var int
-     */
-    protected $maxNumberInOrder = 0;
-
-    /**
-     * @var bool
-     */
-    protected $isNetPrice = false;
-
-    /**
-     * @var float
-     */
-    protected $price = 0.0;
-
-    /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @var ObjectStorage<SpecialPrice>
      */
-    protected $specialPrices;
+    #[Cascade(['value' => 'remove'])]
+    protected ObjectStorage $specialPrices;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @var ObjectStorage<QuantityDiscount>
      */
-    protected $quantityDiscounts;
+    #[Cascade(['value' => 'remove'])]
+    protected ObjectStorage $quantityDiscounts;
+
+    protected int $taxClassId = 1;
 
     /**
-     * @var float
-     */
-    protected $priceMeasure = 0.0;
-
-    /**
-     * @var string
-     */
-    protected $priceMeasureUnit = '';
-
-    /**
-     * @var string
-     */
-    protected $basePriceMeasureUnit = '';
-
-    /**
-     * @var float
-     */
-    protected $serviceAttribute1 = 0.0;
-
-    /**
-     * @var float
-     */
-    protected $serviceAttribute2 = 0.0;
-
-    /**
-     * @var float
-     */
-    protected $serviceAttribute3 = 0.0;
-
-    /**
-     * @var int
-     */
-    protected $taxClassId = 1;
-
-    /**
-     * @var BeVariantAttribute
-     */
-    protected $beVariantAttribute1;
-
-    /**
-     * @var BeVariantAttribute
-     */
-    protected $beVariantAttribute2;
-
-    /**
-     * @var BeVariantAttribute
-     */
-    protected $beVariantAttribute3;
-
-    /**
-     * variants
-     *
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @var ObjectStorage<BeVariant>
-     */
-    protected $beVariants;
-
-    /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @var ObjectStorage<FeVariant>
      */
-    protected $feVariants;
+    #[Cascade(['value' => 'remove'])]
+    protected ObjectStorage $feVariants;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var ObjectStorage<Product>
      */
-    protected $relatedProducts;
+    #[Lazy]
+    protected ?ObjectStorage $relatedProducts = null;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var ObjectStorage<Product>
      */
-    protected $relatedProductsFrom;
+    #[Lazy]
+    protected ?ObjectStorage $relatedProductsFrom = null;
 
-    /**
-     * @var int
-     */
-    protected $stock = 0;
+    protected int $stock = 0;
 
-    /**
-     * @var bool
-     */
-    protected $handleStock = false;
+    protected bool $handleStock = false;
 
-    /**
-     * @var bool
-     */
-    protected $handleStockInVariants = false;
-
-    /**
-     * @var Category
-     */
-    protected $category;
-
-    /**
-     * @var ObjectStorage<Category>
-     */
-    protected $categories;
-
-    /**
-     * @var ObjectStorage<Tag>
-     */
-    protected $tags;
+    protected bool $handleStockInVariants = false;
 
     public function __construct()
     {
@@ -223,53 +98,6 @@ class Product extends AbstractProduct
     public function setProductType(string $productType): void
     {
         $this->productType = $productType;
-    }
-
-    public function getImages(): ?ObjectStorage
-    {
-        return $this->images;
-    }
-
-    public function getFirstImage(): ?FileReference
-    {
-        $images = $this->getImages();
-        if ($images) {
-            $imageArray = $images->toArray();
-            return array_shift($imageArray);
-        }
-
-        return null;
-    }
-
-    /**
-     * @param ObjectStorage<FileReference> $images
-     */
-    public function setImages(ObjectStorage $images)
-    {
-        $this->images = $images;
-    }
-
-    public function getFiles(): ?ObjectStorage
-    {
-        return $this->files;
-    }
-
-    /**
-     * @param ObjectStorage<FileReference> $files
-     */
-    public function setFiles(ObjectStorage $files): void
-    {
-        $this->files = $files;
-    }
-
-    public function getTeaser(): string
-    {
-        return $this->teaser;
-    }
-
-    public function setTeaser(string $teaser): void
-    {
-        $this->teaser = $teaser;
     }
 
     public function getProductContent(): ?ObjectStorage
@@ -293,7 +121,7 @@ class Product extends AbstractProduct
     public function setMinNumberInOrder(int $minNumberInOrder): void
     {
         if ($minNumberInOrder < 0 || $minNumberInOrder > $this->maxNumberInOrder) {
-            throw new \InvalidArgumentException;
+            throw new \InvalidArgumentException();
         }
 
         $this->minNumberInOrder = $minNumberInOrder;
@@ -304,10 +132,10 @@ class Product extends AbstractProduct
         return $this->maxNumberInOrder;
     }
 
-    public function setMaxNumberInOrder(int $maxNumberInOrder)
+    public function setMaxNumberInOrder(int $maxNumberInOrder): void
     {
         if ($maxNumberInOrder < 0 || (($maxNumberInOrder !== 0) && ($maxNumberInOrder < $this->minNumberInOrder))) {
-            throw new \InvalidArgumentException;
+            throw new \InvalidArgumentException();
         }
 
         $this->maxNumberInOrder = $maxNumberInOrder;
@@ -363,14 +191,13 @@ class Product extends AbstractProduct
     {
         $bestSpecialPrice = $this->price;
 
-        if ($this->specialPrices) {
-            foreach ($this->specialPrices as $specialPrice) {
-                if ($specialPrice->getPrice() < $bestSpecialPrice) {
-                    if (!$specialPrice->getFrontendUserGroup() ||
-                        in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
-                    ) {
-                        $bestSpecialPrice = $specialPrice->getPrice();
-                    }
+        foreach ($this->specialPrices as $specialPrice) {
+            if ($specialPrice->getPrice() < $bestSpecialPrice) {
+                if (
+                    !$specialPrice->getFrontendUserGroup() ||
+                    in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
+                ) {
+                    $bestSpecialPrice = $specialPrice->getPrice();
                 }
             }
         }
@@ -440,105 +267,13 @@ class Product extends AbstractProduct
         $this->quantityDiscounts = $quantityDiscounts;
     }
 
-    public function getPriceMeasure(): float
-    {
-        return $this->priceMeasure;
-    }
-
-    public function setPriceMeasure(float $priceMeasure): void
-    {
-        $this->priceMeasure = $priceMeasure;
-    }
-
-    public function getPriceMeasureUnit(): string
-    {
-        return $this->priceMeasureUnit;
-    }
-
-    public function setPriceMeasureUnit(string $priceMeasureUnit): void
-    {
-        $this->priceMeasureUnit = $priceMeasureUnit;
-    }
-
-    public function getBasePriceMeasureUnit(): string
-    {
-        return $this->basePriceMeasureUnit;
-    }
-
-    public function setBasePriceMeasureUnit(string $basePriceMeasureUnit): void
-    {
-        $this->basePriceMeasureUnit = $basePriceMeasureUnit;
-    }
-
-    public function getIsMeasureUnitCompatibility(): bool
-    {
-        foreach ($this->measureUnits as $measureUnit) {
-            if (array_key_exists($this->basePriceMeasureUnit, $measureUnit)
-                && array_key_exists($this->priceMeasureUnit, $measureUnit)
-            ) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function getMeasureUnitFactor(): float
-    {
-        $factor = 1.0;
-
-        foreach ($this->measureUnits as $measureUnit) {
-            if (array_key_exists($this->priceMeasureUnit, $measureUnit)) {
-                $factor = $factor / ($this->priceMeasure / $measureUnit[$this->priceMeasureUnit]);
-            }
-            if (array_key_exists($this->basePriceMeasureUnit, $measureUnit)) {
-                $factor = $factor * (1.0 / $measureUnit[$this->basePriceMeasureUnit]);
-            }
-        }
-
-        return $factor;
-    }
-
-    /**
-     * @return float|bool
-     */
-    public function getCalculatedBasePrice()
+    public function getCalculatedBasePrice(): float
     {
         if ($this->getIsMeasureUnitCompatibility()) {
             return $this->getMinPrice() * $this->getMeasureUnitFactor();
         }
 
-        return false;
-    }
-
-    public function getServiceAttribute1(): float
-    {
-        return $this->serviceAttribute1;
-    }
-
-    public function setServiceAttribute1(float $serviceAttribute1): void
-    {
-        $this->serviceAttribute1 = $serviceAttribute1;
-    }
-
-    public function getServiceAttribute2(): float
-    {
-        return $this->serviceAttribute2;
-    }
-
-    public function setServiceAttribute2(float $serviceAttribute2): void
-    {
-        $this->serviceAttribute2 = $serviceAttribute2;
-    }
-
-    public function getServiceAttribute3(): float
-    {
-        return $this->serviceAttribute3;
-    }
-
-    public function setServiceAttribute3(float $serviceAttribute3): void
-    {
-        $this->serviceAttribute3 = $serviceAttribute3;
+        return 0.0;
     }
 
     public function getTaxClassId(): int
@@ -549,62 +284,6 @@ class Product extends AbstractProduct
     public function setTaxClassId(int $taxClassId): void
     {
         $this->taxClassId = $taxClassId;
-    }
-
-    public function getBeVariantAttribute1(): ?BeVariantAttribute
-    {
-        return $this->beVariantAttribute1;
-    }
-
-    public function setBeVariantAttribute1(BeVariantAttribute $beVariantAttribute1): void
-    {
-        $this->beVariantAttribute1 = $beVariantAttribute1;
-    }
-
-    public function getBeVariantAttribute2(): ?BeVariantAttribute
-    {
-        return $this->beVariantAttribute2;
-    }
-
-    public function setBeVariantAttribute2(BeVariantAttribute $beVariantAttribute2): void
-    {
-        $this->beVariantAttribute2 = $beVariantAttribute2;
-    }
-
-    public function getBeVariantAttribute3(): ?BeVariantAttribute
-    {
-        return $this->beVariantAttribute3;
-    }
-
-    public function setBeVariantAttribute3(BeVariantAttribute $beVariantAttribute3): void
-    {
-        $this->beVariantAttribute3 = $beVariantAttribute3;
-    }
-
-    public function addBeVariant(BeVariant $beVariant): void
-    {
-        $this->beVariants->attach($beVariant);
-    }
-
-    public function removeBeVariant(BeVariant $beVariant): void
-    {
-        $this->beVariants->detach($beVariant);
-    }
-
-    /**
-     * @return ObjectStorage<BeVariant>
-     */
-    public function getBeVariants(): ObjectStorage
-    {
-        return $this->beVariants;
-    }
-
-    /**
-     * @param ObjectStorage<BeVariant> $beVariants
-     */
-    public function setBeVariants(ObjectStorage $beVariants): void
-    {
-        $this->beVariants = $beVariants;
     }
 
     public function addFeVariant(FeVariant $feVariant): void
@@ -694,8 +373,8 @@ class Product extends AbstractProduct
         if ($this->handleStockInVariants) {
             $count = 0;
             if (count($this->beVariants)) {
-                foreach ($this->beVariants as $variant) {
-                    $count += $variant->getStock();
+                foreach ($this->beVariants as $beVariant) {
+                    $count += $beVariant->getStock();
                 }
             }
             return $count;
@@ -749,7 +428,7 @@ class Product extends AbstractProduct
             return true;
         }
         if (!$this->handleStockInVariants) {
-            return boolval($this->stock);
+            return (bool)($this->stock);
         }
         if (count($this->beVariants)) {
             foreach ($this->beVariants as $beVariant) {
@@ -762,63 +441,23 @@ class Product extends AbstractProduct
         return false;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(Category $category): void
-    {
-        $this->category = $category;
-    }
-
-    public function addCategory(Category $category): void
-    {
-        $this->categories->attach($category);
-    }
-
-    public function removeCategory(Category $category): void
-    {
-        $this->categories->detach($category);
-    }
-
-    /**
-     * @return ObjectStorage<Category>
-     */
-    public function getCategories(): ?ObjectStorage
-    {
-        return $this->categories;
-    }
-
     public function getFirstCategory(): ?Category
     {
         $categories = $this->getCategories();
-        if (!is_null($categories)) {
-            $categories->rewind();
-            return $categories->current();
-        }
-
-        return null;
-    }
-
-    /**
-     * @param ObjectStorage<Category> $categories
-     */
-    public function setCategories(ObjectStorage $categories): void
-    {
-        $this->categories = $categories;
+        $categories->rewind();
+        return $categories->current();
     }
 
     public function getMinPrice(): float
     {
         $minPrice = null;
-        if (count($this->getBeVariants())) {
-            foreach ($this->getBeVariants() as $variant) {
+        if (count($this->beVariants)) {
+            foreach ($this->beVariants as $beVariant) {
                 if (!isset($minPrice)) {
-                    $minPrice = $variant->getBestPriceCalculated();
+                    $minPrice = $beVariant->getBestPriceCalculated();
                 } else {
-                    if ($variant->getBestPriceCalculated() < $minPrice) {
-                        $minPrice = $variant->getBestPriceCalculated();
+                    if ($beVariant->getBestPriceCalculated() < $minPrice) {
+                        $minPrice = $beVariant->getBestPriceCalculated();
                     }
                 }
             }
@@ -827,41 +466,5 @@ class Product extends AbstractProduct
         }
 
         return $minPrice;
-    }
-
-    public function getMeasureUnits(): array
-    {
-        return $this->measureUnits;
-    }
-
-    public function setMeasureUnits(array $measureUnits): void
-    {
-        $this->measureUnits = $measureUnits;
-    }
-
-    public function addTag(Tag $tag): void
-    {
-        $this->tags->attach($tag);
-    }
-
-    public function removeTag(Tag $tagToRemove): void
-    {
-        $this->tags->detach($tagToRemove);
-    }
-
-    /**
-     * @return ObjectStorage<Tag>
-     */
-    public function getTags(): ?ObjectStorage
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param  ObjectStorage<Tag> $tags
-     */
-    public function setTags(ObjectStorage $tags): void
-    {
-        $this->tags = $tags;
     }
 }

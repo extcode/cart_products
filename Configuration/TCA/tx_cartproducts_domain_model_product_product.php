@@ -1,9 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
-
-use TYPO3\CMS\Core\Resource\File;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+defined('TYPO3') or die();
 
 $_LLL_general = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf';
 $_LLL_tca = 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf';
@@ -19,7 +16,6 @@ return [
         'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
 
         'sortby' => 'sorting',
 
@@ -35,7 +31,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'sku,title,teaser,description,price,',
-        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/tx_cartproducts_domain_model_product_product.svg'
+        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/tx_cartproducts_domain_model_product_product.svg',
     ],
     'types' => [
         '1' => [
@@ -66,12 +62,12 @@ return [
                     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access,
                         --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.visibility;hiddenonly,
                         --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.access;access,
-            '
+            ',
         ],
     ],
     'palettes' => [
         '1' => [
-            'showitem' => ''
+            'showitem' => '',
         ],
         'hiddenonly' => [
             'showitem' => 'hidden;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden_formlabel',
@@ -81,23 +77,23 @@ return [
         ],
         'be_variant_attributes' => [
             'showitem' => 'be_variant_attribute1, be_variant_attribute2, be_variant_attribute3, --linebreak--, be_variants',
-            'canNotCollapse' => 1
+            'canNotCollapse' => 1,
         ],
         'minmax' => [
             'showitem' => 'min_number_in_order, max_number_in_order',
-            'canNotCollapse' => 1
+            'canNotCollapse' => 1,
         ],
         'prices' => [
             'showitem' => 'is_net_price, --linebreak--, price, tax_class_id, --linebreak--, special_prices, quantity_discounts',
-            'canNotCollapse' => 1
+            'canNotCollapse' => 1,
         ],
         'measures' => [
             'showitem' => 'price_measure, price_measure_unit, base_price_measure_unit',
-            'canNotCollapse' => 1
+            'canNotCollapse' => 1,
         ],
         'service_attributes' => [
             'showitem' => 'service_attribute1, service_attribute2, service_attribute3',
-            'canNotCollapse' => 1
+            'canNotCollapse' => 1,
         ],
     ],
     'columns' => [
@@ -105,19 +101,7 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.language',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        $_LLL_general . ':LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ],
-                ],
-                'default' => 0,
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -126,7 +110,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_product',
                 'foreign_table_where' => 'AND tx_cartproducts_domain_model_product_product.pid=###CURRENT_PID### AND tx_cartproducts_domain_model_product_product.sys_language_uid IN (-1,0)',
@@ -144,7 +128,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => 1,
@@ -157,14 +141,12 @@ return [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 13,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
             ],
         ],
@@ -172,14 +154,12 @@ return [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 13,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
             ],
         ],
@@ -191,10 +171,10 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.product_type.simple', 'simple'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.product_type.configurable', 'configurable'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.product_type.virtual', 'virtual'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.product_type.downloadable', 'downloadable'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.product_type.simple', 'value' => 'simple'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.product_type.configurable', 'value' => 'configurable'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.product_type.virtual', 'value' => 'virtual'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.product_type.downloadable', 'value' => 'downloadable'],
                 ],
                 'default' => 'simple',
                 'size' => 1,
@@ -211,7 +191,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,trim'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
 
@@ -221,7 +202,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,trim'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
 
@@ -265,20 +247,18 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.min_number_in_order',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'int'
-            ]
+            ],
         ],
 
         'max_number_in_order' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.max_number_in_order',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'int'
-            ]
+            ],
         ],
 
         'is_net_price' => [
@@ -293,11 +273,12 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.price',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'required,double2',
                 'default' => '0.00',
-            ]
+                'required' => true,
+                'format' => 'decimal',
+            ],
         ],
 
         'special_prices' => [
@@ -315,7 +296,7 @@ return [
                     'levelLinksPosition' => 'top',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
+                    'showAllLocalizationLink' => 1,
                 ],
             ],
         ],
@@ -335,7 +316,7 @@ return [
                     'levelLinksPosition' => 'top',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
+                    'showAllLocalizationLink' => 1,
                 ],
             ],
         ],
@@ -344,11 +325,11 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.price_measure',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2',
                 'default' => '0.00',
-            ]
+                'format' => 'decimal',
+            ],
         ],
 
         'price_measure_unit' => [
@@ -358,26 +339,26 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.no_measuring_unit', 0],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.weight', '--div--'],
-                    ['mg', 'mg'],
-                    ['g', 'g'],
-                    ['kg', 'kg'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.volume', '--div--'],
-                    ['ml', 'ml'],
-                    ['cl', 'cl'],
-                    ['l', 'l'],
-                    ['cbm', 'cbm'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.length', '--div--'],
-                    ['cm', 'cm'],
-                    ['m', 'm'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.area', '--div--'],
-                    ['m²', 'm2'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.no_measuring_unit', 'value' => 0],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.weight', 'value' => '--div--'],
+                    ['label' => 'mg', 'value' => 'mg'],
+                    ['label' => 'g', 'value' => 'g'],
+                    ['label' => 'kg', 'value' => 'kg'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.volume', 'value' => '--div--'],
+                    ['label' => 'ml', 'value' => 'ml'],
+                    ['label' => 'cl', 'value' => 'cl'],
+                    ['label' => 'l', 'value' => 'l'],
+                    ['label' => 'cbm', 'value' => 'cbm'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.length', 'value' => '--div--'],
+                    ['label' => 'cm', 'value' => 'cm'],
+                    ['label' => 'm', 'value' => 'm'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.area', 'value' => '--div--'],
+                    ['label' => 'm²', 'value' => 'm2'],
                 ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-            ]
+            ],
         ],
 
         'base_price_measure_unit' => [
@@ -387,57 +368,60 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.no_measuring_unit', 0],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.weight', '--div--'],
-                    ['mg', 'mg'],
-                    ['g', 'g'],
-                    ['kg', 'kg'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.volume', '--div--'],
-                    ['ml', 'ml'],
-                    ['cl', 'cl'],
-                    ['l', 'l'],
-                    ['cbm', 'cbm'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.length', '--div--'],
-                    ['cm', 'cm'],
-                    ['m', 'm'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.area', '--div--'],
-                    ['m²', 'm2'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.no_measuring_unit', 'value' => 0],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.weight', 'value' => '--div--'],
+                    ['label' => 'mg', 'value' => 'mg'],
+                    ['label' => 'g', 'value' => 'g'],
+                    ['label' => 'kg', 'value' => 'kg'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.volume', 'value' => '--div--'],
+                    ['label' => 'ml', 'value' => 'ml'],
+                    ['label' => 'cl', 'value' => 'cl'],
+                    ['label' => 'l', 'value' => 'l'],
+                    ['label' => 'cbm', 'value' => 'cbm'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.length', 'value' => '--div--'],
+                    ['label' => 'cm', 'value' => 'cm'],
+                    ['label' => 'm', 'value' => 'm'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.area', 'value' => '--div--'],
+                    ['label' => 'm²', 'value' => 'm2'],
                 ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-            ]
+            ],
         ],
 
         'service_attribute1' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.service_attribute1',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2,required',
                 'default' => '0.00',
-            ]
+                'required' => true,
+                'format' => 'decimal',
+            ],
         ],
         'service_attribute2' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.service_attribute2',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2,required',
                 'default' => '0.00',
-            ]
+                'required' => true,
+                'format' => 'decimal',
+            ],
         ],
         'service_attribute3' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.service_attribute3',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2,required',
                 'default' => '0.00',
-            ]
+                'required' => true,
+                'format' => 'decimal',
+            ],
         ],
 
         'tax_class_id' => [
@@ -447,9 +431,9 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$_LLL_cart . ':tx_cart.tax_class_id.1', 1],
-                    [$_LLL_cart . ':tx_cart.tax_class_id.2', 2],
-                    [$_LLL_cart . ':tx_cart.tax_class_id.3', 3],
+                    ['label' => $_LLL_cart . ':tx_cart.tax_class_id.1', 'value' => 1],
+                    ['label' => $_LLL_cart . ':tx_cart.tax_class_id.2', 'value' => 2],
+                    ['label' => $_LLL_cart . ':tx_cart.tax_class_id.3', 'value' => 3],
                 ],
                 'size' => 1,
                 'minitems' => 1,
@@ -465,7 +449,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattribute',
                 'foreign_table_where' => ' AND tx_cartproducts_domain_model_product_bevariantattribute.pid=###CURRENT_PID### ORDER BY tx_cartproducts_domain_model_product_bevariantattribute.title ',
@@ -485,7 +469,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattribute',
                 'foreign_table_where' => ' AND tx_cartproducts_domain_model_product_bevariantattribute.pid=###CURRENT_PID### ORDER BY tx_cartproducts_domain_model_product_bevariantattribute.title ',
@@ -505,7 +489,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattribute',
                 'foreign_table_where' => ' AND tx_cartproducts_domain_model_product_bevariantattribute.pid=###CURRENT_PID### ORDER BY tx_cartproducts_domain_model_product_bevariantattribute.title ',
@@ -541,7 +525,7 @@ return [
                         'hide' => true,
                         'delete' => true,
                         'localize' => true,
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -571,7 +555,7 @@ return [
                         'hide' => true,
                         'delete' => true,
                         'localize' => true,
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -581,7 +565,6 @@ return [
             'label' => $_LLL . 'tx_cartproducts_domain_model_product_product.related_products',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_cartproducts_domain_model_product_product',
                 'foreign_table' => 'tx_cartproducts_domain_model_product_product',
                 'MM_opposite_field' => 'related_products_from',
@@ -594,7 +577,7 @@ return [
                         'searchWholePhrase' => true,
                     ],
                 ],
-            ]
+            ],
         ],
 
         'related_products_from' => [
@@ -602,136 +585,51 @@ return [
             'label' => $_LLL . 'tx_cartproducts_domain_model_product_product.related_products_from',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'foreign_table' => 'tx_cartproducts_domain_model_product_product',
                 'allowed' => 'tx_cartproducts_domain_model_product_product',
                 'size' => 5,
                 'maxitems' => 100,
                 'MM' => 'tx_cartproducts_domain_model_product_product_related_mm',
                 'readOnly' => 1,
-            ]
+            ],
         ],
 
         'images' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.images',
-            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
-                'images',
-                [
-                    'appearance' => [
-                        'createNewRelationLinkTitle' => $_LLL_ttc . ':images.addFileReference',
-                        'showPossibleLocalizationRecords' => true,
-                        'showRemovedLocalizationRecords' => true,
-                        'showAllLocalizationLink' => true,
-                        'showSynchronizationLink' => true,
-                    ],
-                    'foreign_match_fields' => [
-                        'fieldname' => 'image',
-                        'tablenames' => 'tx_cartproducts_domain_model_product_product',
-                        'table_local' => 'sys_file',
-                    ],
-                    // custom configuration for displaying fields in the overlay/reference table
-                    // to use the imageoverlayPalette instead of the basicoverlayPalette
-                    'overrideChildTca' => [
-                        'types' => [
-                            '0' => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_TEXT => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_AUDIO => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_VIDEO => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_APPLICATION => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                        ],
-                    ],
-                    'minitems' => 0,
-                    'maxitems' => 99,
+            'config' => [
+                'type' => 'file',
+                'appearance' => [
+                    'createNewRelationLinkTitle' => $_LLL_ttc . ':images.addFileReference',
+                    'showPossibleLocalizationRecords' => true,
+                    'showRemovedLocalizationRecords' => true,
+                    'showAllLocalizationLink' => true,
+                    'showSynchronizationLink' => true,
                 ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+                'allowed' => 'common-image-types',
+            ],
         ],
 
         'files' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.files',
-            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
-                'files',
-                [
-                    'appearance' => [
-                        'createNewRelationLinkTitle' => $_LLL_ttc . ':images.addFileReference',
-                        'showPossibleLocalizationRecords' => true,
-                        'showRemovedLocalizationRecords' => true,
-                        'showAllLocalizationLink' => true,
-                        'showSynchronizationLink' => true,
-                    ],
-                    'foreign_match_fields' => [
-                        'fieldname' => 'files',
-                        'tablenames' => 'tx_cartproducts_domain_model_product_product',
-                        'table_local' => 'sys_file',
-                    ],
-                    // custom configuration for displaying fields in the overlay/reference table
-                    // to use the imageoverlayPalette instead of the basicoverlayPalette
-                    'overrideChildTca' => [
-                        'types' => [
-                            '0' => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_TEXT => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_AUDIO => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_VIDEO => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            File::FILETYPE_APPLICATION => [
-                                'showitem' => '
-                                --palette--;' . $_LLL_tca . ':sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                        ],
-                    ],
-                    'minitems' => 0,
-                    'maxitems' => 99,
+            'config' => [
+                'type' => 'file',
+                'appearance' => [
+                    'createNewRelationLinkTitle' => $_LLL_ttc . ':media.addFileReference',
+                    'showPossibleLocalizationRecords' => true,
+                    'showRemovedLocalizationRecords' => true,
+                    'showAllLocalizationLink' => true,
+                    'showSynchronizationLink' => true,
                 ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'] . ', pdf'
-            ),
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+                'allowed' => 'common-media-types',
+            ],
         ],
 
         'product_content' => [
@@ -747,7 +645,6 @@ return [
                 'appearance' => [
                     'levelLinksPosition' => 'top',
                     'showPossibleLocalizationRecords' => true,
-                    'showRemovedLocalizationRecords' => true,
                     'showAllLocalizationLink' => true,
                     'showSynchronizationLink' => true,
                     'enabledControls' => [
@@ -758,12 +655,12 @@ return [
                         'hide' => true,
                         'delete' => true,
                         'localize' => true,
-                    ]
+                    ],
                 ],
                 'inline' => [
                     'inlineNewButtonStyle' => 'display: inline-block;',
                 ],
-            ]
+            ],
         ],
 
         'handle_stock' => [
@@ -782,7 +679,7 @@ return [
                 'AND' => [
                     'FIELD:product_type:=:configurable',
                     'FIELD:handle_stock:=:1',
-                ]
+                ],
             ],
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.handle_stock_in_variants',
             'config' => [
@@ -798,17 +695,31 @@ return [
                 'AND' => [
                     'FIELD:handle_stock:=:1',
                     'FIELD:handle_stock_in_variants:=:0',
-                ]
+                ],
             ],
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.stock',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'int',
                 'default' => 0,
             ],
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
+        ],
+
+        'category' => [
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.category',
+            'config' => [
+                'type' => 'category',
+                'relationship' => 'oneToOne',
+            ],
+        ],
+
+        'categories' => [
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.categories',
+            'config' => [
+                'type' => 'category',
+            ],
         ],
 
         'tags' => [
@@ -816,7 +727,6 @@ return [
             'label' => $_LLL_cart . ':tx_cart_domain_model_tag',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_cart_domain_model_tag',
                 'foreign_table' => 'tx_cart_domain_model_tag',
                 'size' => 5,

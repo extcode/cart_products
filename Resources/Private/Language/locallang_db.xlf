@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z" product-name="cart_products">
+    <file source-language="en" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z"
+          product-name="cart_products">
         <header/>
         <body>
 
             <trans-unit id="tx_cartproducts.typoscript.default_configuration">
                 <source>Shopping Cart - Example Configuration</source>
+            </trans-unit>
+
+            <trans-unit id="tx_cart_domain_model_order_product.product_type.cart_products">
+                <source>Cart: Products</source>
             </trans-unit>
 
             <trans-unit id="tx_cartproducts.flexform.productId">
@@ -342,10 +347,10 @@
                 <source>Cart: Product Category Image</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_category.cart_product_list_pid">
-                <source>Cart: Page where Products of this category are listed.</source>
+                <source>Cart: Page for the list view of Products of this category.</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_category.cart_product_show_pid">
-                <source>Cart: Page where Products of this category are shown.</source>
+                <source>Cart: Page for the detail view of Products of this category.</source>
             </trans-unit>
 
         </body>

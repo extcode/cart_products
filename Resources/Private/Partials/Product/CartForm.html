@@ -2,6 +2,8 @@
       xmlns:cartproducts="http://typo3.org/ns/Extcode/CartProducts/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
+<f:asset.script identifier="add-to-cart" src="EXT:cart/Resources/Public/JavaScript/add_to_cart.js" />
+
 <div class="cart_form">
     <f:form id="product-{product.uid}"
             class="add-to-cart-form"
@@ -11,13 +13,14 @@
             controller="Cart\Product"
             action="add"
             method="post"
-            pageType="{f:if(condition:'{settings.addToCartByAjax}', then:'{settings.addToCartByAjax}', else:'')}"
+            pageType="{settings.addToCartByAjax}"
             additionalAttributes="{data-ajax: '{f:if(condition: \'{settings.addToCartByAjax}\', then: \'1\', else: \'0\')}', data-type: 'slot', data-id: '{slot.uid}'}">
         <input type="hidden" name="tx_cart_cart[productType]" value="CartProducts">
         <input type="hidden" name="tx_cart_cart[product]" value="{product.uid}">
 
-        <input class="form-control" type="text" value="1" name="tx_cart_cart[quantity]">
+        <input class="form-control" type="number" value="1" name="tx_cart_cart[quantity]">
         <f:if condition="{product.beVariants}">
+            <f:asset.script identifier="change-be-variant" src="EXT:cart/Resources/Public/JavaScript/change_be_variant.js" />
             <cartproducts:form.variantSelect
                     id="be-variants-select"
                     class="form-control"
@@ -51,4 +54,5 @@
         </div>
     </f:form>
 </div>
+
 </html>

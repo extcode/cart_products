@@ -7,6 +7,40 @@ services:
   Extcode\CartProducts\:
     resource: '../Classes/*'
 
+  Extcode\CartProducts\EventListener\Create\CheckRequest:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--create--check-request'
+        event: Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent
+
+  Extcode\CartProducts\EventListener\Create\LoadProduct:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--create--load-product'
+        event: Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent
+        after: 'cart-products--create--check-request'
+
+  Extcode\CartProducts\EventListener\Create\CreateCartFrontendVariants:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--create--create-cart-frontend-variants'
+        event: Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent
+        after: 'cart-products--create--load-product'
+
+  Extcode\CartProducts\EventListener\Create\CreateCartProduct:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--create--create-cart-product'
+        event: Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent
+        after: 'cart-products--create--create-cart-frontend-variants'
+
+  Extcode\CartProducts\EventListener\Create\CreateCartBackendVariants:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--create--create-cart-backend-variants'
+        event: Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent
+        after: 'cart-products--create--create-cart-product'
+
   Extcode\CartProducts\EventListener\Order\Stock\HandleStock:
     tags:
       - name: event.listener
@@ -31,6 +65,16 @@ services:
       - name: event.listener
         identifier: 'cart-products--check-product-availability'
         event: Extcode\Cart\Event\CheckProductAvailabilityEvent
+
+  Extcode\CartProducts\EventListener\Order\Stock\CheckStock:
+    tags:
+      - name: event.listener
+        identifier: 'cart-products--order--stock-check-stock'
+        event: Extcode\Cart\Event\ProcessOrderCheckStockEvent
+
+  Extcode\CartProducts\Reaction\UpdateStockReaction:
+    tags: ['reactions.reaction']
+    public: true
 
   Extcode\CartProducts\Updates\SlugUpdater:
     public: true

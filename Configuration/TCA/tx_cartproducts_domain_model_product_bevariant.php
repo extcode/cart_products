@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 $_LLL_general = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf';
 $_LLL = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf';
@@ -13,7 +13,6 @@ return [
         'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
 
         'versioningWS' => true,
 
@@ -28,7 +27,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title',
-        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/BeVariant.png'
+        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/BeVariant.png',
     ],
     'types' => [
         '1' => [
@@ -43,12 +42,12 @@ return [
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access,
                     --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.visibility;hiddenonly,
                     --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.access;access,
-            '
+            ',
         ],
     ],
     'palettes' => [
         '1' => [
-            'showitem' => ''
+            'showitem' => '',
         ],
         'hiddenonly' => [
             'showitem' => 'hidden;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden_formlabel',
@@ -58,7 +57,7 @@ return [
         ],
         'variants' => [
             'showitem' => 'be_variant_attribute_option1, be_variant_attribute_option2, be_variant_attribute_option3',
-            'canNotCollapse' => 1
+            'canNotCollapse' => 1,
         ],
         'prices' => ['showitem' => 'price, price_calc_method, --linebreak--, special_prices', 'canNotCollapse' => 1],
         'measure' => ['showitem' => 'price_measure, price_measure_unit', 'canNotCollapse' => 1],
@@ -68,19 +67,7 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.language',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        $_LLL_general . ':LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ],
-                ],
-                'default' => 0,
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -89,7 +76,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariant',
                 'foreign_table_where' => 'AND tx_cartproducts_domain_model_product_bevariant.pid=###CURRENT_PID### AND tx_cartproducts_domain_model_product_bevariant.sys_language_uid IN (-1,0)',
@@ -107,7 +94,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => 1,
@@ -120,14 +107,12 @@ return [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 13,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
             ],
         ],
@@ -135,14 +120,12 @@ return [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 13,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
             ],
         ],
@@ -154,7 +137,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattributeoption',
                 'foreign_table_where' =>
@@ -175,7 +158,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattributeoption',
                 'foreign_table_where' =>
@@ -196,7 +179,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattributeoption',
                 'foreign_table_where' =>
@@ -214,11 +197,12 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.price',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'required,double2',
                 'default' => '0.00',
-            ]
+                'required' => true,
+                'format' => 'decimal',
+            ],
         ],
 
         'price_calc_method' => [
@@ -228,17 +212,17 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.0', 0],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.1', 1],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.2', 2],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.3', 3],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.4', 4],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.5', 5]
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.0', 'value' => 0],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.1', 'value' => 1],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.2', 'value' => 2],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.3', 'value' => 3],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.4', 'value' => 4],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_bevariant.price_calc_method.5', 'value' => 5],
                 ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-            ]
+            ],
         ],
 
         'special_prices' => [
@@ -255,7 +239,7 @@ return [
                     'levelLinksPosition' => 'top',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
+                    'showAllLocalizationLink' => 1,
                 ],
             ],
         ],
@@ -264,10 +248,10 @@ return [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.price_measure',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'double2'
-            ]
+                'format' => 'decimal',
+            ],
         ],
 
         'price_measure_unit' => [
@@ -277,36 +261,36 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.no_measuring_unit', 0],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.weight', '--div--'],
-                    ['mg', 'mg'],
-                    ['g', 'g'],
-                    ['kg', 'kg'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.volume', '--div--'],
-                    ['ml', 'ml'],
-                    ['cl', 'cl'],
-                    ['l', 'l'],
-                    ['cbm', 'cbm'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.length', '--div--'],
-                    ['cm', 'cm'],
-                    ['m', 'm'],
-                    [$_LLL . ':tx_cartproducts_domain_model_product_product.measure.area'],
-                    ['m²', 'm2'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.no_measuring_unit', 'value' => 0],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.weight', 'value' => '--div--'],
+                    ['label' => 'mg', 'value' => 'mg'],
+                    ['label' => 'g', 'value' => 'g'],
+                    ['label' => 'kg', 'value' => 'kg'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.volume', 'value' => '--div--'],
+                    ['label' => 'ml', 'value' => 'ml'],
+                    ['label' => 'cl', 'value' => 'cl'],
+                    ['label' => 'l', 'value' => 'l'],
+                    ['label' => 'cbm', 'value' => 'cbm'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.length', 'value' => '--div--'],
+                    ['label' => 'cm', 'value' => 'cm'],
+                    ['label' => 'm', 'value' => 'm'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.area'],
+                    ['label' => 'm²', 'value' => 'm2'],
                 ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-            ]
+            ],
         ],
 
         'stock' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_bevariant.stock',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'required,int',
                 'default' => 0,
+                'required' => true,
             ],
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',

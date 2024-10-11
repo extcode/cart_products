@@ -1,5 +1,6 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
+===========
 1.0 Changes
 ===========
 

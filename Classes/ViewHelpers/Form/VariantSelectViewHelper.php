@@ -12,6 +12,7 @@ namespace Extcode\CartProducts\ViewHelpers\Form;
 use Extcode\Cart\ViewHelpers\Format\CurrencyViewHelper;
 use Extcode\CartProducts\Domain\Model\Product\BeVariant;
 use Extcode\CartProducts\Domain\Model\Product\Product;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -23,16 +24,20 @@ class VariantSelectViewHelper extends AbstractViewHelper
     protected $escapeOutput = false;
 
     /**
-     * @var \Extcode\CartProducts\Domain\Model\Product\Product
+     * @var Product
      */
     protected $product;
+
+    public function __construct(
+        private readonly Context $context,
+    ) {}
 
     /**
      * Initialize arguments.
      *
      * @api
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -98,9 +103,7 @@ class VariantSelectViewHelper extends AbstractViewHelper
             $out .= $option;
         }
 
-        $out .= '</select>';
-
-        return $out;
+        return $out .= '</select>';
     }
 
     /**
@@ -121,17 +124,16 @@ class VariantSelectViewHelper extends AbstractViewHelper
              * @var BeVariant $beVariant
              */
             $currencyViewHelper->setRenderChildrenClosure(
-                function () use ($beVariant) {
-                    return $beVariant->getPriceCalculated();
-                }
+                fn() => $beVariant->getPriceCalculated()
             );
             $regularPrice = $currencyViewHelper->render();
 
+            $frontendUserGroupIds = $this->context->getPropertyFromAspect('frontend.user', 'groupIds');
+
             $currencyViewHelper->setRenderChildrenClosure(
-                function () use ($beVariant) {
-                    return $beVariant->getBestPriceCalculated();
-                }
+                fn() => $beVariant->getBestPriceCalculated($frontendUserGroupIds)
             );
+
             $specialPrice = $currencyViewHelper->render();
 
             $specialPricePercentageDiscount = number_format($beVariant->getBestSpecialPricePercentageDiscount(), 2);

@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 $_LLL_general = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf';
 $_LLL = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf';
@@ -11,7 +11,6 @@ return [
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
 
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -24,11 +23,11 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title',
-        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/FeVariant.png'
+        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/FeVariant.png',
     ],
     'types' => [
         '1' => [
-            'showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,is_required,sku,title,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access'
+            'showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,is_required,sku,title,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access',
         ],
     ],
     'palettes' => [
@@ -39,19 +38,7 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.language',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        $_LLL_general . ':LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ],
-                ],
-                'default' => 0,
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -60,7 +47,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_fevariant',
                 'foreign_table_where' => 'AND tx_cartproducts_domain_model_product_fevariant.pid=###CURRENT_PID### AND tx_cartproducts_domain_model_product_fevariant.sys_language_uid IN (-1,0)',
@@ -78,7 +65,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => 1,
@@ -101,7 +88,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,trim'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'title' => [
@@ -110,7 +98,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,trim'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'product' => [

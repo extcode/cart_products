@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z" product-name="cart_products">
+    <file source-language="en" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z"
+          product-name="cart_products">
         <header/>
         <body>
 
@@ -30,6 +31,10 @@
                 <source>End Date</source>
             </trans-unit>
 
+            <trans-unit id="reaction.update-stock.description">
+                <source>Cart Products: Update Stock</source>
+            </trans-unit>
+
             <trans-unit id="tx_cartproducts_domain_model_product.filter.sku">
                 <source>SKU</source>
             </trans-unit>
@@ -39,6 +44,9 @@
 
             <trans-unit id="tx_cartproducts.add_product">
                 <source>Add to cart</source>
+            </trans-unit>
+            <trans-unit id="tx_cartproducts.you_save">
+                <source>You save</source>
             </trans-unit>
 
             <trans-unit id="tx_cartproducts.variants-select.choose">
@@ -74,7 +82,7 @@
                 <source>SKU</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_product_product.filter.title">
-                <source>Tilte</source>
+                <source>Title</source>
             </trans-unit>
 
             <trans-unit id="tx_cartproducts_domain_model_product_product">

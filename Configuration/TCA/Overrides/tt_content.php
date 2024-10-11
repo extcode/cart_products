@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -10,24 +10,29 @@ call_user_func(function () {
     $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
     $pluginNames = [
-        'Products' => [
-            'subtypes_excludelist' => 'select_key'
+        'ShowProduct' => [
+            'subtypes_excludelist' => 'select_key, pages, recursive',
+        ],
+        'ListProducts' => [
+            'subtypes_excludelist' => 'select_key',
         ],
         'TeaserProducts' => [
-            'subtypes_excludelist' => 'select_key, pages, recursive'
+            'subtypes_excludelist' => 'select_key, pages, recursive',
         ],
         'SingleProduct' => [
-            'subtypes_excludelist' => 'select_key, pages, recursive'
+            'subtypes_excludelist' => 'select_key, pages, recursive',
         ],
     ];
 
     foreach ($pluginNames as $pluginName => $pluginConf) {
         $pluginSignature = 'cartproducts_' . strtolower($pluginName);
-        $pluginNameSC = strtolower(preg_replace('/[A-Z]/', '_$0', lcfirst($pluginName)));
+        $pluginNameSC = strtolower((string)preg_replace('/[A-Z]/', '_$0', lcfirst($pluginName)));
         ExtensionUtility::registerPlugin(
             'CartProducts',
             $pluginName,
-            $_LLL_be . 'tx_cartproducts.plugin.' . $pluginNameSC . '.title'
+            $_LLL_be . 'tx_cartproducts.plugin.' . $pluginNameSC . '.title',
+            null,
+            'cart'
         );
 
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = $pluginConf['subtypes_excludelist'];

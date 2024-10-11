@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 $_LLL_general = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf';
 $_LLL = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf';
@@ -13,7 +13,6 @@ return [
         'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
 
         'versioningWS' => true,
 
@@ -29,16 +28,16 @@ return [
             'fe_group' => 'frontend_user_group',
         ],
         'searchFields' => 'price',
-        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/SpecialPrice.png'
+        'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/SpecialPrice.png',
     ],
     'types' => [
         '1' => [
-            'showitem' => 'frontend_user_group,title,price,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access,--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.visibility;hiddenonly,--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.access;access'
+            'showitem' => 'frontend_user_group,title,price,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access,--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.visibility;hiddenonly,--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.palettes.access;access',
         ],
     ],
     'palettes' => [
         '1' => [
-            'showitem' => ''
+            'showitem' => '',
         ],
         'hiddenonly' => [
             'showitem' => 'hidden;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden_formlabel',
@@ -52,19 +51,7 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.language',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        $_LLL_general . ':LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ],
-                ],
-                'default' => 0,
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -73,7 +60,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_specialprice',
                 'foreign_table_where' => 'AND tx_cartproducts_domain_model_product_specialprice.pid=###CURRENT_PID### AND tx_cartproducts_domain_model_product_specialprice.sys_language_uid IN (-1,0)',
@@ -92,7 +79,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
 
         'hidden' => [
@@ -106,10 +93,8 @@ return [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 13,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
             ],
@@ -118,10 +103,8 @@ return [
             'exclude' => 1,
             'label' => $_LLL_general . ':LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 13,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
             ],
@@ -133,18 +116,19 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'price' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_specialprice.price',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 30,
-                'eval' => 'required,double2',
                 'default' => '0.00',
-            ]
+                'required' => true,
+                'format' => 'decimal',
+            ],
         ],
 
         'frontend_user_group' => [
@@ -157,12 +141,12 @@ return [
                 'foreign_table' => 'fe_groups',
                 'size' => 1,
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
-            ]
+            ],
         ],
 
         'product' => [

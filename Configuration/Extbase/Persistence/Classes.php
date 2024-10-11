@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Extcode\CartProducts\Domain\Model\Category;
@@ -9,25 +10,21 @@ return [
         'tableName' => 'tt_content',
         'properties' => [
             'altText' => [
-                'fieldName' => 'altText'
+                'fieldName' => 'altText',
             ],
             'titleText' => [
-                'fieldName' => 'titleText'
+                'fieldName' => 'titleText',
             ],
             'colPos' => [
-                'fieldName' => 'colPos'
+                'fieldName' => 'colPos',
             ],
             'CType' => [
-                'fieldName' => 'CType'
+                'fieldName' => 'CType',
             ],
         ],
     ],
+
     Category::class => [
         'tableName' => 'sys_category',
-        'properties' => [
-            'parentcategory' => [
-                'fieldName' => 'parent'
-            ],
-        ],
     ],
 ];

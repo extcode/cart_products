@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Extcode\CartProducts\Domain\Repository;
 
 /*
@@ -9,29 +11,18 @@ namespace Extcode\CartProducts\Domain\Repository;
  * LICENSE file that was distributed with this source code.
  */
 
-class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
-{
+use TYPO3\CMS\Extbase\Domain\Model\Category;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
-    /**
-     * findAllAsRecursiveTreeArray
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $selectedCategory
-     * @return array $categories
-     */
-    public function findAllAsRecursiveTreeArray($selectedCategory = null)
+class CategoryRepository extends Repository
+{
+    public function findAllAsRecursiveTreeArray(Category $selectedCategory = null): array
     {
         $categoriesArray = $this->findAllAsArray($selectedCategory);
-        $categoriesTree = $this->buildSubcategories($categoriesArray, null);
-        return $categoriesTree;
+        return $this->buildSubcategories($categoriesArray, null);
     }
 
-    /**
-     * findAllAsArray
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $selectedCategory
-     * @return array $categories
-     */
-    public function findAllAsArray($selectedCategory = null)
+    public function findAllAsArray(Category $selectedCategory = null): array
     {
         $localCategories = $this->findAll();
         $categories = [];
@@ -43,26 +34,21 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
                 'parent' =>
                     ($localCategory->getParent() ? $localCategory->getParent()->getUid() : null),
                 'subcategories' => null,
-                'isSelected' => ($selectedCategory === $localCategory)
+                'isSelected' => ($selectedCategory === $localCategory),
             ];
             $categories[] = $newCategory;
         }
         return $categories;
     }
 
-    /**
-     * findSubcategoriesRecursiveAsArray
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $parentCategory
-     * @return array $categories
-     */
-    public function findSubcategoriesRecursiveAsArray($parentCategory)
+    public function findSubcategoriesRecursiveAsArray(Category $parentCategory = null): array
     {
         $categories = [];
         $localCategories = $this->findAllAsArray();
         foreach ($localCategories as $category) {
-            if (($parentCategory && $category['uid'] === $parentCategory->getUid())
-                || !$parentCategory
+            if (
+                !$parentCategory ||
+                $category['uid'] === $parentCategory->getUid()
             ) {
                 $this->getSubcategoriesIds(
                     $localCategories,
@@ -74,17 +60,10 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
         return $categories;
     }
 
-    /**
-     * getSubcategoriesIds
-     *
-     * @param array $categoriesArray
-     * @param array $parentCategory
-     * @param array $subcategoriesArray
-     */
     protected function getSubcategoriesIds(
-        $categoriesArray,
-        $parentCategory,
-        &$subcategoriesArray
+        array $categoriesArray,
+        array $parentCategory,
+        array &$subcategoriesArray
     ) {
         $subcategoriesArray[] = $parentCategory['uid'];
         foreach ($categoriesArray as $category) {
@@ -98,14 +77,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
         }
     }
 
-    /**
-     * buildSubcategories
-     *
-     * @param array $categoriesArray
-     * @param array $parentCategory
-     * @return array $categories
-     */
-    protected function buildSubcategories($categoriesArray, $parentCategory)
+    protected function buildSubcategories(array $categoriesArray, array $parentCategory): array
     {
         $categories = null;
         foreach ($categoriesArray as $category) {
@@ -116,6 +88,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
                 $categories[] = $newCategory;
             }
         }
+
         return $categories;
     }
 }

@@ -8,21 +8,16 @@ namespace Extcode\CartProducts\Domain\Repository\Product;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class ProductRepository extends Repository
 {
-    /**
-     * @param ProductDemand $demand
-     *
-     * @return QueryResultInterface|array
-     */
-    public function findDemanded(ProductDemand $demand)
+    public function findDemanded(ProductDemand $demand): QueryResultInterface
     {
         $query = $this->createQuery();
 
@@ -38,15 +33,15 @@ class ProductRepository extends Repository
         if ((!empty($demand->getCategories()))) {
             $categoryConstraints = [];
             foreach ($demand->getCategories() as $category) {
-                $categoryConstraints[] = $query->contains('category', $category);
+                $categoryConstraints[] = $query->equals('category', $category);
                 $categoryConstraints[] = $query->contains('categories', $category);
             }
-            $constraints = $query->logicalOr($categoryConstraints);
+            $constraints[] = $query->logicalOr(...array_values($categoryConstraints));
         }
 
         if (!empty($constraints)) {
             $query->matching(
-                $query->logicalAnd($constraints)
+                $query->logicalAnd(...array_values($constraints))
             );
         }
 
@@ -57,14 +52,7 @@ class ProductRepository extends Repository
         return $query->execute();
     }
 
-    /**
-     * Find all products based on selected uids
-     *
-     * @param string $uids
-     *
-     * @return array
-     */
-    public function findByUids($uids)
+    public function findByUids(string $uids): array
     {
         $uids = explode(',', $uids);
 
@@ -78,12 +66,7 @@ class ProductRepository extends Repository
         return $this->orderByField($query->execute(), $uids);
     }
 
-    /**
-     * @param ProductDemand $demand
-     *
-     * @return array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface>
-     */
-    protected function createOrderingsFromDemand(ProductDemand $demand)
+    protected function createOrderingsFromDemand(ProductDemand $demand): array
     {
         $orderings = [];
 
@@ -91,12 +74,13 @@ class ProductRepository extends Repository
 
         if (!empty($orderList)) {
             foreach ($orderList as $orderItem) {
-                list($orderField, $ascDesc) =
+                [$orderField, $orderDirection] =
                     GeneralUtility::trimExplode(' ', $orderItem, true);
-                if ($ascDesc) {
-                    $orderings[$orderField] = ((strtolower($ascDesc) === 'desc') ?
-                        QueryInterface::ORDER_DESCENDING :
-                        QueryInterface::ORDER_ASCENDING);
+                if (
+                    $orderDirection &&
+                    strtolower($orderDirection) === 'desc'
+                ) {
+                    $orderings[$orderField] = QueryInterface::ORDER_DESCENDING;
                 } else {
                     $orderings[$orderField] = QueryInterface::ORDER_ASCENDING;
                 }
@@ -106,20 +90,15 @@ class ProductRepository extends Repository
         return $orderings;
     }
 
-    /**
-     * @param QueryResultInterface $products
-     * @param array $uids
-     *
-     * @return array
-     */
-    protected function orderByField(QueryResultInterface $products, $uids)
+    protected function orderByField(QueryResultInterface $products, array $uids): array
     {
         $indexedProducts = [];
         $orderedProducts = [];
 
         // Create an associative array
         foreach ($products as $object) {
-            $indexedProducts[$object->getUid()] = $object;
+            $uid = $object->_getProperty(AbstractDomainObject::PROPERTY_LOCALIZED_UID);
+            $indexedProducts[$uid] = $object;
         }
         // add to ordered array in right order
         foreach ($uids as $uid) {

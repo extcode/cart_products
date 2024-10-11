@@ -1,10 +1,10 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 ======================================================
 Important: #47 - Exclude Product Type from Translation
 ======================================================
 
-See :issue:`47`
+See `Issue 47 <https://github.com/extcode/cart_products/issues/47>`__
 
 Description
 ===========

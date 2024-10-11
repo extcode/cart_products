@@ -10,18 +10,18 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
  */
 
 use Extcode\CartProducts\Domain\Model\Product\Product;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 abstract class AbstractProductViewHelper extends AbstractViewHelper
 {
-    /**
-     * @var bool
-     */
     protected $escapeOutput = false;
 
-    public function initializeArguments()
+    public function __construct(
+        private readonly Context $context,
+    ) {}
+
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -33,27 +33,8 @@ abstract class AbstractProductViewHelper extends AbstractViewHelper
         );
     }
 
-    /**
-     * Get Frontend User Group
-     *
-     * @return array
-     */
-    protected function getFrontendUserGroupIds()
+    protected function getFrontendUserGroupIds(): array
     {
-        $feGroupIds = [];
-        $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
-        if ($feUserId) {
-            $frontendUserRepository = GeneralUtility::makeInstance(
-                FrontendUserRepository::class
-            );
-            $feUser = $frontendUserRepository->findByUid($feUserId);
-            $feGroups = $feUser->getUsergroup();
-            if ($feGroups) {
-                foreach ($feGroups as $feGroup) {
-                    $feGroupIds[] = $feGroup->getUid();
-                }
-            }
-        }
-        return $feGroupIds;
+        return $this->context->getPropertyFromAspect('frontend.user', 'groupIds') ?? [];
     }
 }

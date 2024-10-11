@@ -8,10 +8,12 @@ namespace Extcode\CartProducts\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 use Extcode\CartProducts\Domain\Model\Product\Product;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
@@ -21,7 +23,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
      */
     protected $tagName = 'link';
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -34,10 +36,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
         );
     }
 
-    /**
-     * Override the canonical tag
-     */
-    public function render(): void
+    public function render(): string
     {
         $product = $this->arguments['product'];
 
@@ -45,26 +44,27 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
         $category = $product->getCategory();
 
         if (!$category) {
-            return;
+            return '';
         }
 
         $pageUid = $category->getCartProductShowPid();
 
         if (!$pageUid) {
-            return;
+            return '';
         }
 
         $arguments = [
             ['tx_cartproducts_product' =>
                 [
                     'controller' => 'Product',
-                    'product' => $product->getUid()
-                ]
-            ]
+                    'product' => $product->getUid(),
+                ],
+            ],
         ];
 
-        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
-        $canonicalUrl = $uriBuilder->reset()
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $uriBuilder->reset();
+        $canonicalUrl = $uriBuilder
             ->setTargetPageUid($pageUid)
             ->setCreateAbsoluteUri(true)
             ->setArguments($arguments)
@@ -73,24 +73,20 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
         $this->tag->addAttribute('rel', 'canonical');
         $this->tag->addAttribute('href', $canonicalUrl);
         $this->getPageRenderer()->addHeaderData($this->tag->render());
+
+        return '';
     }
 
-    /**
-     * @return \TYPO3\CMS\Core\Page\PageRenderer
-     */
-    protected function getPageRenderer()
+    protected function getPageRenderer(): PageRenderer
     {
-        if ('FE' === TYPO3_MODE && is_callable([$this->getTypoScriptFrontendController(), 'getPageRenderer'])) {
+        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend() && is_callable([$this->getTypoScriptFrontendController(), 'getPageRenderer'])) {
             return $this->getTypoScriptFrontendController()->getPageRenderer();
         }
 
         return GeneralUtility::makeInstance(PageRenderer::class);
     }
 
-    /**
-     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
     }

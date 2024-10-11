@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Extcode\CartProducts\EventListener;
 
 /*
@@ -11,80 +13,45 @@ namespace Extcode\CartProducts\EventListener;
 
 use Extcode\Cart\Event\RetrieveProductsFromRequestEvent;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
-use Extcode\CartProducts\Utility\ProductUtility;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\Context\Context;
 
 class RetrieveProductsFromRequest
 {
-    /**
-     * @var ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * @var ProductUtility
-     */
-    protected $productUtility;
-
     public function __construct(
-        ProductRepository $productRepository,
-        ProductUtility $productUtility
-    ) {
-        $this->productRepository = $productRepository;
-        $this->productUtility = $productUtility;
-    }
+        private readonly Context $context,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        protected ProductRepository $productRepository
+    ) {}
 
     public function __invoke(RetrieveProductsFromRequestEvent $event): void
     {
         $request = $event->getRequest();
-        $cart = $event->getCart();
+        $taxClasses = $event->getCart()->getTaxClasses();
         $requestArguments = $request->getArguments();
-        $taxClasses = $cart->getTaxClasses();
 
         if ($requestArguments['productType'] !== 'CartProducts') {
             return;
         }
 
-        $errors = $this->checkRequestArguments($requestArguments);
+        $frontendUserGroupIds = $this->getFrontendUserGroupIds();
 
+        $createEvent = new \Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent($request, $taxClasses);
+        $createEvent->setFrontendUserGroupIds($frontendUserGroupIds);
+        $this->eventDispatcher->dispatch($createEvent);
+
+        $errors = $createEvent->getErrors();
         if (!empty($errors)) {
             $event->setErrors($errors);
+            $event->setPropagationStopped(true);
             return;
         }
 
-        $this->productUtility->setTaxClasses($taxClasses);
-
-        $event->addProduct(
-            $this->productUtility->getProductFromRequest(
-                $request,
-                $cart->getTaxClasses()
-            )
-        );
+        $event->addProduct($createEvent->getCartProduct());
     }
 
-    protected function checkRequestArguments(array $requestArguments): array
+    protected function getFrontendUserGroupIds(): array
     {
-        if (!(int)$requestArguments['product']) {
-            return [
-                'messageBody' => LocalizationUtility::translate(
-                    'tx_cart.error.parameter.no_product',
-                    'cart_products'
-                ),
-                AbstractMessage::ERROR
-            ];
-        }
-
-        if ((int)$requestArguments['quantity'] < 0) {
-            return [
-                'messageBody' => LocalizationUtility::translate(
-                    'tx_cart.error.invalid_quantity',
-                    'cart_products'
-                ),
-                'severity' => AbstractMessage::WARNING
-            ];
-        }
-
-        return [];
+        return $this->context->getPropertyFromAspect('frontend.user', 'groupIds') ?? [];
     }
 }

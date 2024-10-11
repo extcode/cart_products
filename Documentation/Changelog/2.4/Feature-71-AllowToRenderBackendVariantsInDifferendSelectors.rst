@@ -1,10 +1,10 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 ======================================================================
 Feature: #71 - Allow to Render Backend Variants in Different Selectors
 ======================================================================
 
-See :issue:`71`
+See `Issue 71 <https://github.com/extcode/cart_products/issues/71>`__
 
 Description
 ===========

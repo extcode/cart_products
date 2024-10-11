@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Extcode\CartProducts\Hooks;
 
 /*
@@ -23,7 +25,7 @@ class DatamapDataHandlerHook
     /**
      * @param DataHandler $dataHandler
      */
-    public function processDatamap_beforeStart(DataHandler $dataHandler)
+    public function processDatamap_beforeStart(DataHandler $dataHandler): void
     {
         $datamap = $dataHandler->datamap;
         if (empty($datamap['tt_content']) || $dataHandler->bypassAccessCheckForRecords) {
@@ -44,8 +46,9 @@ class DatamapDataHandlerHook
             }
 
             $page = BackendUtility::getRecord('pages', abs($pageId));
+            $listType = $incomingFieldArray['list_type'] ?? '';
 
-            if (!$this->isAllowedTargetPage($incomingFieldArray['list_type'], $page['doktype'])) {
+            if (!$this->isAllowedTargetPage($listType, $page['doktype'])) {
                 unset($dataHandler->datamap['tt_content'][$id]);
                 $dataHandler->log(
                     'tt_content',
@@ -63,7 +66,7 @@ class DatamapDataHandlerHook
         }
     }
 
-    public function processDatamap_afterAllOperations(DataHandler $dataHandler)
+    public function processDatamap_afterAllOperations(DataHandler $dataHandler): void
     {
         $newIdUidArray = $dataHandler->substNEWwithIDs;
 
@@ -84,13 +87,23 @@ class DatamapDataHandlerHook
 
     protected function isAllowedTargetPage($listType, $doktype)
     {
-        if (empty($listType) || substr($listType, 0, 11) !== 'cartproducts_') {
+        if (empty($listType) || substr((string)$listType, 0, 11) !== 'cartproducts_') {
             return true;
         }
-        if (($doktype === 183) && ($listType === 'cartproducts_singleproduct')) {
-            return true;
-        }
-        if (($doktype !== 183) && ($listType === 'cartproducts_products' || $listType === 'cartproducts_slots')) {
+
+        if (
+            (
+                ($doktype === 183) && (
+                    $listType === 'cartproducts_singleproduct'
+                )
+            ) ||
+            (
+                ($doktype !== 183) && (
+                    $listType === 'cartproducts_products' ||
+                    $listType === 'cartproducts_slots'
+                )
+            )
+        ) {
             return true;
         }
 

@@ -10,8 +10,8 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
  */
 
 use Extcode\CartProducts\Domain\Model\Product\Product;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
@@ -21,7 +21,7 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
      */
     protected $escapeOutput = false;
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -34,7 +34,7 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
     }
 
     /**
-     * @param array|NULL $arguments
+     * @param array|null $arguments
      * @return bool
      * @api
      */
@@ -45,27 +45,9 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
         return $bestSpecialPrice < $product->getMinPrice();
     }
 
-    /**
-     * Get Frontend User Group
-     *
-     * @return array
-     */
     protected static function getFrontendUserGroupIds(): array
     {
-        $feGroupIds = [];
-        $feUserId = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
-        if ($feUserId) {
-            $frontendUserRepository = GeneralUtility::makeInstance(
-                FrontendUserRepository::class
-            );
-            $feUser = $frontendUserRepository->findByUid($feUserId);
-            $feGroups = $feUser->getUsergroup();
-            if ($feGroups) {
-                foreach ($feGroups as $feGroup) {
-                    $feGroupIds[] = $feGroup->getUid();
-                }
-            }
-        }
-        return $feGroupIds;
+        $context = GeneralUtility::makeInstance(Context::class);
+        return $context->getPropertyFromAspect('frontend.user', 'groupIds') ?? [];
     }
 }

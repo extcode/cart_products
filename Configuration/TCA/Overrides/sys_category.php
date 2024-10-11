@@ -1,40 +1,36 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 $_LLL_db = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_db.xlf:';
+$_LLL_ttc = 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf';
 
 $newSysCategoryColumns = [
     'images' => [
         'exclude' => 1,
         'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.image',
-        'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
-            'images',
-            [
-                'appearance' => [
-                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
-                    'showPossibleLocalizationRecords' => 1,
-                    'showRemovedLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1,
-                    'showSynchronizationLink' => 1
-                ],
-                'foreign_match_fields' => [
-                    'fieldname' => 'images',
-                    'tablenames' => 'sys_category',
-                    'table_local' => 'sys_file',
-                ],
+        'config' => [
+            'type' => 'file',
+            'appearance' => [
+                'createNewRelationLinkTitle' => $_LLL_ttc . ':images.addFileReference',
+                'showPossibleLocalizationRecords' => true,
+                'showRemovedLocalizationRecords' => true,
+                'showAllLocalizationLink' => true,
+                'showSynchronizationLink' => true,
             ],
-            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-        )
+            'behaviour' => [
+                'allowLanguageSynchronization' => true,
+            ],
+            'allowed' => 'common-image-types',
+        ],
     ],
     'cart_product_list_pid' => [
         'exclude' => 1,
         'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.cart_product_list_pid',
         'config' => [
             'type' => 'group',
-            'internal_type' => 'db',
             'allowed' => 'pages',
             'size' => 1,
             'maxitems' => 1,
@@ -45,14 +41,13 @@ $newSysCategoryColumns = [
                     'searchWholePhrase' => true,
                 ],
             ],
-        ]
+        ],
     ],
     'cart_product_show_pid' => [
         'exclude' => 1,
         'label' => $_LLL_db . 'tx_cartproducts_domain_model_category.cart_product_show_pid',
         'config' => [
             'type' => 'group',
-            'internal_type' => 'db',
             'allowed' => 'pages',
             'size' => 1,
             'maxitems' => 1,
@@ -63,7 +58,7 @@ $newSysCategoryColumns = [
                     'searchWholePhrase' => true,
                 ],
             ],
-        ]
+        ],
     ],
 ];
 

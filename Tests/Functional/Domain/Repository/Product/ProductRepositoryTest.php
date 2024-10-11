@@ -2,50 +2,49 @@
 
 namespace Extcode\CartProducts\Tests\Functional\Domain\Repository\Product;
 
+use Codappix\Typo3PhpDatasets\TestingFramework;
 use Extcode\CartProducts\Domain\Model\Dto\Product\ProductDemand;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class ProductRepositoryTest extends FunctionalTestCase
 {
-    /**
-     * @var ProductRepository
-     */
-    protected $productRepository;
+    use TestingFramework;
 
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/cart',
-        'typo3conf/ext/cart_products',
-    ];
+    protected ProductRepository $productRepository;
 
     public function setUp(): void
     {
+        $this->testExtensionsToLoad[] = 'extcode/cart';
+        $this->testExtensionsToLoad[] = 'extcode/cart-products';
+
+        $this->coreExtensionsToLoad[] = 'typo3/cms-reactions';
+
         parent::setUp();
 
         $this->productRepository = GeneralUtility::makeInstance(ProductRepository::class);
 
-        $fixturePath = ORIGINAL_ROOT . 'typo3conf/ext/cart_products/Tests/Functional/Fixtures/';
-        $this->importDataSet($fixturePath . 'pages.xml');
-        $this->importDataSet($fixturePath . 'tx_cartproducts_domain_model_product_product.xml');
+        $this->importPHPDataSet(__DIR__ . '/../../../Fixtures/Pages.php');
+        $this->importPHPDataSet(__DIR__ . '/../../../Fixtures/Products.php');
     }
 
     /**
      * @test
      */
-    public function findDemandedWithGivenSkuReturnsProducts()
+    public function findDemandedWithGivenSkuReturnsProducts(): void
     {
-        $_GET['id'] = 110;
+        $querySettings = GeneralUtility::makeInstance(QuerySettingsInterface::class);
+        $querySettings->setStoragePageIds([110]);
+        $this->productRepository->setDefaultQuerySettings($querySettings);
 
         $productDemand = GeneralUtility::makeInstance(ProductDemand::class);
         $productDemand->setSku('first');
 
         $products = $this->productRepository->findDemanded($productDemand);
 
-        $this->assertCount(
+        self::assertCount(
             1,
             $products
         );
@@ -54,16 +53,18 @@ class ProductRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findDemandedWithGivenTitleReturnsProducts()
+    public function findDemandedWithGivenTitleReturnsProducts(): void
     {
-        $_GET['id'] = 110;
+        $querySettings = GeneralUtility::makeInstance(QuerySettingsInterface::class);
+        $querySettings->setStoragePageIds([110]);
+        $this->productRepository->setDefaultQuerySettings($querySettings);
 
         $productDemand = GeneralUtility::makeInstance(ProductDemand::class);
         $productDemand->setTitle('First');
 
         $products = $this->productRepository->findDemanded($productDemand);
 
-        $this->assertCount(
+        self::assertCount(
             1,
             $products
         );
@@ -72,7 +73,7 @@ class ProductRepositoryTest extends FunctionalTestCase
 
         $products = $this->productRepository->findDemanded($productDemand);
 
-        $this->assertCount(
+        self::assertCount(
             3,
             $products
         );
@@ -81,11 +82,11 @@ class ProductRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findByUidsDoesNotRespectStoragePid()
+    public function findByUidsDoesNotRespectStoragePid(): void
     {
         $products = $this->productRepository->findByUids('3,1,2,5,4');
 
-        $this->assertCount(
+        self::assertCount(
             5,
             $products
         );
@@ -93,7 +94,7 @@ class ProductRepositoryTest extends FunctionalTestCase
         //product 6 and 7 are hidden or deleted
         $products = $this->productRepository->findByUids('3,1,2,5,4,6,7');
 
-        $this->assertCount(
+        self::assertCount(
             5,
             $products
         );
@@ -102,13 +103,13 @@ class ProductRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findByUidsReturnsCorrectOrder()
+    public function findByUidsReturnsCorrectOrder(): void
     {
         $listOfProductIds = [3, 1, 2, 5, 4];
         $products = $this->productRepository->findByUids(implode(',', $listOfProductIds));
 
         foreach ($products as $key => $product) {
-            $this->assertSame(
+            self::assertSame(
                 $listOfProductIds[$key],
                 $product->getUid()
             );

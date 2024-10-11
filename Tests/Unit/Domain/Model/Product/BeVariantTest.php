@@ -29,9 +29,9 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getProductInitiallyReturnsNull()
+    public function getProductInitiallyReturnsNull(): void
     {
-        $this->assertNull(
+        self::assertNull(
             $this->beVariant->getProduct()
         );
     }
@@ -39,12 +39,12 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setProductSetsProduct()
+    public function setProductSetsProduct(): void
     {
         $product = new Product();
         $this->beVariant->setProduct($product);
 
-        $this->assertSame(
+        self::assertSame(
             $product,
             $this->beVariant->getProduct()
         );
@@ -53,9 +53,9 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBeVariantAttributeOption1InitiallyIsNull()
+    public function getBeVariantAttributeOption1InitiallyIsNull(): void
     {
-        $this->assertNull(
+        self::assertNull(
             $this->beVariant->getBeVariantAttributeOption1()
         );
     }
@@ -63,13 +63,13 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBeVariantAttributeOption1SetsBeVariantAttributeOption1()
+    public function setBeVariantAttributeOption1SetsBeVariantAttributeOption1(): void
     {
         $beVariantAttributeOption = new BeVariantAttributeOption();
 
         $this->beVariant->setBeVariantAttributeOption1($beVariantAttributeOption);
 
-        $this->assertSame(
+        self::assertSame(
             $beVariantAttributeOption,
             $this->beVariant->getBeVariantAttributeOption1()
         );
@@ -78,9 +78,9 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBeVariantAttributeOption2InitiallyIsNull()
+    public function getBeVariantAttributeOption2InitiallyIsNull(): void
     {
-        $this->assertNull(
+        self::assertNull(
             $this->beVariant->getBeVariantAttributeOption2()
         );
     }
@@ -88,13 +88,13 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBeVariantAttributeOption2SetsBeVariantAttributeOption2()
+    public function setBeVariantAttributeOption2SetsBeVariantAttributeOption2(): void
     {
         $beVariantAttributeOption = new BeVariantAttributeOption();
 
         $this->beVariant->setBeVariantAttributeOption2($beVariantAttributeOption);
 
-        $this->assertSame(
+        self::assertSame(
             $beVariantAttributeOption,
             $this->beVariant->getBeVariantAttributeOption2()
         );
@@ -103,9 +103,9 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBeVariantAttributeOption3InitiallyIsNull()
+    public function getBeVariantAttributeOption3InitiallyIsNull(): void
     {
-        $this->assertNull(
+        self::assertNull(
             $this->beVariant->getBeVariantAttributeOption3()
         );
     }
@@ -113,13 +113,13 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBeVariantAttributeOption3SetsBeVariantAttributeOption3()
+    public function setBeVariantAttributeOption3SetsBeVariantAttributeOption3(): void
     {
         $beVariantAttributeOption = new BeVariantAttributeOption();
 
         $this->beVariant->setBeVariantAttributeOption3($beVariantAttributeOption);
 
-        $this->assertSame(
+        self::assertSame(
             $beVariantAttributeOption,
             $this->beVariant->getBeVariantAttributeOption3()
         );
@@ -128,11 +128,11 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPriceInitiallyReturnsZero()
+    public function getPriceInitiallyReturnsZero(): void
     {
         $price = 0.0;
 
-        $this->assertSame(
+        self::assertSame(
             $price,
             $this->beVariant->getPrice()
         );
@@ -141,13 +141,13 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPriceSetsPrice()
+    public function setPriceSetsPrice(): void
     {
         $price = 100.0;
 
         $this->beVariant->setPrice($price);
 
-        $this->assertSame(
+        self::assertSame(
             $price,
             $this->beVariant->getPrice()
         );
@@ -156,9 +156,9 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSpecialPricesInitiallyReturnsEmptyObjectStorage()
+    public function getSpecialPricesInitiallyReturnsEmptyObjectStorage(): void
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ObjectStorage::class,
             $this->beVariant->getSpecialPrices()
         );
@@ -167,13 +167,13 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function addSpecialPriceAddsSpecialPrice()
+    public function addSpecialPriceAddsSpecialPrice(): void
     {
         $specialPrice = new SpecialPrice();
 
         $this->beVariant->addSpecialPrice($specialPrice);
 
-        $this->assertSame(
+        self::assertSame(
             $specialPrice,
             $this->beVariant->getBestSpecialPrice()
         );
@@ -182,13 +182,13 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBestSpecialPriceWithOneSpecialPriceReturnsSpecialPrice()
+    public function getBestSpecialPriceWithOneSpecialPriceReturnsSpecialPrice(): void
     {
         $specialPrice = new SpecialPrice();
 
         $this->beVariant->addSpecialPrice($specialPrice);
 
-        $this->assertSame(
+        self::assertSame(
             $specialPrice,
             $this->beVariant->getBestSpecialPrice()
         );
@@ -199,27 +199,27 @@ class BeVariantTest extends UnitTestCase
      *
      * @return array
      */
-    public function bestSpecialPriceProvider()
+    public static function bestSpecialPriceProvider()
     {
         return [
-            [0,  50.0, 100.0,  150.0, 1],
-            [0, 100.0,  50.0,  150.0, 2],
-            [0, 100.0, 150.0,   50.0, 3],
-            [1,  50.0, 100.0,  150.0, 1],
-            [1, 100.0,  50.0,  150.0, 2],
-            [1, 100.0, 150.0,   50.0, 3],
-            [2, 150.0,  50.0,  100.0, 1],
-            [2,  50.0, 150.0,  100.0, 2],
-            [2, 100.0,  50.0,  150.0, 3],
-            [3, 150.0,  50.0,  100.0, 1],
-            [3,  50.0, 150.0,  100.0, 2],
-            [3, 100.0,  50.0,  150.0, 3],
-            [4,  50.0, 100.0,  150.0, 1],
-            [4, 100.0,  50.0,  150.0, 2],
-            [4, 100.0, 150.0,   50.0, 3],
-            [5,  50.0, 100.0,  150.0, 1],
-            [5, 100.0,  50.0,  150.0, 2],
-            [5, 100.0, 150.0,   50.0, 3],
+            [0, 50.0, 100.0, 150.0, 1],
+            [0, 100.0, 50.0, 150.0, 2],
+            [0, 100.0, 150.0, 50.0, 3],
+            [1, 50.0, 100.0, 150.0, 1],
+            [1, 100.0, 50.0, 150.0, 2],
+            [1, 100.0, 150.0, 50.0, 3],
+            [2, 150.0, 50.0, 100.0, 1],
+            [2, 50.0, 150.0, 100.0, 2],
+            [2, 100.0, 50.0, 150.0, 3],
+            [3, 150.0, 50.0, 100.0, 1],
+            [3, 50.0, 150.0, 100.0, 2],
+            [3, 100.0, 50.0, 150.0, 3],
+            [4, 50.0, 100.0, 150.0, 1],
+            [4, 100.0, 50.0, 150.0, 2],
+            [4, 100.0, 150.0, 50.0, 3],
+            [5, 50.0, 100.0, 150.0, 1],
+            [5, 100.0, 50.0, 150.0, 2],
+            [5, 100.0, 150.0, 50.0, 3],
         ];
     }
 
@@ -233,7 +233,7 @@ class BeVariantTest extends UnitTestCase
         $priceForSpecialPrice2,
         $priceForSpecialPrice3,
         $expectedBestSpecialPrice
-    ) {
+    ): void {
         $this->beVariant->setPriceCalcMethod($priceCalcMethod);
 
         $specialPrice1 = new SpecialPrice();
@@ -253,7 +253,7 @@ class BeVariantTest extends UnitTestCase
             3 => $specialPrice3,
         ];
 
-        $this->assertSame(
+        self::assertSame(
             $specialPrices[$expectedBestSpecialPrice],
             $this->beVariant->getBestSpecialPrice()
         );
@@ -262,13 +262,13 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBestPriceInitiallyReturnsPrice()
+    public function getBestPriceInitiallyReturnsPrice(): void
     {
         $price = 100.0;
 
         $this->beVariant->setPrice($price);
 
-        $this->assertSame(
+        self::assertSame(
             $price,
             $this->beVariant->getBestPrice()
         );
@@ -279,20 +279,20 @@ class BeVariantTest extends UnitTestCase
      *
      * @return array
      */
-    public function bestPriceProvider()
+    public static function bestPriceProvider()
     {
         return [
-            [0, 100.0,  50.0,  50.0],
+            [0, 100.0, 50.0, 50.0],
             [0, 100.0, 150.0, 100.0],
-            [1, 100.0,  50.0,  50.0],
+            [1, 100.0, 50.0, 50.0],
             [1, 100.0, 150.0, 100.0],
-            [2, 100.0,  50.0, 100.0],
+            [2, 100.0, 50.0, 100.0],
             [2, 100.0, 150.0, 150.0],
-            [3, 100.0,  50.0, 100.0],
+            [3, 100.0, 50.0, 100.0],
             [3, 100.0, 150.0, 150.0],
-            [4, 100.0,  50.0,  50.0],
+            [4, 100.0, 50.0, 50.0],
             [4, 100.0, 150.0, 100.0],
-            [5, 100.0,  50.0,  50.0],
+            [5, 100.0, 50.0, 50.0],
             [5, 100.0, 150.0, 100.0],
         ];
     }
@@ -306,17 +306,17 @@ class BeVariantTest extends UnitTestCase
         $price,
         $specialPrice,
         $expectedBestPrice
-    ) {
+    ): void {
         $specialPriceObj = $this->createMock(
             SpecialPrice::class
         );
-        $specialPriceObj->expects($this->any())->method('getPrice')->will($this->returnValue($specialPrice));
+        $specialPriceObj->expects(self::any())->method('getPrice')->willReturn($specialPrice);
 
         $this->beVariant->setPrice($price);
         $this->beVariant->setPriceCalcMethod($priceCalcMethod);
         $this->beVariant->addSpecialPrice($specialPriceObj);
 
-        $this->assertSame(
+        self::assertSame(
             $expectedBestPrice,
             $this->beVariant->getBestPrice()
         );
@@ -327,21 +327,21 @@ class BeVariantTest extends UnitTestCase
      *
      * @return array
      */
-    public function bestPriceCalculatedProvider()
+    public static function bestPriceCalculatedProvider()
     {
         return [
             [0, 500.0, 400.0, 350.0, 500.0],
             [0, 500.0, 400.0, 450.0, 500.0],
             [1, 500.0, 400.0, 350.0, 350.0],
             [1, 500.0, 400.0, 450.0, 400.0],
-            [2, 500.0,  20.0,  15.0, 480.0],
-            [2, 500.0,  20.0,  25.0, 475.0],
-            [3, 500.0,  20.0,  15.0, 400.0],
-            [3, 500.0,  20.0,  25.0, 375.0],
-            [4, 500.0,  20.0,  15.0, 515.0],
-            [4, 500.0,  20.0,  25.0, 520.0],
-            [5, 500.0,  20.0,  15.0, 575.0],
-            [5, 500.0,  20.0,  25.0, 600.0],
+            [2, 500.0, 20.0, 15.0, 480.0],
+            [2, 500.0, 20.0, 25.0, 475.0],
+            [3, 500.0, 20.0, 15.0, 400.0],
+            [3, 500.0, 20.0, 25.0, 375.0],
+            [4, 500.0, 20.0, 15.0, 515.0],
+            [4, 500.0, 20.0, 25.0, 520.0],
+            [5, 500.0, 20.0, 15.0, 575.0],
+            [5, 500.0, 20.0, 25.0, 600.0],
         ];
     }
 
@@ -355,11 +355,11 @@ class BeVariantTest extends UnitTestCase
         $price,
         $specialPrice,
         $expectedBestPrice
-    ) {
+    ): void {
         $specialPriceObj = $this->createMock(
             SpecialPrice::class
         );
-        $specialPriceObj->expects($this->any())->method('getPrice')->will($this->returnValue($specialPrice));
+        $specialPriceObj->expects(self::any())->method('getPrice')->willReturn($specialPrice);
 
         $this->beVariant->setPrice($price);
         $this->beVariant->setPriceCalcMethod($priceCalcMethod);
@@ -369,7 +369,7 @@ class BeVariantTest extends UnitTestCase
         $product->setPrice($productPrice);
         $this->beVariant->setProduct($product);
 
-        $this->assertSame(
+        self::assertSame(
             $expectedBestPrice,
             $this->beVariant->getBestPriceCalculated()
         );
@@ -378,9 +378,9 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStockInitiallyReturnsZero()
+    public function getStockInitiallyReturnsZero(): void
     {
-        $this->assertSame(
+        self::assertSame(
             0,
             $this->beVariant->getStock()
         );
@@ -389,12 +389,12 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function setStockSetsStock()
+    public function setStockSetsStock(): void
     {
         $stock = 10;
         $this->beVariant->setStock($stock);
 
-        $this->assertSame(
+        self::assertSame(
             $stock,
             $this->beVariant->getStock()
         );
@@ -403,9 +403,9 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getIsAvailableInitiallyReturnsFalse()
+    public function getIsAvailableInitiallyReturnsFalse(): void
     {
-        $this->assertFalse(
+        self::assertFalse(
             $this->beVariant->getIsAvailable()
         );
     }
@@ -413,11 +413,11 @@ class BeVariantTest extends UnitTestCase
     /**
      * @test
      */
-    public function getIsAvailableWithStockGreaterZeroReturnsTrue()
+    public function getIsAvailableWithStockGreaterZeroReturnsTrue(): void
     {
         $this->beVariant->setStock(10);
 
-        $this->assertTrue(
+        self::assertTrue(
             $this->beVariant->getIsAvailable()
         );
     }

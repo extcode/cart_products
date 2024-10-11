@@ -29,64 +29,73 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Extcode\\CartProducts\\Tests\\": "Tests"
+            "Extcode\\CartProducts\\Tests\\": "Tests/"
         }
     },
     "config": {
-        "vendor-dir": ".build/vendor",
-        "bin-dir": ".build/bin"
+        "allow-plugins": {
+            "typo3/cms-composer-installers": true,
+            "typo3/class-alias-loader": true,
+            "sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": true
+        }
     },
     "extra": {
         "typo3/cms": {
             "extension-key": "cart_products",
-            "app-dir": ".build",
-            "web-dir": ".build/public"
+            "web-dir": ".build/web"
         }
     },
     "require": {
-        "php": "^7.2 || ^7.3 || ^7.4 || ^8.0",
+        "php": "^8.1",
         "ext-pdo": "*",
-        "typo3/cms-core": "^10.4 || ^11.5",
-        "typo3/cms-extbase": "^10.4 || ^11.5",
-        "typo3/cms-fluid": "^10.4 || ^11.5",
-        "extcode/cart": "^8.0"
+        "extcode/cart": "^9.0",
+        "typo3/cms-core": "^12.4",
+        "typo3/cms-extbase": "^12.4",
+        "typo3/cms-fluid": "^12.4",
+        "typo3/cms-reactions": "^12.4"
     },
     "require-dev": {
-        "typo3/testing-framework": "^6.0",
-        "typo3/cms-dashboard": "^10.4 || ^11.5",
-        "friendsofphp/php-cs-fixer": "^2.14",
-        "helmich/typo3-typoscript-lint": "^2.0",
-        "overtrue/phplint": "^1.1",
-        "rector/rector": "^0.11",
-        "phpstan/phpstan": "^0.12.99"
+        "codappix/typo3-php-datasets": "^1.5",
+        "codeception/codeception": "^5.0",
+        "codeception/module-db": "^3.1",
+        "codeception/module-webdriver": "^4.0",
+        "friendsofphp/php-cs-fixer": "^3.16",
+        "helmich/typo3-typoscript-lint": "^3.1",
+        "overtrue/phplint": "^5.5",
+        "phpstan/phpstan": "^1.10",
+        "ssch/typo3-rector": "^2.6",
+        "typo3/cms-dashboard": "^12.4",
+        "typo3/cms-fluid-styled-content": "^12.4",
+        "typo3/cms-install": "^12.4",
+        "typo3/testing-framework": "^8.0"
     },
     "scripts": {
         "test:cgl": [
-            ".build/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --using-cache=no --path-mode=intersection ./"
+            "vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --using-cache=no --path-mode=intersection ./"
         ],
         "test:cgl:dry-run": [
-            ".build/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --using-cache=no --path-mode=intersection ./"
+            "vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --using-cache=no --path-mode=intersection ./"
         ],
         "test:php:lint": [
-            ".build/bin/phplint -c Build/phplint.yaml"
+            "vendor/bin/phplint -c Build/phplint.yaml"
         ],
         "test:php:unit": [
-            ".build/bin/phpunit -c Build/UnitTests.xml"
+            "vendor/bin/phpunit -c Build/UnitTests.xml"
         ],
         "test:php:functional": [
-            "typo3DatabaseDriver=\"pdo_sqlite\" .build/bin/phpunit -c Build/FunctionalTests.xml"
+            "typo3DatabaseDriver=\"pdo_sqlite\" vendor/bin/phpunit -c Build/FunctionalTests.xml"
         ],
         "test:phpstan:analyse": [
-            ".build/bin/phpstan analyse -c Build/phpstan.neon"
+            "vendor/bin/phpstan analyse -c Build/phpstan.neon --memory-limit 256M"
         ],
         "test:rector:process": [
-            ".build/bin/rector process *"
+            "vendor/bin/rector process *"
         ],
         "test:rector:process:dry-run": [
-            ".build/bin/rector process * --dry-run"
+            "vendor/bin/rector process * --dry-run"
         ],
         "test:typoscript:lint": [
-            ".build/bin/typoscript-lint -c Build/typoscriptlint.yaml Configuration"
+            "vendor/bin/typoscript-lint -c Build/typoscriptlint.yaml Configuration"
         ],
         "test:php": [
             "@test:php:lint",
@@ -99,10 +108,6 @@
             "@test:cgl",
             "@test:typoscript:lint",
             "@test:php"
-        ],
-        "post-autoload-dump": [
-            "mkdir -p .build/public/typo3conf/ext/",
-            "[ -L .build/public/typo3conf/ext/cart_products ] || ln -snvf ../../../../. .build/public/typo3conf/ext/cart_products"
         ]
     }
 }
