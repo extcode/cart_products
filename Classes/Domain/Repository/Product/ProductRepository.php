@@ -75,7 +75,11 @@ class ProductRepository extends Repository
         if (!empty($orderList)) {
             foreach ($orderList as $orderItem) {
                 [$orderField, $orderDirection] =
-                    GeneralUtility::trimExplode(' ', $orderItem, true);
+                    array_pad(
+                        GeneralUtility::trimExplode(' ', $orderItem, true),
+                        2,
+                        'asc'
+                    );
                 if (
                     $orderDirection &&
                     strtolower($orderDirection) === 'desc'
