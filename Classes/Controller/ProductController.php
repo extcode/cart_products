@@ -183,6 +183,11 @@ class ProductController extends ActionController
 
     public function showAction(Product $product = null): ResponseInterface
     {
+        if ((int)$GLOBALS['TSFE']->page['doktype'] === 183) {
+            $productUid = (int)$GLOBALS['TSFE']->page['cart_products_product'];
+            $product =  $this->productRepository->findByUid($productUid);
+        }
+
         $this->view->assign('product', $product);
         $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
 
