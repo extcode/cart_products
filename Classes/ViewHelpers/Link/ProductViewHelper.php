@@ -86,7 +86,9 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
         $page = $this->getProductPage($product);
 
         if ($page) {
-            $this->arguments['pageUid'] = $page['uid'];
+            $pluginName = 'SingleProduct';
+
+            $pageUid = $page['uid'];
         } else {
             $pluginName = 'ShowProduct';
 
@@ -127,10 +129,16 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
             $uriBuilder->setTargetPageUid((int)$pageUid);
         }
 
-        $uri = $uriBuilder->uriFor($action, $parameters, $controller, $extensionName, $pluginName);
+        if ($pluginName === 'SingleProduct') {
+            $uri = $uriBuilder->buildFrontendUri();
+        } else {
+            $uri = $uriBuilder->uriFor($action, $parameters, $controller, $extensionName, $pluginName);
+        }
+
         if ($uri === '') {
             return $this->renderChildren();
         }
+
         $this->tag->addAttribute('href', $uri);
         $this->tag->setContent($this->renderChildren());
         $this->tag->forceClosingTag(true);

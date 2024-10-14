@@ -40,5 +40,20 @@ return [
             'l18n_parent' => 3,
             'l10n_source' => 3,
         ],
+        4 => [
+            'uid' => '5',
+            'pid' => '13',
+            'CType' => 'list',
+            'list_type' => 'cartproducts_singleproduct',
+        ],
+        5 => [
+            'uid' => '6',
+            'pid' => '13',
+            'CType' => 'list',
+            'list_type' => 'cartproducts_singleproduct',
+            'sys_language_uid' => 2,
+            'l18n_parent' => 5,
+            'l10n_source' => 5,
+        ],
     ],
 ];
