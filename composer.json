@@ -51,8 +51,7 @@
         "extcode/cart": "^9.0",
         "typo3/cms-core": "^12.4",
         "typo3/cms-extbase": "^12.4",
-        "typo3/cms-fluid": "^12.4",
-        "typo3/cms-reactions": "^12.4"
+        "typo3/cms-fluid": "^12.4"
     },
     "require-dev": {
         "codappix/typo3-php-datasets": "^1.5",
@@ -66,6 +65,7 @@
         "typo3/cms-dashboard": "^12.4",
         "typo3/cms-fluid-styled-content": "^12.4",
         "typo3/cms-install": "^12.4",
+        "typo3/cms-reactions": "^12.4",
         "typo3/testing-framework": "^8.0"
     },
     "scripts": {
