@@ -3,6 +3,7 @@
 namespace Extcode\CartProducts\Tests\Unit\Domain\Model\Product;
 
 use Extcode\CartProducts\Domain\Model\Product\QuantityDiscount;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class QuantityDiscountTest extends UnitTestCase
@@ -22,9 +23,7 @@ class QuantityDiscountTest extends UnitTestCase
         unset($this->quantityDiscount);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPriceInitiallyReturnsZero(): void
     {
         self::assertSame(
@@ -33,9 +32,7 @@ class QuantityDiscountTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setPriceSetThePrice(): void
     {
         $price = 1.00;
@@ -48,9 +45,7 @@ class QuantityDiscountTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getQuantityInitiallyReturnsZero(): void
     {
         self::assertSame(
@@ -59,9 +54,7 @@ class QuantityDiscountTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setQuantitySetTheQuantity(): void
     {
         $quantity = 10;

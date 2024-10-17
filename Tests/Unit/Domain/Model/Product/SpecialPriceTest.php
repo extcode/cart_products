@@ -3,6 +3,7 @@
 namespace Extcode\CartProducts\Tests\Unit\Domain\Model\Product;
 
 use Extcode\CartProducts\Domain\Model\Product\SpecialPrice;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SpecialPriceTest extends UnitTestCase
@@ -22,9 +23,7 @@ class SpecialPriceTest extends UnitTestCase
         unset($this->specialPrice);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTitleInitiallyReturnsEmptyString(): void
     {
         self::assertSame(
@@ -33,9 +32,7 @@ class SpecialPriceTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTitleSetsTitle(): void
     {
         $title = 'Special Price Title';
@@ -48,9 +45,7 @@ class SpecialPriceTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPriceInitiallyReturnsZero(): void
     {
         self::assertSame(
@@ -59,9 +54,7 @@ class SpecialPriceTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setPriceSetThePrice(): void
     {
         $price = 1.00;

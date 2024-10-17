@@ -172,7 +172,7 @@ class VariantSelectViewHelper extends AbstractViewHelper
                 if ($this->arguments['showOutOfStockMessage']) {
                     $labelOutofStock = LocalizationUtility::translate(
                         'tx_cartproducts.stock.out_of_stock',
-                        'cart_products'
+                        'CartProducts'
                     );
                     $optionLabel .= $labelOutofStock;
                 }

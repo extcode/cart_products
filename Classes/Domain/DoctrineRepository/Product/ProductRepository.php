@@ -35,7 +35,7 @@ class ProductRepository
             ->fetchOne();
     }
 
-    public function addQuantityToStock(int $uid, int $quantity)
+    public function addQuantityToStock(int $uid, int $quantity): void
     {
         $currentStock = $this->getStock($uid);
 

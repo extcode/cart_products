@@ -16,9 +16,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
 {
-    /**
-     * @var bool
-     */
     protected $escapeOutput = false;
 
     public function initializeArguments(): void
@@ -33,12 +30,7 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
         );
     }
 
-    /**
-     * @param array|null $arguments
-     * @return bool
-     * @api
-     */
-    protected static function evaluateCondition($arguments = null)
+    protected static function evaluateCondition(?array $arguments = null): bool
     {
         $product = $arguments['product'];
         $bestSpecialPrice = $product->getBestSpecialPrice(self::getFrontendUserGroupIds());
@@ -48,6 +40,7 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
     protected static function getFrontendUserGroupIds(): array
     {
         $context = GeneralUtility::makeInstance(Context::class);
+
         return $context->getPropertyFromAspect('frontend.user', 'groupIds') ?? [];
     }
 }
