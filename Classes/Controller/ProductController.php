@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
+use TYPO3\CMS\Extbase\Configuration\Exception;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -44,7 +44,7 @@ class ProductController extends ActionController
         protected readonly CategoryRepository $categoryRepository
     ) {}
 
-    protected function initializeAction()
+    protected function initializeAction(): void
     {
         $this->cartConfiguration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
@@ -249,7 +249,7 @@ class ProductController extends ActionController
 
     /**
      * @return int|mixed
-     * @throws InvalidConfigurationTypeException
+     * @throws Exception
      */
     public function getProductUid(): mixed
     {
