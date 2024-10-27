@@ -185,7 +185,7 @@ class ProductController extends ActionController
     {
         if ((int)$GLOBALS['TSFE']->page['doktype'] === 183) {
             $productUid = (int)$GLOBALS['TSFE']->page['cart_products_product'];
-            $product =  $this->productRepository->findByUid($productUid);
+            $product = $this->productRepository->findByUid($productUid);
         }
 
         $this->view->assign('product', $product);
@@ -349,17 +349,23 @@ class ProductController extends ActionController
     private function getDetailLinkData(Request $request): array
     {
         $frontendController = $request->getAttribute('frontend.controller');
+        $detailPageUid = $frontendController->getRequestedId();
+
         $requestArguments = $frontendController->getPageArguments()->getArguments();
 
         $pluginNamespace = preg_grep('/tx_cartproducts_.*/', array_keys($requestArguments));
         $pluginNamespace = array_shift($pluginNamespace);
 
+        if (!$pluginNamespace) {
+            return [
+                'uid' => $detailPageUid,
+            ];
+        }
+
         $pluginArguments = $requestArguments[$pluginNamespace];
         $controller = $pluginArguments['controller'];
         $action = $pluginArguments['action'];
         $pluginName = preg_replace('/tx_cartproducts_/', '', $pluginNamespace);
-
-        $detailPageUid = $frontendController->getRequestedId();
 
         return [
             'uid' => $detailPageUid,
