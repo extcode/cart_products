@@ -181,7 +181,7 @@ class ProductController extends ActionController
         return $this->htmlResponse();
     }
 
-    public function showAction(Product $product = null): ResponseInterface
+    public function showAction(?Product $product = null): ResponseInterface
     {
         if ((int)$GLOBALS['TSFE']->page['doktype'] === 183) {
             $productUid = (int)$GLOBALS['TSFE']->page['cart_products_product'];
@@ -197,7 +197,7 @@ class ProductController extends ActionController
         return $this->htmlResponse();
     }
 
-    public function showFormAction(Product $product = null): ResponseInterface
+    public function showFormAction(?Product $product = null): ResponseInterface
     {
         if (!$product) {
             $product = $this->getProduct();
