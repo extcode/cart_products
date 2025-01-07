@@ -1,12 +1,12 @@
 <?php
 
+defined('TYPO3') or die();
+
 use Extcode\CartProducts\Controller\ProductController;
 use Extcode\CartProducts\Hooks\DataHandler;
 use Extcode\CartProducts\Hooks\DatamapDataHandlerHook;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-
-defined('TYPO3') or die();
 
 $_LLL_be = 'LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:';
 
@@ -19,7 +19,8 @@ ExtensionUtility::configurePlugin(
     ],
     [
         ProductController::class => 'showForm',
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
 ExtensionUtility::configurePlugin(
@@ -30,7 +31,8 @@ ExtensionUtility::configurePlugin(
     ],
     [
         ProductController::class => 'showForm',
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
 ExtensionUtility::configurePlugin(
@@ -41,7 +43,8 @@ ExtensionUtility::configurePlugin(
     ],
     [
         ProductController::class => 'showForm',
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
 ExtensionUtility::configurePlugin(
@@ -52,7 +55,8 @@ ExtensionUtility::configurePlugin(
     ],
     [
         ProductController::class => 'showForm',
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
 ExtensionUtility::configurePlugin(
@@ -63,7 +67,8 @@ ExtensionUtility::configurePlugin(
     ],
     [
         ProductController::class => 'showForm',
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
 // Cart Hooks

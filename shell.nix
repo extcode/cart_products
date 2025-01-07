@@ -84,7 +84,7 @@ let
     ];
     text = ''
       project-install
-      ./vendor/bin/phpunit -c Build/UnitTests.xml
+      ./vendor/bin/phpunit -c Build/UnitTests.xml --display-deprecations --display-warnings
     '';
   };
 
@@ -96,7 +96,7 @@ let
     ];
     text = ''
       project-install
-      ./vendor/bin/phpunit -c Build/FunctionalTests.xml
+      ./vendor/bin/phpunit -c Build/FunctionalTests.xml --display-deprecations --display-warnings
     '';
   };
 
