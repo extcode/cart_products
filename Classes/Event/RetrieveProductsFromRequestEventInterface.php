@@ -11,7 +11,7 @@ namespace Extcode\CartProducts\Event;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Domain\Model\Cart\Product as CartProduct;
+use Extcode\Cart\Domain\Model\Cart\ProductInterface;
 use Extcode\CartProducts\Domain\Model\Product\Product as ProductProduct;
 use Psr\EventDispatcher\StoppableEventInterface;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -23,9 +23,9 @@ interface RetrieveProductsFromRequestEventInterface extends StoppableEventInterf
 
     public function getRequest(): Request;
 
-    public function getCartProduct(): ?CartProduct;
+    public function getCartProduct(): ?ProductInterface;
 
-    public function setCartProduct(CartProduct $cartProduct): void;
+    public function setCartProduct(ProductInterface $cartProduct): void;
 
     public function getProductProduct(): ?ProductProduct;
 

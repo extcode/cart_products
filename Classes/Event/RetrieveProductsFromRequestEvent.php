@@ -11,8 +11,8 @@ namespace Extcode\CartProducts\Event;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Domain\Model\Cart\FeVariant as CartFeVariant;
-use Extcode\Cart\Domain\Model\Cart\Product as CartProduct;
+use Extcode\Cart\Domain\Model\Cart\FeVariantInterface;
+use Extcode\Cart\Domain\Model\Cart\ProductInterface;
 use Extcode\CartProducts\Domain\Model\Product\Product as ProductProduct;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -21,9 +21,9 @@ final class RetrieveProductsFromRequestEvent implements RetrieveProductsFromRequ
 {
     private ?ProductProduct $productProduct = null;
 
-    private ?CartProduct $cartProduct = null;
+    private ?ProductInterface $cartProduct = null;
 
-    private ?CartFeVariant $cartFeVariant = null;
+    private ?FeVariantInterface $cartFeVariant = null;
 
     private array $frontendUserGroupIds = [];
 
@@ -59,22 +59,22 @@ final class RetrieveProductsFromRequestEvent implements RetrieveProductsFromRequ
         $this->productProduct = $productProduct;
     }
 
-    public function getCartProduct(): ?CartProduct
+    public function getCartProduct(): ?ProductInterface
     {
         return $this->cartProduct;
     }
 
-    public function setCartProduct(CartProduct $cartProduct): void
+    public function setCartProduct(ProductInterface $cartProduct): void
     {
         $this->cartProduct = $cartProduct;
     }
 
-    public function getCartFeVariant(): ?CartFeVariant
+    public function getCartFeVariant(): ?FeVariantInterface
     {
         return $this->cartFeVariant;
     }
 
-    public function setCartFeVariant(CartFeVariant $cartFeVariant): void
+    public function setCartFeVariant(FeVariantInterface $cartFeVariant): void
     {
         $this->cartFeVariant = $cartFeVariant;
     }

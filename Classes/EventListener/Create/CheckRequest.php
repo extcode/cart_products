@@ -10,6 +10,7 @@ namespace Extcode\CartProducts\EventListener\Create;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
+
 use Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;

@@ -11,13 +11,14 @@ namespace Extcode\CartProducts\EventListener\Create;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Domain\Model\Cart\FeVariant;
+use Extcode\Cart\Domain\Model\Cart\FeVariantFactoryInterface;
 use Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class CreateCartFrontendVariants
+final class CreateCartFrontendVariants
 {
-    public function __construct() {}
+    public function __construct(
+        private FeVariantFactoryInterface $feVariantFactory
+    ) {}
 
     public function __invoke(RetrieveProductsFromRequestEvent $event): void
     {
@@ -48,8 +49,7 @@ class CreateCartFrontendVariants
         }
 
         if ($cartProductFeVariants) {
-            $feVariant = GeneralUtility::makeInstance(
-                FeVariant::class,
+            $feVariant = $this->feVariantFactory->create(
                 $cartProductFeVariants
             );
             $event->setCartFeVariant($feVariant);

@@ -11,18 +11,20 @@ namespace Extcode\CartProducts\EventListener\Create;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Domain\Model\Cart\BeVariant;
-use Extcode\Cart\Domain\Model\Cart\Product;
+use Extcode\Cart\Domain\Model\Cart\BeVariantFactoryInterface;
+use Extcode\Cart\Domain\Model\Cart\BeVariantInterface;
+use Extcode\Cart\Domain\Model\Cart\ProductInterface;
+use Extcode\CartProducts\Domain\Model\Product\SpecialPrice;
 use Extcode\CartProducts\Domain\Repository\Product\BeVariantRepository;
 use Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class CreateCartBackendVariants
+final class CreateCartBackendVariants
 {
-    protected array $frontendUserGroupIds;
+    private array $frontendUserGroupIds;
 
     public function __construct(
-        protected BeVariantRepository $beVariantRepository
+        private BeVariantRepository $beVariantRepository,
+        private BeVariantFactoryInterface $beVariantFactory
     ) {}
 
     public function __invoke(RetrieveProductsFromRequestEvent $event): void
@@ -76,18 +78,15 @@ class CreateCartBackendVariants
     protected function createCartBackendVariant(
         int $quantity,
         string $variantId,
-        BeVariant|Product $parent,
-    ): ?BeVariant {
+        BeVariantInterface|ProductInterface $parent,
+    ): ?BeVariantInterface {
         $productBackendVariant = $this->beVariantRepository->findByUid($variantId);
 
         if (!$productBackendVariant instanceof \Extcode\CartProducts\Domain\Model\Product\BeVariant) {
             return null;
         }
 
-        $bestSpecialPrice = $productBackendVariant->getBestSpecialPrice($this->frontendUserGroupIds);
-
-        $cartBackendVariant = GeneralUtility::makeInstance(
-            BeVariant::class,
+        $cartBackendVariant = $this->beVariantFactory->create(
             $variantId,
             $parent,
             $productBackendVariant->getTitle(),
@@ -97,7 +96,8 @@ class CreateCartBackendVariants
             $quantity
         );
 
-        if ($bestSpecialPrice) {
+        $bestSpecialPrice = $productBackendVariant->getBestSpecialPrice($this->frontendUserGroupIds);
+        if ($bestSpecialPrice instanceof SpecialPrice) {
             $cartBackendVariant->setSpecialPrice($bestSpecialPrice->getPrice());
         }
 

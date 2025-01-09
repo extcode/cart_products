@@ -11,11 +11,15 @@ namespace Extcode\CartProducts\EventListener\Create;
  * LICENSE file that was distributed with this source code.
  */
 
-use Extcode\Cart\Domain\Model\Cart\Product;
+use Extcode\Cart\Domain\Model\Cart\ProductFactoryInterface;
 use Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent;
 
-class CreateCartProduct
+final class CreateCartProduct
 {
+    public function __construct(
+        private ProductFactoryInterface $productFactory
+    ) {}
+
     public function __invoke(RetrieveProductsFromRequestEvent $event): void
     {
         $request = $event->getRequest();
@@ -23,7 +27,7 @@ class CreateCartProduct
         $taxClasses = $event->getTaxClasses();
         $frontendUserGroupIds = $event->getFrontendUserGroupIds();
 
-        $cartProduct = new Product(
+        $cartProduct = $this->productFactory->create(
             'CartProducts',
             (int)$request->getArgument('product'),
             $productProduct->getSku(),
