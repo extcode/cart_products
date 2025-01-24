@@ -99,9 +99,9 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
             }
 
             // A missing $pageUid means the product does not have a defined detail view via category or flexform
-            // In this case the product detail view must be displayed within the ListProducts plugin.
+            // In this case the $pluginName of the extbase context should be used.
             if (!$pageUid) {
-                $pluginName = 'ListProducts';
+                $pluginName = $renderingContext->getRequest()->getAttributes()['extbase']->getPluginName();
             }
 
             $action = 'show';
