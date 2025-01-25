@@ -21,7 +21,6 @@ stages:
   - lint
   - test
   - documentation
-  - analysis
 
 lint:cgl:
   image: $CI_REGISTRY/containers/phpunit-with-php-8.1:main
@@ -104,14 +103,7 @@ phpstan:analyse:
     - composer config --no-plugins allow-plugins.typo3/class-alias-loader true
     - composer require typo3/cms-core="${TYPO3_VERSION}"
   script:
-    - >
-      if [[ "$COVERAGE" == "0" ]]; then
-        vendor/bin/phpunit -c Build/UnitTests.xml
-      fi
-    - >
-      if [[ "$COVERAGE" == "1" ]]; then
-        XDEBUG_MODE=coverage TYPO3_PATH_WEB=${TYPO3_PATH_WEB} vendor/bin/phpunit --coverage-clover=phpunit.coverage.xml --log-junit=phpunit.report.xml -c Build/UnitTests.xml Tests/Unit
-      fi
+    - vendor/bin/phpunit -c Build/UnitTests.xml
     - typo3DatabaseDriver=pdo_sqlite vendor/bin/phpunit -c Build/FunctionalTests.xml
   artifacts:
     paths:
@@ -126,7 +118,6 @@ test:php81:typo3_12:
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.1:main
     TYPO3_VERSION: ^12.4
-    COVERAGE: 0
 
 # Build in PHP 8.2 and TYPO3 12.4
 test:php82:typo3_12:
@@ -134,7 +125,6 @@ test:php82:typo3_12:
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.2:main
     TYPO3_VERSION: ^12.4
-    COVERAGE: 0
 
 # Build in PHP 8.3 and TYPO3 12.4
 test:php83:typo3_12:
@@ -142,7 +132,6 @@ test:php83:typo3_12:
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.3:main
     TYPO3_VERSION: ^12.4
-    COVERAGE: 1
 
 .test_codeception: &test_codeception
   stage: test
@@ -210,34 +199,3 @@ documentation:
       - Documentation-GENERATED-temp/
     expire_in: 1 day
     when: always
-
-sonarqube:
-  stage: analysis
-  image: ciricihq/gitlab-sonar-scanner
-  variables:
-    SONAR_URL: "https://sonar.extco.de"
-    SONAR_PROJECT_NAME: "$CI_PROJECT_NAME"
-    SONAR_TOKEN: "$SONAR_TOKEN"
-    SONAR_PROJECT_VERSION: "$CI_JOB_ID"
-    SONAR_ANALYSIS_MODE: "issues"
-    SONAR_SOURCES: "./Classes"
-    SONAR_GITLAB_PROJECT_ID: "$CI_PROJECT_ID"
-  script:
-    - echo "sonar.projectKey=cart_products-5.x" > sonar-project.properties
-    - gitlab-sonar-scanner -Dsonar.php.coverage.reportPath=phpunit.coverage.xml -Dsonar.php.tests.reportPath=phpunit.report.xml
-  allow_failure: true
-
-sonarqube-reports:
-  stage: analysis
-  image: ciricihq/gitlab-sonar-scanner
-  variables:
-    SONAR_URL: "https://sonar.extco.de"
-    SONAR_PROJECT_NAME: "$CI_PROJECT_NAME"
-    SONAR_TOKEN: "$SONAR_TOKEN"
-    SONAR_PROJECT_VERSION: "$CI_JOB_ID"
-    SONAR_ANALYSIS_MODE: "publish"
-    SONAR_SOURCES: "./Classes"
-    SONAR_TESTS: "./Tests"
-  script:
-    - echo "sonar.projectKey=cart_products-5.x" > sonar-project.properties
-    - gitlab-sonar-scanner -Dsonar.php.coverage.reportPath=phpunit.coverage.xml -Dsonar.php.tests.reportPath=phpunit.report.xml
