@@ -94,7 +94,7 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
 
             if ($product->getCategory() && $product->getCategory()->getCartProductShowPid()) {
                 $pageUid = $product->getCategory()->getCartProductShowPid();
-            } elseif ($this->arguments['settings']['showPageUids']) {
+            } elseif ($this->arguments['settings']['showPageUids'] ?? null) {
                 $pageUid = $this->arguments['settings']['showPageUids'];
             }
 

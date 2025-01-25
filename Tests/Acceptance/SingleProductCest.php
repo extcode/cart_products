@@ -17,7 +17,7 @@ class SingleProductCest
     {
         $I->amOnUrl('http://127.0.0.1:8080/products/');
 
-        $I->see('Simple Product With Detail Page');
+        $I->seeLink('Simple Product With Detail Page', '/detail-page-for-simple-product-with-detail-page');
 
         $I->click('Simple Product With Detail Page');
         $I->seeCurrentUrlEquals('/detail-page-for-simple-product-with-detail-page');
@@ -28,7 +28,7 @@ class SingleProductCest
     {
         $I->amOnUrl('http://127.0.0.1:8080/de/produkte/');
 
-        $I->see('Einfaches Produkt Mit Detailseite');
+        $I->seeLink('Einfaches Produkt Mit Detailseite', '/de/detailseite-fuer-einfaches-produkt-mit-detailseite');
 
         $I->click('Einfaches Produkt Mit Detailseite');
         $I->seeCurrentUrlEquals('/de/detailseite-fuer-einfaches-produkt-mit-detailseite');

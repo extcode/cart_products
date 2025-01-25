@@ -157,6 +157,27 @@ return [
             'l10n_parent' => 13,
             'l10n_source' => 13,
         ],
+        14 => [
+            'uid' => '15',
+            'pid' => '1',
+            'title' => 'Product',
+            'doktype' => PageRepository::DOKTYPE_DEFAULT,
+            'slug' => '/product',
+            'sorting' => '128',
+            'deleted' => '0',
+        ],
+        15 => [
+            'uid' => '16',
+            'pid' => '1',
+            'title' => 'Produkt',
+            'doktype' => PageRepository::DOKTYPE_DEFAULT,
+            'slug' => '/produkt',
+            'sorting' => '128',
+            'deleted' => '0',
+            'sys_language_uid' => 2,
+            'l10n_parent' => 15,
+            'l10n_source' => 15,
+        ],
     ],
     'sys_template' => [
         0 => [

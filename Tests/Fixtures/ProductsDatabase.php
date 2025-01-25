@@ -16,6 +16,7 @@ return [
             'price' => 9.99,
             'handle_stock' => 1,
             'stock' => 10,
+            'related_products' => 2,
         ],
         1 => [
             'uid' => '2',
@@ -27,6 +28,7 @@ return [
             'description' => '',
             'path_segment' => 'simple-product-2',
             'price' => 19.99,
+            'related_products' => 1,
         ],
         2 => [
             'uid' => '3',
@@ -365,6 +367,24 @@ return [
             'be_variant_attribute_option3' => '0',
             'sorting' => '7',
             'stock' => '7',
+        ],
+    ],
+    'tx_cartproducts_domain_model_product_product_related_mm' => [
+        0 => [
+            'uid_local' => 2,
+            'uid_foreign' => 1,
+        ],
+        2 => [
+            'uid_local' => 12,
+            'uid_foreign' => 1,
+        ],
+        3 => [
+            'uid_local' => 1,
+            'uid_foreign' => 2,
+        ],
+        5 => [
+            'uid_local' => 1,
+            'uid_foreign' => 12,
         ],
     ],
 ];
