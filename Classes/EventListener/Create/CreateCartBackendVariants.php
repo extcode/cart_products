@@ -46,8 +46,7 @@ class CreateCartBackendVariants
                     $newVariant = $this->createCartBackendVariant(
                         $quantity,
                         $variantId,
-                        $cartProduct,
-                        null
+                        $cartProduct
                     );
 
                     if ($newVariant) {
@@ -60,7 +59,6 @@ class CreateCartBackendVariants
                     $newVariant = $this->createCartBackendVariant(
                         $quantity,
                         $variantId,
-                        null,
                         $newVariantArr[$variantsKey - 1]
                     );
 
@@ -78,8 +76,7 @@ class CreateCartBackendVariants
     protected function createCartBackendVariant(
         int $quantity,
         string $variantId,
-        Product $product = null,
-        BeVariant $variant = null
+        BeVariant|Product $parent,
     ): ?BeVariant {
         $productBackendVariant = $this->beVariantRepository->findByUid($variantId);
 
@@ -92,8 +89,7 @@ class CreateCartBackendVariants
         $cartBackendVariant = GeneralUtility::makeInstance(
             BeVariant::class,
             $variantId,
-            $product,
-            $variant,
+            $parent,
             $productBackendVariant->getTitle(),
             $productBackendVariant->getSku(),
             $productBackendVariant->getPriceCalcMethod(),
