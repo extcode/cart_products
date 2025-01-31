@@ -17,7 +17,7 @@ Cart Products provides an own data storage for simple and configurable products.
 
 #### Installation using Composer
 
-The recommended way to install the extension is by using [Composer][2]. In your Composer based TYPO3 project root, just do `composer require extcode/cart-products`. 
+The recommended way to install the extension is by using [Composer][2]. In your Composer based TYPO3 project root, just do `composer require extcode/cart-products`.
 
 #### Installation as extension from TYPO3 Extension Repository (TER)
 
@@ -33,15 +33,11 @@ Sometimes minor versions also result in minor adjustments to own templates or co
 
 ## 3.1 Compatibility and supported Versions
 
-| Cart Products | TYPO3      | PHP       | Support/Development                     |
-| ------------- | ---------- |-----------|-----------------------------------------|
-| 4.x.x         | 10.4, 11.5 | 7.2+      | Features, Bugfixes, Security Updates    |
-| 3.x.x         | 10.4       | 7.2 - 7.4 | Bugfixes, Security Updates              |
-| 2.x.x         | 9.5        | 7.2 - 7.4 | Security Updates                        |
-| 1.x.x         | 8.7        | 7.0 - 7.4 |                                         |
+Please refer to the current [README](https://github.com/extcode/cart_products/blob/main/README.md#31-compatibility-and-supported-versions).
 
 If you need extended support for features and bug fixes outside of the currently supported versions,
 we are happy to offer paid services.
+
 
 ### 3.2. Changelog
 

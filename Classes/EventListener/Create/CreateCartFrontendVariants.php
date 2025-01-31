@@ -12,20 +12,11 @@ namespace Extcode\CartProducts\EventListener\Create;
  */
 
 use Extcode\Cart\Domain\Model\Cart\FeVariant;
-use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
 use Extcode\CartProducts\Event\RetrieveProductsFromRequestEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CreateCartFrontendVariants
 {
-    protected ProductRepository $productRepository;
-
-    public function __construct(
-        ProductRepository $productRepository,
-    ) {
-        $this->productRepository = $productRepository;
-    }
-
     public function __invoke(RetrieveProductsFromRequestEvent $event): void
     {
         $request = $event->getRequest();
@@ -39,8 +30,6 @@ class CreateCartFrontendVariants
         if ($productProductFeVariants->count() === 0) {
             return;
         }
-
-        $feVariants = [];
 
         $requestFeVariants = $request->getArgument('feVariants');
 
@@ -63,7 +52,5 @@ class CreateCartFrontendVariants
             );
             $event->setCartFeVariant($feVariant);
         }
-
-        return;
     }
 }
