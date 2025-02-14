@@ -29,6 +29,7 @@ return [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
             'endtime' => 'endtime',
+            'fe_group' => 'fe_group',
         ],
         'searchFields' => 'sku,title,teaser,description,price,',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/tx_cartproducts_domain_model_product_product.svg',
@@ -73,7 +74,11 @@ return [
             'showitem' => 'hidden;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden_formlabel',
         ],
         'access' => [
-            'showitem' => 'starttime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:starttime_formlabel, endtime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:endtime_formlabel',
+            'showitem' => '
+                starttime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:starttime_formlabel, 
+                endtime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:endtime_formlabel,
+                --linebreak--,
+                fe_group;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:fe_group_formlabel,',
         ],
         'be_variant_attributes' => [
             'showitem' => 'be_variant_attribute1, be_variant_attribute2, be_variant_attribute3, --linebreak--, be_variants',
@@ -163,7 +168,32 @@ return [
                 ],
             ],
         ],
-
+        'fe_group' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.fe_group',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'size' => 5,
+                'maxitems' => 20,
+                'items' => [
+                    [
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hide_at_login',
+                        'value' => -1,
+                    ],
+                    [
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.any_login',
+                        'value' => -2,
+                    ],
+                    [
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.usergroups',
+                        'value' => '--div--',
+                    ],
+                ],
+                'exclusiveKeys' => '-1,-2',
+                'foreign_table' => 'fe_groups',
+            ],
+        ],
         'product_type' => [
             'exclude' => 1,
             'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.product_type',
