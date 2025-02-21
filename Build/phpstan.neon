@@ -7,4 +7,4 @@ parameters:
     - ../ext_emconf.php
     - ../ext_localconf.php
   excludePaths:
-    - ../Tests/Acceptance
+    - ../Tests/Acceptance/Support/_generated
