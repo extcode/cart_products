@@ -9,6 +9,7 @@ namespace Extcode\CartProducts\Domain\DoctrineRepository\Product;
  * LICENSE file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
@@ -26,10 +27,10 @@ class BeVariantRepository
             ->select('stock')
             ->from('tx_cartproducts_domain_model_product_bevariant')
             ->where(
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
             )
             ->orWhere(
-                $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
             )
             ->executeQuery()
             ->fetchOne();
@@ -44,10 +45,10 @@ class BeVariantRepository
         $queryBuilder
             ->update('tx_cartproducts_domain_model_product_bevariant')
             ->where(
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
             )
             ->orWhere(
-                $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
             )
             ->set('stock', $currentStock - $quantity)
             ->executeStatement();
