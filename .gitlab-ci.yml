@@ -105,12 +105,6 @@ phpstan:analyse:
   script:
     - vendor/bin/phpunit -c Build/UnitTests.xml
     - typo3DatabaseDriver=pdo_sqlite vendor/bin/phpunit -c Build/FunctionalTests.xml
-  artifacts:
-    paths:
-      - phpunit.coverage.xml
-      - phpunit.report.xml
-    expire_in: 1 day
-    when: always
 
 # Build in PHP 8.1 and TYPO3 12.4
 test:php81:typo3_12:
