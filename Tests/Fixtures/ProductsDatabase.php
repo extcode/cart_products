@@ -28,6 +28,8 @@ return [
             'description' => '',
             'path_segment' => 'simple-product-2',
             'price' => 19.99,
+            'handle_stock' => 0,
+            'stock' => 10,
             'related_products' => 1,
         ],
         2 => [
