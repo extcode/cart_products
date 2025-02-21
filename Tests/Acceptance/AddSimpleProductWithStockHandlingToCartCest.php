@@ -13,9 +13,9 @@ namespace Extcode\CartProducts\Tests\Acceptance;
 
 use Extcode\CartProducts\Tests\Acceptance\Support\Tester;
 
-class AddSimpleProductToCartCest
+class AddSimpleProductWithStockHandlingToCartCest
 {
-    public function testAddOneAndTwoItemsOfASimpleProductToCart(Tester $I): void
+    public function testAddDifferentItemsWithinAvailableAmountToCart(Tester $I): void
     {
         $I->amOnUrl('http://127.0.0.1:8080/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=1&cHash=275cce22d935c04473314c31f46f7ada');
 
