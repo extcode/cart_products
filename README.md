@@ -55,7 +55,6 @@ News uses **semantic versioning** which basically means for you, that
 * Ask for an invoice.
 * [GitHub Sponsors](https://github.com/sponsors/extcode)
 * [PayPal.Me](https://paypal.me/extcart)
-* [Patreon](https://patreon.com/ext_cart)
 
 [1]: https://docs.typo3.org/typo3cms/extensions/cart_products/
 [2]: https://getcomposer.org/

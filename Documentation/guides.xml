@@ -11,7 +11,7 @@
                interlink-shortcode="extcode/cart_products"
     />
     <project title="Cart Products"
-             release="6.0.0"
+             release="6.0.1"
              version="6.0"
              copyright="2018 - 2024"
     />
