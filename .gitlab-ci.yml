@@ -5,14 +5,7 @@ cache:
     - .php_cs.cache
 
 variables:
-  COMPOSER_CACHE_DIR: ".composer"
-  TYPO3_PATH_WEB: "$CI_PROJECT_DIR/.build/public"
-  MYSQL_DATABASE: "typo3"
-  MYSQL_ROOT_PASSWORD: "joh316"
-  typo3DatabaseName: "typo3"
-  typo3DatabaseHost: "mysql"
-  typo3DatabaseUsername: "root"
-  typo3DatabasePassword: "joh316"
+  TYPO3_VERSION: ^13.4
 
 before_script:
   - apk add git --update
@@ -69,6 +62,7 @@ phpstan:analyse:
     - composer config platform.php 8.2
     - composer install --no-progress --no-ansi --no-interaction
   script:
+    - vendor/bin/codecept build
     - vendor/bin/phpstan analyse -c Build/phpstan.neon --memory-limit 256M
 
 .test_php: &test_php
@@ -86,26 +80,20 @@ phpstan:analyse:
     - vendor/bin/phpunit -c Build/UnitTests.xml
     - typo3DatabaseDriver=pdo_sqlite vendor/bin/phpunit -c Build/FunctionalTests.xml
 
-# Build in PHP 8.2 and TYPO3 13.4
-test:php82:typo3_13:
+test:php82:
   <<: *test_php
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.2:main
-    TYPO3_VERSION: ^13.4
 
-# Build in PHP 8.3 and TYPO3 13.4
-test:php83:typo3_13:
+test:php83:
   <<: *test_php
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.3:main
-    TYPO3_VERSION: ^13.4
 
-# Build in PHP 8.4 and TYPO3 13.4
-test:php84:typo3_13:
+test:php84:
   <<: *test_php
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.4:main
-    TYPO3_VERSION: ^13.4
 
 .test_codeception: &test_codeception
   stage: test
@@ -131,33 +119,24 @@ test:php84:typo3_13:
     expire_in: 1 day
     when: always
 
-# Build in PHP 8.2 and TYPO3 13.4
-test:codception:php82:typo3_13:
+codeception:php82:
   <<: *test_codeception
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.2:main
-    TYPO3_VERSION: ^13.4
-    GECKODRIVER_VERSION: v0.34.0
 
-# Build in PHP 8.3 and TYPO3 13.4
-test:codception:php83:typo3_13:
+codeception:php83:
   <<: *test_codeception
   needs:
-    - test:codception:php82:typo3_13
+    - codeception:php82
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.3:main
-    TYPO3_VERSION: ^13.4
-    GECKODRIVER_VERSION: v0.34.0
 
-# Build in PHP 8.4 and TYPO3 13.4
-test:codception:php84:typo3_13:
+codeception:php84:
   <<: *test_codeception
   needs:
-    - test:codception:php83:typo3_13
+    - codeception:php83
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.4:main
-    TYPO3_VERSION: ^13.4
-    GECKODRIVER_VERSION: v0.34.0
 
 documentation:
   stage: documentation
