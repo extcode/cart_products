@@ -1,2 +1,6 @@
 page = PAGE
 page.10 < styles.content.get
+
+plugin.tx_cartproducts {
+    view.partialRootPaths.1 = EXT:cart_products_test/Resources/Private/Partials/
+}
