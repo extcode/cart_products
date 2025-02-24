@@ -32,10 +32,9 @@ class AddConfigurableProductWithStockHandlingToCartCest
 
         $I->see('Item was added to cart.', '#product-6 .form-message .form-success');
         $I->dontSeeElement('#product-6 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-6 .form-message .form-success');
-        $I->dontSeeElement('#product-6 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-error');
 
         $I->fillField('tx_cart_cart[quantity]', 2);
         $I->selectOption('tx_cart_cart[beVariants][1]', 'M - green');
@@ -44,10 +43,9 @@ class AddConfigurableProductWithStockHandlingToCartCest
 
         $I->see('2 Items were added to cart.', '#product-6 .form-message .form-success');
         $I->dontSeeElement('#product-6 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-6 .form-message .form-success');
-        $I->dontSeeElement('#product-6 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-error');
 
         $I->fillField('tx_cart_cart[quantity]', 4);
         $I->selectOption('tx_cart_cart[beVariants][1]', 'XL - red');
@@ -56,10 +54,9 @@ class AddConfigurableProductWithStockHandlingToCartCest
 
         $I->see('4 Items were added to cart.', '#product-6 .form-message .form-success');
         $I->dontSeeElement('#product-6 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-6 .form-message .form-success');
-        $I->dontSeeElement('#product-6 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-error');
     }
 
     public function testAddMoreItemsThanInStockOfASimpleProductToCart(Tester $I): void
@@ -80,10 +77,8 @@ class AddConfigurableProductWithStockHandlingToCartCest
         $I->dontSeeElement('#product-6 .form-message .form-success');
         $I->see('Desired number of this item not available.', '#product-6 .form-message .form-error');
 
-        $I->wait(3);
-
-        $I->dontSeeElement('#product-6 .form-message .form-success');
-        $I->dontSeeElement('#product-6 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-error');
     }
 
     public function testAddOneAndThanMoreItemsThanInStockOfASimpleProductToCart(Tester $I): void
@@ -103,10 +98,9 @@ class AddConfigurableProductWithStockHandlingToCartCest
 
         $I->see('Item was added to cart.', '#product-6 .form-message .form-success');
         $I->dontSeeElement('#product-6 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-6 .form-message .form-success');
-        $I->dontSeeElement('#product-6 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-error');
 
         $I->fillField('tx_cart_cart[quantity]', 5);
         $I->selectOption('tx_cart_cart[beVariants][1]', 'XL - red');
@@ -116,9 +110,7 @@ class AddConfigurableProductWithStockHandlingToCartCest
         $I->dontSeeElement('#product-6 .form-message .form-success');
         $I->see('Desired number of this item not available.', '#product-6 .form-message .form-error');
 
-        $I->wait(3);
-
-        $I->dontSeeElement('#product-6 .form-message .form-success');
-        $I->dontSeeElement('#product-6 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-6 .form-message .form-error');
     }
 }
