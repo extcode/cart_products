@@ -30,20 +30,18 @@ class AddSimpleProductWithStockHandlingToCartCest
 
         $I->see('Item was added to cart.', '#product-1 .form-message .form-success');
         $I->dontSeeElement('#product-1 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-1 .form-message .form-success');
-        $I->dontSeeElement('#product-1 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-error');
 
         $I->fillField('tx_cart_cart[quantity]', 2);
         $I->click('#product-1.add-to-cart-form input.btn[type="submit"]');
 
         $I->see('2 Items were added to cart.', '#product-1 .form-message .form-success');
         $I->dontSeeElement('#product-1 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-1 .form-message .form-success');
-        $I->dontSeeElement('#product-1 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-error');
     }
 
     public function testAddMoreItemsThanInStockOfASimpleProductToCart(Tester $I): void
@@ -62,10 +60,8 @@ class AddSimpleProductWithStockHandlingToCartCest
         $I->dontSeeElement('#product-1 .form-message .form-success');
         $I->see('Desired number of this item not available.', '#product-1 .form-message .form-error');
 
-        $I->wait(3);
-
-        $I->dontSeeElement('#product-1 .form-message .form-success');
-        $I->dontSeeElement('#product-1 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-error');
     }
 
     public function testAddOneAndThanMoreItemsThanInStockOfASimpleProductToCart(Tester $I): void
@@ -83,10 +79,9 @@ class AddSimpleProductWithStockHandlingToCartCest
 
         $I->see('Item was added to cart.', '#product-1 .form-message .form-success');
         $I->dontSeeElement('#product-1 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-1 .form-message .form-success');
-        $I->dontSeeElement('#product-1 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-error');
 
         $I->fillField('tx_cart_cart[quantity]', 10);
         $I->click('#product-1.add-to-cart-form input.btn[type="submit"]');
@@ -94,9 +89,7 @@ class AddSimpleProductWithStockHandlingToCartCest
         $I->dontSeeElement('#product-1 .form-message .form-success');
         $I->see('Desired number of this item not available.', '#product-1 .form-message .form-error');
 
-        $I->wait(3);
-
-        $I->dontSeeElement('#product-1 .form-message .form-success');
-        $I->dontSeeElement('#product-1 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-1 .form-message .form-error');
     }
 }

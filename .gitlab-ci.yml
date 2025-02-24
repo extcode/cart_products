@@ -5,14 +5,7 @@ cache:
     - .php_cs.cache
 
 variables:
-  COMPOSER_CACHE_DIR: ".composer"
-  TYPO3_PATH_WEB: "$CI_PROJECT_DIR/.build/public"
-  MYSQL_DATABASE: "typo3"
-  MYSQL_ROOT_PASSWORD: "joh316"
-  typo3DatabaseName: "typo3"
-  typo3DatabaseHost: "mysql"
-  typo3DatabaseUsername: "root"
-  typo3DatabasePassword: "joh316"
+  TYPO3_VERSION: ^12.4
 
 before_script:
   - apk add git --update
@@ -26,29 +19,10 @@ lint:cgl:
   image: $CI_REGISTRY/containers/phpunit-with-php-8.1:main
   stage: lint
   before_script:
-    - sed -i -e "s#ssh://git@code.extco.de:22722#https://gitlab-ci-token:$CI_JOB_TOKEN@code.extco.de#g" composer.json
-    - composer config platform.php 8.1
     - composer remove typo3/cms-core --no-update
     - composer install --no-progress --no-ansi --no-interaction
   script:
     - vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --using-cache=no --path-mode=intersection ./
-
-lint:typoscriptcgl:
-  image: php:8.1-alpine
-  stage: lint
-  before_script:
-    - apk add --no-cache bash curl git mercurial openssh openssl parallel subversion tini zlib-dev libzip-dev zip icu-dev g++
-    - docker-php-ext-install mysqli && docker-php-ext-install zip && docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
-    - wget https://composer.github.io/installer.sig -O - -q | tr -d '\n' > installer.sig
-    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-    - php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-    - php composer-setup.php --no-ansi --install-dir=/usr/bin --filename=composer
-    - php -r "unlink('composer-setup.php'); unlink('installer.sig');"
-    - sed -i -e "s#ssh://git@code.extco.de:22722#https://gitlab-ci-token:$CI_JOB_TOKEN@code.extco.de#g" composer.json
-    - composer config platform.php 8.1
-    - composer remove typo3/cms-core --no-update
-    - composer install --no-progress --no-ansi --no-interaction
-  script:
     - vendor/bin/typoscript-lint -c Build/typoscriptlint.yaml Configuration
 
 lint:yaml:
@@ -81,6 +55,11 @@ lint:php83:
   variables:
     CONTAINER_IMAGE: php:8.3-alpine
 
+lint:php84:
+  <<: *lint_php
+  variables:
+    CONTAINER_IMAGE: php:8.4-alpine
+
 phpstan:analyse:
   image: $CI_REGISTRY/containers/phpunit-with-php-8.1:main
   stage: lint
@@ -89,6 +68,7 @@ phpstan:analyse:
     - composer config platform.php 8.1
     - composer install --no-progress --no-ansi --no-interaction
   script:
+    - vendor/bin/codecept build
     - vendor/bin/phpstan analyse -c Build/phpstan.neon --memory-limit 256M
 
 .test_php: &test_php
@@ -106,26 +86,25 @@ phpstan:analyse:
     - vendor/bin/phpunit -c Build/UnitTests.xml
     - typo3DatabaseDriver=pdo_sqlite vendor/bin/phpunit -c Build/FunctionalTests.xml
 
-# Build in PHP 8.1 and TYPO3 12.4
-test:php81:typo3_12:
+test:php81:
   <<: *test_php
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.1:main
-    TYPO3_VERSION: ^12.4
 
-# Build in PHP 8.2 and TYPO3 12.4
-test:php82:typo3_12:
+test:php82:
   <<: *test_php
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.2:main
-    TYPO3_VERSION: ^12.4
 
-# Build in PHP 8.3 and TYPO3 12.4
-test:php83:typo3_12:
+test:php83:
   <<: *test_php
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.3:main
-    TYPO3_VERSION: ^12.4
+
+test:php84:
+  <<: *test_php
+  variables:
+    CONTAINER_IMAGE: $CI_REGISTRY/containers/phpunit-with-php-8.4:main
 
 .test_codeception: &test_codeception
   stage: test
@@ -151,33 +130,31 @@ test:php83:typo3_12:
     expire_in: 1 day
     when: always
 
-# Build in PHP 8.1 and TYPO3 12.4
-test:codception:php81:typo3_12:
+codeception:php81:
   <<: *test_codeception
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.1:main
-    TYPO3_VERSION: ^12.4
-    GECKODRIVER_VERSION: v0.34.0
 
-# Build in PHP 8.2 and TYPO3 12.4
-test:codception:php82:typo3_12:
+codeception:php82:
   <<: *test_codeception
   needs:
-    - test:codception:php81:typo3_12
+    - codeception:php81
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.2:main
-    TYPO3_VERSION: ^12.4
-    GECKODRIVER_VERSION: v0.34.0
 
-# Build in PHP 8.3 and TYPO3 12.4
-test:codception:php83:typo3_12:
+codeception:php83:
   <<: *test_codeception
   needs:
-    - test:codception:php82:typo3_12
+    - codeception:php82
   variables:
     CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.3:main
-    TYPO3_VERSION: ^12.4
-    GECKODRIVER_VERSION: v0.34.0
+
+codeception:php84:
+  <<: *test_codeception
+  needs:
+    - codeception:php83
+  variables:
+    CONTAINER_IMAGE: $CI_REGISTRY/containers/codeception-with-php-8.4:main
 
 documentation:
   stage: documentation

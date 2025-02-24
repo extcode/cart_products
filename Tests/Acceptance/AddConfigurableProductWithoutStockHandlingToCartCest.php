@@ -31,10 +31,9 @@ class AddConfigurableProductWithoutStockHandlingToCartCest
 
         $I->see('Item was added to cart.', '#product-5 .form-message .form-success');
         $I->dontSeeElement('#product-5 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-5 .form-message .form-success');
-        $I->dontSeeElement('#product-5 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-5 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-5 .form-message .form-error');
 
         $I->fillField('tx_cart_cart[quantity]', 2);
         $I->selectOption('tx_cart_cart[beVariants][1]', 'green');
@@ -42,10 +41,9 @@ class AddConfigurableProductWithoutStockHandlingToCartCest
 
         $I->see('2 Items were added to cart.', '#product-5 .form-message .form-success');
         $I->dontSeeElement('#product-5 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-5 .form-message .form-success');
-        $I->dontSeeElement('#product-5 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-5 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-5 .form-message .form-error');
 
         $I->fillField('tx_cart_cart[quantity]', 100);
         $I->selectOption('tx_cart_cart[beVariants][1]', 'red');
@@ -53,9 +51,8 @@ class AddConfigurableProductWithoutStockHandlingToCartCest
 
         $I->see('100 Items were added to cart.', '#product-5 .form-message .form-success');
         $I->dontSeeElement('#product-5 .form-message .form-error');
-        $I->wait(3);
 
-        $I->dontSeeElement('#product-5 .form-message .form-success');
-        $I->dontSeeElement('#product-5 .form-message .form-error');
+        $I->waitForElementNotVisible('#product-5 .form-message .form-success');
+        $I->waitForElementNotVisible('#product-5 .form-message .form-error');
     }
 }
