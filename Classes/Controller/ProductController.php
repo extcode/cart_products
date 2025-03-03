@@ -17,7 +17,7 @@ use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Repository\CategoryRepository;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Pagination\SimplePagination;
+use TYPO3\CMS\Core\Pagination\SlidingWindowPagination;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -154,19 +154,20 @@ class ProductController extends ActionController
         $demand = $this->createDemandObjectFromSettings($this->settings);
         $demand->setActionAndClass(__METHOD__, self::class);
 
-        $itemsPerPage = $this->settings['itemsPerPage'] ?? 20;
+        $itemsPerPage = (int)($this->settings['itemsPerPage'] ?? 20);
+        $maximumNumberOfLinks = (int)($this->settings['maximumNumberOfLinks'] ?? 0);
 
         $products = $this->productRepository->findDemanded($demand);
-        $arrayPaginator = new QueryResultPaginator(
+        $paginator = new QueryResultPaginator(
             $products,
             $currentPage,
             $itemsPerPage
         );
-        $pagination = new SimplePagination($arrayPaginator);
+        $pagination = new SlidingWindowPagination($paginator, $maximumNumberOfLinks);
         $this->view->assignMultiple(
             [
                 'products' => $products,
-                'paginator' => $arrayPaginator,
+                'paginator' => $paginator,
                 'pagination' => $pagination,
                 'pages' => range(1, $pagination->getLastPageNumber()),
             ]

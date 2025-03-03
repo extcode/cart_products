@@ -17,11 +17,20 @@
                 <li class="disabled"><a href="#" class="btn btn-link">&lsaquo;</a></li>
             </f:else>
         </f:if>
-        <f:for each="{pages}" as="page">
+
+        <f:if condition="{pagination.hasLessPages}">
+            <li>…</li>
+        </f:if>
+
+        <f:for each="{pagination.allPageNumbers}" as="page">
             <li class="{f:if(condition: '{page} == {paginator.currentPageNumber}', then:'active', else:'waves-effect')}">
                 <a href="{f:uri.action(action:actionName, arguments:{currentPage: page})}" class="btn btn-link">{page}</a>
             </li>
         </f:for>
+
+        <f:if condition="{pagination.hasMorePages}">
+            <li>…</li>
+        </f:if>
 
         <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
             <f:then>
