@@ -25,6 +25,7 @@ EXT:cart.
             format.currency < plugin.tx_cart.settings.format.currency
 
             itemsPerPage = 9
+            maximumNumberOfLinks = 0
         }
     }
 
@@ -49,3 +50,10 @@ the individual parameter are described.
    :Default: The default value is 20 if there is no TypoScript configuration.
 
    Defines how many records should be displayed per page in the list action.
+
+.. confval:: maximumNumberOfLinks
+
+   :Type: int
+   :Default: The default value is 0 if there is no TypoScript configuration.
+
+   Defines how many links the paginator should show. The default value 0 means that the page links are not limited.
