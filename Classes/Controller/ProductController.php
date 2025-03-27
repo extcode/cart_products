@@ -186,7 +186,7 @@ class ProductController extends ActionController
     {
         if ((int)$GLOBALS['TSFE']->page['doktype'] === 183) {
             $productUid = (int)$GLOBALS['TSFE']->page['cart_products_product'];
-            $product =  $this->productRepository->findByUid($productUid);
+            $product = $this->productRepository->findByUid($productUid);
         }
 
         $this->view->assign('product', $product);
@@ -204,8 +204,11 @@ class ProductController extends ActionController
             $product = $this->getProduct();
         }
 
+        $detailLinkData = $this->getDetailLinkData($this->request);
+
         $this->view->assign('product', $product);
         $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
+        $this->view->assign('detailLinkData', $detailLinkData);
 
         $this->assignCurrencyTranslationData();
         return $this->htmlResponse();
@@ -342,5 +345,34 @@ class ProductController extends ActionController
 
         $this->cart = $this->cartUtility->getNewCart($this->cartConfiguration);
         $this->sessionHandler->writeCart($this->cartConfiguration['settings']['cart']['pid'], $this->cart);
+    }
+
+    private function getDetailLinkData(Request $request): array
+    {
+        $frontendController = $request->getAttribute('frontend.controller');
+        $detailPageUid = $frontendController->getRequestedId();
+
+        $requestArguments = $frontendController->getPageArguments()->getArguments();
+
+        $pluginNamespace = preg_grep('/tx_cartproducts_.*/', array_keys($requestArguments));
+        $pluginNamespace = array_shift($pluginNamespace);
+
+        if (!$pluginNamespace) {
+            return [
+                'uid' => $detailPageUid,
+            ];
+        }
+
+        $pluginArguments = $requestArguments[$pluginNamespace];
+        $controller = $pluginArguments['controller'];
+        $action = $pluginArguments['action'];
+        $pluginName = preg_replace('/tx_cartproducts_/', '', $pluginNamespace);
+
+        return [
+            'uid' => $detailPageUid,
+            'pluginName' => $pluginName,
+            'controller' => $controller,
+            'action' => $action,
+        ];
     }
 }
