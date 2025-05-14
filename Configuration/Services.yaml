@@ -6,6 +6,8 @@ services:
 
   Extcode\CartProducts\:
     resource: '../Classes/*'
+    exclude:
+      - '../Classes/Handler/WatchlistItemHandler.php'
 
   Extcode\CartProducts\EventListener\Create\CheckRequest:
     tags:

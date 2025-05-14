@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Extcode\CartProducts\Domain\DoctrineRepository\Product;
 
 /*
@@ -15,9 +17,24 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 class ProductRepository
 {
+    public const TABLENAME = 'tx_cartproducts_domain_model_product_product';
+
     public function __construct(
-        private readonly ConnectionPool $connectionPool
+        private readonly ConnectionPool $connectionPool,
     ) {}
+
+    public function findProductByUid(int $uid): array|bool
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLENAME);
+
+        return $queryBuilder
+            ->select('uid', 'title', 'images')
+            ->from(self::TABLENAME)
+            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid)))
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
+    }
 
     public function getStock(int $uid): int
     {
@@ -25,7 +42,7 @@ class ProductRepository
 
         return $queryBuilder
             ->select('stock')
-            ->from('tx_cartproducts_domain_model_product_product')
+            ->from(self::TABLENAME)
             ->where(
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
             )
@@ -43,7 +60,7 @@ class ProductRepository
         $queryBuilder = $this->getQueryBuilder();
 
         $queryBuilder
-            ->update('tx_cartproducts_domain_model_product_product')
+            ->update(self::TABLENAME)
             ->where(
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
             )
@@ -64,7 +81,7 @@ class ProductRepository
     {
         return $this
             ->connectionPool
-            ->getConnectionForTable('tx_cartproducts_domain_model_product_product')
+            ->getConnectionForTable(self::TABLENAME)
             ->createQueryBuilder();
     }
 }

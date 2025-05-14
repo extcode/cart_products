@@ -20,7 +20,7 @@ Cart Products - extend EXT:cart with products
       cart_products
 
    :Package name:
-      extcode/cart_products
+      extcode/cart-products
 
    :Version:
       |release|
@@ -60,7 +60,7 @@ Cart Products - extend EXT:cart with products
 
     ..  card:: :ref:`Introduction <introduction>`
 
-        Introduction to the extension cart, general information.
+        Introduction to the extension, general information.
 
     ..  card:: :ref:`For Administrators <administrator>`
 
