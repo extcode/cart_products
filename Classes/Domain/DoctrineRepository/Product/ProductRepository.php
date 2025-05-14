@@ -9,15 +9,35 @@ namespace Extcode\CartProducts\Domain\DoctrineRepository\Product;
  * LICENSE file that was distributed with this source code.
  */
 
+use Doctrine\DBAL\Exception;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 class ProductRepository
 {
+    public const TABLENAME = 'tx_cartproducts_domain_model_product_product';
+
     public function __construct(
-        private readonly ConnectionPool $connectionPool
+        private readonly ConnectionPool $connectionPool,
     ) {}
+
+    /**
+     * @return array<string,mixed>|false
+     * @throws Exception
+     */
+    public function findProductByUid(int $uid)
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLENAME);
+
+        return $queryBuilder
+            ->select('product.title')
+            ->from(self::TABLENAME, 'product')
+            ->where($queryBuilder->expr()->eq('product.uid', $queryBuilder->createNamedParameter($uid)))
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
+    }
 
     public function getStock(int $uid): int
     {
@@ -25,7 +45,7 @@ class ProductRepository
 
         return $queryBuilder
             ->select('stock')
-            ->from('tx_cartproducts_domain_model_product_product')
+            ->from(self::TABLENAME)
             ->where(
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
             )
@@ -43,7 +63,7 @@ class ProductRepository
         $queryBuilder = $this->getQueryBuilder();
 
         $queryBuilder
-            ->update('tx_cartproducts_domain_model_product_product')
+            ->update(self::TABLENAME)
             ->where(
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
             )
@@ -64,7 +84,7 @@ class ProductRepository
     {
         return $this
             ->connectionPool
-            ->getConnectionForTable('tx_cartproducts_domain_model_product_product')
+            ->getConnectionForTable(self::TABLENAME)
             ->createQueryBuilder();
     }
 }

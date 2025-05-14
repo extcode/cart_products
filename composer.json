@@ -15,7 +15,7 @@
     "authors": [
         {
             "name": "Daniel Gohlke",
-            "email": "ext.cart@extco.de",
+            "email": "ext@extco.de",
             "role": "Developer"
         }
     ],
@@ -46,7 +46,7 @@
         }
     },
     "require": {
-        "php": "^8.1",
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
         "ext-pdo": "*",
         "extcode/cart": "^10.0",
         "typo3/cms-core": "^12.4",
@@ -66,7 +66,8 @@
         "typo3/cms-fluid-styled-content": "^12.4",
         "typo3/cms-install": "^12.4",
         "typo3/cms-reactions": "^12.4",
-        "typo3/testing-framework": "^8.0"
+        "typo3/testing-framework": "^8.0",
+        "werkraummedia/watchlist": "^2.0"
     },
     "scripts": {
         "test:cgl": [
@@ -108,5 +109,8 @@
             "@test:typoscript:lint",
             "@test:php"
         ]
+    },
+    "suggest": {
+        "werkraummedia/watchlist": "^2.0"
     }
 }
