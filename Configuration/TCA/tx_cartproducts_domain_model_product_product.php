@@ -47,7 +47,7 @@ return [
                 --div--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.div.prices,
                     --palette--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.palette.minmax;minmax,
                     --palette--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.palette.prices;prices,
-                --div--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.div.measures,    
+                --div--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.div.measures,
                     --palette--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.palette.measures;measures,
                     --palette--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.palette.service_attributes;service_attributes,
                 --div--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.div.stock,
@@ -56,7 +56,7 @@ return [
                     fe_variants,
                     --palette--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.palette.be_variant_attributes;be_variant_attributes,
                 --div--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.div.related_products,
-                    related_products,  
+                    related_products,
                 --div--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.div.tags_categories,
                     tags, category, categories,
                     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.access,
@@ -562,7 +562,7 @@ return [
 
         'related_products' => [
             'exclude' => 1,
-            'label' => $_LLL . 'tx_cartproducts_domain_model_product_product.related_products',
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.related_products',
             'config' => [
                 'type' => 'group',
                 'allowed' => 'tx_cartproducts_domain_model_product_product',
@@ -582,7 +582,7 @@ return [
 
         'related_products_from' => [
             'exclude' => 1,
-            'label' => $_LLL . 'tx_cartproducts_domain_model_product_product.related_products_from',
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.related_products_from',
             'config' => [
                 'type' => 'group',
                 'foreign_table' => 'tx_cartproducts_domain_model_product_product',
