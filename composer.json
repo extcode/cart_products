@@ -65,7 +65,8 @@
         "typo3/cms-fluid-styled-content": "^13.4",
         "typo3/cms-install": "^13.4",
         "typo3/cms-reactions": "^13.4",
-        "typo3/testing-framework": "^8.2"
+        "typo3/testing-framework": "^8.2",
+        "werkraummedia/watchlist": "^3.0"
     },
     "scripts": {
         "test:cgl": [
@@ -107,5 +108,8 @@
             "@test:typoscript:lint",
             "@test:php"
         ]
+    },
+    "suggest": {
+        "werkraummedia/watchlist": "^3.0"
     }
 }
