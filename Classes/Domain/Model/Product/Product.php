@@ -194,8 +194,8 @@ class Product extends AbstractProduct
         foreach ($this->specialPrices as $specialPrice) {
             if ($specialPrice->getPrice() < $bestSpecialPrice) {
                 if (
-                    !$specialPrice->getFrontendUserGroup() ||
-                    in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
+                    !$specialPrice->getFrontendUserGroup()
+                    || in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
                 ) {
                     $bestSpecialPrice = $specialPrice->getPrice();
                 }
@@ -238,8 +238,8 @@ class Product extends AbstractProduct
 
         if ($this->getQuantityDiscounts()) {
             foreach ($this->getQuantityDiscounts() as $quantityDiscount) {
-                if (!$quantityDiscount->getFrontendUserGroup() ||
-                    in_array($quantityDiscount->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
+                if (!$quantityDiscount->getFrontendUserGroup()
+                    || in_array($quantityDiscount->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
                 ) {
                     $quantityDiscountArray[] = $quantityDiscount->toArray();
                 }

@@ -140,10 +140,10 @@ return [
                     ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattributeoption',
-                'foreign_table_where' =>
-                    ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.pid=###CURRENT_PID###' .
-                    ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.be_variant_attribute IN ((SELECT tx_cartproducts_domain_model_product_product.be_variant_attribute1 FROM tx_cartproducts_domain_model_product_product WHERE tx_cartproducts_domain_model_product_product.uid=###REC_FIELD_product###)) ' .
-                    ' ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
+                'foreign_table_where'
+                    => ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.pid=###CURRENT_PID###'
+                    . ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.be_variant_attribute IN ((SELECT tx_cartproducts_domain_model_product_product.be_variant_attribute1 FROM tx_cartproducts_domain_model_product_product WHERE tx_cartproducts_domain_model_product_product.uid=###REC_FIELD_product###)) '
+                    . ' ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'eval' => 'int',
@@ -161,10 +161,10 @@ return [
                     ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattributeoption',
-                'foreign_table_where' =>
-                    ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.pid=###CURRENT_PID###' .
-                    ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.be_variant_attribute IN ((SELECT tx_cartproducts_domain_model_product_product.be_variant_attribute2 FROM tx_cartproducts_domain_model_product_product WHERE tx_cartproducts_domain_model_product_product.uid=###REC_FIELD_product###)) ' .
-                    ' ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
+                'foreign_table_where'
+                    => ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.pid=###CURRENT_PID###'
+                    . ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.be_variant_attribute IN ((SELECT tx_cartproducts_domain_model_product_product.be_variant_attribute2 FROM tx_cartproducts_domain_model_product_product WHERE tx_cartproducts_domain_model_product_product.uid=###REC_FIELD_product###)) '
+                    . ' ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'eval' => 'int',
@@ -182,10 +182,10 @@ return [
                     ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_cartproducts_domain_model_product_bevariantattributeoption',
-                'foreign_table_where' =>
-                    ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.pid=###CURRENT_PID###' .
-                    ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.be_variant_attribute IN ((SELECT tx_cartproducts_domain_model_product_product.be_variant_attribute3 FROM tx_cartproducts_domain_model_product_product WHERE tx_cartproducts_domain_model_product_product.uid=###REC_FIELD_product###)) ' .
-                    ' ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
+                'foreign_table_where'
+                    => ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.pid=###CURRENT_PID###'
+                    . ' AND tx_cartproducts_domain_model_product_bevariantattributeoption.be_variant_attribute IN ((SELECT tx_cartproducts_domain_model_product_product.be_variant_attribute3 FROM tx_cartproducts_domain_model_product_product WHERE tx_cartproducts_domain_model_product_product.uid=###REC_FIELD_product###)) '
+                    . ' ORDER BY tx_cartproducts_domain_model_product_bevariantattributeoption.title ',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'eval' => 'int',

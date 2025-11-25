@@ -98,8 +98,8 @@ class BeVariant extends AbstractEntity
         };
 
         if (
-            isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount']) &&
-            is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])
+            isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])
+            && is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])
         ) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'] as $funcRef) {
                 if ($funcRef) {
@@ -144,8 +144,8 @@ class BeVariant extends AbstractEntity
         };
 
         if (
-            isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount']) &&
-            is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])
+            isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])
+            && is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'])
         ) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cart']['changeVariantDiscount'] as $funcRef) {
                 if ($funcRef) {
@@ -226,8 +226,8 @@ class BeVariant extends AbstractEntity
 
         foreach ($this->getSpecialPrices() as $specialPrice) {
             if ($bestSpecialPrice === null) {
-                if (!$specialPrice->getFrontendUserGroup() ||
-                    in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
+                if (!$specialPrice->getFrontendUserGroup()
+                    || in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
                 ) {
                     $bestSpecialPrice = $specialPrice;
                 }
@@ -236,16 +236,16 @@ class BeVariant extends AbstractEntity
 
             if (
                 (
-                    ($specialPrice->getPrice() < $bestSpecialPrice->getPrice()) &&
-                    in_array($this->priceCalcMethod, [0, 1, 4, 5])
-                ) ||
-                (
-                    ($specialPrice->getPrice() > $bestSpecialPrice->getPrice()) &&
-                    in_array($this->priceCalcMethod, [2, 3])
+                    ($specialPrice->getPrice() < $bestSpecialPrice->getPrice())
+                    && in_array($this->priceCalcMethod, [0, 1, 4, 5])
+                )
+                || (
+                    ($specialPrice->getPrice() > $bestSpecialPrice->getPrice())
+                    && in_array($this->priceCalcMethod, [2, 3])
                 )
             ) {
-                if (!$specialPrice->getFrontendUserGroup() ||
-                    in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
+                if (!$specialPrice->getFrontendUserGroup()
+                    || in_array($specialPrice->getFrontendUserGroup()->getUid(), $frontendUserGroupIds)
                 ) {
                     $bestSpecialPrice = $specialPrice;
                 }
@@ -263,12 +263,12 @@ class BeVariant extends AbstractEntity
         if ($bestSpecialPrice) {
             if (
                 (
-                    ($bestSpecialPrice->getPrice() < $bestPrice) &&
-                    in_array($this->priceCalcMethod, [0, 1, 4, 5])
-                ) ||
-                (
-                    ($bestSpecialPrice->getPrice() > $bestPrice) &&
-                    in_array($this->priceCalcMethod, [2, 3])
+                    ($bestSpecialPrice->getPrice() < $bestPrice)
+                    && in_array($this->priceCalcMethod, [0, 1, 4, 5])
+                )
+                || (
+                    ($bestSpecialPrice->getPrice() > $bestPrice)
+                    && in_array($this->priceCalcMethod, [2, 3])
                 )
             ) {
                 $bestPrice = $bestSpecialPrice->getPrice();
@@ -301,9 +301,9 @@ class BeVariant extends AbstractEntity
     {
         //TODO: respects different measuring units between variant and product
         if (
-            !$this->product ||
-            !$this->product->getIsMeasureUnitCompatibility() ||
-            !$this->getPriceMeasure() > 0
+            !$this->product
+            || !$this->product->getIsMeasureUnitCompatibility()
+            || !$this->getPriceMeasure() > 0
         ) {
             return null;
         }
@@ -424,20 +424,20 @@ class BeVariant extends AbstractEntity
         $titleArray = [];
 
         if ($this->getProduct()->getBeVariantAttribute1()) {
-            $titleArray[] =
-                $this->getProduct()->getBeVariantAttribute1()->getTitle()
+            $titleArray[]
+                = $this->getProduct()->getBeVariantAttribute1()->getTitle()
                 . ' '
                 . $this->getBeVariantAttributeOption1()->getTitle();
         }
         if ($this->getProduct()->getBeVariantAttribute2()) {
-            $titleArray[] =
-                $this->getProduct()->getBeVariantAttribute2()->getTitle()
+            $titleArray[]
+                = $this->getProduct()->getBeVariantAttribute2()->getTitle()
                 . ' '
                 . $this->getBeVariantAttributeOption2()->getTitle();
         }
         if ($this->getProduct()->getBeVariantAttribute3()) {
-            $titleArray[] =
-                $this->getProduct()->getBeVariantAttribute3()->getTitle()
+            $titleArray[]
+                = $this->getProduct()->getBeVariantAttribute3()->getTitle()
                 . ' '
                 . $this->getBeVariantAttributeOption3()->getTitle();
         }

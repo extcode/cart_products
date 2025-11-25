@@ -54,8 +54,8 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
         }
 
         $arguments = [
-            ['tx_cartproducts_product' =>
-                [
+            ['tx_cartproducts_product'
+                => [
                     'controller' => 'Product',
                     'product' => $product->getUid(),
                 ],
