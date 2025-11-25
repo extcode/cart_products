@@ -12,7 +12,7 @@ use TYPO3\CMS\Install\Updates\AbstractListTypeToCTypeUpdate;
  * LICENSE file that was distributed with this source code.
  */
 
-#[UpgradeWizard('cart_updateListTypeToCType')]
+#[UpgradeWizard('cartProducts_updateListTypeToCType')]
 class ListTypeToCTypeUpdate extends AbstractListTypeToCTypeUpdate
 {
     protected function getListTypeToCTypeMapping(): array

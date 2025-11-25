@@ -20,7 +20,7 @@ use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
-#[UpgradeWizard('switchableControllerActionsPluginUpdater')]
+#[UpgradeWizard('cartProducts_switchableControllerActionsPluginUpdater')]
 class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
 {
     private const MIGRATION_SETTINGS = [
