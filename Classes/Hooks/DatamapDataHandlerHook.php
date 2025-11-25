@@ -96,11 +96,11 @@ class DatamapDataHandlerHook
                 ($doktype === 183) && (
                     $listType === 'cartproducts_singleproduct'
                 )
-            ) ||
-            (
+            )
+            || (
                 ($doktype !== 183) && (
-                    $listType === 'cartproducts_products' ||
-                    $listType === 'cartproducts_slots'
+                    $listType === 'cartproducts_products'
+                    || $listType === 'cartproducts_slots'
                 )
             )
         ) {

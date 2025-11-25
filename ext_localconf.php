@@ -76,13 +76,13 @@ ExtensionManagementUtility::addPageTSConfig('
 
 // processDatamapClass Hook
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['cartproducts_allowed'] =
-    DatamapDataHandlerHook::class;
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['cartproducts_allowed']
+    = DatamapDataHandlerHook::class;
 
 // clearCachePostProc Hook
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['cartproducts_clearcache'] =
-    DataHandler::class . '->clearCachePostProc';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['cartproducts_clearcache']
+    = DataHandler::class . '->clearCachePostProc';
 
 // register "cartproducts:" namespace
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['cartproducts'][]

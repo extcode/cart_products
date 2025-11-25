@@ -93,9 +93,9 @@ class CheckProductAvailability
         }
 
         if (
-            $mode === 'add' &&
-            $cart->getProductById($cartProduct->getId()) &&
-            $cart->getProductById($cartProduct->getId())->getBeVariantById($cartProductBeVariant->getId())
+            $mode === 'add'
+            && $cart->getProductById($cartProduct->getId())
+            && $cart->getProductById($cartProduct->getId())->getBeVariantById($cartProductBeVariant->getId())
         ) {
             $quantityInCart += $cart->getProductById($cartProduct->getId())->getBeVariantById($cartProductBeVariant->getId())->getQuantity();
         }
