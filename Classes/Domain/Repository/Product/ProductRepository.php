@@ -74,15 +74,15 @@ class ProductRepository extends Repository
 
         if (!empty($orderList)) {
             foreach ($orderList as $orderItem) {
-                [$orderField, $orderDirection] =
-                    array_pad(
+                [$orderField, $orderDirection]
+                    = array_pad(
                         GeneralUtility::trimExplode(' ', $orderItem, true),
                         2,
                         'asc'
                     );
                 if (
-                    $orderDirection &&
-                    strtolower($orderDirection) === 'desc'
+                    $orderDirection
+                    && strtolower($orderDirection) === 'desc'
                 ) {
                     $orderings[$orderField] = QueryInterface::ORDER_DESCENDING;
                 } else {

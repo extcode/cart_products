@@ -153,8 +153,8 @@ class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
     protected function getTargetListType(string $sourceListType, string $switchableControllerActions): string
     {
         foreach (self::MIGRATION_SETTINGS as $setting) {
-            if ($setting['sourceListType'] === $sourceListType &&
-                $setting['switchableControllerActions'] === $switchableControllerActions
+            if ($setting['sourceListType'] === $sourceListType
+                && $setting['switchableControllerActions'] === $switchableControllerActions
             ) {
                 return $setting['targetListType'];
             }

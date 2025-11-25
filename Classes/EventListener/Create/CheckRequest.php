@@ -22,8 +22,8 @@ class CheckRequest
         $request = $event->getRequest();
 
         if (
-            !$request->hasArgument('product') ||
-            !(int)$request->getArgument('product')
+            !$request->hasArgument('product')
+            || !(int)$request->getArgument('product')
         ) {
             $event->addError(
                 new FlashMessage(
@@ -39,8 +39,8 @@ class CheckRequest
         }
 
         if (
-            !$request->hasArgument('quantity') ||
-            $request->getArgument('quantity') < 0
+            !$request->hasArgument('quantity')
+            || $request->getArgument('quantity') < 0
         ) {
             $event->addError(
                 new FlashMessage(
