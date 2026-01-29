@@ -82,8 +82,8 @@ class ProductController extends ActionController
         }
         if ($settings['orderBy']) {
             if (
-                !isset($settings['orderDirection']) &&
-                $settings['orderDirection'] !== 'DESC'
+                !isset($settings['orderDirection'])
+                && $settings['orderDirection'] !== 'DESC'
             ) {
                 $settings['orderDirection'] = 'ASC';
             }

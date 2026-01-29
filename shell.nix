@@ -1,10 +1,14 @@
 {
   pkgs ? import <nixpkgs> { }
+  ,php81 ? import <phps>
   ,phpVersion ? "php81"
 }:
 
 let
-  php = pkgs.${phpVersion}.buildEnv {
+  phpVersionPkgs =
+    if (phpVersion == "php81") then php81.packages.x86_64-linux.${phpVersion}
+    else pkgs.${phpVersion};
+  php = phpVersionPkgs.buildEnv {
     extensions = { enabled, all }: enabled ++ (with all; [
       xdebug
     ]);
@@ -14,7 +18,7 @@ let
       memory_limit = 4G
     '';
   };
-  inherit(pkgs."${phpVersion}Packages") composer;
+  inherit(phpVersionPkgs.packages) composer;
 
   projectInstall = pkgs.writeShellApplication {
     name = "project-install";
@@ -84,7 +88,7 @@ let
     ];
     text = ''
       project-install
-      ./vendor/bin/phpunit -c Build/UnitTests.xml
+      ./vendor/bin/phpunit -c Build/phpunit.xml.dist --testsuite unit --display-warnings --display-deprecations --display-errors
     '';
   };
 
@@ -96,7 +100,19 @@ let
     ];
     text = ''
       project-install
-      ./vendor/bin/phpunit -c Build/FunctionalTests.xml
+      ./vendor/bin/phpunit -c Build/phpunit.xml.dist --testsuite functional --display-warnings --display-deprecations --display-errors
+    '';
+  };
+
+  projectTestWithCoverage = pkgs.writeShellApplication {
+    name = "project-test-with-coverage";
+    runtimeInputs = [
+      php
+      projectInstall
+    ];
+    text = ''
+      project-install
+      XDEBUG_MODE=coverage ./vendor/bin/phpunit -c Build/phpunit.xml.dist --coverage-html=coverage_result
     '';
   };
 
@@ -139,6 +155,7 @@ in pkgs.mkShellNoCC {
     projectPhpstan
     projectTestUnit
     projectTestFunctional
+    projectTestWithCoverage
     projectTestAcceptance
   ];
 

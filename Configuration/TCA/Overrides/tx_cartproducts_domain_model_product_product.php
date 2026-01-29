@@ -21,9 +21,9 @@ if ($categoryRestrictionSetting) {
 
     // prepend category restriction at the beginning of foreign_table_where
     if (!empty($categoryRestriction)) {
-        $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['columns']['category']['config']['foreign_table_where'] = $categoryRestriction .
-            $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['columns']['category']['config']['foreign_table_where'];
-        $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['columns']['categories']['config']['foreign_table_where'] = $categoryRestriction .
-            $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['columns']['categories']['config']['foreign_table_where'];
+        $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['columns']['category']['config']['foreign_table_where'] = $categoryRestriction
+            . $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['columns']['category']['config']['foreign_table_where'];
+        $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['columns']['categories']['config']['foreign_table_where'] = $categoryRestriction
+            . $GLOBALS['TCA']['tx_cartproducts_domain_model_product_product']['columns']['categories']['config']['foreign_table_where'];
     }
 }
