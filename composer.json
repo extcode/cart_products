@@ -46,7 +46,7 @@
         }
     },
     "require": {
-        "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-pdo": "*",
         "extcode/cart": "^11.0",
         "typo3/cms-core": "^13.4",
@@ -79,10 +79,10 @@
             "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l"
         ],
         "test:php:unit": [
-            "vendor/bin/phpunit -c Build/UnitTests.xml"
+            "vendor/bin/phpunit -c Build/phpunit.xml.dist --testsuite unit --display-warnings --display-deprecations --display-errors"
         ],
         "test:php:functional": [
-            "typo3DatabaseDriver=\"pdo_sqlite\" vendor/bin/phpunit -c Build/FunctionalTests.xml"
+            "typo3DatabaseDriver=\"pdo_sqlite\" vendor/bin/phpunit -c Build/phpunit.xml.dist --testsuite functional --display-warnings --display-deprecations --display-errors"
         ],
         "test:phpstan:analyse": [
             "vendor/bin/phpstan analyse -c Build/phpstan.neon --memory-limit 256M"
