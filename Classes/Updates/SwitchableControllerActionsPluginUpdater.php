@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace Extcode\CartProducts\Updates;
 
+use TYPO3\CMS\Core\Attribute\UpgradeWizard;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Service\FlexFormService;
+use TYPO3\CMS\Core\Upgrades\DatabaseUpdatedPrerequisite;
+use TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Install\Attribute\UpgradeWizard;
-use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
-use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 #[UpgradeWizard('cartProducts_switchableControllerActionsPluginUpdater')]
 class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
@@ -38,7 +38,7 @@ class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
 
     protected FlexFormService $flexFormService;
 
-    public function __construct()
+    public function __construct(private readonly ConnectionPool $connectionPool)
     {
         $this->flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
     }
@@ -133,7 +133,7 @@ class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
     {
         $checkListTypes = array_unique(array_column(self::MIGRATION_SETTINGS, 'sourceListType'));
 
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $connectionPool = $this->connectionPool;
         $queryBuilder = $connectionPool->getQueryBuilderForTable('tt_content');
         $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
 
@@ -193,7 +193,7 @@ class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
      */
     protected function updateContentElement(int $uid, string $newListType, string $flexform): void
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tt_content');
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable('tt_content');
         $queryBuilder->update('tt_content')
             ->set('list_type', $newListType)
             ->set('pi_flexform', $flexform)

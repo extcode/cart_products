@@ -2,7 +2,6 @@
 
 defined('TYPO3') or die();
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
@@ -28,32 +27,23 @@ call_user_func(function () {
             'translationKeyPrefix' => $_LLL_be . 'tx_cartproducts.plugin.single_product',
         ],
     ];
-
-    foreach ($pluginNames as $pluginName => $pluginConf) {
-        $pluginSignature = ExtensionUtility::registerPlugin(
-            'cart_products',
-            $pluginName,
-            $pluginConf['translationKeyPrefix'] . '.title',
-            $pluginConf['pluginIcon'],
-            'cart',
-            $pluginConf['translationKeyPrefix'] . '.description',
-        );
-
+    foreach ($pluginNames as $pluginName => $pluginConfig) {
         $flexFormPath = 'EXT:cart_products/Configuration/FlexForms/' . $pluginName . 'Plugin.xml';
         if (file_exists(GeneralUtility::getFileAbsFileName($flexFormPath))) {
-            ExtensionManagementUtility::addToAllTCAtypes(
-                'tt_content',
-                rtrim('--div--;Configuration,pi_flexform,' . ($pluginConf['additionalNewFields'] ?? ''), ','),
-                $pluginSignature,
-                'after:subheader',
-            );
-
-            ExtensionManagementUtility::addPiFlexFormValue(
-                '*',
-                'FILE:' . $flexFormPath,
-                $pluginSignature,
-            );
+            $flexFormPath = 'FILE:' . $flexFormPath;
+        } else {
+            $flexFormPath = '';
         }
+
+        ExtensionUtility::registerPlugin(
+            'CartProducts',
+            $pluginName,
+            $pluginConfig['translationKeyPrefix'] . '.title',
+            $pluginConfig['pluginIcon'],
+            'cart',
+            $pluginConfig['translationKeyPrefix'] . '.description',
+            $flexFormPath
+        );
     }
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_cartproducts_domain_model_product_product']['config']['type'] = 'passthrough';

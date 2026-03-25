@@ -125,7 +125,7 @@ class ProductController extends ActionController
     protected function isActionAllowed(string $action): bool
     {
         $frameworkConfiguration = $this->configurationManager->getConfiguration($this->configurationManager::CONFIGURATION_TYPE_FRAMEWORK);
-        $allowedActions = $frameworkConfiguration['controllerConfiguration'][\Extcode\CartProducts\Controller\ProductController::class]['actions'] ?? [];
+        $allowedActions = $frameworkConfiguration['controllerConfiguration'][ProductController::class]['actions'] ?? [];
 
         return in_array($action, $allowedActions, true);
     }
@@ -184,8 +184,8 @@ class ProductController extends ActionController
 
     public function showAction(?Product $product = null): ResponseInterface
     {
-        if ((int)$GLOBALS['TSFE']->page['doktype'] === 183) {
-            $productUid = (int)$GLOBALS['TSFE']->page['cart_products_product'];
+        if ((int)$this->request->getAttribute('frontend.page.information')->getPageRecord()['doktype'] === 183) {
+            $productUid = (int)$this->request->getAttribute('frontend.page.information')->getPageRecord()['cart_products_product'];
             $product =  $this->productRepository->findByUid($productUid);
         }
 
@@ -254,17 +254,15 @@ class ProductController extends ActionController
      */
     public function getProductUid(): mixed
     {
-        if ((int)$GLOBALS['TSFE']->page['doktype'] === 183) {
-            return (int)$GLOBALS['TSFE']->page['cart_products_product'];
+        if ((int)$this->request->getAttribute('frontend.page.information')->getPageRecord()['doktype'] === 183) {
+            return (int)$this->request->getAttribute('frontend.page.information')->getPageRecord()['cart_products_product'];
         }
 
         if ($this->request->getPluginName() !== 'ProductPartial') {
             return 0;
         }
 
-        $configurationManager = GeneralUtility::makeInstance(
-            ConfigurationManager::class
-        );
+        $configurationManager = $this->configurationManager;
         $configuration = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK);
 
         $typoscriptService = GeneralUtility::makeInstance(

@@ -23,7 +23,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title,value,calc,',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/BeVariantAttribute.png',
     ],
     'types' => [

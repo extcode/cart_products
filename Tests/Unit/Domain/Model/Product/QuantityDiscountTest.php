@@ -8,19 +8,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class QuantityDiscountTest extends UnitTestCase
 {
-    /**
-     * @var QuantityDiscount
-     */
-    protected $quantityDiscount;
+    private QuantityDiscount $quantityDiscount;
 
     public function setUp(): void
     {
-        $this->quantityDiscount = new QuantityDiscount();
-    }
+        parent::setUp();
 
-    public function tearDown(): void
-    {
-        unset($this->quantityDiscount);
+        $this->quantityDiscount = new QuantityDiscount();
     }
 
     #[Test]

@@ -26,7 +26,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/BeVariant.png',
     ],
     'types' => [

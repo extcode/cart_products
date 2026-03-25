@@ -61,7 +61,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Coding Guideline
-        run: vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --using-cache=no --path-mode=intersection ./
+        run: .build/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --using-cache=no --path-mode=intersection ./
 
   code-quality:
     runs-on: ubuntu-latest
@@ -71,13 +71,13 @@ jobs:
       matrix:
         include:
           - php-version: '8.2'
-            typo3-version: '^13.4'
+            typo3-version: '^14.1'
           - php-version: '8.3'
-            typo3-version: '^13.4'
+            typo3-version: '^14.1'
           - php-version: '8.4'
-            typo3-version: '^13.4'
+            typo3-version: '^14.1'
           - php-version: '8.5'
-            typo3-version: '^13.4'
+            typo3-version: '^14.1'
     steps:
       - uses: actions/checkout@v4
 
@@ -92,20 +92,20 @@ jobs:
           composer require --no-interaction --prefer-dist --no-progress "typo3/cms-core:${{ matrix.typo3-version }}" "typo3/cms-extbase:${{ matrix.typo3-version }}" "typo3/cms-frontend:${{ matrix.typo3-version }}"
 
       - name: Build codeception tester
-        run: vendor/bin/codecept build
+        run: .build/bin/codecept build
 
       - name: Code Quality (by PHPStan)
-        run: vendor/bin/phpstan analyse -c Build/phpstan.neon
+        run: .build/bin/phpstan analyse -c Build/phpstan.neon
 
-  test-php:
+  test-unit-and-functional:
     runs-on: ubuntu-latest
     needs:
       - coding-guideline
       - code-quality
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
-      - uses: cachix/install-nix-action@v17
+      - uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
@@ -136,11 +136,11 @@ jobs:
   test-acceptance:
     runs-on: ubuntu-latest
     needs:
-      - test-php
+      - test-unit-and-functional
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
-      - uses: cachix/install-nix-action@v17
+      - uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 

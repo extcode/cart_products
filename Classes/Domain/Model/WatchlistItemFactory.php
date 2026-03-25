@@ -22,7 +22,7 @@ final readonly class WatchlistItemFactory
     public function createFromIdentifier(
         string $identifier,
     ): ?WatchlistItem {
-        list($uid, $detailPid) = explode('-', $identifier);
+        [$uid, $detailPid] = explode('-', $identifier);
 
         $product = $this->productRepository->findProductByUid((int)$uid);
 

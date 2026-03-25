@@ -9,11 +9,8 @@ namespace Extcode\CartProducts\ViewHelpers;
  * LICENSE file that was distributed with this source code.
  */
 use Extcode\CartProducts\Domain\Model\Product\Product;
-use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Page\PageRenderer;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
@@ -22,6 +19,13 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
      * @var string
      */
     protected $tagName = 'link';
+
+    public function __construct(
+        private readonly UriBuilder $uriBuilder,
+        private readonly PageRenderer $pageRenderer
+    ) {
+        parent::__construct();
+    }
 
     public function initializeArguments(): void
     {
@@ -62,7 +66,7 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
             ],
         ];
 
-        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $uriBuilder = $this->uriBuilder;
         $uriBuilder->reset();
         $canonicalUrl = $uriBuilder
             ->setTargetPageUid($pageUid)
@@ -72,22 +76,8 @@ class CanonicalTagViewHelper extends AbstractTagBasedViewHelper
 
         $this->tag->addAttribute('rel', 'canonical');
         $this->tag->addAttribute('href', $canonicalUrl);
-        $this->getPageRenderer()->addHeaderData($this->tag->render());
+        $this->pageRenderer->addHeaderData($this->tag->render());
 
         return '';
-    }
-
-    protected function getPageRenderer(): PageRenderer
-    {
-        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend() && is_callable([$this->getTypoScriptFrontendController(), 'getPageRenderer'])) {
-            return $this->getTypoScriptFrontendController()->getPageRenderer();
-        }
-
-        return GeneralUtility::makeInstance(PageRenderer::class);
-    }
-
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'];
     }
 }

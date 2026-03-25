@@ -13,19 +13,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class BeVariantTest extends UnitTestCase
 {
-    /**
-     * @var BeVariant
-     */
-    protected $beVariant;
+    private BeVariant $beVariant;
 
     public function setUp(): void
     {
-        $this->beVariant = new BeVariant();
-    }
+        parent::setUp();
 
-    public function tearDown(): void
-    {
-        unset($this->beVariant);
+        $this->beVariant = new BeVariant();
     }
 
     #[Test]
@@ -138,6 +132,7 @@ class BeVariantTest extends UnitTestCase
     #[Test]
     public function getSpecialPricesInitiallyReturnsEmptyObjectStorage(): void
     {
+        // @phpstan-ignore staticMethod.alreadyNarrowedType
         self::assertInstanceOf(
             ObjectStorage::class,
             $this->beVariant->getSpecialPrices()
@@ -280,7 +275,7 @@ class BeVariantTest extends UnitTestCase
         $specialPriceObj = $this->createMock(
             SpecialPrice::class
         );
-        $specialPriceObj->expects(self::any())->method('getPrice')->willReturn($specialPrice);
+        $specialPriceObj->method('getPrice')->willReturn($specialPrice);
 
         $this->beVariant->setPrice($price);
         $this->beVariant->setPriceCalcMethod($priceCalcMethod);
@@ -327,7 +322,7 @@ class BeVariantTest extends UnitTestCase
         $specialPriceObj = $this->createMock(
             SpecialPrice::class
         );
-        $specialPriceObj->expects(self::any())->method('getPrice')->willReturn($specialPrice);
+        $specialPriceObj->method('getPrice')->willReturn($specialPrice);
 
         $this->beVariant->setPrice($price);
         $this->beVariant->setPriceCalcMethod($priceCalcMethod);

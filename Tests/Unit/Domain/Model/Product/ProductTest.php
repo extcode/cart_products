@@ -13,19 +13,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProductTest extends UnitTestCase
 {
-    /**
-     * @var Product
-     */
-    protected $product;
+    private Product $product;
 
     protected function setUp(): void
     {
-        $this->product = new Product();
-    }
+        parent::setUp();
 
-    protected function tearDown(): void
-    {
-        unset($this->product);
+        $this->product = new Product();
     }
 
     /**
@@ -504,7 +498,7 @@ class ProductTest extends UnitTestCase
         $productBackendVariant = $this->createMock(
             BeVariant::class
         );
-        $productBackendVariant->expects(self::any())->method('getIsAvailable')->willReturn(false);
+        $productBackendVariant->method('getIsAvailable')->willReturn(false);
 
         $product = new Product();
         $product->addBeVariant($productBackendVariant);
@@ -523,7 +517,7 @@ class ProductTest extends UnitTestCase
         $productBackendVariant = $this->createMock(
             BeVariant::class
         );
-        $productBackendVariant->expects(self::any())->method('getIsAvailable')->willReturn(true);
+        $productBackendVariant->method('getIsAvailable')->willReturn(true);
 
         $product = new Product();
         $product->addBeVariant($productBackendVariant);

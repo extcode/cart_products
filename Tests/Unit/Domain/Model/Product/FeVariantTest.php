@@ -8,19 +8,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class FeVariantTest extends UnitTestCase
 {
-    /**
-     * @var FeVariant
-     */
-    protected $feVariant;
+    private FeVariant $feVariant;
 
     public function setUp(): void
     {
-        $this->feVariant = new FeVariant();
-    }
+        parent::setUp();
 
-    public function tearDown(): void
-    {
-        unset($this->feVariant);
+        $this->feVariant = new FeVariant();
     }
 
     #[Test]

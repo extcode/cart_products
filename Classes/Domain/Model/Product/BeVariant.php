@@ -10,7 +10,7 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Attribute\ORM\Cascade;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -29,7 +29,7 @@ class BeVariant extends AbstractEntity
     /**
      * @var ObjectStorage<SpecialPrice>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade(value: 'remove')]
     protected ObjectStorage $specialPrices;
 
     protected int $priceCalcMethod = 0;
