@@ -51,16 +51,6 @@ class ProductController extends ActionController
             'Cart'
         );
 
-        if (!empty($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE'])) {
-            static $cacheTagsSet = false;
-
-            $typoScriptFrontendController = $GLOBALS['TSFE'];
-            if (!$cacheTagsSet) {
-                $typoScriptFrontendController->addCacheTags(['tx_cartproducts']);
-                $cacheTagsSet = true;
-            }
-        }
-
         $this->settings['addToCartByAjax'] = isset($this->settings['addToCartByAjax']) ? (int)$this->settings['addToCartByAjax'] : 0;
     }
 
@@ -178,7 +168,6 @@ class ProductController extends ActionController
 
         $this->assignCurrencyTranslationData();
 
-        $this->addCacheTags($products);
         return $this->htmlResponse();
     }
 
@@ -194,7 +183,6 @@ class ProductController extends ActionController
 
         $this->assignCurrencyTranslationData();
 
-        $this->addCacheTags([$product]);
         return $this->htmlResponse();
     }
 
@@ -220,7 +208,6 @@ class ProductController extends ActionController
 
         $this->assignCurrencyTranslationData();
 
-        $this->addCacheTags($products);
         return $this->htmlResponse();
     }
 
@@ -314,19 +301,6 @@ class ProductController extends ActionController
         ];
 
         $this->view->assign('currencyTranslationData', $currencyTranslationData);
-    }
-
-    protected function addCacheTags(iterable $products): void
-    {
-        $cacheTags = [];
-
-        foreach ($products as $product) {
-            // cache tag for each product record
-            $cacheTags[] = 'tx_cartproducts_product_' . $product->getUid();
-        }
-        if (count($cacheTags) > 0) {
-            $GLOBALS['TSFE']->addCacheTags($cacheTags);
-        }
     }
 
     protected function restoreSession(): void
