@@ -50,7 +50,7 @@ class BeVariantRepository
             ->orWhere(
                 $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
             )
-            ->set('stock', $currentStock - $quantity)
+            ->set('stock', $currentStock + $quantity)
             ->executeStatement();
     }
 
