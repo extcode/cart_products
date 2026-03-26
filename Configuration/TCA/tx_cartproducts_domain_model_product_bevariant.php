@@ -274,7 +274,7 @@ return [
                     ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.length', 'value' => '--div--'],
                     ['label' => 'cm', 'value' => 'cm'],
                     ['label' => 'm', 'value' => 'm'],
-                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.area'],
+                    ['label' => $_LLL . ':tx_cartproducts_domain_model_product_product.measure.area', 'value' => '--div--'],
                     ['label' => 'm²', 'value' => 'm2'],
                 ],
                 'size' => 1,
