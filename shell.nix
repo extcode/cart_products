@@ -125,12 +125,12 @@ let
     text = ''
       project-install
 
-      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance"
-      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-logs"
-      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-reports"
-      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-sqlite-dbs"
+      mkdir -p "$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance"
+      mkdir -p "$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance-logs"
+      mkdir -p "$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance-reports"
+      mkdir -p "$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance-sqlite-dbs"
 
-      export INSTANCE_PATH="$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance"
+      export INSTANCE_PATH="$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance"
 
       ./.build/bin/codecept run
 

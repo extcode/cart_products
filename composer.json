@@ -78,7 +78,7 @@
         "typo3/cms-reactions": "^14.1",
         "typo3/testing-framework": "^9.3",
         "werkraummedia/watchlist": "^3.0",
-	"ssch/typo3-rector": "^3.11"
+        "ssch/typo3-rector": "^3.11"
     },
     "suggest": {
         "werkraummedia/watchlist": "^3.0"
