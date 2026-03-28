@@ -61,7 +61,7 @@ class ProductController extends ActionController
             }
         }
 
-        $this->settings['addToCartByAjax'] = isset($this->settings['addToCartByAjax']) ? (int)$this->settings['addToCartByAjax'] : 0;
+        $this->settings['addToCartByAjax'] = (int)($this->settings['addToCartByAjax'] ?? 0);
     }
 
     /**
@@ -80,7 +80,7 @@ class ProductController extends ActionController
         if (!empty($this->searchArguments['title'])) {
             $demand->setTitle($this->searchArguments['title']);
         }
-        if ($settings['orderBy']) {
+        if ($settings['orderBy'] ?? false) {
             if (
                 !isset($settings['orderDirection'])
                 && $settings['orderDirection'] !== 'DESC'
@@ -97,7 +97,7 @@ class ProductController extends ActionController
 
     protected function addCategoriesToDemandObjectFromSettings(ProductDemand $demand): void
     {
-        if ($this->settings['categoriesList']) {
+        if ($this->settings['categoriesList'] ?? false) {
             $selectedCategories = GeneralUtility::intExplode(
                 ',',
                 $this->settings['categoriesList'],
@@ -106,7 +106,7 @@ class ProductController extends ActionController
 
             $categories = [];
 
-            if ($this->settings['listSubcategories']) {
+            if ($this->settings['listSubcategories'] ?? false) {
                 foreach ($selectedCategories as $selectedCategory) {
                     $category = $this->categoryRepository->findByUid($selectedCategory);
                     $categories = array_merge(
@@ -333,7 +333,8 @@ class ProductController extends ActionController
 
     protected function restoreSession(): void
     {
-        $cart = $this->sessionHandler->restoreCart($this->cartConfiguration['settings']['cart']['pid']);
+        $pid = (int)($this->cartConfiguration['settings']['cart']['pid'] ?? 0);
+        $cart = $this->sessionHandler->restoreCart($pid);
 
         if ($cart instanceof Cart) {
             $this->cart = $cart;
@@ -341,6 +342,6 @@ class ProductController extends ActionController
         }
 
         $this->cart = $this->cartUtility->getNewCart($this->cartConfiguration);
-        $this->sessionHandler->writeCart($this->cartConfiguration['settings']['cart']['pid'], $this->cart);
+        $this->sessionHandler->writeCart($pid, $this->cart);
     }
 }
