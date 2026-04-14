@@ -74,6 +74,9 @@ services:
         identifier: 'cart-products--order--stock-check-stock'
         event: Extcode\Cart\Event\ProcessOrderCheckStockEvent
 
+  Extcode\CartProducts\Hooks\DataHandler:
+    public: true
+
   Extcode\CartProducts\Reaction\UpdateStockReaction:
     tags: ['reactions.reaction']
     public: true
