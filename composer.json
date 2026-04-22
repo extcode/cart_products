@@ -54,10 +54,10 @@
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-pdo": "*",
-        "extcode/cart": "dev-12.x-dev as 12.0.0",
-        "typo3/cms-core": "^14.1",
-        "typo3/cms-extbase": "^14.1",
-        "typo3/cms-fluid": "^14.1"
+        "extcode/cart": "dev-main as 12.0.0",
+        "typo3/cms-core": "^14.3",
+        "typo3/cms-extbase": "^14.3",
+        "typo3/cms-fluid": "^14.3"
     },
     "require-dev": {
         "codappix/typo3-php-datasets": "^2.0",
@@ -72,10 +72,10 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "spaze/phpstan-disallowed-calls": "^4.7",
         "staabm/phpstan-todo-by": "^0.3",
-        "typo3/cms-dashboard": "^14.1",
-        "typo3/cms-fluid-styled-content": "^14.1",
-        "typo3/cms-install": "^14.1",
-        "typo3/cms-reactions": "^14.1",
+        "typo3/cms-dashboard": "^14.3",
+        "typo3/cms-fluid-styled-content": "^14.3",
+        "typo3/cms-install": "^14.3",
+        "typo3/cms-reactions": "^14.3",
         "typo3/testing-framework": "^9.3",
         "werkraummedia/watchlist": "^3.0",
         "ssch/typo3-rector": "^3.11"

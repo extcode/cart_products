@@ -36,10 +36,11 @@ Sometimes minor versions also result in minor adjustments to own templates or co
 
 | Cart Products | TYPO3      | PHP       | Support/Development                  |
 |---------------|------------|-----------|--------------------------------------|
-| 7.x.x         | 13.2       | 8.2 - 8.5 | Features, Bugfixes, Security Updates |
-| 6.x.x         | 12.4       | 8.1+      | Bugfixes, Security Updates           |
-| 5.x.x         | 12.4       | 8.1+      | Security Updates                     |
-| 4.x.x         | 10.4, 11.5 | 7.2+      | Security Updates                     |
+| 8.x.x         | 14.3       | 8.2 - 8.5 | Features, Bugfixes, Security Updates |
+| 7.x.x         | 13.4       | 8.2 - 8.5 | Bugfixes, Security Updates           |
+| 6.x.x         | 12.4       | 8.1+      | Security Updates                     |
+| 5.x.x         | 12.4       | 8.1+      |                                      |
+| 4.x.x         | 10.4, 11.5 | 7.2+      |                                      |
 | 3.x.x         | 10.4       | 7.2 - 7.4 |                                      |
 | 2.x.x         | 9.5        | 7.2 - 7.4 |                                      |
 | 1.x.x         | 8.7        | 7.0 - 7.4 |                                      |
