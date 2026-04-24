@@ -10,19 +10,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class BeVariantAttributeTest extends UnitTestCase
 {
-    /**
-     * @var BeVariantAttribute
-     */
-    protected $beVariantAttribute;
+    private BeVariantAttribute $beVariantAttribute;
 
     public function setUp(): void
     {
-        $this->beVariantAttribute = new BeVariantAttribute();
-    }
+        parent::setUp();
 
-    public function tearDown(): void
-    {
-        unset($this->beVariantAttribute);
+        $this->beVariantAttribute = new BeVariantAttribute();
     }
 
     #[Test]

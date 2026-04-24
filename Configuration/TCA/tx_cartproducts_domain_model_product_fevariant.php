@@ -12,6 +12,8 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
 
+        'versioningWS' => true,
+
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -22,7 +24,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/FeVariant.png',
     ],
     'types' => [

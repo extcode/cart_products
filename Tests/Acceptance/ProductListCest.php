@@ -22,11 +22,11 @@ class ProductListCest
     {
         $I->amOnUrl('http://127.0.0.1:8080/products/');
 
-        $I->seeLink('Simple Product 1', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=1&cHash=275cce22d935c04473314c31f46f7ada');
+        $I->seeLink('Simple Product 1', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=1&cHash=a0592042d989ca64fc9bb8593502c30cbcd458a2a4d415dcb75a701227213400');
         $I->see('9,99 €');
-        $I->seeLink('Simple Product 2', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=2&cHash=36af38e6c5bbac81dcd80c3a3c53f4a1');
+        $I->seeLink('Simple Product 2', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=2&cHash=65f2e92995fa7df0eae115ab9767534305e54b973f7ee988c8fa8818eaf8801e');
         $I->see('19,99 €');
-        $I->seeLink('Simple Product 3', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=3&cHash=499063e1c85e8b41785e04d33a20e2db');
+        $I->seeLink('Simple Product 3', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=3&cHash=0efa57e1d49c9fe19f480b426201ad0c4506ff9f63359448f42475df08b10aa0');
         $I->see('29,99 €');
 
         $I->dontSee('Simple Product 4');
@@ -43,14 +43,14 @@ class ProductListCest
         $I->click('Simple Product 1');
         $I->see('Simple Product 1', 'h1');
 
-        $I->seeLink('Simple Product 2', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=2&cHash=36af38e6c5bbac81dcd80c3a3c53f4a1');
+        $I->seeLink('Simple Product 2', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=2&cHash=65f2e92995fa7df0eae115ab9767534305e54b973f7ee988c8fa8818eaf8801e');
         $I->dontSee('Simple Product 3', 'a');
         $I->seeLink('Simple Product With Detail Page', '/detail-page-for-simple-product-with-detail-page');
 
         $I->click('Simple Product With Detail Page');
         $I->see('Simple Product With Detail Page', 'h1');
 
-        $I->seeLink('Simple Product 1', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=1&cHash=275cce22d935c04473314c31f46f7ada');
+        $I->seeLink('Simple Product 1', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=1&cHash=a0592042d989ca64fc9bb8593502c30cbcd458a2a4d415dcb75a701227213400');
         $I->dontSee('Simple Product 2', 'a');
         $I->dontSee('Simple Product 3', 'a');
 
@@ -59,9 +59,9 @@ class ProductListCest
     public function testProductListAndDetailViewForConfigurableProducts(Tester $I): void
     {
         $I->amOnUrl('http://127.0.0.1:8080/products/');
-        $I->seeLink('Configurable Product 1', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=5&cHash=4c2d7ef7c3ec394907ad93a1a0434fc8');
+        $I->seeLink('Configurable Product 1', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=5&cHash=31a347dca803764112a31aa21b85c7e9ddd124f69df6b8d3739fb9d431509bfc');
         $I->see('99,99 €');
-        $I->seeLink('Configurable Product 2', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=6&cHash=93520e7d2c5c85e6563ce0e5b8eba102');
+        $I->seeLink('Configurable Product 2', '/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=6&cHash=91f0b865a7cd0161b2aed04e57831294d4874e03da49948d27b9a92f936f7440');
         $I->see('149,49 €');
 
         $I->click('Configurable Product 1');

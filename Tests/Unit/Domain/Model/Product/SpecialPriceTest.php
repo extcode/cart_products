@@ -8,19 +8,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SpecialPriceTest extends UnitTestCase
 {
-    /**
-     * @var SpecialPrice
-     */
-    protected $specialPrice;
+    private SpecialPrice $specialPrice;
 
     public function setUp(): void
     {
-        $this->specialPrice = new SpecialPrice();
-    }
+        parent::setUp();
 
-    public function tearDown(): void
-    {
-        unset($this->specialPrice);
+        $this->specialPrice = new SpecialPrice();
     }
 
     #[Test]

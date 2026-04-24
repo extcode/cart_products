@@ -13,10 +13,10 @@ namespace Extcode\CartProducts\EventListener\Order\Stock;
 
 use Extcode\Cart\Event\Order\EventInterface;
 use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class FlushCache
 {
+    public function __construct(private readonly CacheManager $cacheManager) {}
     public function __invoke(EventInterface $event): void
     {
         $cartProducts = $event->getCart()->getProducts();
@@ -26,7 +26,7 @@ class FlushCache
                 $cartProductId = $cartProduct->getProductId();
 
                 $cacheTag = 'tx_cartproducts_product_' . $cartProductId;
-                $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
+                $cacheManager = $this->cacheManager;
                 $cacheManager->flushCachesInGroupByTag('pages', $cacheTag);
             }
         }

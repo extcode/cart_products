@@ -10,18 +10,18 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  */
 
 use Extcode\Cart\Domain\Model\FrontendUserGroup;
-use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Attribute\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class QuantityDiscount extends AbstractEntity
 {
-    #[Validate(['validator' => 'NotEmpty'])]
+    #[Validate(validator: 'NotEmpty')]
     protected float $price = 0.0;
 
     /**
      * Quantity (lower bound)
      */
-    #[Validate(['validator' => 'NotEmpty'])]
+    #[Validate(validator: 'NotEmpty')]
     protected int $quantity = 0;
 
     protected ?FrontendUserGroup $frontendUserGroup = null;

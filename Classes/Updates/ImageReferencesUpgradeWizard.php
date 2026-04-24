@@ -11,17 +11,17 @@ namespace Extcode\CartProducts\Updates;
  * LICENSE file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Attribute\UpgradeWizard;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Install\Attribute\UpgradeWizard;
-use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
+use TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface;
 
 #[UpgradeWizard('cartProducts_updateImageReferences')]
-final class ImageReferencesUpgradeWizard implements UpgradeWizardInterface
+final readonly class ImageReferencesUpgradeWizard implements UpgradeWizardInterface
 {
     public const TABLE_NAME = 'sys_file_reference';
     public const IDENTIFIER = 'tx_cartproducts_domain_model_product_product';
+    public function __construct(private ConnectionPool $connectionPool) {}
 
     public function getTitle(): string
     {
@@ -35,7 +35,7 @@ final class ImageReferencesUpgradeWizard implements UpgradeWizardInterface
 
     public function executeUpdate(): bool
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_reference');
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable('sys_file_reference');
         $queryBuilder->getRestrictions()->removeAll();
         $queryBuilder
             ->update(self::TABLE_NAME)
@@ -57,7 +57,7 @@ final class ImageReferencesUpgradeWizard implements UpgradeWizardInterface
 
     public function updateNecessary(): bool
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable(self::TABLE_NAME);
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLE_NAME);
         $queryBuilder->getRestrictions()->removeAll();
         $count = $queryBuilder->count('uid')
             ->from(self::TABLE_NAME)->where(
