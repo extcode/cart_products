@@ -44,6 +44,11 @@ final readonly class WatchlistItemFactory
             return null;
         }
 
-        return $this->productRepository->findFirstProductImageUid($product['uid']);
+        $firstProductImageUid = $this->productRepository->findFirstProductImageUid($product['uid']);
+        if (is_int($firstProductImageUid)) {
+            return $firstProductImageUid;
+        }
+
+        return null;
     }
 }

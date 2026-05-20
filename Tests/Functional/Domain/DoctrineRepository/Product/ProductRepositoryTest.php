@@ -62,6 +62,30 @@ class ProductRepositoryTest extends FunctionalTestCase
     }
 
     #[Test]
+    public function returnsFalseIfProductHasOnlyOneDeaktivatedImage(): void
+    {
+        $this->importPhpDataSet(__DIR__ . '/Fixtures/OneImageFileReference.php');
+
+        $this
+            ->getConnectionPool()
+            ->getConnectionForTable('sys_file_reference')
+            ->update(
+                'sys_file_reference',
+                [
+                    'deleted' => 1,
+                ],
+                [
+                    'uid' => 1,
+                ]
+            )
+        ;
+
+        self::assertFalse(
+            $this->productRepository->findFirstProductImageUid(1)
+        );
+    }
+
+    #[Test]
     public function returnsFirstUidOfImageIfProductHasMoreThanOneImage(): void
     {
         $this->importPhpDataSet(__DIR__ . '/Fixtures/TwoImageFileReference.php');
