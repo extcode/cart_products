@@ -40,18 +40,10 @@ final readonly class WatchlistItemFactory
 
     private function getFirstImageReference(array $product): ?int
     {
-        if (is_string($product['images'] ?? null) === false || $product['images'] === '') {
+        if ((int)$product['images'] === 0) {
             return null;
         }
 
-        $images = explode(',', $product['images']);
-
-        $image = array_pop($images);
-
-        if (is_numeric($image) === false) {
-            return null;
-        }
-
-        return (int)$image;
+        return $this->productRepository->findFirstProductImageUid($product['uid']);
     }
 }
