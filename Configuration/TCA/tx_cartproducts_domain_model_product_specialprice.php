@@ -27,7 +27,6 @@ return [
             'endtime' => 'endtime',
             'fe_group' => 'frontend_user_group',
         ],
-        'searchFields' => 'price',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/Product/SpecialPrice.png',
     ],
     'types' => [

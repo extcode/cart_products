@@ -30,7 +30,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'sku,title,teaser,description,price,',
         'iconfile' => 'EXT:cart_products/Resources/Public/Icons/tx_cartproducts_domain_model_product_product.svg',
     ],
     'types' => [

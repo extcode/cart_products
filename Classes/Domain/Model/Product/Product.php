@@ -16,8 +16,8 @@ use Extcode\Cart\Domain\Model\Product\ServiceAttributeTrait;
 use Extcode\Cart\Domain\Model\Product\TagTrait;
 use Extcode\CartProducts\Domain\Model\Category;
 use Extcode\CartProducts\Domain\Model\TtContent;
-use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Attribute\ORM\Cascade;
+use TYPO3\CMS\Extbase\Attribute\ORM\Lazy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Product extends AbstractProduct
@@ -48,13 +48,13 @@ class Product extends AbstractProduct
     /**
      * @var ObjectStorage<SpecialPrice>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade(value: 'remove')]
     protected ObjectStorage $specialPrices;
 
     /**
      * @var ObjectStorage<QuantityDiscount>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade(value: 'remove')]
     protected ObjectStorage $quantityDiscounts;
 
     protected int $taxClassId = 1;
@@ -62,7 +62,7 @@ class Product extends AbstractProduct
     /**
      * @var ObjectStorage<FeVariant>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade(value: 'remove')]
     protected ObjectStorage $feVariants;
 
     /**

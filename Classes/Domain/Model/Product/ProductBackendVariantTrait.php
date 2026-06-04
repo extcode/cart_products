@@ -9,7 +9,7 @@ namespace Extcode\CartProducts\Domain\Model\Product;
  * LICENSE file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Attribute\ORM\Cascade;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 trait ProductBackendVariantTrait
@@ -23,7 +23,7 @@ trait ProductBackendVariantTrait
     /**
      * @var ObjectStorage<BeVariant>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade(value: 'remove')]
     protected ObjectStorage $beVariants;
 
     public function getBeVariantAttribute1(): ?BeVariantAttribute

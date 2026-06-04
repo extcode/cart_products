@@ -17,18 +17,18 @@ CREATE TABLE tx_cartproducts_domain_model_product_product (
     min_number_in_order int(11) unsigned DEFAULT '0' NOT NULL,
     max_number_in_order int(11) unsigned DEFAULT '0' NOT NULL,
 
-    price double(11,2) DEFAULT '0.00' NOT NULL,
+    price decimal(17,5) DEFAULT '0.00' NOT NULL,
     is_net_price tinyint(4) unsigned DEFAULT '0' NOT NULL,
     special_prices int(11) unsigned DEFAULT '0' NOT NULL,
     quantity_discounts int(11) unsigned DEFAULT '0' NOT NULL,
-    price_measure double(11,2) DEFAULT '0.00' NOT NULL,
+    price_measure decimal(17,5) DEFAULT '0.00' NOT NULL,
     price_measure_unit varchar(8) DEFAULT '' NOT NULL,
-    base_price_measure double(11,2) DEFAULT '0.00' NOT NULL,
+    base_price_measure decimal(17,5) DEFAULT '0.00' NOT NULL,
     base_price_measure_unit varchar(8) DEFAULT '' NOT NULL,
 
-    service_attribute1 double(11,2) DEFAULT '0.00' NOT NULL,
-    service_attribute2 double(11,2) DEFAULT '0.00' NOT NULL,
-    service_attribute3 double(11,2) DEFAULT '0.00' NOT NULL,
+    service_attribute1 decimal(17,5) DEFAULT '0.00' NOT NULL,
+    service_attribute2 decimal(17,5) DEFAULT '0.00' NOT NULL,
+    service_attribute3 decimal(17,5) DEFAULT '0.00' NOT NULL,
 
     handle_stock tinyint(4) unsigned DEFAULT '0' NOT NULL,
     handle_stock_in_variants tinyint(4) unsigned DEFAULT '0' NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE tx_cartproducts_domain_model_product_specialprice (
 
     frontend_user_group int(11) unsigned DEFAULT '0' NOT NULL,
 
-    price double(11,2) DEFAULT '0.00' NOT NULL,
+    price decimal(17,5) DEFAULT '0.00' NOT NULL,
 
     tstamp int(11) unsigned DEFAULT '0' NOT NULL,
     crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE tx_cartproducts_domain_model_product_quantitydiscount (
 
     frontend_user_group int(11) unsigned DEFAULT '0' NOT NULL,
 
-    price double(11,2) DEFAULT '0.00' NOT NULL,
+    price decimal(17,5) DEFAULT '0.00' NOT NULL,
     quantity int(11) unsigned DEFAULT '0' NOT NULL,
 
     tstamp int(11) unsigned DEFAULT '0' NOT NULL,
@@ -304,12 +304,12 @@ CREATE TABLE tx_cartproducts_domain_model_product_bevariant (
     be_variant_attribute_option2 int(11) unsigned DEFAULT '0' NOT NULL,
     be_variant_attribute_option3 int(11) unsigned DEFAULT '0' NOT NULL,
 
-    price double(11,2) DEFAULT '0.00' NOT NULL,
+    price decimal(17,5) DEFAULT '0.00' NOT NULL,
 
     special_prices int(11) unsigned DEFAULT '0' NOT NULL,
 
     price_calc_method int(11) unsigned DEFAULT '0' NOT NULL,
-    price_measure double(11,2) DEFAULT '0.00' NOT NULL,
+    price_measure decimal(17,5) DEFAULT '0.00' NOT NULL,
     price_measure_unit varchar(8) DEFAULT '' NOT NULL,
 
     stock int(11) unsigned DEFAULT '0' NOT NULL,

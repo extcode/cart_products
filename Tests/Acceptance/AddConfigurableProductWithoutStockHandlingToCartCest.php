@@ -17,7 +17,7 @@ class AddConfigurableProductWithoutStockHandlingToCartCest
 {
     public function testAddDifferentItemsToCart(Tester $I): void
     {
-        $I->amOnUrl('http://127.0.0.1:8080/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=5&cHash=4c2d7ef7c3ec394907ad93a1a0434fc8');
+        $I->amOnUrl('http://127.0.0.1:8080/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=5&cHash=31a347dca803764112a31aa21b85c7e9ddd124f69df6b8d3739fb9d431509bfc');
 
         $I->see('Configurable Product 1', 'h1');
         $I->dontSeeElement('#product-price .in-stock');

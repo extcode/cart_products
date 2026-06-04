@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Extcode\CartProducts\ViewHelpers\Link;
 
 use Extcode\CartProducts\Domain\Model\Product\Product;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /*
@@ -26,14 +26,17 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
      */
     protected $tagName = 'a';
 
+    public function __construct(
+        private readonly UriBuilder $uriBuilder,
+        private readonly ConnectionPool $connectionPool
+    ) {
+        parent::__construct();
+    }
+
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('name', 'string', 'Specifies the name of an anchor');
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
-        $this->registerTagAttribute('rev', 'string', 'Specifies the relationship between the linked document and the current document');
-        $this->registerTagAttribute('target', 'string', 'Specifies where to open the linked document');
+
         $this->registerArgument('action', 'string', 'Target action');
         $this->registerArgument('controller', 'string', 'Target controller. If NULL current controllerName is used');
         $this->registerArgument('extensionName', 'string', 'Target Extension Name (without `tx_` prefix and no underscores). If NULL the current extension name is used');
@@ -58,8 +61,12 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var RenderingContext $renderingContext */
         $renderingContext = $this->renderingContext;
-        $request = $renderingContext->getRequest();
-        if (!$request instanceof RequestInterface) {
+        $request = null;
+        if ($renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            $request = $renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+
+        if (($request instanceof RequestInterface) === false) {
             throw new \RuntimeException(
                 'ViewHelper f:link.action can be used only in extbase context and needs a request implementing extbase RequestInterface.',
                 1639818540
@@ -101,7 +108,7 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
             // A missing $pageUid means the product does not have a defined detail view via category or flexform
             // In this case the $pluginName of the extbase context should be used.
             if (!$pageUid) {
-                $pluginName = $renderingContext->getRequest()->getAttributes()['extbase']->getPluginName();
+                $pluginName = $request->getAttributes()['extbase']->getPluginName();
             }
 
             $action = 'show';
@@ -110,7 +117,7 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
 
         $parameters = $this->arguments['arguments'];
 
-        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $uriBuilder = $this->uriBuilder;
         $uriBuilder
             ->reset()
             ->setRequest($request)
@@ -151,7 +158,7 @@ class ProductViewHelper extends AbstractTagBasedViewHelper
      */
     protected function getProductPage(Product $product)
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable('pages');
 
         return $queryBuilder->select('*')
             ->from('pages')

@@ -17,7 +17,7 @@ class AddConfigurableProductWithStockHandlingToCartCest
 {
     public function testAddDifferentItemsWithinAvailableAmountToCart(Tester $I): void
     {
-        $I->amOnUrl('http://127.0.0.1:8080/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=6&cHash=93520e7d2c5c85e6563ce0e5b8eba102');
+        $I->amOnUrl('http://127.0.0.1:8080/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=6&cHash=91f0b865a7cd0161b2aed04e57831294d4874e03da49948d27b9a92f936f7440');
 
         $I->see('Configurable Product 2', 'h1');
         $I->see(' ', '#product-price .in-stock');
@@ -61,7 +61,7 @@ class AddConfigurableProductWithStockHandlingToCartCest
 
     public function testAddMoreItemsThanInStockOfASimpleProductToCart(Tester $I): void
     {
-        $I->amOnUrl('http://127.0.0.1:8080/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=6&cHash=93520e7d2c5c85e6563ce0e5b8eba102');
+        $I->amOnUrl('http://127.0.0.1:8080/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=6&cHash=91f0b865a7cd0161b2aed04e57831294d4874e03da49948d27b9a92f936f7440');
 
         $I->see('Configurable Product 2', 'h1');
         $I->see(' ', '#product-price .in-stock');
@@ -83,7 +83,7 @@ class AddConfigurableProductWithStockHandlingToCartCest
 
     public function testAddOneAndThanMoreItemsThanInStockOfASimpleProductToCart(Tester $I): void
     {
-        $I->amOnUrl('http://127.0.0.1:8080/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=6&cHash=93520e7d2c5c85e6563ce0e5b8eba102');
+        $I->amOnUrl('http://127.0.0.1:8080/product?tx_cartproducts_showproduct%5Baction%5D=show&tx_cartproducts_showproduct%5Bcontroller%5D=Product&tx_cartproducts_showproduct%5Bproduct%5D=6&cHash=91f0b865a7cd0161b2aed04e57831294d4874e03da49948d27b9a92f936f7440');
 
         $I->see('Configurable Product 2', 'h1');
         $I->see(' ', '#product-price .in-stock');

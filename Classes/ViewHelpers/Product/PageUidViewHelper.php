@@ -19,7 +19,7 @@ class PageUidViewHelper extends AbstractViewHelper
         private readonly PageRepository $pageRepository,
     ) {}
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -54,6 +54,6 @@ class PageUidViewHelper extends AbstractViewHelper
             return $this->arguments['settings']['showPageUids'];
         }
 
-        return $GLOBALS['TSFE']->id;
+        return $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.page.information')->getId();
     }
 }
