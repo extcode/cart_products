@@ -36,6 +36,33 @@ class ProductRepository
             ->fetchAssociative();
     }
 
+    public function findFirstProductImageUid(int $uid): int|bool
+    {
+        $queryBuilder = $this
+            ->connectionPool
+            ->getConnectionForTable('sys_file_reference')
+            ->createQueryBuilder()
+        ;
+
+        $queryBuilder
+            ->select('uid')
+            ->from('sys_file_reference')
+            ->where(
+                $queryBuilder->expr()->and(
+                    $queryBuilder->expr()->eq('tablenames', $queryBuilder->createNamedParameter(self::TABLENAME)),
+                    $queryBuilder->expr()->eq('fieldname', $queryBuilder->createNamedParameter('images')),
+                    $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($uid)),
+                )
+            )
+            ->orderBy('sorting_foreign')
+            ->setMaxResults(1);
+
+        return $queryBuilder
+            ->executeQuery()
+            ->fetchOne()
+        ;
+    }
+
     public function getStock(int $uid): int
     {
         $queryBuilder = $this->getQueryBuilder();
