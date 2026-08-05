@@ -40,7 +40,9 @@
             "typo3/class-alias-loader": true,
             "sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": true,
             "phpstan/extension-installer": true
-        }
+        },
+        "lock": false,
+        "sort-packages": true
     },
     "extra": {
         "typo3/cms": {
@@ -48,13 +50,10 @@
             "web-dir": ".build/public"
         }
     },
-    "version": "8.0.0",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-pdo": "*",
-        "extcode/cart": "dev-main as 12.0.0",
+        "extcode/cart": "^12.0",
         "typo3/cms-core": "^14.3",
         "typo3/cms-extbase": "^14.3",
         "typo3/cms-fluid": "^14.3"
