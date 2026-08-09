@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Cache\CacheManager;
 class DataHandler
 {
     public function __construct(private readonly CacheManager $cacheManager) {}
+
     /**
      * Flushes the cache if a news record was edited.
      * This happens on two levels: by UID and by PID.

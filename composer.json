@@ -40,7 +40,9 @@
             "typo3/class-alias-loader": true,
             "sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": true,
             "phpstan/extension-installer": true
-        }
+        },
+        "lock": false,
+        "sort-packages": true
     },
     "extra": {
         "typo3/cms": {
@@ -48,13 +50,10 @@
             "web-dir": ".build/public"
         }
     },
-    "version": "8.0.0",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-pdo": "*",
-        "extcode/cart": "dev-main as 12.0.0",
+        "extcode/cart": "^12.0",
         "typo3/cms-core": "^14.3",
         "typo3/cms-extbase": "^14.3",
         "typo3/cms-fluid": "^14.3"
@@ -64,6 +63,7 @@
         "codeception/codeception": "^5.0",
         "codeception/module-db": "^3.1",
         "codeception/module-webdriver": "^4.0",
+        "extcode/testing-framework": "dev-main",
         "friendsofphp/php-cs-fixer": "^3.64",
         "helmich/typo3-typoscript-lint": "^3.1",
         "phpstan/extension-installer": "^1.4",
@@ -76,7 +76,6 @@
         "typo3/cms-fluid-styled-content": "^14.3",
         "typo3/cms-install": "^14.3",
         "typo3/cms-reactions": "^14.3",
-        "typo3/testing-framework": "^9.3",
         "werkraummedia/watchlist": "^3.0",
         "ssch/typo3-rector": "^3.11"
     },
