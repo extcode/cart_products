@@ -44,6 +44,8 @@ class Product extends AbstractProduct
     protected bool $isNetPrice = false;
 
     protected float $price = 0.0;
+    
+    protected $feGroup = '';
 
     /**
      * @var ObjectStorage<SpecialPrice>
@@ -466,5 +468,15 @@ class Product extends AbstractProduct
         }
 
         return $minPrice;
+    }
+
+    public function getFeGroup(): string
+    {
+        return $this->feGroup;
+    }
+
+    public function setFeGroup($feGroup): void
+    {
+        $this->feGroup = $feGroup;
     }
 }
