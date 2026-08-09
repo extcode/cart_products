@@ -63,6 +63,7 @@
         "codeception/codeception": "^5.0",
         "codeception/module-db": "^3.1",
         "codeception/module-webdriver": "^4.0",
+        "extcode/testing-framework": "dev-main",
         "friendsofphp/php-cs-fixer": "^3.64",
         "helmich/typo3-typoscript-lint": "^3.1",
         "phpstan/extension-installer": "^1.4",
@@ -75,7 +76,6 @@
         "typo3/cms-fluid-styled-content": "^14.3",
         "typo3/cms-install": "^14.3",
         "typo3/cms-reactions": "^14.3",
-        "typo3/testing-framework": "^9.3",
         "werkraummedia/watchlist": "^3.0",
         "ssch/typo3-rector": "^3.11"
     },

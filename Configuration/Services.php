@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Extcode\CartProducts\Configuration;
-
 use Extcode\CartProducts\Handler\WatchlistItemHandler;
 use Extcode\CartProducts\Hooks\DataHandler;
 use Extcode\CartProducts\Reaction\UpdateStockReaction;

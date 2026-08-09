@@ -13,7 +13,7 @@ namespace Extcode\CartProducts\Tests\Acceptance\Support;
 
 use Codappix\Typo3PhpDatasets\PhpDataSet;
 use Codeception\Event\SuiteEvent;
-use TYPO3\TestingFramework\Core\Acceptance\Extension\BackendEnvironment;
+use Extcode\TestingFramework\Core\Acceptance\Extension\BackendEnvironment;
 
 final class Environment extends BackendEnvironment
 {
