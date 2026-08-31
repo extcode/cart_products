@@ -101,14 +101,11 @@ class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
                 $record['list_type'],
                 $flexForm['switchableControllerActions']
             );
-            $allowedSettings = $this->getAllowedSettingsFromFlexForm($targetListType);
 
             // Remove flexform data which do not exist in flexform of new plugin
             foreach ($flexFormData['data'] as $sheetKey => $sheetData) {
-                foreach ($sheetData['lDEF'] as $settingName => $setting) {
-                    if (!in_array($settingName, $allowedSettings, true)) {
-                        unset($flexFormData['data'][$sheetKey]['lDEF'][$settingName]);
-                    }
+                if (isset($sheetData['lDEF']['switchableControllerActions'])) {
+                    unset($flexFormData['data'][$sheetKey]['lDEF']['switchableControllerActions']);
                 }
 
                 // Remove empty sheets
@@ -161,27 +158,6 @@ class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
         }
 
         return '';
-    }
-
-    protected function getAllowedSettingsFromFlexForm(string $listType): array
-    {
-        if (isset($GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds'][$listType . ',list']) === false) {
-            return [];
-        }
-
-        $flexFormFile = $GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds'][$listType . ',list'];
-        $flexFormContent = file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim((string)$flexFormFile), 5)));
-        $flexFormData = GeneralUtility::xml2array($flexFormContent);
-
-        // Iterate each sheet and extract all settings
-        $settings = [];
-        foreach ($flexFormData['sheets'] as $sheet) {
-            foreach ($sheet['ROOT']['el'] as $setting => $tceForms) {
-                $settings[] = $setting;
-            }
-        }
-
-        return $settings;
     }
 
     /**
