@@ -29,7 +29,7 @@ class AddConfigurableProductWithoutStockHandlingToCartCest
         $I->selectOption('tx_cart_cart[beVariants][1]', 'red');
         $I->click('#product-5.add-to-cart-form input.btn[type="submit"]');
 
-        $I->see('Item was added to cart.', '#product-5 .form-message .form-success');
+        $I->waitForText('Item was added to cart.', 5, '#product-5 .form-message .form-success');
         $I->dontSeeElement('#product-5 .form-message .form-error');
 
         $I->waitForElementNotVisible('#product-5 .form-message .form-success');
@@ -39,7 +39,7 @@ class AddConfigurableProductWithoutStockHandlingToCartCest
         $I->selectOption('tx_cart_cart[beVariants][1]', 'green');
         $I->click('#product-5.add-to-cart-form input.btn[type="submit"]');
 
-        $I->see('2 Items were added to cart.', '#product-5 .form-message .form-success');
+        $I->waitForText('2 Items were added to cart.', 5, '#product-5 .form-message .form-success');
         $I->dontSeeElement('#product-5 .form-message .form-error');
 
         $I->waitForElementNotVisible('#product-5 .form-message .form-success');
@@ -49,7 +49,7 @@ class AddConfigurableProductWithoutStockHandlingToCartCest
         $I->selectOption('tx_cart_cart[beVariants][1]', 'red');
         $I->click('#product-5.add-to-cart-form input.btn[type="submit"]');
 
-        $I->see('100 Items were added to cart.', '#product-5 .form-message .form-success');
+        $I->waitForText('100 Items were added to cart.', 5, '#product-5 .form-message .form-success');
         $I->dontSeeElement('#product-5 .form-message .form-error');
 
         $I->waitForElementNotVisible('#product-5 .form-message .form-success');
