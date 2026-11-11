@@ -37,7 +37,7 @@ let
     ];
 
     text = ''
-      composer project:cgl
+      "$PROJECT_ROOT/Build/Scripts/cgl.sh"
     '';
   };
 
@@ -50,7 +50,7 @@ let
     ];
 
     text = ''
-      composer project:cgl:fix
+      "$PROJECT_ROOT/Build/Scripts/cgl.sh" --fix
     '';
   };
 
@@ -63,7 +63,7 @@ let
     ];
 
     text = ''
-      composer project:lint:php
+      "$PROJECT_ROOT/Build/Scripts/lint-php.sh"
     '';
   };
 
@@ -76,7 +76,7 @@ let
     ];
 
     text = ''
-      composer project:phpstan
+      "$PROJECT_ROOT/Build/Scripts/phpstan.sh"
     '';
   };
 
@@ -89,7 +89,7 @@ let
     ];
     text = ''
       project-install
-      composer project:test:unit
+      "$PROJECT_ROOT/Build/Scripts/phpunit.sh" unit
     '';
   };
 
@@ -102,7 +102,7 @@ let
     ];
     text = ''
       project-install
-      composer project:test:functional
+      "$PROJECT_ROOT/Build/Scripts/phpunit.sh" functional
     '';
   };
 
@@ -130,18 +130,7 @@ let
     ];
     text = ''
       project-install
-
-      mkdir -p "$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance"
-      mkdir -p "$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance-logs"
-      mkdir -p "$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance-reports"
-      mkdir -p "$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance-sqlite-dbs"
-
-      export INSTANCE_PATH="$PROJECT_ROOT/.build/public/typo3temp/var/tests/acceptance"
-
-      ./.build/bin/codecept run
-
-      pgrep -f "php -S" | xargs -r kill
-      pgrep -f "geckodriver" | xargs -r kill
+      "$PROJECT_ROOT/Build/Scripts/acceptance.sh" "$@"
     '';
   };
 
@@ -149,6 +138,9 @@ in pkgs.mkShellNoCC {
   name = "TYPO3 Extension extcode/cart-products";
   buildInputs = [
     pkgs.cacert
+    pkgs.firefox
+    pkgs.geckodriver
+    pkgs.procps
     php
     composer
     projectInstall
