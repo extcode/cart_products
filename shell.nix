@@ -37,7 +37,7 @@ let
     ];
 
     text = ''
-      composer project:cgl
+      "$PROJECT_ROOT/Build/Scripts/cgl.sh"
     '';
   };
 
@@ -50,7 +50,7 @@ let
     ];
 
     text = ''
-      composer project:cgl:fix
+      "$PROJECT_ROOT/Build/Scripts/cgl.sh" --fix
     '';
   };
 
@@ -63,7 +63,7 @@ let
     ];
 
     text = ''
-      composer project:lint:php
+      "$PROJECT_ROOT/Build/Scripts/lint-php.sh"
     '';
   };
 
@@ -76,7 +76,7 @@ let
     ];
 
     text = ''
-      composer project:phpstan
+      "$PROJECT_ROOT/Build/Scripts/phpstan.sh"
     '';
   };
 
@@ -89,7 +89,7 @@ let
     ];
     text = ''
       project-install
-      composer project:test:unit
+      "$PROJECT_ROOT/Build/Scripts/phpunit.sh" unit
     '';
   };
 
@@ -102,7 +102,7 @@ let
     ];
     text = ''
       project-install
-      composer project:test:functional
+      "$PROJECT_ROOT/Build/Scripts/phpunit.sh" functional
     '';
   };
 
