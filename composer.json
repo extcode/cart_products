@@ -75,7 +75,11 @@
         "project:lint:typoscript": "typoscript-lint -c Build/typoscriptlint.yaml Configuration",
         "project:phpstan": "Build/Scripts/phpstan.sh",
         "project:test:unit": "Build/Scripts/phpunit.sh unit",
-        "project:test:functional": "Build/Scripts/phpunit.sh functional"
+        "project:test:functional": "Build/Scripts/phpunit.sh functional",
+        "project:test:acceptance": [
+            "Composer\\Config::disableProcessTimeout",
+            "Build/Scripts/acceptance.sh"
+        ]
     },
     "suggest": {
         "werkraummedia/watchlist": "^3.0"
