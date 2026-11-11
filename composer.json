@@ -63,7 +63,7 @@
         "codeception/codeception": "^5.0",
         "codeception/module-db": "^3.1",
         "codeception/module-webdriver": "^4.0",
-        "extcode/testing-framework": "dev-main",
+        "extcode/testing-framework": "^1.0",
         "friendsofphp/php-cs-fixer": "^3.64",
         "helmich/typo3-typoscript-lint": "^3.1",
         "phpstan/extension-installer": "^1.4",
