@@ -36,7 +36,7 @@ let
     ];
 
     text = ''
-      ./vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --diff
+      "$PROJECT_ROOT/Build/Scripts/cgl.sh"
     '';
   };
 
@@ -48,7 +48,7 @@ let
     ];
 
     text = ''
-      ./vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php
+      "$PROJECT_ROOT/Build/Scripts/cgl.sh" --fix
     '';
   };
 
@@ -60,7 +60,7 @@ let
     ];
 
     text = ''
-      find ./*.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+      "$PROJECT_ROOT/Build/Scripts/lint-php.sh"
     '';
   };
 
@@ -72,7 +72,7 @@ let
     ];
 
     text = ''
-      ./vendor/bin/phpstan analyse -c Build/phpstan.neon --memory-limit 256M
+      "$PROJECT_ROOT/Build/Scripts/phpstan.sh"
     '';
   };
 
@@ -84,7 +84,7 @@ let
     ];
     text = ''
       project-install
-      ./vendor/bin/phpunit -c Build/phpunit.xml.dist --testsuite unit --display-warnings --display-deprecations --display-errors
+      "$PROJECT_ROOT/Build/Scripts/phpunit.sh" unit
     '';
   };
 
@@ -96,7 +96,7 @@ let
     ];
     text = ''
       project-install
-      ./vendor/bin/phpunit -c Build/phpunit.xml.dist --testsuite functional --display-warnings --display-deprecations --display-errors
+      "$PROJECT_ROOT/Build/Scripts/phpunit.sh" functional
     '';
   };
 
