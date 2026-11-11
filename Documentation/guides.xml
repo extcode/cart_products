@@ -8,7 +8,7 @@
                edit-on-github-branch="main"
                edit-on-github="extcode/cart_products"
                typo3-core-preferred="stable"
-               interlink-shortcode="extcode/cart_products"
+               interlink-shortcode="extcode/cart-products"
     />
     <project title="Cart Products"
              release="8.0.0"
