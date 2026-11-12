@@ -37,12 +37,14 @@
             "typo3/cms-composer-installers": true,
             "typo3/class-alias-loader": true,
             "sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": true
-        }
+        },
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
     },
     "extra": {
         "typo3/cms": {
             "extension-key": "cart_products",
-            "web-dir": ".build/web"
+            "web-dir": ".Build/public"
         }
     },
     "require": {

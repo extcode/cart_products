@@ -92,7 +92,7 @@ jobs:
           composer require --no-interaction --prefer-dist --no-progress "typo3/cms-core:${{ matrix.typo3-version }}" "typo3/cms-extbase:${{ matrix.typo3-version }}" "typo3/cms-frontend:${{ matrix.typo3-version }}"
 
       - name: Build codeception tester
-        run: vendor/bin/codecept build
+        run: .Build/bin/codecept build
 
       - name: Code Quality (by PHPStan)
         run: Build/Scripts/phpstan.sh
@@ -162,4 +162,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: acceptance-reports-php${{ matrix.php-version }}
-          path: .build/web/typo3temp/var/tests/acceptance-reports
+          path: .Build/public/typo3temp/var/tests/acceptance-reports

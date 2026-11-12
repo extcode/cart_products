@@ -1,4 +1,4 @@
-.build
+.Build
 composer.lock
 
 .php-cs-fixer.cache
@@ -12,7 +12,6 @@ Documentation-GENERATED-temp/
 .idea
 
 var/
-vendor/
 
 phpunit.coverage.xml
 phpunit.report.xml
