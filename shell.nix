@@ -36,7 +36,7 @@ let
     ];
 
     text = ''
-      ./vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php -v --dry-run --diff
+      "$PROJECT_ROOT/Build/Scripts/cgl.sh"
     '';
   };
 
@@ -48,7 +48,7 @@ let
     ];
 
     text = ''
-      ./vendor/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.dist.php
+      "$PROJECT_ROOT/Build/Scripts/cgl.sh" --fix
     '';
   };
 
@@ -60,7 +60,7 @@ let
     ];
 
     text = ''
-      find ./*.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+      "$PROJECT_ROOT/Build/Scripts/lint-php.sh"
     '';
   };
 
@@ -72,7 +72,7 @@ let
     ];
 
     text = ''
-      ./vendor/bin/phpstan analyse -c Build/phpstan.neon --memory-limit 256M
+      "$PROJECT_ROOT/Build/Scripts/phpstan.sh"
     '';
   };
 
@@ -84,7 +84,7 @@ let
     ];
     text = ''
       project-install
-      ./vendor/bin/phpunit -c Build/phpunit.xml.dist --testsuite unit --display-warnings --display-deprecations --display-errors
+      "$PROJECT_ROOT/Build/Scripts/phpunit.sh" unit
     '';
   };
 
@@ -96,7 +96,7 @@ let
     ];
     text = ''
       project-install
-      ./vendor/bin/phpunit -c Build/phpunit.xml.dist --testsuite functional --display-warnings --display-deprecations --display-errors
+      "$PROJECT_ROOT/Build/Scripts/phpunit.sh" functional
     '';
   };
 
@@ -124,24 +124,16 @@ let
     ];
     text = ''
       project-install
-
-      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance"
-      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-logs"
-      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-reports"
-      mkdir -p "$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance-sqlite-dbs"
-
-      export INSTANCE_PATH="$PROJECT_ROOT/.build/web/typo3temp/var/tests/acceptance"
-
-      ./vendor/bin/codecept run
-
-      pgrep -f "php -S" | xargs -r kill
-      pgrep -f "geckodriver" | xargs -r kill
+      "$PROJECT_ROOT/Build/Scripts/acceptance.sh" "$@"
     '';
   };
 
 in pkgs.mkShellNoCC {
   name = "TYPO3 Extension extcode/cart-products";
   buildInputs = [
+    pkgs.firefox
+    pkgs.geckodriver
+    pkgs.procps
     php
     composer
     projectInstall

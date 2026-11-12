@@ -28,6 +28,9 @@ class CategoryRepository extends Repository
         $categories = [];
         // Transform categories to array
         foreach ($localCategories as $localCategory) {
+            if (($localCategory instanceof Category) === false) {
+                continue;
+            }
             $newCategory = [
                 'uid' => $localCategory->getUid(),
                 'title' => $localCategory->getTitle(),
