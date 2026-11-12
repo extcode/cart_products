@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.0">
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="messages" date="2019-11-21T00:45:00Z"
           product-name="cart_products">
         <header/>
@@ -29,20 +29,8 @@
                 <source>Sender email address for email to the Buyer</source>
             </trans-unit>
 
-            <trans-unit id="tx_cartproducts_domain_model_product_product.title">
-                <source>Title</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.sku">
-                <source>SKU</source>
-            </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_product_product.path_segment">
                 <source>URL segment</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.is_net_price">
-                <source>Price (net)</source>
-            </trans-unit>
-            <trans-unit id="tx_cartproducts_domain_model_product_product.price">
-                <source>Price</source>
             </trans-unit>
             <trans-unit id="tx_cartproducts_domain_model_product_product.special_prices">
                 <source>Special Prices</source>
