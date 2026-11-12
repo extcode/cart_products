@@ -73,8 +73,16 @@
     "scripts": {
         "project:cgl": "Build/Scripts/cgl.sh",
         "project:cgl:fix": "Build/Scripts/cgl.sh --fix",
+        "project:lint": [
+            "@project:lint:php",
+            "@project:lint:typoscript",
+            "@project:lint:xml",
+            "@project:lint:yaml"
+        ],
         "project:lint:php": "Build/Scripts/lint-php.sh",
-        "project:lint:typoscript": "typoscript-lint -c Build/typoscriptlint.yaml Configuration",
+        "project:lint:typoscript": "Build/Scripts/lint-typoscript.sh",
+        "project:lint:xml": "Build/Scripts/lint-xml.sh",
+        "project:lint:yaml": "Build/Scripts/lint-yaml.sh",
         "project:phpstan": "Build/Scripts/phpstan.sh",
         "project:test:unit": "Build/Scripts/phpunit.sh unit",
         "project:test:functional": "Build/Scripts/phpunit.sh functional",
