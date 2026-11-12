@@ -27,12 +27,18 @@ plugin.tx_cartproducts {
             media {
                 image {
                     size {
-                        small.maxWidth = 100
-                        small.maxHeight =
-                        medium.maxWidth = 300
-                        medium.maxHeight =
-                        large.maxWidth = 600
-                        large.maxHeight =
+                        small {
+                            maxWidth = 100
+                            maxHeight =
+                        }
+                        medium {
+                            maxWidth = 300
+                            maxHeight =
+                        }
+                        large {
+                            maxWidth = 600
+                            maxHeight =
+                        }
                     }
                 }
             }
@@ -42,30 +48,34 @@ plugin.tx_cartproducts {
     }
 }
 
-lib.cartProduct = COA
-lib.cartProduct.showForm = USER
-lib.cartProduct.showForm {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    vendorName = Extcode
-    extensionName = CartProducts
-    pluginName = ProductPartial
+lib {
+    cartProduct = COA
+    cartProduct {
+        showForm = USER
+        showForm {
+            userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+            vendorName = Extcode
+            extensionName = CartProducts
+            pluginName = ProductPartial
 
-    controller = Product
-    action = showForm
+            controller = Product
+            action = showForm
 
-    product = TEXT
-    product.value.dataWrap = {field: productUid}
+            product = TEXT
+            product.value.dataWrap = {field: productUid}
 
-    settings =< plugin.tx_cartproducts.settings
-    persistence =< plugin.tx_cartproducts.persistence
-    view =< plugin.tx_cartproducts.view
-    update =< plugin.tx_cartproducts.update
-}
+            settings =< plugin.tx_cartproducts.settings
+            persistence =< plugin.tx_cartproducts.persistence
+            view =< plugin.tx_cartproducts.view
+            update =< plugin.tx_cartproducts.update
+        }
+    }
 
-lib.renderContent = RECORDS
-lib.renderContent {
-    source.current = 1
-    tables = tt_content
-    dontCheckPid = 1
-    conf.tt_content =< tt_content
+    renderContent = RECORDS
+    renderContent {
+        source.current = 1
+        tables = tt_content
+        dontCheckPid = 1
+        conf.tt_content =< tt_content
+    }
 }
