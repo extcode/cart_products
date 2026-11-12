@@ -21,12 +21,12 @@ plugin.tx_cartproducts {
         }
 
         format.currency {
-            currencySign       = &euro;
-            decimalSeparator   = ,
+            currencySign = &euro;
+            decimalSeparator = ,
             thousandsSeparator = .
-            prependCurrency    = false
-            separateCurrency   = true
-            decimals           = 2
+            prependCurrency = false
+            separateCurrency = true
+            decimals = 2
         }
     }
 }
