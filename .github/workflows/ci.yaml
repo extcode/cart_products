@@ -90,7 +90,7 @@ jobs:
           && composer install --no-progress --no-ansi --no-interaction
 
       - name: Build codeception tester
-        run: .build/bin/codecept build
+        run: .Build/bin/codecept build
 
       - name: Code Quality (by PHPStan)
         run: Build/Scripts/phpstan.sh
@@ -160,4 +160,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: acceptance-reports-php${{ matrix.php-version }}
-          path: .build/public/typo3temp/var/tests/acceptance-reports
+          path: .Build/public/typo3temp/var/tests/acceptance-reports
