@@ -67,6 +67,18 @@ let
     '';
   };
 
+  projectLintXml = pkgs.writeShellApplication {
+    name = "project-lint-xml";
+
+    runtimeInputs = [
+      pkgs.libxml2
+    ];
+
+    text = ''
+      "$PROJECT_ROOT/Build/Scripts/lint-xml.sh"
+    '';
+  };
+
   projectLintYaml = pkgs.writeShellApplication {
     name = "project-lint-yaml";
 
@@ -153,6 +165,7 @@ in pkgs.mkShellNoCC {
     pkgs.firefox
     pkgs.geckodriver
     pkgs.procps
+    pkgs.libxml2
     pkgs.yamllint
     php
     composer
@@ -160,6 +173,7 @@ in pkgs.mkShellNoCC {
     projectCgl
     projectCglFix
     projectLint
+    projectLintXml
     projectLintYaml
     projectPhpstan
     projectTestUnit
