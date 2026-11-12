@@ -26,7 +26,7 @@ for tool in firefox geckodriver; do
     fi
 done
 
-TESTS_PATH="${PROJECT_ROOT}/.build/web/typo3temp/var/tests"
+TESTS_PATH="${PROJECT_ROOT}/.Build/public/typo3temp/var/tests"
 mkdir -p \
     "${TESTS_PATH}/acceptance" \
     "${TESTS_PATH}/acceptance-logs" \

@@ -23,7 +23,7 @@ let
       composer
     ];
     text = ''
-      rm -rf .Build/ vendor/ composer.lock
+      rm -rf .Build/ composer.lock
       composer update --prefer-dist --no-progress --working-dir="$PROJECT_ROOT"
     '';
   };
@@ -108,7 +108,7 @@ let
     ];
     text = ''
       project-install
-      XDEBUG_MODE=coverage ./vendor/bin/phpunit -c Build/phpunit.xml.dist --coverage-html=coverage_result
+      XDEBUG_MODE=coverage ./.Build/bin/phpunit -c Build/phpunit.xml.dist --coverage-html=coverage_result
     '';
   };
 
