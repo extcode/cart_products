@@ -39,7 +39,8 @@
             "sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": true
         },
         "vendor-dir": ".Build/vendor",
-        "bin-dir": ".Build/bin"
+        "bin-dir": ".Build/bin",
+        "lock": false
     },
     "extra": {
         "typo3/cms": {
