@@ -1,8 +1,5 @@
 # Cart Products
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/39ffda87c75d419ea82d1d8d132a3cf5)](https://www.codacy.com/manual/extcode/cart_products?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=extcode/cart_products&amp;utm_campaign=Badge_Grade)
-![GitHub Actions](https://github.com/extcode/cart_products/actions/workflows/ci.yaml/badge.svg?branch=6.x-dev)
-
 Cart is a small but powerful extension which "solely" adds a shopping cart to your TYPO3 installation.
 Cart Products provides an own data storage for simple and configurable products. Products can be offered via a list and detail view and can be purchased via cart function of the Cart extension.
 
