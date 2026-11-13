@@ -32,5 +32,6 @@ Therefore EXT:cart needs other extensions. One of those other extensions is EXT:
    :maxdepth: 5
    :titlesonly:
 
+   SupportedVersions/Index
    Support/Index
    Sponsoring/Index
