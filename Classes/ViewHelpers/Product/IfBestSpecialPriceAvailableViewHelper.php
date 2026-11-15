@@ -12,6 +12,7 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
 use Extcode\CartProducts\Domain\Model\Product\Product;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
@@ -30,7 +31,7 @@ class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
         );
     }
 
-    protected static function evaluateCondition(?array $arguments = null): bool
+    public static function verdict(array $arguments, RenderingContextInterface $renderingContext): bool
     {
         $product = $arguments['product'];
         $bestSpecialPrice = $product->getBestSpecialPrice(self::getFrontendUserGroupIds());
