@@ -11,7 +11,7 @@ Description
 
 In some cases you don't need a detail page for the products and want to allow adding products to the shopping cart
 in the list view.
-Diese Änderung erlaubt es, der showForm Action das Produkt als Parameter mitzugeben.
+This change allows to pass the product as parameter to the showForm action.
 
 Integration
 ===========

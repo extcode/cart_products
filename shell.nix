@@ -67,6 +67,30 @@ let
     '';
   };
 
+  projectLintTypos = pkgs.writeShellApplication {
+    name = "project-lint-typos";
+
+    runtimeInputs = [
+      pkgs.typos
+    ];
+
+    text = ''
+      "$PROJECT_ROOT/Build/Scripts/lint-typos.sh"
+    '';
+  };
+
+  projectLintTyposFix = pkgs.writeShellApplication {
+    name = "project-lint-typos-fix";
+
+    runtimeInputs = [
+      pkgs.typos
+    ];
+
+    text = ''
+      "$PROJECT_ROOT/Build/Scripts/lint-typos.sh" --fix
+    '';
+  };
+
   projectLintTypoScript = pkgs.writeShellApplication {
     name = "project-lint-typoscript";
 
@@ -108,6 +132,7 @@ let
 
     runtimeInputs = [
       projectLintPhp
+      projectLintTypos
       projectLintTypoScript
       projectLintXml
       projectLintYaml
@@ -115,6 +140,7 @@ let
 
     text = ''
       project-lint-php
+      project-lint-typos
       project-lint-typoscript
       project-lint-xml
       project-lint-yaml
@@ -188,6 +214,7 @@ in pkgs.mkShellNoCC {
     pkgs.geckodriver
     pkgs.procps
     pkgs.libxml2
+    pkgs.typos
     pkgs.yamllint
     php
     composer
@@ -196,6 +223,8 @@ in pkgs.mkShellNoCC {
     projectCglFix
     projectLint
     projectLintPhp
+    projectLintTypos
+    projectLintTyposFix
     projectLintTypoScript
     projectLintXml
     projectLintYaml

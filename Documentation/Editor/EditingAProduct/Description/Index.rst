@@ -15,7 +15,7 @@ Description
 ===========
 
 A longer description of the product. This is limited to text, for further
-options the below descriped 'Content' can be used.
+options the below described 'Content' can be used.
 
 Content
 =======
