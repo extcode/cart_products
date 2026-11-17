@@ -50,7 +50,7 @@ class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
 
     public function getTitle(): string
     {
-        return 'Migrates plugins of existing cart_produts plugins using switchableControllerActions';
+        return 'Migrates plugins of existing cart_products plugins using switchableControllerActions';
     }
 
     public function getDescription(): string
