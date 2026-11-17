@@ -1,0 +1,18 @@
+[files]
+extend-exclude = [
+    # Vendored schemas, kept as published.
+    "Build/xliff-core-1.2-strict.xsd",
+    "Build/xml.xsd",
+    # Written in German.
+    "Documentation/Changelog/2.3/Feature-70-AddProductsToCartFromListView.rst",
+    # Misspelled file name, renaming it would change the documentation URL.
+    "Documentation/Changelog/2.4/Feature-71-AllowToRenderBackendVariantsInDifferendSelectors.rst",
+]
+
+[default.extend-words]
+# German test data.
+produkt = "produkt"
+
+[default.extend-identifiers]
+# TYPO3 core API.
+substNEWwithIDs = "substNEWwithIDs"
