@@ -308,13 +308,13 @@ class ProductTest extends UnitTestCase
     public function getBestSpecialPriceDiscountForGivenSpecialPriceReturnsPercentageDiscount(): void
     {
         $price = 10.0;
-        $porductSpecialPrice = 9.0;
+        $productSpecialPrice = 9.0;
 
         $product = new Product();
         $product->setPrice($price);
 
         $specialPrice = new SpecialPrice();
-        $specialPrice->setPrice($porductSpecialPrice);
+        $specialPrice->setPrice($productSpecialPrice);
 
         $product->addSpecialPrice($specialPrice);
 

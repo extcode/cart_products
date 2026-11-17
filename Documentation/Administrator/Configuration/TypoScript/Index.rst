@@ -40,7 +40,7 @@ the individual parameter are described.
    :Type: array
    :Default: The TypoScript template use the setting defined by the constant of the cart extension.
 
-   Configures how prices should be formated in frontend. The
+   Configures how prices should be formatted in frontend. The
    `\Extcode\Cart\ViewHelpers\Format\CurrencyViewHelper` uses this global
    setting.
 

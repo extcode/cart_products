@@ -24,7 +24,7 @@ All installations which are not set up with version 5 of EXT:cart_products
 Migration
 =========
 
-1. Run the UpdateWizard "Migrates plugins of existing cart_produts plugins
+1. Run the UpdateWizard "Migrates plugins of existing cart_products plugins
 using switchableControllerActions".
 2. Adapt the value of `plugin` from `Products` to `ShowProduct` in your site
 configuration (`config/sites/<your-site>/config.yaml`):
