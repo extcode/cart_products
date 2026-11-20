@@ -11,6 +11,7 @@ ChangeLog
    :titlesonly:
 
    8.0/Index
+   7.3/Index
    7.2/Index
    7.1/Index
    7.0/Index
