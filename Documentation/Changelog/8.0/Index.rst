@@ -15,8 +15,8 @@
 Bugfixes
 ~~~~~~~~
 
-*  Tag the page cache with the shown products again
-*  Flush the cache after handling the stock of products
+*  Tag the page cache with the shown products again (`#313 <https://github.com/extcode/cart_products/pull/313>`__)
+*  Flush the cache after handling the stock of products (`#313 <https://github.com/extcode/cart_products/pull/313>`__)
 
 Tasks
 ~~~~~
