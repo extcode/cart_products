@@ -35,8 +35,20 @@ Compatibility
 *  TYPO3 ^14.3 (was ^13.4)
 *  extcode/cart ^12.0 (was ^11.0)
 
+Breaking
+~~~~~~~~
+
+*  :doc:`#287 - Price columns as fixed-point numbers <Breaking-287-PriceColumnsAsFixedPointNumbers>`
+*  :doc:`#287 - Remove addCacheTags() from ProductController <Breaking-287-RemoveAddCacheTagsFromProductController>`
+
 Bugfixes
 ~~~~~~~~
 
 *  Correct stock handling for backend variants (`#281 <https://github.com/extcode/cart_products/pull/281>`__)
 *  Add missing value for area divider item (`#286 <https://github.com/extcode/cart_products/pull/286>`__)
+
+.. toctree::
+   :hidden:
+   :glob:
+
+   *-*
