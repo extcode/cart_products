@@ -17,6 +17,8 @@ use Extcode\CartProducts\Domain\Model\Product\Product;
 use Extcode\CartProducts\Domain\Repository\CategoryRepository;
 use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Cache\CacheDataCollector;
+use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Pagination\SlidingWindowPagination;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -52,6 +54,8 @@ class ProductController extends ActionController
         );
 
         $this->settings['addToCartByAjax'] = isset($this->settings['addToCartByAjax']) ? (int)$this->settings['addToCartByAjax'] : 0;
+
+        $this->addPageCacheTags(['tx_cartproducts']);
     }
 
     /**
@@ -168,6 +172,7 @@ class ProductController extends ActionController
 
         $this->assignCurrencyTranslationData();
 
+        $this->addProductCacheTags($products);
         return $this->htmlResponse();
     }
 
@@ -183,6 +188,7 @@ class ProductController extends ActionController
 
         $this->assignCurrencyTranslationData();
 
+        $this->addProductCacheTags($product instanceof Product ? [$product] : []);
         return $this->htmlResponse();
     }
 
@@ -196,6 +202,8 @@ class ProductController extends ActionController
         $this->view->assign('cartSettings', $this->cartConfiguration['settings']);
 
         $this->assignCurrencyTranslationData();
+
+        $this->addProductCacheTags($product instanceof Product ? [$product] : []);
         return $this->htmlResponse();
     }
 
@@ -208,6 +216,7 @@ class ProductController extends ActionController
 
         $this->assignCurrencyTranslationData();
 
+        $this->addProductCacheTags($products);
         return $this->htmlResponse();
     }
 
@@ -301,6 +310,32 @@ class ProductController extends ActionController
         ];
 
         $this->view->assign('currencyTranslationData', $currencyTranslationData);
+    }
+
+    /**
+     * @param iterable<Product> $products
+     */
+    private function addProductCacheTags(iterable $products): void
+    {
+        $cacheTags = [];
+        foreach ($products as $product) {
+            $cacheTags[] = 'tx_cartproducts_product_' . $product->getUid();
+        }
+        $this->addPageCacheTags($cacheTags);
+    }
+
+    /**
+     * @param list<string> $cacheTags
+     */
+    private function addPageCacheTags(array $cacheTags): void
+    {
+        $cacheDataCollector = $this->request->getAttribute('frontend.cache.collector');
+        if (!$cacheDataCollector instanceof CacheDataCollector) {
+            return;
+        }
+        foreach ($cacheTags as $cacheTag) {
+            $cacheDataCollector->addCacheTags(new CacheTag($cacheTag));
+        }
     }
 
     protected function restoreSession(): void
