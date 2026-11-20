@@ -104,7 +104,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             [
                 'event' => StockEvent::class,
                 'identifier' => 'cart-products--order--stock--flush-cache',
-                'after' => 'cart-books--order--stock--handle-stock',
+                'after' => 'cart-products--order--stock--handle-stock',
             ]
         )
     ;
