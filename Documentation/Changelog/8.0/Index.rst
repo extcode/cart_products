@@ -9,6 +9,15 @@
    :local:
    :depth: 1
 
+8.0.2
+-----
+
+Tasks
+~~~~~
+
+*  Check spelling with typos (`#310 <https://github.com/extcode/cart_products/pull/310>`__)
+*  List the changes of each release in the changelog
+
 8.0.1
 -----
 
