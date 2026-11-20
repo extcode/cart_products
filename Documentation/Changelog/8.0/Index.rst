@@ -12,6 +12,12 @@
 8.0.2
 -----
 
+Bugfixes
+~~~~~~~~
+
+*  Tag the page cache with the shown products again
+*  Flush the cache after handling the stock of products
+
 Tasks
 ~~~~~
 
