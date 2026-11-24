@@ -53,7 +53,7 @@
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-pdo": "*",
-        "extcode/cart": "^12.0",
+        "extcode/cart": "^12.8",
         "typo3/cms-core": "^14.3",
         "typo3/cms-extbase": "^14.3",
         "typo3/cms-fluid": "^14.3"

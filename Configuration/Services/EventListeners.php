@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Extcode\Cart\Event\CheckProductAvailabilityEvent;
+use Extcode\Cart\Event\Order\BeforePersistOrderProductEvent;
 use Extcode\Cart\Event\Order\StockEvent;
 use Extcode\Cart\Event\ProcessOrderCheckStockEvent;
 use Extcode\Cart\Event\RetrieveProductsFromRequestEvent as CartRetrieveProductsFromRequestEvent;
@@ -13,6 +14,7 @@ use Extcode\CartProducts\EventListener\Create\CreateCartBackendVariants;
 use Extcode\CartProducts\EventListener\Create\CreateCartFrontendVariants;
 use Extcode\CartProducts\EventListener\Create\CreateCartProduct;
 use Extcode\CartProducts\EventListener\Create\LoadProduct;
+use Extcode\CartProducts\EventListener\Order\OrderProductProperties;
 use Extcode\CartProducts\EventListener\Order\Stock\CheckStock;
 use Extcode\CartProducts\EventListener\Order\Stock\FlushCache;
 use Extcode\CartProducts\EventListener\Order\Stock\HandleStock;
@@ -138,6 +140,17 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             [
                 'event' => ProcessOrderCheckStockEvent::class,
                 'identifier' => 'cart-products--order--stock-check-stock',
+            ]
+        )
+    ;
+
+    $services
+        ->set(OrderProductProperties::class)
+        ->tag(
+            'event.listener',
+            [
+                'event' => BeforePersistOrderProductEvent::class,
+                'identifier' => 'cart-products--order--order-product-properties',
             ]
         )
     ;

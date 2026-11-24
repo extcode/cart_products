@@ -38,3 +38,14 @@ URL segment
 ===========
 
 The url segment which is used in the URL when `RouteEnhancers <https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Routing/>`_ are defined.
+
+Shipping, cancellation and return
+=================================
+
+Whether the product is shipped, whether it may be canceled before it is shipped
+and whether it may be returned after it was shipped, e.g. not for personalized
+products. All three are enabled by default. The values are stored with each
+order, changing them does not affect existing orders.
+
+Shippable is only shown for physical products. Products of the types "virtual"
+and "downloadable" are always stored as not shippable with the order.
