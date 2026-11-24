@@ -79,6 +79,27 @@
             <trans-unit id="tx_cartproducts_domain_model_product_product.palette.service_attributes">
                 <source>Service Attributes</source>
             </trans-unit>
+            <trans-unit id="tx_cartproducts_domain_model_product_product.palette.fulfillment">
+                <source>Shipping, cancellation and return</source>
+            </trans-unit>
+            <trans-unit id="tx_cartproducts_domain_model_product_product.shippable">
+                <source>Shippable</source>
+            </trans-unit>
+            <trans-unit id="tx_cartproducts_domain_model_product_product.shippable.description">
+                <source>The product is shipped to the customer; disable it e.g. for products which are picked up. The product still counts for shipping costs based on the price of physical products. Virtual and downloadable products are never shipped. Stored with the order, changes do not affect existing orders.</source>
+            </trans-unit>
+            <trans-unit id="tx_cartproducts_domain_model_product_product.cancelable">
+                <source>Cancelable</source>
+            </trans-unit>
+            <trans-unit id="tx_cartproducts_domain_model_product_product.cancelable.description">
+                <source>The product may be canceled before it is shipped. Stored with the order, changes do not affect existing orders.</source>
+            </trans-unit>
+            <trans-unit id="tx_cartproducts_domain_model_product_product.returnable">
+                <source>Returnable</source>
+            </trans-unit>
+            <trans-unit id="tx_cartproducts_domain_model_product_product.returnable.description">
+                <source>The product may be returned after it was shipped, e.g. not for personalized products. Stored with the order, changes do not affect existing orders.</source>
+            </trans-unit>
 
             <trans-unit id="tx_cartproducts_domain_model_product_product">
                 <source>Product</source>

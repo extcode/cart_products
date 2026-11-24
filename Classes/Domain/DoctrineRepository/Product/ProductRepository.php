@@ -36,6 +36,38 @@ class ProductRepository
             ->fetchAssociative();
     }
 
+    /**
+     * Ignores the enable fields and the deleted flag: the product may have been
+     * hidden or deleted after it was put into the cart.
+     *
+     * @return array{shippable: bool, cancelable: bool, returnable: bool}|null null if the product does not exist
+     */
+    public function findFulfillmentOptions(int $uid): ?array
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->getRestrictions()->removeAll();
+
+        $row = $queryBuilder
+            ->select('shippable', 'cancelable', 'returnable')
+            ->from(self::TABLENAME)
+            ->where(
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT))
+            )
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        if ($row === false) {
+            return null;
+        }
+
+        return [
+            'shippable' => (bool)$row['shippable'],
+            'cancelable' => (bool)$row['cancelable'],
+            'returnable' => (bool)$row['returnable'],
+        ];
+    }
+
     public function getStock(int $uid): int
     {
         $queryBuilder = $this->getQueryBuilder();

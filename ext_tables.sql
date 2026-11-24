@@ -34,6 +34,10 @@ CREATE TABLE tx_cartproducts_domain_model_product_product (
     handle_stock_in_variants tinyint(4) unsigned DEFAULT '0' NOT NULL,
     stock int(11) unsigned DEFAULT '0' NOT NULL,
 
+    shippable tinyint(4) unsigned DEFAULT '1' NOT NULL,
+    cancelable tinyint(4) unsigned DEFAULT '1' NOT NULL,
+    returnable tinyint(4) unsigned DEFAULT '1' NOT NULL,
+
     tax_class_id int(11) unsigned DEFAULT '1' NOT NULL,
 
     product_content int(11) DEFAULT '0' NOT NULL,

@@ -38,6 +38,7 @@ return [
                 sys_language_uid, l10n_parent, l10n_diffsource,
                 product_type, sku, title,
                 path_segment,
+                --palette--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.palette.fulfillment;fulfillment,
                 --div--;' . $_LLL . ':tx_cartproducts_domain_model_product_product.div.descriptions,
                     teaser, description,
                     product_content,
@@ -93,6 +94,9 @@ return [
         'service_attributes' => [
             'showitem' => 'service_attribute1, service_attribute2, service_attribute3',
             'canNotCollapse' => 1,
+        ],
+        'fulfillment' => [
+            'showitem' => 'shippable, cancelable, returnable',
         ],
     ],
     'columns' => [
@@ -204,6 +208,41 @@ return [
                 'eval' => 'trim',
                 'required' => true,
             ],
+        ],
+
+        'shippable' => [
+            'exclude' => 1,
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.shippable',
+            'description' => $_LLL . ':tx_cartproducts_domain_model_product_product.shippable.description',
+            'displayCond' => 'FIELD:product_type:!IN:virtual,downloadable',
+            'config' => [
+                'type' => 'check',
+                'default' => 1,
+            ],
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
+        ],
+        'cancelable' => [
+            'exclude' => 1,
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.cancelable',
+            'description' => $_LLL . ':tx_cartproducts_domain_model_product_product.cancelable.description',
+            'config' => [
+                'type' => 'check',
+                'default' => 1,
+            ],
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
+        ],
+        'returnable' => [
+            'exclude' => 1,
+            'label' => $_LLL . ':tx_cartproducts_domain_model_product_product.returnable',
+            'description' => $_LLL . ':tx_cartproducts_domain_model_product_product.returnable.description',
+            'config' => [
+                'type' => 'check',
+                'default' => 1,
+            ],
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
         ],
 
         'path_segment' => [
